@@ -1,4 +1,4 @@
-package dev.mvc.process;
+package dev.mvc.recom;
 
 import lombok.Getter;
 import lombok.Setter;

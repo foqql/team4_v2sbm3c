@@ -1,10 +1,10 @@
-package dev.mvc.process;
+package dev.mvc.recom;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter @Getter
-public class GenreComVO {
+public class GenreRecomVO {
   
     private int memGenNo; // 회원 장르 번호
     
