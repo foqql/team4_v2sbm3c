@@ -1,12 +1,12 @@
-package dev.mvc.country;
+package dev.mvc.genre;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-// countryVO.java
+// GenreVO.java
 @Getter @Setter @ToString
-public class genreVO {
+public class GenreVO {
     private int genreno; // 장르번호
     private String genre;  //장르 이름
     private int cnt;  //관련 자료수
@@ -16,3 +16,4 @@ public class genreVO {
     private int countryno; //국가별 방송사 번호(FK)
 
  }
+

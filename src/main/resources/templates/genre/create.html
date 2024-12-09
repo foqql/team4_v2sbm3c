@@ -1,0 +1,59 @@
+  <!DOCTYPE html>
+  <html layout:decorate="~{layout}">
+  <!-- layout.html 상속-->
+  <div layout:fragment="content">
+    <div class="title_line">
+      <img src="/images/pepe good.gif" style="width:50px; height: 50px;">국가별 방송사 등록
+    </div>
+  
+    <aside class="aside_right">
+      <a href="javascript:location.reload();">새로고침</a>
+    </aside>
+    <!--<div th:replace="~{genre/list_search_com::list_search_fragment}"></div> -->
+    <div class="menu_line"></div>
+  
+    <div style="width : 60%; margin: 0px auto;">
+      <form name="frm" method="post" action="/genre/create" th:object="${countryVO}">
+  
+        <div>
+          <label>방송사 [company]</label>
+          <input type="text" name="company" value="" autofocus="autofocus" class="form-control" style="width: 50%;"
+            th:field="*{company}">
+          <div th:if="${#fields.hasErrors('company')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+            <div th:each="err: ${#lists.sort(#fields.errors('company'))}" th:text="${err}"></div>
+          </div>
+        </div>
+  
+        <div>
+          <label>출력 순서 [seqno]</label>
+          <input type="number" name="seqno" value="1" min="1" max="1000000" step="1"
+                 class="form-control" style="width: 50%;" th:field="*{seqno}">
+          <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+            <div th:each="err: ${#lists.sort(#fields.errors('seqno'))}" th:text="${err}"></div>
+          </div>
+        </div>
+  
+          <div>
+          <label>출력 모드 [visible]</label>
+          <select id="visible" name="visible" class="form-control" th:field="*{visible}">
+            <option value="" selected="selected">출력 모드</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+          
+          <div th:if="${#fields.hasErrors('visible')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+            <div th:each="err: ${#lists.sort(#fields.errors('visible'))}" th:text="${err}"></div>
+          </div>
+        </div>
+
+  
+        <div class="content_body_bottom">
+          <button type="submit" class="btn btn-secondary btn-sm">등록</button>
+          <!--<button type="button" onclick="location.href='/genre/list_search'" class="btn btn-secondary btn-sm">목록</button>-->
+        </div>
+  
+      </form>
+    </div>
+  </div>
+  
+  </html>
