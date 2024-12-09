@@ -14,7 +14,8 @@
   
     <div style="width : 60%; margin: 0px auto;">
       <form name="frm" method="post" action="/genre/create" th:object="${countryVO}">
-  
+    <input type="hidden" name="rdate" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />
+
         <div>
           <label>방송사 [company]</label>
           <input type="text" name="company" value="" autofocus="autofocus" class="form-control" style="width: 50%;"
