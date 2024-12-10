@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.genre.GenreDAOInter">
+
+<insert id="create" parameterType="dev.mvc.genre.GenreVO">
+    INSERT INTO genre (genreno, genre, cnt, seqno, visible, rdate, name)
+    VALUES (genre_seq.NEXTVAL, #{genre}, 1, #{seqno}, #{visible}, SYSDATE, #{name})
+</insert>
+
+  <select id="list_all" resultType="dev.mvc.genre.GenreVO">
+    SELECT * FROM genre
+    ORDER BY seqno ASC, genreno asc
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM genre WHERE genreno = #{genreno}
+</delete>
+  <!-- 종류 목록 -->
+  <select id="typeset" resultType="String">
+    SELECT genre
+    FROM genre 
+    WHERE name='--'
+    ORDER BY seqno ASC
+  </select>
+
+
+  <!-- SQL -> 회원/비회원에게 공개할 카테고리 그룹(대분류) 목록 -->
+  <select id="list_all_categrp_y" resultType="dev.mvc.genre.GenreVO">
+    SELECT
+        *
+    FROM
+        genre
+    WHERE
+             name='--'
+        AND visible = 'Y'
+    ORDER BY
+        seqno ASC
+  </select>
+  
+    <!-- SQL ->회원/비회원에게 공개할 카테고리(중분류) 목록  -->
+  <select id="list_all_cate_y" resultType="dev.mvc.genre.GenreVO" parameterType="String">
+    SELECT *
+    FROM genre 
+    WHERE name!='--' AND visible='Y' AND genre=#{genre}
+    ORDER BY seqno ASC
+</select>
+
+  
+</mapper>

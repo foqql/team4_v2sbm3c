@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"dev.mvc"}) // <-- 이 부분만 Copy and Paste
-@MapperScan("dev.mvc.country")
+@MapperScan("dev.mvc.genre")
 public class Team4V2sbm3cApplication {
 
     public static void main(String[] args) {

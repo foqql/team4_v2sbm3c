@@ -1,0 +1,90 @@
+<div th:fragment="list_all_fragment">
+  <!-- /* <div th:replace="~{genre/list_all_com::list_all_fragment}" */ -->
+  <table class="table table-hover" style='width: 100%;'>
+    <colgroup>
+      <col style='width: 5%;' /> <!-- 순서 -->
+      <col style='width: 15%;' /> <!-- 이름 -->
+      <col style='width: 10%;' /> <!-- 수량 -->
+      <col style='width: 15%;' /> <!-- 종류 -->
+      <col style='width: 20%;' /> <!-- 날짜 -->
+      <col style='width: 10%;' /> <!-- 출력 순서 -->
+      <col style='width: 10%;' /> <!-- 수정 -->
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">종류</th>
+        <th class="th_bs">이름</th>
+        <th class="th_bs">관련 자료수</th>
+        <th class="th_bs">생성일</th>
+        <th class="th_bs">출력 순서</th>
+        <th class="th_bs">수정삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="genreVO,  i  : ${list}">
+      <!-- 순서 
+        <td class="td_bs" th:text="${no - i.index}"></td> -->
+        <td class="td_bs" th:text="${no != null && i.index != null ? no - i.index : 0}"></td>
+
+        <!--<td class="td_bs" th:text="${i.index + 1}"></td>-->
+        <!--<td class="td_bs" th:text="${genreVO.genreno}"></td>-->
+        <!-- 타입 -->
+        <td class="td_bs">
+          <a th:href="@{|/genre/read/${genreVO.genreno}?word=${word}&now_page=${now_page}|}" style="display:block;"
+            th:text="${genreVO.genre}"></a>
+        </td>
+        <!-- 이름 -->
+        <td class="td_bs">
+          <a th:href="@{|/genre/read/${genreVO.genreno}?word=${word}&now_page=${now_page}|}" style="display:block;"
+            th:text="${genreVO.name}"></a>
+        </td>
+        <!-- 관련 자료수 -->
+        <td class="td_bs" th:text="${genreVO.cnt}"></td>
+        <!--등록일 -->
+        <td class="td_bs" th:text="${genreVO.rdate}"></td>
+        <td class="td_bs" th:text="${genreVO.seqno}"></td>
+        <td class="td_bs">
+          <!--<span th:text="${genreVO.visible}"></span>-->
+        <!--  <span th:text="${genreVO.seqno}+순서"> </span> -->
+
+          <span th:if="${genreVO.visible == 'Y'}">
+            <a th:href="@{|/genre/update_visible_n/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+              <img src="/genre/images/o.png" class="icon" title="공개">
+            </a>
+          </span>
+
+          <span th:if="${genreVO.visible == 'N'}">
+            <a th:href="@{|/genre/update_visible_y/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+              <img src="/genre/images/against.png" class="icon" title="비공개">
+            </a>
+          </span>
+
+          <a th:href="@{|/genre/update_seqno_forward/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/arrow-up.png" class="icon" title="상승">
+          </a>
+          <a th:href="@{|/genre/update_seqno_backward/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/arrow-down.png" class="icon" title="하락">
+          </a>
+          <br>
+          <a th:href="@{|/genre/update/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/edit.png" class="icon" title="수정">
+          </a>
+          <a th:href="@{|/genre/delete/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/trash.png" class="icon" title="삭제">
+          </a>
+       <!--   <a th:if="${genreVO.name != '--'}" th:href="@{|/supplements/create?genreno=${genreVO.genreno}&word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/plus.png" class="icon" title="pluoooos">
+          </a>-->
+
+       
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 페이지 버튼 목록 출력 시작 -->
+  <div class="Bottom_menu" th:utext="${paging}"></div>
+  <!-- 페이지 버튼 목록 출력 종료 -->
+</div>
