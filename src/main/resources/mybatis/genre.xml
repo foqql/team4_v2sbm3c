@@ -14,9 +14,6 @@
     ORDER BY seqno ASC, genreno asc
   </select>
   
-  <delete id="delete" parameterType="int">
-    DELETE FROM genre WHERE genreno = #{genreno}
-</delete>
   <!-- 종류 목록 -->
   <select id="typeset" resultType="String">
     SELECT genre
@@ -45,6 +42,15 @@
     FROM genre 
     WHERE name!='--' AND visible='Y' AND genre=#{genre}
     ORDER BY seqno ASC
+</select>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM genre
+    WHERE genreno = #{genreno}
+</delete>
+
+<select id="read" resultType="dev.mvc.genre.GenreVO">
+    SELECT * FROM genre WHERE genreno = #{genreno}
 </select>
 
   

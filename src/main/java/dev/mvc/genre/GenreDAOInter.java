@@ -39,6 +39,13 @@ public interface GenreDAOInter {
      */
     public ArrayList<String> typeset();
     
+    public int delete(int genreno);
     
-    
+    /**
+     * 조회
+     * 
+     * @param genreno
+     * @return
+     */
+    public GenreVO read(Integer genreno);
 }
