@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.translate.TranslateDAOInter">
+
+    <insert id="create" parameterType="dev.mvc.translate.TranslateVO">
+        INSERT INTO translate (translateno, title, content, newsCrawlingno, contentsno)
+        VALUES (translate_seq.NEXTVAL, #{title}, #{content}, #{newsCrawlingno}, #{contentsno})
+    </insert>
+
+</mapper>
