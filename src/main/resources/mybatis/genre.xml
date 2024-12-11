@@ -53,5 +53,17 @@
     SELECT * FROM genre WHERE genreno = #{genreno}
 </select>
 
+  <!-- 처리결과 : 레코드 갯수 -->
+  <update id="update" parameterType="dev.mvc.genre.GenreVO">
+  UPDATE genre
+  SET NAME = #{name},
+      GENRE = #{genre},
+      seqno = #{seqno},
+      visible = #{visible},
+      RDATE = sysdate
+  WHERE genreno = #{genreno}
+</update>
+
+
   
 </mapper>

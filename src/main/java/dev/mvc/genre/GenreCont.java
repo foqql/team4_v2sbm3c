@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.member.MemberProcInter;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 //@RequestMapping("/genre")
@@ -213,4 +216,135 @@ public class GenreCont {
 //    model.addAttribute("no", no);
     return "/genre/read";
   }
+  
+  
+  
+  /**
+   * 수정 http://localhost:9091/genre/update/1
+   * 
+   * @param model
+   * @param genreno
+   * @return
+   */
+  @GetMapping(value = "/update/{genreno}")
+  public String update(Model model, @PathVariable("genreno") Integer genreno
+//      , @RequestParam(name = "word", defaultValue = "") String word,
+//      @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session
+      ) { 
+    GenreVO genreVO = this.genreProc.read(genreno);                                                               
+    model.addAttribute("genreVO", genreVO);
+
+    return "/genre/update";
+   
+//    //추후 수정 시작
+//    if (this.memberProc.isMember(session) || this.memberProc.isMemberAdmin(session)) {
+//
+//      GenreVO genreVO = this.genreProc.read(genreno); // 수정: 실제 genreno를 전달
+//      model.addAttribute("genreVO", genreVO);
+//
+//      // 카테고리 그룹 목록
+//      ArrayList<String> list_type = this.genreProc.typeset();
+////    genreVO.setGenre(String.join("/", list_type));
+//      model.addAttribute("list_type", String.join("/", list_type));
+//
+//    ArrayList<GenreVO> list = this.genreProc.list_all();
+//      ArrayList<GenreVO> list = this.genreProc.list_search_paging(word, now_page, this.record_per_page);
+//      model.addAttribute("list", list);
+//
+//      ArrayList<GenreVOMenu> menu = this.genreProc.menu();
+//      model.addAttribute("menu", menu);
+//      model.addAttribute("word", word);
+//
+//      // 프로젝트 목록 번호 생성
+//      String list_file_name = "/genre/read/" + genreno;
+//      int search_count = this.genreProc.list_search_count(word);
+//      String paging = this.genreProc.pagingBox(now_page, word, list_file_name, search_count, this.record_per_page,
+//          this.page_per_block);
+//      model.addAttribute("paging", paging);
+//      model.addAttribute("now_page", now_page);
+//      // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+//      int no = search_count - ((now_page - 1) * this.record_per_page);
+//      model.addAttribute("no", no);
+//
+//      return "/genre/update";
+//    } else {
+//      return "redirect:/member/login_cookie_need"; // redirect
+//    }
+//  //추후 수정 끝
+  }
+
+  /**
+   * 수정 처리, http://localhost:9092/genre/update
+   * 
+   * @param model         Controller -> Thymeleaf HTML로 데이터 전송
+   * @param cateVO        Form 태그 값 -> 검증 -> cateVO 자동저장, request.getParameter()
+   *                      자동 실행
+   * @param bindingResult 폼에 에러가 있는지 검사 지원
+   * @return
+   */
+  @PostMapping(value = "/update")
+  public String update(Model model, @Valid @ModelAttribute("genreVO") GenreVO genreVO, BindingResult bindingResult,
+      @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
+    System.out.println(" -> update post [ genre/update ]");
+    if (bindingResult.hasErrors()) {
+      System.out.println(" -> Error 에러 발생  [ genre/update ]");
+      return "/genre/update";
+    }
+//    System.out.println("영양제 이름 : " + genreVO.getName());
+//    System.out.println("영양제 가격 : " + genreVO.getPrice());
+//    System.out.println("영양제 개봉일 : " + genreVO.getRdate());
+
+    int cnt = this.genreProc.update(genreVO);
+    System.out.println(" -> cnt [genreCont]: " + cnt);
+
+    if (cnt == 1) {
+      model.addAttribute("code", "update_success");
+      model.addAttribute("name", genreVO.getName());
+      model.addAttribute("type", genreVO.getGenre());
+    } else {
+      model.addAttribute("code", "update_fail");
+    }
+
+    model.addAttribute("cnt", cnt);
+
+    return "/genre/msg";
+//    //추후 수정 시작
+//    
+//    System.out.println(" -> update post [ genre/update ]");
+//    System.out.println("영양제 이름 : " + genreVO.getName());
+//    System.out.println("영양제 Seqno : " + genreVO.getSeqno());
+//    System.out.println("영양제 CNT : " + genreVO.getCnt());
+////    System.out.println("영양제 가격 : " + genreVO.getPrice());
+//    System.out.println("영양제 개봉일 : " + genreVO.getRdate());
+//    if (this.memberProc.isMemberAdmin(session)) {
+//      if (bindingResult.hasErrors()) {
+//        System.out.println(" -> Error 발생  [ genre/update ]");
+//        model.addAttribute("genreVO", genreVO); // 에러 발생 시 데이터 유지
+//        return "/genre/update";
+//      }
+//
+//      // 업데이트 로직
+//      int cnt = this.genreProc.update(genreVO);
+//      System.out.println(" -> cnt [genreCont]: " + cnt);
+//
+//      if (cnt == 1) {
+//        model.addAttribute("code", "update_success");
+//        ra.addAttribute("word", word);
+//        ra.addAttribute("now_page", now_page);
+//        return "redirect:/genre/update/" + genreVO.getGenreno();
+//      } else {
+//        model.addAttribute("code", "update_fail");
+//      }
+//
+//      model.addAttribute("cnt", cnt);
+//      return "/genre/msg"; // templates/genre/msg.html
+//    } else {
+//      return "redirect:/member/login_cookie_need"; // redirect
+//    }
+//    // 추후 수정 끝
+  }
+
+  
+  
 }

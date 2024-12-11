@@ -94,5 +94,11 @@ public class GenreProc implements GenreProcInter {
     return genreVO;
   }
 
+  @Override
+  public int update(GenreVO genreVO) {
+    int cnt = this.genreDAO.update(genreVO);
+    return cnt;
+  }
+
   }
 
