@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.member.MemberProcInter;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 //@RequestMapping("/genre")
@@ -178,4 +176,41 @@ public class GenreCont {
     return "/genre/msg"; // templates/genre/msg.html
   }
 
+  
+  /**
+   * 번호에 따른 조회 http://localhost:9091/read/1
+   * 
+   * @param model
+   * @param genreno
+   * @return
+   */
+  @GetMapping(value = "/read/{genreno}")
+  public String read(Model model, @PathVariable("genreno") Integer genreno
+//      ,@RequestParam(name = "word", defaultValue = "") String word,
+//      @RequestParam(name = "now_page", defaultValue = "1") int now_page
+      ) {
+    // 변경: "genreno"를 "genreno"로
+    GenreVO genreVO = this.genreProc.read(genreno); // 수정: 실제 genreno를 전달
+    model.addAttribute("genreVO", genreVO);
+
+    ArrayList<GenreVO> list = this.genreProc.list_all();
+//    ArrayList<GenreVO> list = this.genreProc.list_search_paging(word, now_page, this.record_per_page);
+    model.addAttribute("list", list);
+
+    ArrayList<GenreVOMenu> menu = this.genreProc.menu();
+    model.addAttribute("menu", menu);
+//    model.addAttribute("word", word);
+
+//    // 프로젝트 목록 번호 생성
+//    String list_file_name = "/genre/read/" + genreno;
+//    int search_count = this.genreProc.list_search_count(word);
+//    String paging = this.genreProc.pagingBox(now_page, word, list_file_name, search_count, this.record_per_page,
+//        this.page_per_block);
+//    model.addAttribute("paging", paging);
+//    model.addAttribute("now_page", now_page);
+//    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+//    int no = search_count - ((now_page - 1) * this.record_per_page);
+//    model.addAttribute("no", no);
+    return "/genre/read";
+  }
 }
