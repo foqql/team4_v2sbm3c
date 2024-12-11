@@ -5,8 +5,8 @@
 <mapper namespace="dev.mvc.translate.TranslateDAOInter">
 
     <insert id="create" parameterType="dev.mvc.translate.TranslateVO">
-        INSERT INTO translate (translateno, title, content, newsCrawlingno, contentsno)
-        VALUES (translate_seq.NEXTVAL, #{title}, #{content}, #{newsCrawlingno}, #{contentsno})
+        INSERT INTO translate (translateno, title, content, newscrawlingno)
+        VALUES (translate_seq.NEXTVAL, #{title}, #{content}, #{newscrawlingno})
     </insert>
 
 </mapper>
