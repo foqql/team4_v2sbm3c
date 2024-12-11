@@ -3,9 +3,11 @@ package dev.mvc.genre;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service("GenreProc")
+
+@Component("GenreProc")
 public class GenreProc implements GenreProcInter {
   
   @Autowired
@@ -90,6 +92,12 @@ public class GenreProc implements GenreProcInter {
   public GenreVO read(Integer genreno) {
     GenreVO genreVO = this.genreDAO.read(genreno);
     return genreVO;
+  }
+
+  @Override
+  public int update(GenreVO genreVO) {
+    int cnt = this.genreDAO.update(genreVO);
+    return cnt;
   }
 
   }

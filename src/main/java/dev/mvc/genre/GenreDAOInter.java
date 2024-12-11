@@ -48,4 +48,13 @@ public interface GenreDAOInter {
      * @return
      */
     public GenreVO read(Integer genreno);
+    
+    /**
+     * 수정
+     * 
+     * @param genreVO
+     * @return
+     */
+    public int update(GenreVO genreVO);
+    
 }
