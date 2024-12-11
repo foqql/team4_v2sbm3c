@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.member.MemberProcInter;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -26,6 +27,10 @@ public class GenreCont {
   @Autowired
   @Qualifier("GenreProc")
   private GenreProcInter genreProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.member.MemberProc")
+  private MemberProcInter memberProc;
 
   /** 페이지당 출력할 레코드 갯수, nowPage는 1부터 시작 */
   public int record_per_page = 10;
