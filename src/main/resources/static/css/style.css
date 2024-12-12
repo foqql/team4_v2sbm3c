@@ -535,6 +535,26 @@
         text-align: center;
         width: 100%;
       }
+
+/* 성명 입력 필드에 연한 회색 텍스트 색상 설정 */
+#mname {
+  color: lightgray; /* 입력되지 않았을 때 텍스트 색상 */
+}
+
+/* placeholder 텍스트 색상도 회색으로 설정 */
+#mname::placeholder {
+  color: lightgray;
+}
+
+/* 입력 중인 글자 색상은 검은색으로 설정 */
+#mname:focus {
+  color: black; /* 글자를 입력하면 검은색으로 변경 */
+}
+
+/* 포커스 상태에서 placeholder는 보이지 않도록 처리 */
+#mname:focus::placeholder {
+  color: transparent;
+}
     }
-/* 부트 스트랩 div input 태그 수평 center 정렬 끝  */
+
   
