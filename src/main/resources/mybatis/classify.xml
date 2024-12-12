@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.classify.ClassifyDAOInter">
+
+<insert id="create" parameterType="dev.mvc.classify.ClassifyVO">
+    INSERT INTO classify (classifyno, classify, cnt, seqno, visible, rdate, name)
+    VALUES (classify_seq.NEXTVAL, #{classify}, 1, #{seqno}, #{visible}, SYSDATE, #{name})
+</insert>
+
+  <select id="list_all" resultType="dev.mvc.classify.ClassifyVO">
+    SELECT * FROM classify
+    ORDER BY seqno ASC, classifyno asc
+  </select>
+  
+  <!-- 종류 목록 -->
+  <select id="typeset" resultType="String">
+    SELECT classify
+    FROM classify 
+    WHERE name='--'
+    ORDER BY seqno ASC
+  </select>
+
+
+  <!-- SQL -> 회원/비회원에게 공개할 카테고리 그룹(대분류) 목록 -->
+  <select id="list_all_categrp_y" resultType="dev.mvc.classify.ClassifyVO">
+    SELECT
+        *
+    FROM
+        classify
+    WHERE
+             name='--'
+        AND visible = 'Y'
+    ORDER BY
+        seqno ASC
+  </select>
+  
+    <!-- SQL ->회원/비회원에게 공개할 카테고리(중분류) 목록  -->
+  <select id="list_all_cate_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+    SELECT *
+    FROM classify 
+    WHERE name!='--' AND visible='Y' AND classify=#{classify}
+    ORDER BY seqno ASC
+</select>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM classify
+    WHERE classifyno = #{classifyno}
+</delete>
+
+<select id="read" resultType="dev.mvc.classify.ClassifyVO">
+    SELECT * FROM classify WHERE classifyno = #{classifyno}
+</select>
+
+  <!-- 처리결과 : 레코드 갯수 -->
+  <update id="update" parameterType="dev.mvc.classify.ClassifyVO">
+  UPDATE classify
+  SET NAME = #{name},
+      classify = #{classify},
+      seqno = #{seqno},
+      visible = #{visible},
+      RDATE = sysdate
+  WHERE classifyno = #{classifyno}
+</update>
+
+
+  
+</mapper>

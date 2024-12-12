@@ -1,36 +1,36 @@
-package dev.mvc.genre;
+package dev.mvc.classify;
 
 import java.util.ArrayList;
 
-public interface GenreDAOInter {
+public interface ClassifyDAOInter {
     /**
      * 대분류 생성
-     * @param genreVO
+     * @param classifyVO
      * @return 처리된 레코드 수
      */
-    public int create(GenreVO genreVO);
+    public int create(ClassifyVO classifyVO);
     
     /**
      * 전체 대분류 조회
      * @return
      */
-    public ArrayList<GenreVO> list_all();
+    public ArrayList<ClassifyVO> list_all();
     
-    public ArrayList<GenreVO> list_all_categrp_y();
+    public ArrayList<ClassifyVO> list_all_categrp_y();
     
     /**
      * 
      * @param type
      * @return
      */
-    public ArrayList<GenreVO> list_all_cate_y(String type);
+    public ArrayList<ClassifyVO> list_all_cate_y(String type);
     
     /**
      * 화면 상단 메뉴
      * 
      * @return
      */
-    public ArrayList<GenreVOMenu> menu();
+    public ArrayList<ClassifyVOMenu> menu();
     
     /**
      * 분류
@@ -39,22 +39,22 @@ public interface GenreDAOInter {
      */
     public ArrayList<String> typeset();
     
-    public int delete(int genreno);
+    public int delete(int classifyno);
     
     /**
      * 조회
      * 
-     * @param genreno
+     * @param classifyno
      * @return
      */
-    public GenreVO read(Integer genreno);
+    public ClassifyVO read(Integer classifyno);
     
     /**
      * 수정
      * 
-     * @param genreVO
+     * @param classifyVO
      * @return
      */
-    public int update(GenreVO genreVO);
+    public int update(ClassifyVO classifyVO);
     
 }

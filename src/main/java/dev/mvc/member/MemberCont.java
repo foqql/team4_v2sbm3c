@@ -9,13 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import dev.mvc.genre.GenreProcInter;
-import dev.mvc.genre.GenreVOMenu;
+import dev.mvc.classify.ClassifyProcInter;
+import dev.mvc.classify.ClassifyVOMenu;
 
 
 @RequestMapping("/member")
@@ -26,8 +25,8 @@ public class MemberCont {
   private MemberProcInter memberProc;
   
   @Autowired
-  @Qualifier("GenreProc")
-  private GenreProcInter genreProc;
+  @Qualifier("ClassifyProc")
+  private ClassifyProcInter classifyProc;
   
   public MemberCont() {
     System.out.println("-> MemberCont created.");  
@@ -57,7 +56,7 @@ public class MemberCont {
   @GetMapping(value="/create") // http://localhost:9093/member/create
   public String create_form(Model model, 
                                       @ModelAttribute("memberVO") MemberVO memberVO) {
-    ArrayList<GenreVOMenu> menu = this.genreProc.menu();
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
     
     return "/member/create";    // /template/member/create.html

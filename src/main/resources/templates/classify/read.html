@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line"><img src="/images/pepe read.png" style="width:50px; height: 50px;">뉴스 조회</div>
+
+  <aside class="aside_right">
+    <a th:href="@{|/classify/list_search?word=${word}&now_page=${now_page}|}">목록</a>
+    <span class='menu_divide'>│</span>
+    <a th:href="@{|/classify/update/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">수정</a>
+    <span class='menu_divide'>│</span>
+    <a th:href="@{|/classify/delete/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">삭제</a>
+    <span class='menu_divide'>│</span>
+    <a th:href="@{|/classify/list_search|}">등록</a> <!-- 수정된 부분 -->
+    <span class='menu_divide'>│</span>
+    <a href="javascript:location.reload();">새로고침</a>
+  </aside>
+  
+<!--    <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>-->
+  <div class="menu_line"></div>
+
+  <div class="container mt-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">번호: <span th:text="${classifyVO.classifyno}"></span></li>
+      <li class="list-group-item">종류: <span th:text="${classifyVO.classify}"></span></li>
+      <li class="list-group-item">이름: <span th:text="${classifyVO.name}"></span></li>
+      <li class="list-group-item">수량: <span th:text="${classifyVO.cnt}"></span></li>
+      <li class="list-group-item">등록일: <span th:text="${classifyVO.rdate}"></span></li>
+    </ul>
+  </div>
+
+
+  <div th:replace="~{classify/list_all_com::list_all_fragment}"></div>
+</div>
+
+</html>

@@ -10,7 +10,7 @@ public class GenreRecomVO {
     
     private int memberNo; // 회원 번호
     
-    private int genreNo; // 장르 번호
+    private int classifyNo; // 장르 번호
 
 
 }

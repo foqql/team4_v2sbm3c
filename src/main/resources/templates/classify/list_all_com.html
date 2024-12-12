@@ -1,0 +1,90 @@
+<div th:fragment="list_all_fragment">
+  <!-- /* <div th:replace="~{classify/list_all_com::list_all_fragment}" */ -->
+  <table class="table table-hover" style='width: 100%;'>
+    <colgroup>
+      <col style='width: 5%;' /> <!-- 순서 -->
+      <col style='width: 15%;' /> <!-- 이름 -->
+      <col style='width: 10%;' /> <!-- 수량 -->
+      <col style='width: 15%;' /> <!-- 종류 -->
+      <col style='width: 20%;' /> <!-- 날짜 -->
+      <col style='width: 10%;' /> <!-- 출력 순서 -->
+      <col style='width: 10%;' /> <!-- 수정 -->
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">종류</th>
+        <th class="th_bs">이름</th>
+        <th class="th_bs">관련 자료수</th>
+        <th class="th_bs">생성일</th>
+        <th class="th_bs">출력 순서</th>
+        <th class="th_bs">수정삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="classifyVO,  i  : ${list}">
+      <!-- 순서 
+        <td class="td_bs" th:text="${no - i.index}"></td> -->
+        <td class="td_bs" th:text="${no != null && i.index != null ? no - i.index : 0}"></td>
+
+        <!--<td class="td_bs" th:text="${i.index + 1}"></td>-->
+        <!--<td class="td_bs" th:text="${classifyVO.classifyno}"></td>-->
+        <!-- 타입 -->
+        <td class="td_bs">
+          <a th:href="@{|/classify/read/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}" style="display:block;"
+            th:text="${classifyVO.classify}"></a>
+        </td>
+        <!-- 이름 -->
+        <td class="td_bs">
+          <a th:href="@{|/classify/read/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}" style="display:block;"
+            th:text="${classifyVO.name}"></a>
+        </td>
+        <!-- 관련 자료수 -->
+        <td class="td_bs" th:text="${classifyVO.cnt}"></td>
+        <!--등록일 -->
+        <td class="td_bs" th:text="${classifyVO.rdate}"></td>
+        <td class="td_bs" th:text="${classifyVO.seqno}"></td>
+        <td class="td_bs">
+          <!--<span th:text="${classifyVO.visible}"></span>-->
+        <!--  <span th:text="${classifyVO.seqno}+순서"> </span> -->
+
+          <span th:if="${classifyVO.visible == 'Y'}">
+            <a th:href="@{|/classify/update_visible_n/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
+              <img src="/classify/images/o.png" class="icon" title="공개">
+            </a>
+          </span>
+
+          <span th:if="${classifyVO.visible == 'N'}">
+            <a th:href="@{|/classify/update_visible_y/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
+              <img src="/classify/images/against.png" class="icon" title="비공개">
+            </a>
+          </span>
+
+          <a th:href="@{|/classify/update_seqno_forward/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
+            <img src="/classify/images/arrow-up.png" class="icon" title="상승">
+          </a>
+          <a th:href="@{|/classify/update_seqno_backward/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
+            <img src="/classify/images/arrow-down.png" class="icon" title="하락">
+          </a>
+          <br>
+          <a th:href="@{|/classify/update/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
+            <img src="/classify/images/edit.png" class="icon" title="수정">
+          </a>
+          <a th:href="@{|/classify/delete/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
+            <img src="/classify/images/trash.png" class="icon" title="삭제">
+          </a>
+       <!--   <a th:if="${classifyVO.name != '--'}" th:href="@{|/supplements/create?classifyno=${classifyVO.classifyno}&word=${word}&now_page=${now_page}|}">
+            <img src="/classify/images/plus.png" class="icon" title="pluoooos">
+          </a>-->
+
+       
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 페이지 버튼 목록 출력 시작 -->
+  <div class="Bottom_menu" th:utext="${paging}"></div>
+  <!-- 페이지 버튼 목록 출력 종료 -->
+</div>

@@ -8,7 +8,7 @@ import lombok.ToString;
 public class NewsVO {
   /*
   newsno  NUMBER(10)                  NOT NULL    PRIMARY KEY,
-  genreno     NUMBER(10)                  NOT NULL, --FK
+  classifyno     NUMBER(10)                  NOT NULL, --FK
   fileno    NUMBER(10)                  NOT NULL, --FK
   title     VARCHAR2(100)             NOT NULL,
   content     CLOB                      NOT NULL,
@@ -28,7 +28,7 @@ public class NewsVO {
   /** 파일 번호 */
   private int fileno;
   /** 장르 번호 */
-  private int genreno;
+  private int classifyno;
   /** 제목 */
   private String title = "";
   /** 내용 */

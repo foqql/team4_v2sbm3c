@@ -5,22 +5,22 @@
   <div class="title_line"><img src="/images/pepe edit.gif" style="width:50px; height: 50px;">  수정</div>
 
   <aside class="aside_right">
-    <a th:href="@{|/genre/list_search?word=${word}&now_page=${now_page}|}">목록</a>
+    <a th:href="@{|/classify/list_search?word=${word}&now_page=${now_page}|}">목록</a>
     <span class='menu_divide'>│</span>
-    <a th:href="@{|/genre/delete/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">삭제</a>
+    <a th:href="@{|/classify/delete/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">삭제</a>
     <span class='menu_divide'>│</span>
-    <a th:href="@{|/genre/list_search|}">등록</a>
+    <a th:href="@{|/classify/list_search|}">등록</a>
     <span class='menu_divide'>│</span>
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
 
-  <!--<div th:replace="~{genre/list_search_com::list_search_fragment}"></div>-->
+  <!--<div th:replace="~{classify/list_search_com::list_search_fragment}"></div>-->
   <div class="menu_line"></div>
 
   <div style="width : 60%; margin: 0px auto;">
-    <form name="frm" method="post" action="/genre/update" th:object="${genreVO}">
-      <input type="hidden" name="genreno" th:value="${genreVO.genreno}">
-     <!-- <input type="hidden" name="seqno" th:value="${genreVO.seqno}">-->
+    <form name="frm" method="post" action="/classify/update" th:object="${classifyVO}">
+      <input type="hidden" name="classifyno" th:value="${classifyVO.classifyno}">
+     <!-- <input type="hidden" name="seqno" th:value="${classifyVO.seqno}">-->
       <input type="hidden" name="word" th:value="${word}">
       <input type="hidden" name="now_page" th:value="${now_page}">
 
@@ -46,10 +46,10 @@
 
       <div>
         <label>제품 유형 [ team4 ]</label>
-        <input type="text" name="genre" class="form-control" style="width: 100%;" th:field="*{genre}">
+        <input type="text" name="classify" class="form-control" style="width: 100%;" th:field="*{classify}">
         <span th:text="|유형 : ${list_type}|"></span><br>
-        <div th:if="${#fields.hasErrors('genre')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
-          <div th:each="err: ${#lists.sort(#fields.errors('genre'))}" th:text="${err}"></div>
+        <div th:if="${#fields.hasErrors('classify')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+          <div th:each="err: ${#lists.sort(#fields.errors('classify'))}" th:text="${err}"></div>
         </div>
       </div>
 
@@ -65,14 +65,14 @@
 
       <div class="content_body_bottom">
         <button type="submit" class="btn btn-secondary btn-sm">저장</button>
-<!--        <button type="button" onclick="location.href='/genre/list_search'"-->
-        <button type="button" onclick="location.href='/genre/list_all'"
+<!--        <button type="button" onclick="location.href='/classify/list_search'"-->
+        <button type="button" onclick="location.href='/classify/list_all'"
           class="btn btn-secondary btn-sm">목록</button>
       </div>
     </form>
   </div>
 
-  <div th:replace="~{genre/list_all_com::list_all_fragment}"></div>
+  <div th:replace="~{classify/list_all_com::list_all_fragment}"></div>
 </div>
 
 </html>

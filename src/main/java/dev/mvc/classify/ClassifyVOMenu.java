@@ -1,4 +1,4 @@
-package dev.mvc.genre;
+package dev.mvc.classify;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class GenreVOMenu {
+public class ClassifyVOMenu {
   /**
    * 나라 및 회사(대분류)
    */
@@ -15,6 +15,6 @@ public class GenreVOMenu {
   /**
    * 장르 이름(중분류) 정치, 스포츠 등등
    */
-  ArrayList<GenreVO> list_name;
+  ArrayList<ClassifyVO> list_name;
 
 }

@@ -1,4 +1,4 @@
-package dev.mvc.genre;
+package dev.mvc.classify;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -6,11 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-// GenreVO.java
+// ClassifyVO.java
 @Getter @Setter @ToString
-public class GenreVO {
-    private int genreno; // 장르번호
-    private String genre;  //장르 
+public class ClassifyVO {
+    private int classifyno; // 장르번호
+    private String classify;  //장르 
     private String name;  //이름
     private int cnt;  //관련 자료수
     private int seqno; //출력 순서

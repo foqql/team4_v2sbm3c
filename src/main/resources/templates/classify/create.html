@@ -10,19 +10,19 @@
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
-  <!--<div th:replace="~{genre/list_search_com::list_search_fragment}"></div> >-->
+  <!--<div th:replace="~{classify/list_search_com::list_search_fragment}"></div> >-->
   <div class="menu_line"></div>
 
   <div style="width : 60%; margin: 0px auto;">
-    <form name="frm" method="post" action="/genre/create" th:object="${genreVO}">
+    <form name="frm" method="post" action="/classify/create" th:object="${classifyVO}">
         <input type="hidden" name="rdate" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />
         
         <div> 
           <label>장르 [ team4 ]</label>
-          <input type="text" name="genre" value="Y" class="form-control fom-control-sm" style="width: 50%;"
-            th:field="*{genre}">
-          <div th:if="${#fields.hasErrors('genre')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
-            <div th:each="err: ${#lists.sort(#fields.errors('genre'))}" th:text="${err}"></div>
+          <input type="text" name="classify" value="Y" class="form-control fom-control-sm" style="width: 50%;"
+            th:field="*{classify}">
+          <div th:if="${#fields.hasErrors('classify')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+            <div th:each="err: ${#lists.sort(#fields.errors('classify'))}" th:text="${err}"></div>
           </div>
         </div>
         
@@ -59,7 +59,7 @@
 
         <div class="content_body_bottom">
           <button type="submit" class="btn btn-secondary btn-sm">등록</button>
-          <button type="button" onclick="location.href='/genre/list_search'"
+          <button type="button" onclick="location.href='/classify/list_search'"
             class="btn btn-secondary btn-sm">목록</button>
         </div>
 

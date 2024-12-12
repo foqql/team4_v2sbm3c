@@ -21,18 +21,18 @@
       <!-- 메뉴 시작 -->
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown" th:each="genreVOMenu:${menu}">
+          <li class="nav-item dropdown" th:each="classifyVOMenu:${menu}">
             <!--/* 대분류 */-->
 
             <!--/* 대분류명 출력    private String type;  */-->
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false" th:text="${genreVOMenu.type}">
+              data-bs-toggle="dropdown" aria-expanded="false" th:text="${classifyVOMenu.type}">
             </a>
 
-            <!--/* 중분류명 출력   ArrayList<GenreVO> list_name;  */-->
+            <!--/* 중분류명 출력   ArrayList<ClassifyVO> list_name;  */-->
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li th:each="genreVO:${genreVOMenu.list_name}">
-              <a class="dropdown-item" th:href="@{|/supplements/list_by_genreno?genreno=${genreVO.genreno}|}"   th:text="${genreVO.name}"></a></li>
+              <li th:each="classifyVO:${classifyVOMenu.list_name}">
+              <a class="dropdown-item" th:href="@{|/supplements/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"   th:text="${classifyVO.name}"></a></li>
             </ul>
           </li>
           
@@ -57,7 +57,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li class="nav-item"><a class="nav-link" th:href="@{|/genre/list_search?word=${word}|}">카테고리
+                            <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_search?word=${word}|}">카테고리
                                     목록</a></li>
                             <li class="nav-item"><a class="nav-link" th:href="@{|/member/list|}">회원 목록</a></li>
                             <li class="nav-item"><a class="nav-link" href="/supplements/list_all">전체 글 목록</a></li>
@@ -75,8 +75,8 @@
       </div>
       <!-- 메뉴 종료 -->
       
-  <a  href="/genre/create" role="button">생성 </a>
-<a th:href="@{|/genre/list_all|}" role="button">리스트 조회</a>
+  <a  href="/classify/create" role="button">생성 </a>
+<a th:href="@{|/classify/list_all|}" role="button">리스트 조회</a>
 
             
     </div>
