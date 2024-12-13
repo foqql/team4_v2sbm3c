@@ -3,55 +3,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dev.mvc.classify.ClassifyDAOInter">
+  <!-- SQL -> Insert into classify table -->
+  <insert id="create" parameterType="dev.mvc.classify.ClassifyVO">
+  INSERT INTO classify (classifyno, NAME,  cnt, classify, seqno, visible, RDATE)
+    VALUES (classify_SEQ.NEXTVAL, #{name}, 0, #{classify},  #{seqno}, #{visible} ,sysdate)
+  </insert>
 
-<insert id="create" parameterType="dev.mvc.classify.ClassifyVO">
-    INSERT INTO classify (classifyno, classify, cnt, seqno, visible, rdate, name)
-    VALUES (classify_seq.NEXTVAL, #{classify}, 1, #{seqno}, #{visible}, SYSDATE, #{name})
-</insert>
 
   <select id="list_all" resultType="dev.mvc.classify.ClassifyVO">
     SELECT * FROM classify
     ORDER BY seqno ASC, classifyno asc
   </select>
-  
-  <!-- 종류 목록 -->
-  <select id="typeset" resultType="String">
-    SELECT classify
-    FROM classify 
-    WHERE name='--'
-    ORDER BY seqno ASC
-  </select>
 
-
-  <!-- SQL -> 회원/비회원에게 공개할 카테고리 그룹(대분류) 목록 -->
-  <select id="list_all_categrp_y" resultType="dev.mvc.classify.ClassifyVO">
-    SELECT
-        *
-    FROM
-        classify
-    WHERE
-             name='--'
-        AND visible = 'Y'
-    ORDER BY
-        seqno ASC
-  </select>
-  
-    <!-- SQL ->회원/비회원에게 공개할 카테고리(중분류) 목록  -->
-  <select id="list_all_cate_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+  <!-- SQL -> Select record by classifyno from classify table -->
+  <select id="read" resultType="dev.mvc.classify.ClassifyVO" parameterType="Integer">
     SELECT *
-    FROM classify 
-    WHERE name!='--' AND visible='Y' AND classify=#{classify}
-    ORDER BY seqno ASC
-</select>
-
-  <delete id="delete" parameterType="int">
-    DELETE FROM classify
-    WHERE classifyno = #{classifyno}
-</delete>
-
-<select id="read" resultType="dev.mvc.classify.ClassifyVO">
-    SELECT * FROM classify WHERE classifyno = #{classifyno}
-</select>
+    FROM classify
+    WHERE classifyno=#{classifyno}
+  </select>
 
   <!-- 처리결과 : 레코드 갯수 -->
   <update id="update" parameterType="dev.mvc.classify.ClassifyVO">
@@ -65,5 +34,132 @@
 </update>
 
 
+  <delete id="delete" parameterType="int">
+DELETE FROM classify
+WHERE classifyno = #{classifyno}
+</delete>
+
+  <!-- 우선순위 높임 -->
+  <update id="update_seqno_forward" parameterType="dev.mvc.classify.ClassifyVO">
+  UPDATE classify
+  SET seqno = seqno - 1
+  WHERE classifyno = #{classifyno}
+</update>
+
+  <!-- 우선순위 낮춤 -->
+  <update id="update_seqno_backward" parameterType="dev.mvc.classify.ClassifyVO">
+  UPDATE classify
+  SET seqno = seqno + 1
+  WHERE classifyno = #{classifyno}
+</update>
+
+  <!-- 공개설정(visible) 공개 -->
+  <update id="update_visible_y" parameterType="dev.mvc.classify.ClassifyVO">
+  UPDATE classify
+  SET visible = 'Y'
+  WHERE classifyno = #{classifyno}
+</update>
+
+  <!-- 공개설정(visible) 비공개 -->
+  <update id="update_visible_n" parameterType="dev.mvc.classify.ClassifyVO">
+  UPDATE classify
+  SET visible = 'N'
+  WHERE classifyno = #{classifyno}
+</update>
+
+  <!-- SQL -> 회원/비회원에게 공개할 카테고리 그룹(대분류) 목록 -->
+  <select id="list_all_categrp_y" resultType="dev.mvc.classify.ClassifyVO">
+    SELECT
+        *
+    FROM
+        classify
+    WHERE
+             name='--'
+        AND visible = 'Y'
+    ORDER BY
+        seqno ASC
+  </select>
+
+  <!-- SQL ->회원/비회원에게 공개할 카테고리(중분류) 목록  -->
+  <select id="list_all_cate_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+    SELECT *
+    FROM classify 
+    WHERE name!='--' AND visible='Y' AND classify=#{classify}
+    ORDER BY seqno ASC
+</select>
+
+  <!-- 종류 목록 -->
+  <select id="classifyset" resultType="String">
+    SELECT classify
+    FROM classify 
+    WHERE name='--'
+    ORDER BY seqno ASC
+  </select>
+
+  <!--  검색 결과 출력  -->
+  <select id="list_search" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+    select classifyno, classify, name, cnt, seqno, visible, rdate, company,price, expdate
+    FROM classify
+    <if test="word != null and word !=''">
+      <!--  검색 상태라면 WHERE 생성  -->
+      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%') OR (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
+    </if>
+    ORDER BY seqno ASC, classifyno asc
+  </select>
+
+  <!--  검색 결과 개수 출력  -->
+  <select id="list_search_count" resultType="Integer" parameterType="String">
+    select count(*) as cnt
+    FROM classify
+    <if test="word != null and word !=''">
+      <!--  검색 상태라면 WHERE 생성  -->
+      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%') 
+      OR (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
+    </if>
+    ORDER BY seqno ASC, classifyno asc
+  </select>
+
+
+  <!--  검색 + 페이징  -->
+  <select id="list_search_paging" resultType="dev.mvc.classify.ClassifyVO" parameterType="Map">
+SELECT classifyno, classify, name, cnt, seqno, visible, rdate, r
+FROM (
+    SELECT classifyno, classify, name, cnt, seqno, visible, rdate,  rownum AS r
+    FROM (
+        SELECT classifyno, classify, name, cnt, seqno, visible, rdate
+        FROM classify
+        WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%')
+           OR (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
+        ORDER BY seqno ASC, classifyno ASC
+    )
+)
+WHERE r BETWEEN #{start_num} AND #{end_num}
+
+  </select>
   
+  <update id="update_classify_cnt">
+      UPDATE classify
+      SET cnt = (
+          SELECT COUNT(*)
+          FROM news
+          WHERE news.classifyno = classify.classifyno
+      )
+  </update>
+  
+<update id="update_classify_genre_cnt">
+    UPDATE classify c
+    SET cnt = COALESCE((
+        SELECT SUM(cnt)
+        FROM classify s
+        WHERE s.classify = c.classify AND s.name != '--'
+    ), 0)
+    WHERE c.name = '--'
+</update>
+
+
+
+  <select id="select_newsno" parameterType="int"  resultType="java.lang.Integer">
+    select newsno FROM news
+     WHERE classifyno=#{classifyno} 
+  </select>
 </mapper>

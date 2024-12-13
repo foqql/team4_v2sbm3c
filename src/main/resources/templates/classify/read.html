@@ -2,7 +2,7 @@
 <html layout:decorate="~{layout}">
 <!-- layout.html 상속-->
 <div layout:fragment="content">
-  <div class="title_line"><img src="/images/pepe read.png" style="width:50px; height: 50px;">뉴스 조회</div>
+  <div class="title_line"><img src="/images/pepe read.png" style="width:50px; height: 50px;"> 조회</div>
 
   <aside class="aside_right">
     <a th:href="@{|/classify/list_search?word=${word}&now_page=${now_page}|}">목록</a>
@@ -15,8 +15,7 @@
     <span class='menu_divide'>│</span>
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
-  
-<!--    <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>-->
+    <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>
   <div class="menu_line"></div>
 
   <div class="container mt-3">
