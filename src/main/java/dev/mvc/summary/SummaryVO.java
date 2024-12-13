@@ -14,6 +14,5 @@ public class SummaryVO {
     private int translateno; // 번역된 기사 번호
     
 
-    
-
+   
 }

@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-connection.project.dir=
-eclipse.preferences.version=1
-=======
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=562737c7e9669251cec8e55cda142d7a962c1d5f
 arguments=--init-script C\:\\Users\\soldesk\\AppData\\Roaming\\Code\\User\\globalStorage\\redhat.java\\1.36.0\\config_win\\org.eclipse.osgi\\58\\0\\.cp\\gradle\\init\\init.gradle --init-script C\:\\Users\\soldesk\\AppData\\Roaming\\Code\\User\\globalStorage\\redhat.java\\1.36.0\\config_win\\org.eclipse.osgi\\58\\0\\.cp\\gradle\\protobuf\\init.gradle
 auto.sync=false
 build.scans.enabled=false
@@ -12,7 +11,6 @@ gradle.user.home=
 java.home=C\:/jdk17
 jvm.arguments=
 offline.mode=false
-override.workspace.settings=true
+override.workspace.settings=false
 show.console.view=true
 show.executions.view=true
->>>>>>> 562737c7e9669251cec8e55cda142d7a962c1d5f
