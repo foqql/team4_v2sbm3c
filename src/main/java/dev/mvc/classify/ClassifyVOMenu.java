@@ -9,11 +9,11 @@ import lombok.Setter;
 @Getter
 public class ClassifyVOMenu {
   /**
-   * 나라 및 회사(대분류)
+   *  종류(대분류)
    */
   private String type;
   /**
-   * 장르 이름(중분류) 정치, 스포츠 등등
+   *  이름(중분류)
    */
   ArrayList<ClassifyVO> list_name;
 

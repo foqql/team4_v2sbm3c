@@ -4,38 +4,35 @@
 <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class="title_line">
-    <img src="/images/pepe list.gif" style="width:50px; height: 50px;">
-    서치 작업 완료<span th:if="${word != null and word != ''}" th:text="|  ${word} : ${search_cnt} 개  |"></span>
+    <img src="/images/pepe list.gif" style="width:50px; height: 50px;"> 정보
   </div>
 
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
-  <!--/* '/cate/list_search_com.html' 파일의 list_search_fragment를 가져다 사용 */-->
   <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>
-
   <div class="menu_line"></div>
 
   <div class="flex_div_center">
     <form class="list_form" name="frm" method="post" action="/classify/create" th:object="${classifyVO}">
-      <div style="width: 20%;">
+      <div style="width: 17%;">
         <input type="text" name="name" value="" autofocus="autofocus" class="form-control" style="width: 100%;"
           th:field="*{name}" placeholder=" 이름 [ classifymin ]">
       </div>
 
 
-      <div style="width: 20%;">
+
+      <div style="width: 7%;">
         <input type="number" name="cnt" min="1" max="10000000" step="1" class="form-control" style="width: 100%;"
-          th:field="*{seqno}" placeholder="출력 순서 [ classifymin ]">
+          th:field="*{cnt}" placeholder="수량 [ classifymin ]">
       </div>
 
-      <div style="width: 20%;">
+      <div style="width: 17%;">
         <input type="text" name="classify" value="Y" class="form-control" style="width: 100%;" th:field="*{classify}"
           placeholder="제품 유형 [ classifymin ]">
       </div>
 
-
-      <div style="margin-right: 2px; width: 20%; float: left;">
+      <div style="margin-right: 2px; width: 10%; float: left;">
         <select id="visible" name="visible" class="form-control">
           <option value="출력 모드" selected="selected">출력 모드</option>
           <option value="Y">Y</option>
@@ -43,11 +40,10 @@
         </select>
       </div>
 
-      <div style="width: 15%;">
+      <div style="width: 10%;">
         <button type="submit" class="btn btn-secondary btn-sm">등록</button>
         <button type="reset" class="btn btn-secondary btn-sm">취소</button>
       </div>
-
 
     </form>
   </div>
