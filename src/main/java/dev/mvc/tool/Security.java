@@ -14,7 +14,9 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Component;
  
+@Component
 public class Security {
   private String iv;
   private Key keySpec;
