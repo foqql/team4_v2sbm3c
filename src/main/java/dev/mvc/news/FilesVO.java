@@ -17,7 +17,9 @@ public class FilesVO {
   url               VARCHAR2(200) NOT NULL
   */
     /** 파일 번호 */
-    private int fileno;
+    private int filesno;
+    /** 뉴스 크롤링 번호 */
+    private int newscrawlingno;
     /** 메인 이미지 */
     private String file1 = "";
     /** 실제 저장된 메인 이미지 */

@@ -187,7 +187,7 @@ public class ClassifyCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) { // 변경: "classifyno"를
                                                                                                 // "classifyno"로
 
- //   if (this.memberProc.isMember(session) || this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isMember(session) || this.memberProc.isMemberAdmin(session)) {
 
       ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 수정: 실제 classifyno를 전달
       model.addAttribute("classifyVO", classifyVO);
@@ -217,9 +217,9 @@ public class ClassifyCont {
       model.addAttribute("no", no);
 
       return "/classify/update";
-//    } else {
-//      return "redirect:/member/login_cookie_need"; // redirect
-//    }
+    } else {
+      return "redirect:/member/login_cookie_need"; // redirect
+    }
   }
 
   /**
@@ -237,11 +237,8 @@ public class ClassifyCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     System.out.println(" -> update post [ classify/update ]");
     System.out.println(" 이름 : " + classifyVO.getName());
-    System.out.println(" Seqno : " + classifyVO.getSeqno());
-    System.out.println(" CNT : " + classifyVO.getCnt());
-//    System.out.println(" 가격 : " + classifyVO.getPrice());
-    System.out.println(" 개봉일 : " + classifyVO.getRdate());
-//    if (this.memberProc.isMemberAdmin(session)) {
+
+    if (this.memberProc.isMemberAdmin(session)) {
       if (bindingResult.hasErrors()) {
         System.out.println(" -> Error 발생  [ classify/update ]");
         model.addAttribute("classifyVO", classifyVO); // 에러 발생 시 데이터 유지
@@ -263,9 +260,9 @@ public class ClassifyCont {
 
       model.addAttribute("cnt", cnt);
       return "/classify/msg"; // templates/classify/msg.html
-//    } else {
-//      return "redirect:/member/login_cookie_need"; // redirect
-//    }
+    } else {
+      return "redirect:/member/login_cookie_need"; // redirect
+   }
   }
 
   /**
@@ -280,7 +277,7 @@ public class ClassifyCont {
       @RequestParam(name = "word", defaultValue = "") String word,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) { // 변경: "classifyno"를
                                                                                                 // "classifyno"로
-//    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isMemberAdmin(session)) {
       ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 수정: 실제 classifyno를 전달
       model.addAttribute("classifyVO", classifyVO);
 
@@ -301,9 +298,9 @@ public class ClassifyCont {
       int no = search_count - ((now_page - 1) * this.record_per_page);
       model.addAttribute("no", no);
       return "/classify/delete";
-//    } else {
-//      return "redirect:/member/login_cookie_need"; // redirect
-//    }
+    } else {
+      return "redirect:/member/login_cookie_need"; // redirect
+    }
   }
 
   /**
@@ -321,7 +318,7 @@ public class ClassifyCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     System.out.println(" -> delete post [ classify/delete ]");
 
-//    if (this.memberProc.isMemberAdmin(session)) {
+   if (this.memberProc.isMemberAdmin(session)) {
       ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 수정: 실제 classifyno를 전달
       model.addAttribute("classifyVO", classifyVO);
 
@@ -355,9 +352,9 @@ public class ClassifyCont {
       model.addAttribute("cnt", cnt);
 
       return "/classify/msg"; // templates/classify/msg.html
-//    } else {
-//      return "redirect:/member/login_cookie_need"; // redirect
-//    }
+    } else {
+      return "redirect:/member/login_cookie_need"; // redirect
+      }
   }
 
   /**
@@ -475,7 +472,7 @@ public class ClassifyCont {
   @GetMapping(value = "/list_search")
   public String list_search_paging(Model model, @RequestParam(name = "word", defaultValue = "") String word,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
-//    if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isMemberAdmin(session)) {
       ClassifyVO classifyVO = new ClassifyVO();
 
       this.classifyProc.update_classify_cnt();
@@ -512,9 +509,9 @@ public class ClassifyCont {
       int no = search_count - ((now_page - 1) * this.record_per_page);
       model.addAttribute("no", no);
       return "/classify/list_search";
-//    } else {
-//      return "redirect:/member/login_cookie_need"; // redirect
-//    }
+    } else {
+      return "redirect:/member/login_cookie_need"; // redirect
+   }
 
   }
 

@@ -25,7 +25,7 @@
       <input type="hidden" name="now_page" th:value="${now_page}">
 
       <div>
-        <label> 이름 [ classifymin ]</label>
+        <label> 이름 </label>
         <input type="text" name="name" autofocus="autofocus" class="form-control" style="width: 100%;"
           th:field="*{name}">
         <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
@@ -36,7 +36,7 @@
 
       
       <div>
-        <label>출력 순서 [ classifymin ]</label>
+        <label> 출력 순서 </label>
         <input type="number" name="seqno" min="1" max="10000000" step="1" class="form-control" style="width: 100%;"
           th:field="*{seqno}">
         <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
@@ -45,7 +45,7 @@
       </div>
 
       <div>
-        <label>제품 유형 [ classifymin ]</label>
+        <label> 카테고리 </label>
         <input type="text" name="classify" class="form-control" style="width: 100%;" th:field="*{classify}">
         <span th:text="|유형 : ${list_type}|"></span><br>
         <div th:if="${#fields.hasErrors('classify')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">

@@ -27,14 +27,14 @@ public interface ClassifyDAOInter {
 
   public int update_visible_n(int classifyno);
 
-  public ArrayList<ClassifyVO> list_all_categrp_y();
+  public ArrayList<ClassifyVO> list_all_classifygrp_y();
 
   /**
    * 
    * @param classify
    * @return
    */
-  public ArrayList<ClassifyVO> list_all_cate_y(String classify);
+  public ArrayList<ClassifyVO> list_all_classify_y(String classify);
 
   /**
    * 장르 목록
