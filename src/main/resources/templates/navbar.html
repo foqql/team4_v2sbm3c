@@ -6,9 +6,10 @@
         -1px -1px 0 black,
         1px -1px 0 black,
         -1px 1px 0 black;">
- Team4_ver 1.0
+ Team4_ver 1.0 해외뉴우스
     </div>
   </div>
+  
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
@@ -32,39 +33,35 @@
             <!--/* 중분류명 출력   ArrayList<ClassifyVO> list_name;  */-->
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li th:each="classifyVO:${classifyVOMenu.list_name}">
-              <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"   th:text="${classifyVO.name}"></a></li>
-            </ul>
+               <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"   th:text="${classifyVO.name}"></a>
+               </li>
+             </ul>
           </li>
-          
-                    <!--/* 회원 서브메뉴 */-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false" th:text="회원">
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li class="nav-item"><a class="nav-link" th:href="@{|/member/create|}">회원 가입</a></li>
-                            <li class="nav-item" th:if="${session.grade == 'admin'}"></li>
-                            <li class="nav-item" th:if="${session.memberno != null}">
-                                <a class="nav-link" th:href="@{|/member/passwd_update|}">비밀 번호 변경</a>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <!--/* 관리자 서브메뉴 */-->
-                    <li class="nav-item dropdown" th:if="${session.grade=='admin'}">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_search?word=${word}|}">카테고리
-                                    목록</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{|/member/list|}">회원 목록</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/news/list_all">전체 글 목록</a></li>
-                        </ul>
-                    </li>
-       
                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="회원">                                                            
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{|/member/create|}">회원 가입</a>
+                        </li>
+                        <li class="nav-item" th:if="${session.memberno != null}">
+                            <a class="nav-link" th:href="@{|/member/passwd_update|}">비밀 번호 변경</a>
+                        </li>  
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">                                                            
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_all|}">카테고리 목록</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{|/member/list|}">회원 목록</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{|/news/list_all|}">전체 글 목록</a></li>
+                    </ul>
+                </li>
                        
                 <li class="nav-item">
                     <span th:if="${session.memberno == null}"><a class="nav-link" href="/member/login" th:text="@{|로그인|}"></a></span>
@@ -76,7 +73,7 @@
       <!-- 메뉴 종료 -->
       
   <a  href="/classify/create" role="button">생성 </a>
-<a th:href="@{|/classify/list_search|}" role="button">리스트 조회</a>
+  <a th:href="@{|/classify/list_all|}" role="button">리스트 조회</a>
 
             
     </div>

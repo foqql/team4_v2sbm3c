@@ -17,19 +17,19 @@
     <form class="list_form" name="frm" method="post" action="/classify/create" th:object="${classifyVO}">
       <div style="width: 17%;">
         <input type="text" name="name" value="" autofocus="autofocus" class="form-control" style="width: 100%;"
-          th:field="*{name}" placeholder=" 이름 [ classifymin ]">
+          th:field="*{name}" placeholder=" 이름 ">
       </div>
 
 
 
       <div style="width: 7%;">
         <input type="number" name="cnt" min="1" max="10000000" step="1" class="form-control" style="width: 100%;"
-          th:field="*{cnt}" placeholder="수량 [ classifymin ]">
+          th:field="*{cnt}" placeholder=" 수량 ">
       </div>
 
       <div style="width: 17%;">
         <input type="text" name="classify" value="Y" class="form-control" style="width: 100%;" th:field="*{classify}"
-          placeholder="제품 유형 [ classifymin ]">
+          placeholder=" 제품 유형 ">
       </div>
 
       <div style="margin-right: 2px; width: 10%; float: left;">

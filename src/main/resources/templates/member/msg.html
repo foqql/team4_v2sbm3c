@@ -16,11 +16,11 @@
           <div th:case="create_fail">
             <span class="span_fail">회원 가입에 실패했습니다. 계속 문제가 발생하면 02-111-1111로 문의해주세요</span><br>
           </div>
-
+          
           <div th:case="duplicte_fail">
             <span class="span_fail">id가 중복됩니다. 새로운 아이디를 사용해주세요.</span><br>
           </div>
-                    
+
           <div th:case="update_success">
             <span class="span_success">회원 정보 수정에 성공했습니다.</span><br>
             수정된 회원 정보: <span th:text="${mname}"></span>
@@ -38,16 +38,20 @@
             <span class="span_fail">회원 정보 삭제에 실패했습니다.</span><br>
             삭제 실패된 회원 정보: <span th:text="${mname}"></span>
           </div>
+          <div th:case="login_fail">
+            <span class="span_fail">로그인에 실패했습니다. 다시 시도해주세요.</span><br>
+          </div>
           <div th:case="passwd_not_equal">
-            <span class="span_fail">패스워드가 일치하지 않습니다. 다시 시도해주세요.</span><br>
+            <span class="span_fail">패스워드가 일치하지 않습니다. 다시 시도해주세요.</span>
           </div>
           <div th:case="passwd_change_success">
-            <span class="span_success">패스워드가 변경 처리 되었습니다.</span><br>
+            <span class="span_success">패스워드가 변경됬습니다.</span>
           </div>
           <div th:case="passwd_change_fail">
-            <span class="span_fail">패스워드 변경에 실패했습니다. 다시 시도해주세요.</span><br>
+            <span class="span_fail">패스워드 변경에 실패했습니다. 다시 시도해주세요.</span>
           </div>
         </li>
+
         
         <li class="li_none">
           <div th:if="${cnt == 0}">
