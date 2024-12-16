@@ -77,9 +77,9 @@ public interface ClassifyProcInter {
    */
   public int update_visible_n(int classifyno);
 
-  public ArrayList<ClassifyVO> list_all_categrp_y();
+  public ArrayList<ClassifyVO> list_all_classifygrp_y();
 
-  public ArrayList<ClassifyVO> list_all_cate_y(String type);
+  public ArrayList<ClassifyVO> list_all_classify_y(String type);
 
   /**
    * 화면 상단 메뉴

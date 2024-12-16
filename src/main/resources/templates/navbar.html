@@ -33,7 +33,7 @@
             <!--/* 중분류명 출력   ArrayList<ClassifyVO> list_name;  */-->
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li th:each="classifyVO:${classifyVOMenu.list_name}">
-               <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"   th:text="${classifyVO.name}"></a>
+               <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"  th:text="${classifyVO.name}"></a>
                </li>
              </ul>
           </li>
@@ -52,9 +52,9 @@
                     </ul>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">                                                            
+                <li class="nav-item dropdown" th:if="${session.grade=='admin'}">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">                                                               
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_all|}">카테고리 목록</a></li>
