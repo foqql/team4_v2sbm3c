@@ -68,7 +68,7 @@ WHERE classifyno = #{classifyno}
 </update>
 
   <!-- SQL -> 회원/비회원에게 공개할 카테고리 그룹(대분류) 목록 -->
-  <select id="list_all_categrp_y" resultType="dev.mvc.classify.ClassifyVO">
+  <select id="list_all_classifygrp_y" resultType="dev.mvc.classify.ClassifyVO">
     SELECT
         *
     FROM
@@ -81,7 +81,7 @@ WHERE classifyno = #{classifyno}
   </select>
 
   <!-- SQL ->회원/비회원에게 공개할 카테고리(중분류) 목록  -->
-  <select id="list_all_cate_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+  <select id="list_all_classify_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
     SELECT *
     FROM classify 
     WHERE name!='--' AND visible='Y' AND classify=#{classify}

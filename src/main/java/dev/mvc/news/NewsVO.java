@@ -24,11 +24,15 @@ public class NewsVO {
   */
 
   /** 컨텐츠 번호 */
-  private int contentsno;
+  private int newsno;
+  /** 관리자 권한의 회원 번호 */
+  private int memberno;
   /** 파일 번호 */
-  private int fileno;
+  private int filesno;
   /** 장르 번호 */
   private int classifyno;
+  /** 요약된 기사 번호 */
+  private int summaryno;
   /** 제목 */
   private String title = "";
   /** 내용 */
@@ -37,8 +41,6 @@ public class NewsVO {
   private int recom;
   /** 조회수 */
   private int cnt = 0;
-  /** 댓글수 */
-  private int replycnt = 0;
   /** 패스워드 */
   private String passwd = "";
   /** 검색어 */
@@ -49,6 +51,8 @@ public class NewsVO {
   private String map = "";
   /** Youtube */
   private String youtube = "";
-  /** mp4 */
-  private String mp4 = "";
+  /** mp3 */
+  private String mp3 = "";
+  
+  private FilesVO filesVO;
 }

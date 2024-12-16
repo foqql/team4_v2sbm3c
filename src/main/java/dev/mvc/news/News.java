@@ -1,5 +1,5 @@
 package dev.mvc.news;
-public class news {
+public class News {
   /** 페이지당 출력할 레코드 갯수 */
   public static int RECORD_PER_PAGE = 10;
 
@@ -11,13 +11,13 @@ public class news {
     String path = "";
 
     if (osName.contains("win")) { // Windows
-      path = "C:\\kd\\deploy\\resort\\contents\\storage\\";
+      path = "C:\\kd\\deploy\\team4\\news\\storage\\";
       // System.out.println("Windows: " + path);
     } else if (osName.contains("mac")) { // MacOS
-      path = "/Users/yourusername/deploy/resort/contents/storage/";
+      path = "/Users/yourusername/deploy/team4/news/storage/";
       // System.out.println("MacOS: " + path);
     } else { // Linux
-      path = "/home/ubuntu/deploy/resort/contents/storage/";
+      path = "/home/ubuntu/deploy/team4/news/storage/";
       // System.out.println("Linux: " + path);
     }
 

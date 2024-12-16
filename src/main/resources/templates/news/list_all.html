@@ -21,6 +21,7 @@
       <th class='th_bs'>제목</th>
     </tr>
    
+
     <tr th:each="contentsVO, status:${list}" 
          th:attr="onclick=|location.href='/contents/read?contentsno=${contentsVO.contentsno}'|"
          style="cursor: pointer;">

@@ -7,14 +7,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dev.mvc.news.NewsDAOInter;
+
 // 알고리즘 구현
 @Service("ClassifyProc")
 public class ClassifyProc implements ClassifyProcInter {
   @Autowired
   private ClassifyDAOInter classifyDAO;
 
-//  @Autowired
-//  private SupplementsDAOInter newsDAO;
+  @Autowired
+  private NewsDAOInter newsDAO;
   
   @Override
   public int create(ClassifyVO classifyVO) {
@@ -90,14 +92,14 @@ public class ClassifyProc implements ClassifyProcInter {
   }
 
   @Override
-  public ArrayList<ClassifyVO> list_all_categrp_y() {
-    ArrayList<ClassifyVO> list = this.classifyDAO.list_all_categrp_y();
+  public ArrayList<ClassifyVO> list_all_classifygrp_y() {
+    ArrayList<ClassifyVO> list = this.classifyDAO.list_all_classifygrp_y();
     return list;
   }
 
   @Override
-  public ArrayList<ClassifyVO> list_all_cate_y(String type) {
-    ArrayList<ClassifyVO> list = this.classifyDAO.list_all_cate_y(type);
+  public ArrayList<ClassifyVO> list_all_classify_y(String type) {
+    ArrayList<ClassifyVO> list = this.classifyDAO.list_all_classify_y(type);
     return list;
   }
 
@@ -105,14 +107,14 @@ public class ClassifyProc implements ClassifyProcInter {
   public ArrayList<ClassifyVOMenu> menu() {
     ArrayList<ClassifyVOMenu> menu = new ArrayList<ClassifyVOMenu>();
 
-    ArrayList<ClassifyVO> type = this.classifyDAO.list_all_categrp_y(); // 대분류 목록 추출
+    ArrayList<ClassifyVO> type = this.classifyDAO.list_all_classifygrp_y(); // 대분류 목록 추출
     for (ClassifyVO classifyVO : type) {
 //      System.out.println(classifyVO.getClassify());
       ClassifyVOMenu classifyVOMenu = new ClassifyVOMenu();
       classifyVOMenu.setType(classifyVO.getClassify()); // 대분류명 저장
 
       // 카테고리 그룹(대분류)에 해당하는 카테고리 목록(중분류) 로딩
-      ArrayList<ClassifyVO> list_name = this.classifyDAO.list_all_cate_y(classifyVO.getClassify());
+      ArrayList<ClassifyVO> list_name = this.classifyDAO.list_all_classify_y(classifyVO.getClassify());
       classifyVOMenu.setList_name(list_name);
 
       menu.add(classifyVOMenu);
