@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.WeatherMapper">
+
+    <!-- Insert Weather Information -->
+    <insert id="insertWeather" parameterType="WeatherVO">
+        INSERT INTO weather (
+            weather, title, content, cnt, word, rdate, map, youtube, passwd
+        ) VALUES (
+            #{weather}, #{title}, #{content}, #{cnt}, #{word}, #{rdate}, #{map}, #{youtube}, #{passwd}
+        )
+    </insert>
+
+    <!-- Select All Weather Information -->
+    <select id="selectAllWeather" resultType="WeatherVO">
+        SELECT 
+            weather, title, content, cnt, word, rdate, map, youtube, passwd 
+        FROM 
+            weather
+    </select>
+
+    <!-- Select Weather by ID -->
+    <select id="selectWeatherById" parameterType="int" resultType="WeatherVO">
+        SELECT 
+            weather, title, content, cnt, word, rdate, map, youtube, passwd 
+        FROM 
+            weather
+        WHERE 
+            weather = #{weather}
+    </select>
+
+    <!-- Update Weather Information -->
+    <update id="updateWeather" parameterType="WeatherVO">
+        UPDATE weather
+        SET
+            title = #{title},
+            content = #{content},
+            cnt = #{cnt},
+            word = #{word},
+            rdate = #{rdate},
+            map = #{map},
+            youtube = #{youtube},
+            passwd = #{passwd}
+        WHERE 
+            weather = #{weather}
+    </update>
+
+    <!-- Delete Weather Information -->
+    <delete id="deleteWeather" parameterType="int">
+        DELETE FROM weather
+        WHERE weather = #{weather}
+    </delete>
+
+</mapper>
