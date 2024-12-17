@@ -33,7 +33,7 @@ public class MemberCont {
   private MemberProcInter memberProc;
   
   @Autowired
-  @Qualifier("ClassifyProc")
+  @Qualifier("dev.mvc.classify.ClassifyProc")
   private ClassifyProcInter classifyProc;
   
   public MemberCont() {

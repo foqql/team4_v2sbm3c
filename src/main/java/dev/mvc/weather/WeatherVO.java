@@ -2,7 +2,6 @@ package dev.mvc.weather;
   
 import org.springframework.web.multipart.MultipartFile;
 
-import dev.mvc.news.FilesVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

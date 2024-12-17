@@ -2,6 +2,9 @@ package dev.mvc.weather;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import dev.mvc.classify.ClassifyVO;
 
 /**
  * Spring Boot가 자동 구현

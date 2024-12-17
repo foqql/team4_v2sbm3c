@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 public class ClassifyCont {
 
     @Autowired
-    @Qualifier("ClassifyProc") 
+    @Qualifier("dev.mvc.classify.ClassifyProc") 
     private ClassifyProcInter classifyProc;
   
   @Autowired
@@ -424,42 +424,6 @@ public class ClassifyCont {
     ra.addAttribute("word", word);
     return "redirect:/classify/list_search"; // @GetMapping(value="/list_all")
   }
-
-//  /**
-//   * 등록 폼 및 검색 목록 http://localhost:9092/classify/list_search
-//   * http://localhost:9091/cate/list_search?word=
-//   * http://localhost:9091/cate/list_search?word=까페
-//   * 
-//   * @param model
-//   * @return
-//   */
-//  @GetMapping(value = "/list_search")
-//  public String list_search(Model model, @RequestParam(name = "word", defaultValue = "") String word) {
-//    ClassifyVO classifyVO = new ClassifyVO();
-//
-//    // 카테고리 그룹 목록
-//    ArrayList<String> list_type = this.classifyProc.classifyset();
-//    classifyVO.setClassify(String.join("/", list_type));
-//
-//    model.addAttribute("classifyVO", classifyVO);
-//
-//    word = Tool.checkNull(word);
-//
-//    ArrayList<ClassifyVO> list = this.classifyProc.list_search(word);
-//    model.addAttribute("list", list);
-//
-////    ArrayList<ClassifyVO> list = this.classifyProc.list_all();
-////    model.addAttribute("list", list);
-//
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//
-//    int search_cnt = this.classifyProc.list_search_count(word);
-//    model.addAttribute("search_cnt", search_cnt);
-//    model.addAttribute("word", word);
-//
-//    return "/classify/list_search";
-//  }
 
   /**
    * 등록 폼 및 검색 목록 + 페이징 http://localhost:9092/cate/list_search

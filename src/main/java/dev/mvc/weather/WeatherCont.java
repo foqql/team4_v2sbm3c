@@ -1,4 +1,4 @@
-package dev.mvc.news;
+package dev.mvc.weather;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,9 +30,9 @@ import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 
-@RequestMapping(value = "/news")
+@RequestMapping(value = "/weather")
 @Controller
-public class NewsCont {
+public class WeatherCont {
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc") // @Service("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
@@ -42,11 +42,11 @@ public class NewsCont {
   private ClassifyProcInter classifyProc;
 
   @Autowired
-  @Qualifier("dev.mvc.news.NewsProc") // @Component("dev.mvc.news.NewsProc")
-  private NewsProcInter newsProc;
+  @Qualifier("dev.mvc.weather.WeatherProc") // @Component("dev.mvc.weather.WeatherProc")
+  private WeatherProcInter weatherProc;
 
-  public NewsCont() {
-    System.out.println("-> NewsCont created.");
+  public WeatherCont() {
+    System.out.println("-> WeatherCont created.");
   }
 
   /**
@@ -64,15 +64,15 @@ public class NewsCont {
     return url; // forward, /templates/...
   }
 
-  // 등록 폼, news 테이블은 FK로 classifyno를 사용함.
-  // http://localhost:9091/news/create X
-  // http://localhost:9091/news/create?classifyno=1 // classifyno 변수값을 보내는 목적
-  // http://localhost:9091/news/create?classifyno=2
-  // http://localhost:9091/news/create?classifyno=5
+  // 등록 폼, weather 테이블은 FK로 classifyno를 사용함.
+  // http://localhost:9091/weather/create X
+  // http://localhost:9091/weather/create?classifyno=1 // classifyno 변수값을 보내는 목적
+  // http://localhost:9091/weather/create?classifyno=2
+  // http://localhost:9091/weather/create?classifyno=5
   @GetMapping(value = "/create")
   public String create(
       Model model, 
-      @ModelAttribute("newsVO") NewsVO newsVO, 
+      @ModelAttribute("weatherVO") WeatherVO weatherVO, 
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
@@ -80,11 +80,11 @@ public class NewsCont {
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
 
-    return "/news/create"; // /templates/news/create.html
+    return "/weather/create"; // /templates/weather/create.html
   }
 
   /**
-   * 등록 처리 http://localhost:9091/news/create
+   * 등록 처리 http://localhost:9091/weather/create
    * 
    * @return
    */
@@ -93,7 +93,7 @@ public class NewsCont {
       HttpServletRequest request, 
       HttpSession session, 
       Model model, 
-      @ModelAttribute("newsVO") NewsVO newsVO,
+      @ModelAttribute("weatherVO") WeatherVO weatherVO,
       RedirectAttributes ra) {
 
     if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
@@ -104,14 +104,14 @@ public class NewsCont {
       String file1saved = ""; // 저장된 파일명, image
       String thumb1 = ""; // preview image
 
-      String upDir = News.getUploadDir(); // 파일을 업로드할 폴더 준비
+      String upDir = Weather.getUploadDir(); // 파일을 업로드할 폴더 준비
       // upDir = upDir + "/" + 한글을 제외한 카테고리 이름
       System.out.println("-> upDir: " + upDir);
 
       // 전송 파일이 없어도 file1MF 객체가 생성됨.
       // <input type='file' class="form-control" name='file1MF' id='file1MF'
       // value='' placeholder="파일 선택">
-      MultipartFile mf = newsVO.getFile1MF();
+      MultipartFile mf = weatherVO.getFile1MF();
 
       file1 = mf.getOriginalFilename(); // 원본 파일명 산출, 01.jpg
       System.out.println("-> 원본 파일명 산출 file1: " + file1);
@@ -127,16 +127,16 @@ public class NewsCont {
             thumb1 = Tool.preview(upDir, file1saved, 200, 150);
           }
 
-          newsVO.setFile1(file1); // 순수 원본 파일명
-          newsVO.setFile1saved(file1saved); // 저장된 파일명(파일명 중복 처리)
-          newsVO.setThumb1(thumb1); // 원본이미지 축소판
-          newsVO.setSize1(size1); // 파일 크기
+          weatherVO.setFile1(file1); // 순수 원본 파일명
+          weatherVO.setFile1saved(file1saved); // 저장된 파일명(파일명 중복 처리)
+          weatherVO.setThumb1(thumb1); // 원본이미지 축소판
+          weatherVO.setSize1(size1); // 파일 크기
 
         } else { // 전송 못하는 파일 형식
           ra.addFlashAttribute("code", "check_upload_file_fail"); // 업로드 할 수 없는 파일
           ra.addFlashAttribute("cnt", 0); // 업로드 실패
-          ra.addFlashAttribute("url", "/news/msg"); // msg.html, redirect parameter 적용
-          return "redirect:/news/msg"; // Post -> Get - param...
+          ra.addFlashAttribute("url", "/weather/msg"); // msg.html, redirect parameter 적용
+          return "redirect:/weather/msg"; // Post -> Get - param...
         }
       } else { // 글만 등록하는 경우
         System.out.println("-> 글만 등록");
@@ -148,14 +148,14 @@ public class NewsCont {
 
       // Call By Reference: 메모리 공유, Hashcode 전달
       int memberno = (int) session.getAttribute("memberno"); // memberno FK
-      newsVO.setMemberno(memberno);
-      int cnt = this.newsProc.create(newsVO);
+      weatherVO.setMemberno(memberno);
+      int cnt = this.weatherProc.create(weatherVO);
 
       // ------------------------------------------------------------------------------
       // PK의 return
       // ------------------------------------------------------------------------------
-      // System.out.println("--> newsno: " + newsVO.getNewsno());
-      // mav.addObject("newsno", newsVO.getNewsno()); // redirect
+      // System.out.println("--> weatherno: " + weatherVO.getWeatherno());
+      // mav.addObject("weatherno", weatherVO.getWeatherno()); // redirect
       // parameter 적용
       // ------------------------------------------------------------------------------
 
@@ -166,25 +166,25 @@ public class NewsCont {
         // type 2, 재업로드 발생
         // model.addAttribute("cnt", cnt);
         // model.addAttribute("code", "create_success");
-        // return "news/msg";
+        // return "weather/msg";
 
         // type 3 권장
-        // return "redirect:/news/list_all"; // /templates/news/list_all.html
+        // return "redirect:/weather/list_all"; // /templates/weather/list_all.html
 
-        // System.out.println("-> newsVO.getClassifyno(): " + newsVO.getClassifyno());
-        // ra.addFlashAttribute("classifyno", newsVO.getClassifyno()); // controller ->
+        // System.out.println("-> weatherVO.getClassifyno(): " + weatherVO.getClassifyno());
+        // ra.addFlashAttribute("classifyno", weatherVO.getClassifyno()); // controller ->
         // controller: X
 
-        ra.addAttribute("classifyno", newsVO.getClassifyno()); // controller -> controller: O
-        return "redirect:/news/list_by_classifyno";
+        ra.addAttribute("classifyno", weatherVO.getClassifyno()); // controller -> controller: O
+        return "redirect:/weather/list_by_classifyno";
 
-        // return "redirect:/news/list_by_classifyno?classifyno=" + newsVO.getClassifyno();
-        // // /templates/news/list_by_classifyno.html
+        // return "redirect:/weather/list_by_classifyno?classifyno=" + weatherVO.getClassifyno();
+        // // /templates/weather/list_by_classifyno.html
       } else {
         ra.addFlashAttribute("code", "create_fail"); // DBMS 등록 실패
         ra.addFlashAttribute("cnt", 0); // 업로드 실패
-        ra.addFlashAttribute("url", "/news/msg"); // msg.html, redirect parameter 적용
-        return "redirect:/news/msg"; // Post -> Get - param...
+        ra.addFlashAttribute("url", "/weather/msg"); // msg.html, redirect parameter 적용
+        return "redirect:/weather/msg"; // Post -> Get - param...
       }
     } else { // 로그인 실패 한 경우
       return "redirect:/member/login_cookie_need"; // /member/login_cookie_need.html
@@ -192,7 +192,7 @@ public class NewsCont {
   }
 
   /**
-   * 전체 목록, 관리자만 사용 가능 http://localhost:9091/news/list_all
+   * 전체 목록, 관리자만 사용 가능 http://localhost:9091/weather/list_all
    * 
    * @return
    */
@@ -203,24 +203,24 @@ public class NewsCont {
     model.addAttribute("menu", menu);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
-      ArrayList<NewsVO> list = this.newsProc.list_all(); // 모든 목록
+      ArrayList<WeatherVO> list = this.weatherProc.list_all(); // 모든 목록
 
       // Thymeleaf는 CSRF(크로스사이트) 스크립팅 해킹 방지 자동 지원
       // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-//      for (NewsVO newsVO : list) {
-//        String title = newsVO.getTitle();
-//        String content = newsVO.getContent();
+//      for (WeatherVO weatherVO : list) {
+//        String title = weatherVO.getTitle();
+//        String content = weatherVO.getContent();
 //        
 //        title = Tool.convertChar(title);  // 특수 문자 처리
 //        content = Tool.convertChar(content); 
 //        
-//        newsVO.setTitle(title);
-//        newsVO.setContent(content);  
+//        weatherVO.setTitle(title);
+//        weatherVO.setContent(content);  
 //
 //      }
 
       model.addAttribute("list", list);
-      return "/news/list_all";
+      return "/weather/list_all";
 
     } else {
       return "redirect:/member/login_cookie_need";
@@ -232,8 +232,8 @@ public class NewsCont {
 //  /**
 //   * 유형 1
 //   * 카테고리별 목록
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=6 
+//   * http://localhost:9091/weather/list_by_classifyno?classifyno=5
+//   * http://localhost:9091/weather/list_by_classifyno?classifyno=6 
 //   * @return
 //   */
 //  @GetMapping(value="/list_by_classifyno")
@@ -245,19 +245,19 @@ public class NewsCont {
 //     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
 //     model.addAttribute("classifyVO", classifyVO);
 //    
-//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno(classifyno);
+//    ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno(classifyno);
 //    model.addAttribute("list", list);
 //    
 //    // System.out.println("-> size: " + list.size());
 //
-//    return "/news/list_by_classifyno";
+//    return "/weather/list_by_classifyno";
 //  }
 
 //  /**
 //   * 유형 2
 //   * 카테고리별 목록 + 검색
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=6 
+//   * http://localhost:9091/weather/list_by_classifyno?classifyno=5
+//   * http://localhost:9091/weather/list_by_classifyno?classifyno=6 
 //   * @return
 //   */
 //  @GetMapping(value="/list_by_classifyno")
@@ -276,22 +276,22 @@ public class NewsCont {
 //     map.put("classifyno", classifyno);
 //     map.put("word", word);
 //     
-//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search(map);
+//    ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search(map);
 //    model.addAttribute("list", list);
 //    
 //    // System.out.println("-> size: " + list.size());
 //    model.addAttribute("word", word);
 //    
-//    int search_count = this.newsProc.list_by_classifyno_search_count(map);
+//    int search_count = this.weatherProc.list_by_classifyno_search_count(map);
 //    model.addAttribute("search_count", search_count);
 //    
-//    return "/news/list_by_classifyno_search"; // /templates/news/list_by_classifyno_search.html
+//    return "/weather/list_by_classifyno_search"; // /templates/weather/list_by_classifyno_search.html
 //  }
 
   /**
    * 유형 3
-   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/news/list_by_classifyno?classifyno=5
-   * http://localhost:9091/news/list_by_classifyno?classifyno=6
+   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/weather/list_by_classifyno?classifyno=5
+   * http://localhost:9091/weather/list_by_classifyno?classifyno=6
    * 
    * @return
    */
@@ -318,31 +318,31 @@ public class NewsCont {
     map.put("word", word);
     map.put("now_page", now_page);
 
-    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search_paging(map);
+    ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
 
     // System.out.println("-> size: " + list.size());
     model.addAttribute("word", word);
 
-    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno", search_count,
-        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+    int search_count = this.weatherProc.list_by_classifyno_search_count(map);
+    String paging = this.weatherProc.pagingBox(classifyno, now_page, word, "/weather/list_by_classifyno", search_count,
+        Weather.RECORD_PER_PAGE, Weather.PAGE_PER_BLOCK);
     model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
 
     model.addAttribute("search_count", search_count);
 
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+    int no = search_count - ((now_page - 1) * Weather.RECORD_PER_PAGE);
     model.addAttribute("no", no);
 
-    return "/news/list_by_classifyno_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
+    return "/weather/list_by_classifyno_search_paging"; // /templates/weather/list_by_classifyno_search_paging.html
   }
 
   /**
    * 카테고리별 목록 + 검색 + 페이징 + Grid
-   * http://localhost:9091/news/list_by_classifyno?classifyno=5
-   * http://localhost:9091/news/list_by_classifyno?classifyno=6
+   * http://localhost:9091/weather/list_by_classifyno?classifyno=5
+   * http://localhost:9091/weather/list_by_classifyno?classifyno=6
    * 
    * @return
    */
@@ -369,146 +369,146 @@ public class NewsCont {
     map.put("word", word);
     map.put("now_page", now_page);
 
-    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search_paging(map);
+    ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
 
     // System.out.println("-> size: " + list.size());
     model.addAttribute("word", word);
 
-    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_grid", search_count,
-        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+    int search_count = this.weatherProc.list_by_classifyno_search_count(map);
+    String paging = this.weatherProc.pagingBox(classifyno, now_page, word, "/weather/list_by_classifyno_grid", search_count,
+        Weather.RECORD_PER_PAGE, Weather.PAGE_PER_BLOCK);
     model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
 
     model.addAttribute("search_count", search_count);
 
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+    int no = search_count - ((now_page - 1) * Weather.RECORD_PER_PAGE);
     model.addAttribute("no", no);
 
-    // /templates/news/list_by_classifyno_search_paging_grid.html
-    return "/news/list_by_classifyno_search_paging_grid";
+    // /templates/weather/list_by_classifyno_search_paging_grid.html
+    return "/weather/list_by_classifyno_search_paging_grid";
   }
 
   /**
-   * 조회 http://localhost:9091/news/read?newsno=17
+   * 조회 http://localhost:9091/weather/read?weatherno=17
    * 
    * @return
    */
   @GetMapping(value = "/read")
   public String read(Model model, 
-      @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+      @RequestParam(name="weatherno", defaultValue = "0") int weatherno, 
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
-    NewsVO newsVO = this.newsProc.read(newsno);
+    WeatherVO weatherVO = this.weatherProc.read(weatherno);
 
-//    String title = newsVO.getTitle();
-//    String content = newsVO.getContent();
+//    String title = weatherVO.getTitle();
+//    String content = weatherVO.getContent();
 //    
 //    title = Tool.convertChar(title);  // 특수 문자 처리
 //    content = Tool.convertChar(content); 
 //    
-//    newsVO.setTitle(title);
-//    newsVO.setContent(content);  
+//    weatherVO.setTitle(title);
+//    weatherVO.setContent(content);  
 
-    long size1 = newsVO.getSize1();
+    long size1 = weatherVO.getSize1();
     String size1_label = Tool.unit(size1);
-    newsVO.setSize1_label(size1_label);
+    weatherVO.setSize1_label(size1_label);
 
-    model.addAttribute("newsVO", newsVO);
+    model.addAttribute("weatherVO", weatherVO);
 
-    ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
+    ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
     model.addAttribute("classifyVO", classifyVO);
 
     // 조회에서 화면 하단에 출력
-    // ArrayList<ReplyVO> reply_list = this.replyProc.list_news(newsno);
+    // ArrayList<ReplyVO> reply_list = this.replyProc.list_weather(weatherno);
     // mav.addObject("reply_list", reply_list);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
 
-    return "/news/read";
+    return "/weather/read";
   }
 
   /**
-   * 맵 등록/수정/삭제 폼 http://localhost:9091/news/map?newsno=19
+   * 맵 등록/수정/삭제 폼 http://localhost:9091/weather/map?weatherno=19
    * 
    * @return
    */
   @GetMapping(value = "/map")
   public String map(Model model, 
-                            @RequestParam(name="newsno", defaultValue="0") int newsno) {
+                            @RequestParam(name="weatherno", defaultValue="0") int weatherno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
-    NewsVO newsVO = this.newsProc.read(newsno); // map 정보 읽어 오기
-    model.addAttribute("newsVO", newsVO); // request.setAttribute("newsVO", newsVO);
+    WeatherVO weatherVO = this.weatherProc.read(weatherno); // map 정보 읽어 오기
+    model.addAttribute("weatherVO", weatherVO); // request.setAttribute("weatherVO", weatherVO);
 
-    ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno()); // 그룹 정보 읽기
+    ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno()); // 그룹 정보 읽기
     model.addAttribute("classifyVO", classifyVO);
 
-    return "/news/map"; // //templates/news/map.html
+    return "/weather/map"; // //templates/weather/map.html
   }
 
   /**
-   * MAP 등록/수정/삭제 처리 http://localhost:9091/news/map
+   * MAP 등록/수정/삭제 처리 http://localhost:9091/weather/map
    * 
-   * @param newsVO
+   * @param weatherVO
    * @return
    */
   @PostMapping(value = "/map")
   public String map_update(Model model, 
-      @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+      @RequestParam(name="weatherno", defaultValue = "0") int weatherno, 
       @RequestParam(name="map", defaultValue = "") String map) {
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", newsno);
+    hashMap.put("weatherno", weatherno);
     hashMap.put("map", map);
 
-    this.newsProc.map(hashMap);
+    this.weatherProc.map(hashMap);
 
-    return "redirect:/news/read?newsno=" + newsno;
+    return "redirect:/weather/read?weatherno=" + weatherno;
   }
 
   /**
-   * Youtube 등록/수정/삭제 폼 http://localhost:9091/news/youtube?newsno=1
+   * Youtube 등록/수정/삭제 폼 http://localhost:9091/weather/youtube?weatherno=1
    * 
    * @return
    */
   @GetMapping(value = "/youtube")
   public String youtube(Model model, 
-      @RequestParam(name="newsno", defaultValue="0") int newsno,
+      @RequestParam(name="weatherno", defaultValue="0") int weatherno,
       @RequestParam(name="word", defaultValue="")  String word, 
       @RequestParam(name="now_page", defaultValue="0") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
-    NewsVO newsVO = this.newsProc.read(newsno); // map 정보 읽어 오기
-    model.addAttribute("newsVO", newsVO); // request.setAttribute("newsVO", newsVO);
+    WeatherVO weatherVO = this.weatherProc.read(weatherno); // map 정보 읽어 오기
+    model.addAttribute("weatherVO", weatherVO); // request.setAttribute("weatherVO", weatherVO);
 
-    ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno()); // 그룹 정보 읽기
+    ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno()); // 그룹 정보 읽기
     model.addAttribute("classifyVO", classifyVO);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
     
-    return "/news/youtube";  // forward, /templates/news/youtube.html
+    return "/weather/youtube";  // forward, /templates/weather/youtube.html
   }
 
   /**
-   * Youtube 등록/수정/삭제 처리 http://localhost:9091/news/youtube
+   * Youtube 등록/수정/삭제 처리 http://localhost:9091/weather/youtube
    * 
-   * @param newsVO
+   * @param weatherVO
    * @return
    */
   @PostMapping(value = "/youtube")
   public String youtube_update(Model model, 
                                             RedirectAttributes ra,
-                                            @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+                                            @RequestParam(name="weatherno", defaultValue = "0") int weatherno, 
                                             @RequestParam(name="youtube", defaultValue = "") String youtube, 
                                             @RequestParam(name="word", defaultValue = "") String word, 
                                             @RequestParam(name="now_page", defaultValue = "0") int now_page) {
@@ -518,21 +518,21 @@ public class NewsCont {
     }
 
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("newsno", newsno);
+    hashMap.put("weatherno", weatherno);
     hashMap.put("youtube", youtube);
 
-    this.newsProc.youtube(hashMap);
+    this.weatherProc.youtube(hashMap);
     
-    ra.addAttribute("newsno", newsno);
+    ra.addAttribute("weatherno", weatherno);
     ra.addAttribute("word", word);
     ra.addAttribute("now_page", now_page);
 
-    // return "redirect:/news/read?newsno=" + newsno;
-    return "redirect:/news/read";
+    // return "redirect:/weather/read?weatherno=" + weatherno;
+    return "redirect:/weather/read";
   }
 
   /**
-   * 수정 폼 http:// localhost:9091/news/update_text?newsno=1
+   * 수정 폼 http:// localhost:9091/weather/update_text?weatherno=1
    *
    */
   @GetMapping(value = "/update_text")
@@ -540,7 +540,7 @@ public class NewsCont {
       HttpSession session, 
       Model model,  
       RedirectAttributes ra,
-      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="weatherno", defaultValue = "0") int weatherno,
       @RequestParam(name="word", defaultValue = "") String word,
       @RequestParam(name="now_page", defaultValue = "0") int now_page) {
     
@@ -551,26 +551,26 @@ public class NewsCont {
     model.addAttribute("now_page", now_page);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
-      NewsVO newsVO = this.newsProc.read(newsno);
-      model.addAttribute("newsVO", newsVO);
+      WeatherVO weatherVO = this.weatherProc.read(weatherno);
+      model.addAttribute("weatherVO", weatherVO);
 
-      ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
+      ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
       model.addAttribute("classifyVO", classifyVO);
 
-      return "/news/update_text"; // /templates/news/update_text.html
+      return "/weather/update_text"; // /templates/weather/update_text.html
       // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
       // model.addAttribute("content", content);
 
     } else {
       // ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
-      // return "redirect:/news/msg"; // @GetMapping(value = "/msg")
+      // return "redirect:/weather/msg"; // @GetMapping(value = "/msg")
       return "/member/login_cookie_need"; // /templates/member/login_cookie_need.html
     }
 
   }
 
   /**
-   * 수정 처리 http://localhost:9091/news/update_text?newsno=1
+   * 수정 처리 http://localhost:9091/weather/update_text?weatherno=1
    * 
    * @return
    */
@@ -579,8 +579,8 @@ public class NewsCont {
       HttpSession session, 
       Model model, 
       RedirectAttributes ra,
-      @ModelAttribute("newsVO") NewsVO newsVO, 
-      @RequestParam(name="search_word", defaultValue = "") String search_word, // newsVO.word와 구분 필요
+      @ModelAttribute("weatherVO") WeatherVO weatherVO, 
+      @RequestParam(name="search_word", defaultValue = "") String search_word, // weatherVO.word와 구분 필요
       @RequestParam(name="now_page", defaultValue = "0") int now_page) {
     
     ra.addAttribute("word", search_word);
@@ -588,40 +588,40 @@ public class NewsCont {
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자 로그인 확인
       HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("newsno", newsVO.getNewsno());
-      map.put("passwd", newsVO.getPasswd());
+      map.put("weatherno", weatherVO.getWeatherno());
+      map.put("passwd", weatherVO.getPasswd());
 
-      if (this.newsProc.password_check(map) == 1) { // 패스워드 일치
-        this.newsProc.update_text(newsVO); // 글수정
+      if (this.weatherProc.password_check(map) == 1) { // 패스워드 일치
+        this.weatherProc.update_text(weatherVO); // 글수정
 
         // mav 객체 이용
-        ra.addAttribute("newsno", newsVO.getNewsno());
-        ra.addAttribute("classifyno", newsVO.getClassifyno());
-        return "redirect:/news/read"; // @GetMapping(value = "/read")
+        ra.addAttribute("weatherno", weatherVO.getWeatherno());
+        ra.addAttribute("classifyno", weatherVO.getClassifyno());
+        return "redirect:/weather/read"; // @GetMapping(value = "/read")
 
       } else { // 패스워드 불일치
         ra.addFlashAttribute("code", "passwd_fail"); // redirect -> forward -> html
         ra.addFlashAttribute("cnt", 0);
-        ra.addAttribute("url", "/news/msg"); // msg.html, redirect parameter 적용
+        ra.addAttribute("url", "/weather/msg"); // msg.html, redirect parameter 적용
 
-        return "redirect:/news/post2get"; // @GetMapping(value = "/msg")
+        return "redirect:/weather/post2get"; // @GetMapping(value = "/msg")
       }
     } else { // 정상적인 로그인이 아닌 경우 로그인 유도
       ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
-      return "redirect:/news/post2get"; // @GetMapping(value = "/msg")
+      return "redirect:/weather/post2get"; // @GetMapping(value = "/msg")
     }
 
   }
 
   /**
-   * 파일 수정 폼 http://localhost:9091/news/update_file?newsno=1
+   * 파일 수정 폼 http://localhost:9091/weather/update_file?weatherno=1
    * 
    * @return
    */
   @GetMapping(value = "/update_file")
   public String update_file(
       HttpSession session, Model model, 
-     @RequestParam(name="newsno", defaultValue = "0") int newsno,
+     @RequestParam(name="weatherno", defaultValue = "0") int weatherno,
      @RequestParam(name="word", defaultValue = "") String word, 
      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
@@ -630,39 +630,39 @@ public class NewsCont {
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
     
-    NewsVO newsVO = this.newsProc.read(newsno);
-    model.addAttribute("newsVO", newsVO);
+    WeatherVO weatherVO = this.weatherProc.read(weatherno);
+    model.addAttribute("weatherVO", weatherVO);
 
-    ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
+    ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
     model.addAttribute("classifyVO", classifyVO);
 
-    return "/news/update_file";
+    return "/weather/update_file";
 
   }
 
   /**
-   * 파일 수정 처리 http://localhost:9091/news/update_file
+   * 파일 수정 처리 http://localhost:9091/weather/update_file
    * 
    * @return
    */
   @PostMapping(value = "/update_file")
   public String update_file(
       HttpSession session, Model model, RedirectAttributes ra,
-       @ModelAttribute("newsVO") NewsVO newsVO,
+       @ModelAttribute("weatherVO") WeatherVO weatherVO,
        @RequestParam(name="word", defaultValue = "") String word, 
        @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     if (this.memberProc.isMemberAdmin(session)) {
       // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
-      NewsVO newsVO_old = newsProc.read(newsVO.getNewsno());
+      WeatherVO weatherVO_old = weatherProc.read(weatherVO.getWeatherno());
 
       // -------------------------------------------------------------------
       // 파일 삭제 시작
       // -------------------------------------------------------------------
-      String file1saved = newsVO_old.getFile1saved(); // 실제 저장된 파일명
-      String thumb1 = newsVO_old.getThumb1(); // 실제 저장된 preview 이미지 파일명
+      String file1saved = weatherVO_old.getFile1saved(); // 실제 저장된 파일명
+      String thumb1 = weatherVO_old.getThumb1(); // 실제 저장된 preview 이미지 파일명
       long size1 = 0;
 
-      String upDir = News.getUploadDir(); // C:/kd/deploy/resort_v4sbm3c/news/storage/
+      String upDir = Weather.getUploadDir(); // C:/kd/deploy/resort_v4sbm3c/weather/storage/
 
       Tool.deleteFile(upDir, file1saved); // 실제 저장된 파일삭제
       Tool.deleteFile(upDir, thumb1); // preview 이미지 삭제
@@ -678,7 +678,7 @@ public class NewsCont {
       // 전송 파일이 없어도 file1MF 객체가 생성됨.
       // <input type='file' class="form-control" name='file1MF' id='file1MF'
       // value='' placeholder="파일 선택">
-      MultipartFile mf = newsVO.getFile1MF();
+      MultipartFile mf = weatherVO.getFile1MF();
 
       file1 = mf.getOriginalFilename(); // 원본 파일명
       size1 = mf.getSize(); // 파일 크기
@@ -699,30 +699,30 @@ public class NewsCont {
         size1 = 0;
       }
 
-      newsVO.setFile1(file1);
-      newsVO.setFile1saved(file1saved);
-      newsVO.setThumb1(thumb1);
-      newsVO.setSize1(size1);
+      weatherVO.setFile1(file1);
+      weatherVO.setFile1saved(file1saved);
+      weatherVO.setThumb1(thumb1);
+      weatherVO.setSize1(size1);
       // -------------------------------------------------------------------
       // 파일 전송 코드 종료
       // -------------------------------------------------------------------
 
-      this.newsProc.update_file(newsVO); // Oracle 처리
-      ra.addAttribute ("newsno", newsVO.getNewsno());
-      ra.addAttribute("classifyno", newsVO.getClassifyno());
+      this.weatherProc.update_file(weatherVO); // Oracle 처리
+      ra.addAttribute ("weatherno", weatherVO.getWeatherno());
+      ra.addAttribute("classifyno", weatherVO.getClassifyno());
       ra.addAttribute("word", word);
       ra.addAttribute("now_page", now_page);
       
-      return "redirect:/news/read";
+      return "redirect:/weather/read";
     } else {
       ra.addAttribute("url", "/member/login_cookie_need"); 
-      return "redirect:/news/msg"; // GET
+      return "redirect:/weather/msg"; // GET
     }
   }
 
   /**
    * 파일 삭제 폼
-   * http://localhost:9091/news/delete?newsno=1
+   * http://localhost:9091/weather/delete?weatherno=1
    * 
    * @return
    */
@@ -730,7 +730,7 @@ public class NewsCont {
   public String delete(
       HttpSession session, Model model, RedirectAttributes ra,
       @RequestParam(name="classifyno", defaultValue = "0") int classifyno,
-      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="weatherno", defaultValue = "0") int weatherno,
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     if (this.memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
@@ -741,30 +741,30 @@ public class NewsCont {
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
       model.addAttribute("menu", menu);
       
-      NewsVO newsVO = this.newsProc.read(newsno);
-      model.addAttribute("newsVO", newsVO);
+      WeatherVO weatherVO = this.weatherProc.read(weatherno);
+      model.addAttribute("weatherVO", weatherVO);
       
-      ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
+      ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
       model.addAttribute("classifyVO", classifyVO);
       
-      return "/news/delete"; // forward
+      return "/weather/delete"; // forward
       
     } else {
       ra.addAttribute("url", "/admin/login_cookie_need");
-      return "redirect:/news/msg"; 
+      return "redirect:/weather/msg"; 
     }
 
   }
   
   /**
-   * 삭제 처리 http://localhost:9091/news/delete
+   * 삭제 처리 http://localhost:9091/weather/delete
    * 
    * @return
    */
   @PostMapping(value = "/delete")
   public String delete(RedirectAttributes ra,
       @RequestParam(name="classifyno", defaultValue = "0") int classifyno,
-      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="weatherno", defaultValue = "0") int weatherno,
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     
@@ -772,19 +772,19 @@ public class NewsCont {
     // 파일 삭제 시작
     // -------------------------------------------------------------------
     // 삭제할 파일 정보를 읽어옴.
-    NewsVO newsVO_read = newsProc.read(newsno);
+    WeatherVO weatherVO_read = weatherProc.read(weatherno);
         
-    String file1saved = newsVO_read.getFile1saved();
-    String thumb1 = newsVO_read.getThumb1();
+    String file1saved = weatherVO_read.getFile1saved();
+    String thumb1 = weatherVO_read.getThumb1();
     
-    String uploadDir = News.getUploadDir();
+    String uploadDir = Weather.getUploadDir();
     Tool.deleteFile(uploadDir, file1saved);  // 실제 저장된 파일삭제
     Tool.deleteFile(uploadDir, thumb1);     // preview 이미지 삭제
     // -------------------------------------------------------------------
     // 파일 삭제 종료
     // -------------------------------------------------------------------
         
-    this.newsProc.delete(newsno); // DBMS 글 삭제
+    this.weatherProc.delete(weatherno); // DBMS 글 삭제
         
     // -------------------------------------------------------------------------------------
     // 마지막 페이지의 마지막 레코드 삭제시의 페이지 번호 -1 처리
@@ -797,7 +797,7 @@ public class NewsCont {
     map.put("classifyno", classifyno);
     map.put("word", word);
     
-    if (this.newsProc.list_by_classifyno_search_count(map) % News.RECORD_PER_PAGE == 0) {
+    if (this.weatherProc.list_by_classifyno_search_count(map) % Weather.RECORD_PER_PAGE == 0) {
       now_page = now_page - 1; // 삭제시 DBMS는 바로 적용되나 크롬은 새로고침등의 필요로 단계가 작동 해야함.
       if (now_page < 1) {
         now_page = 1; // 시작 페이지
@@ -809,7 +809,7 @@ public class NewsCont {
     ra.addAttribute("word", word);
     ra.addAttribute("now_page", now_page);
     
-    return "redirect:/news/list_by_classifyno";    
+    return "redirect:/weather/list_by_classifyno";    
     
   }   
    

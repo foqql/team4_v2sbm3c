@@ -5,23 +5,23 @@
 <mapper namespace="dev.mvc.weather.WeatherDAOInter">
   <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.weather.WeatherVO">
-    INSERT INTO weather(weatherno, memberno, classifyno, supcnt, exp, title, content, passwd, word,
+    INSERT INTO weather(weatherno, memberno, classifyno, title, content, passwd, word,
                                      file1, file1saved, thumb1, size1, rdate)
-    VALUES(weather_seq.nextval, #{memberno}, #{classifyno}, #{supcnt}, #{exp}, #{title}, #{content}, #{passwd}, #{word},
+    VALUES(weather_seq.nextval, #{memberno}, #{classifyno}, #{title}, #{content}, #{passwd}, #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert>
 
-  <!-- 모든 카테고리의 등록된 글목록 -->
+
   <select id="list_all" resultType="dev.mvc.weather.WeatherVO">
-    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, passwd, word, rdate,
+    SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, passwd, word, rdate,
                file1, file1saved, thumb1, size1
-    FROM weather
+
     ORDER BY weatherno DESC
   </select>
   
   <!-- 특정 카테고리의 등록된 글목록 -->
   <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate,
+    SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, rdate,
               LOWER(file1) as file1, file1saved, thumb1, size1
     FROM weather 
     WHERE classifyno = #{classifyno}
@@ -30,7 +30,7 @@
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, passwd, word, rdate,
+    SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, passwd, word, rdate,
               file1, file1saved, thumb1, size1, map, youtube
     FROM weather
     WHERE weatherno = #{weatherno}
@@ -52,7 +52,7 @@
 
   <!-- 카테고리별 검색 목록 -->
   <select id="list_by_classifyno_search" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
-    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, word, rdate,
+    SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, word, rdate,
             file1, file1saved, thumb1, size1, map, youtube
     FROM weather
     <choose>
@@ -86,11 +86,11 @@
 
   <!-- 카테고리별 검색 + 페이징 목록 -->
   <select id="list_by_classifyno_search_paging" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
-   SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, r
+   SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, r
    FROM (
-              SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, rownum as r
+              SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, rownum as r
               FROM (
-                        SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube
+                        SELECT weatherno, memberno, classifyno, title, content, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube
                         FROM weather
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
@@ -125,7 +125,6 @@
     SET title=#{title}, content=#{content},  word=#{word}
     WHERE weatherno = #{weatherno}
   </update>
-
 
   <!-- 파일 수정 -->
   <update id="update_file" parameterType="dev.mvc.weather.WeatherVO">
@@ -181,5 +180,5 @@
      SET replycnt = replycnt - 1
      WHERE weatherno = #{weatherno}
    </update>
-               
+                    
 </mapper> 

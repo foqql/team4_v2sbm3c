@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import dev.mvc.news.NewsDAOInter;
 
 // 알고리즘 구현
-@Service("ClassifyProc")
+@Service("dev.mvc.classify.ClassifyProc")
 public class ClassifyProc implements ClassifyProcInter {
   @Autowired
   private ClassifyDAOInter classifyDAO;

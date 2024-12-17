@@ -6,17 +6,17 @@
   <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.news.NewsVO">
     INSERT INTO news(newsno, memberno, classifyno, title, content, passwd, word,
-                     file1, file1saved, thumb1, size1, rdate)
+                                     file1, file1saved, thumb1, size1, rdate)
     VALUES(news_seq.nextval, #{memberno}, #{classifyno}, #{title}, #{content}, #{passwd}, #{word},
-           #{filesVO.file1}, #{filesVO.file1saved}, #{filesVO.thumb1}, #{filesVO.size1}, sysdate)
+                #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert>
 
-  <!-- 모든 카테고리의 등록된 글목록 -->
+
   <select id="list_all" resultType="dev.mvc.news.NewsVO">
-    SELECT news.newsno, member.memberno, classify.classifyno, news.title, news.content, news.recom, news.cnt, news.replycnt, news.passwd, news.word, news.rdate,
-               files.file1, files.file1saved, files.thumb1, files.size1, news.mp3
-    FROM news, files, classify, member
-    WHERE news.filesno = files.filesno and classifyno = classify.classifyno and member.memberno = news.memberno
+    SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, passwd, word, rdate,
+               file1, file1saved, thumb1, size1, mp3
+    FROM news
+
     ORDER BY newsno DESC
   </select>
   
@@ -24,8 +24,8 @@
   <select id="list_by_classifyno" resultType="dev.mvc.news.NewsVO" parameterType="int">
     SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, rdate,
               LOWER(file1) as file1, file1saved, thumb1, size1, mp3
-    FROM news, files
-    WHERE classifyno = #{classifyno} and news.filesno = files.filesno
+    FROM news 
+    WHERE classifyno = #{classifyno}
     ORDER BY newsno DESC
   </select> 
   
@@ -33,8 +33,8 @@
   <select id="read" resultType="dev.mvc.news.NewsVO" parameterType="int">
     SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, passwd, word, rdate,
               file1, file1saved, thumb1, size1, map, youtube
-    FROM news, files
-    WHERE newsno = #{newsno} and news.filesno = files.filesno
+    FROM news
+    WHERE newsno = #{newsno}
   </select>
   
   <!-- map 등록, 수정, 삭제, 
@@ -55,7 +55,7 @@
   <select id="list_by_classifyno_search" resultType="dev.mvc.news.NewsVO" parameterType="HashMap">
     SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, word, rdate,
             file1, file1saved, thumb1, size1, map, youtube
-    FROM news.files
+    FROM news
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
         WHERE classifyno=#{classifyno}
@@ -92,10 +92,10 @@
               SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, rownum as r
               FROM (
                         SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube
-                        FROM news, files
+                        FROM news
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-                            WHERE classifyno=#{classifyno} and news.filesno = files.filesno
+                            WHERE classifyno=#{classifyno}
                           </when>
                           <otherwise>
                             WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
@@ -127,12 +127,11 @@
     WHERE newsno = #{newsno}
   </update>
 
-
   <!-- 파일 수정 -->
   <update id="update_file" parameterType="dev.mvc.news.NewsVO">
     UPDATE news
-    SET file1=#{filesVO.file1}, file1saved=#{filesVO.file1saved}, thumb1=#{filesVO.thumb1}, size1=#{filesVO.size1}
-    WHERE newsno = #{newsno} 
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE newsno = #{newsno}
   </update>  
 
   <!-- 글 삭제 -->
@@ -182,5 +181,5 @@
      SET replycnt = replycnt - 1
      WHERE newsno = #{newsno}
    </update>
-               
+                    
 </mapper> 
