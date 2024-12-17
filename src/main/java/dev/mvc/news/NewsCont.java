@@ -662,7 +662,7 @@ public class NewsCont {
       String thumb1 = newsVO_old.getThumb1(); // 실제 저장된 preview 이미지 파일명
       long size1 = 0;
 
-      String upDir = News.getUploadDir(); // C:/kd/deploy/resort_v4sbm3c/news/storage/
+      String upDir = News.getUploadDir(); // C:/kd/deploy/team4/news/storage/
 
       Tool.deleteFile(upDir, file1saved); // 실제 저장된 파일삭제
       Tool.deleteFile(upDir, thumb1); // preview 이미지 삭제
