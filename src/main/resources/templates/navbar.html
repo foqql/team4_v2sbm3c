@@ -33,8 +33,21 @@
             <!--/* 중분류명 출력   ArrayList<ClassifyVO> list_name;  */-->
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li th:each="classifyVO:${classifyVOMenu.list_name}">
-               <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"  th:text="${classifyVO.name}"></a>
-               </li>
+<a class="dropdown-item"  
+   th:if="${classifyVO.classify == '뉴스'}" 
+   th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"  
+   th:text="${classifyVO.name}"></a>
+
+<a class="dropdown-item"  
+   th:if="${classifyVO.classify == '환율'}" 
+   th:href="@{|/exchange/list?classifyno=${classifyVO.classifyno}|}"  
+   th:text="${classifyVO.name}"></a>
+   
+   <a class="dropdown-item"  
+   th:if="${classifyVO.classify == '날씨'}" 
+   th:href="@{|/weather/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"  
+   th:text="${classifyVO.name}"></a>
+          </li>
              </ul>
           </li>
                 
