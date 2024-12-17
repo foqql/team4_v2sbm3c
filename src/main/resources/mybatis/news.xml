@@ -16,7 +16,7 @@
     SELECT news.newsno, member.memberno, classify.classifyno, news.title, news.content, news.recom, news.cnt, news.replycnt, news.passwd, news.word, news.rdate,
                files.file1, files.file1saved, files.thumb1, files.size1, news.mp3
     FROM news, files, classify, member
-    WHERE news.filesno = files.filesno and news.classifyno = classify.classifyno and member.memberno = news.memberno
+    WHERE news.filesno = files.filesno and classifyno = classify.classifyno and member.memberno = news.memberno
     ORDER BY newsno DESC
   </select>
   

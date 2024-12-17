@@ -1,55 +1,185 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+ 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.weather.WeatherDAOInter">
+  <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
+  <insert id="create" parameterType="dev.mvc.weather.WeatherVO">
+    INSERT INTO weather(weatherno, memberno, classifyno, supcnt, exp, title, content, passwd, word,
+                                     file1, file1saved, thumb1, size1, rdate)
+    VALUES(weather_seq.nextval, #{memberno}, #{classifyno}, #{supcnt}, #{exp}, #{title}, #{content}, #{passwd}, #{word},
+                #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+  </insert>
 
-<mapper namespace="com.example.mapper.WeatherMapper">
+  <!-- 모든 카테고리의 등록된 글목록 -->
+  <select id="list_all" resultType="dev.mvc.weather.WeatherVO">
+    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, passwd, word, rdate,
+               file1, file1saved, thumb1, size1
+    FROM weather
+    ORDER BY weatherno DESC
+  </select>
+  
+  <!-- 특정 카테고리의 등록된 글목록 -->
+  <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
+    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate,
+              LOWER(file1) as file1, file1saved, thumb1, size1
+    FROM weather 
+    WHERE classifyno = #{classifyno}
+    ORDER BY weatherno DESC
+  </select> 
+  
+  <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
+    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, passwd, word, rdate,
+              file1, file1saved, thumb1, size1, map, youtube
+    FROM weather
+    WHERE weatherno = #{weatherno}
+  </select>
+  
+  <!-- map 등록, 수정, 삭제, 
+         HashMap: VO 클래스는 변수가 너무 많아서 메모리 낭비가 발생함으로,
+                       보통 3개 이하의 적은 변수만 전달하는 경우 HashMap 사용 권장 -->
+  <update id="map" parameterType="HashMap">
+    UPDATE weather SET map=#{map} WHERE weatherno=#{weatherno}
+  </update>
 
-    <!-- Insert Weather Information -->
-    <insert id="insertWeather" parameterType="WeatherVO">
-        INSERT INTO weather (
-            weather, title, content, cnt, word, rdate, map, youtube, passwd
-        ) VALUES (
-            #{weather}, #{title}, #{content}, #{cnt}, #{word}, #{rdate}, #{map}, #{youtube}, #{passwd}
-        )
-    </insert>
+  <!-- Youtube 등록, 수정, 삭제, 
+         HashMap: VO 클래스는 변수가 너무 많아서 메모리 낭비가 발생함으로,
+                       보통 3개 이하의 적은 변수만 전달하는 경우 HashMap 사용 권장 -->
+  <update id="youtube" parameterType="HashMap">
+    UPDATE weather SET youtube=#{youtube} WHERE weatherno=#{weatherno}
+  </update>
 
-    <!-- Select All Weather Information -->
-    <select id="selectAllWeather" resultType="WeatherVO">
-        SELECT 
-            weather, title, content, cnt, word, rdate, map, youtube, passwd 
-        FROM 
-            weather
-    </select>
+  <!-- 카테고리별 검색 목록 -->
+  <select id="list_by_classifyno_search" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
+    SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, word, rdate,
+            file1, file1saved, thumb1, size1, map, youtube
+    FROM weather
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+        WHERE classifyno=#{classifyno}
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+        WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+      </otherwise>
+    </choose>
+    ORDER BY weatherno DESC   
+  </select>
+   
+  <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="list_by_classifyno_search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM weather
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE classifyno=#{classifyno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
+                                                  OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+      </otherwise>
+    </choose>
+  </select>   
 
-    <!-- Select Weather by ID -->
-    <select id="selectWeatherById" parameterType="int" resultType="WeatherVO">
-        SELECT 
-            weather, title, content, cnt, word, rdate, map, youtube, passwd 
-        FROM 
-            weather
-        WHERE 
-            weather = #{weather}
-    </select>
+  <!-- 카테고리별 검색 + 페이징 목록 -->
+  <select id="list_by_classifyno_search_paging" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
+   SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, r
+   FROM (
+              SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, rownum as r
+              FROM (
+                        SELECT weatherno, memberno, classifyno, supcnt, exp, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube
+                        FROM weather
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                            WHERE classifyno=#{classifyno}
+                          </when>
+                          <otherwise>
+                            WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
+                                                              OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
+                                                              OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+                          </otherwise>
+                        </choose>
+                        ORDER BY weatherno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+     
+    <!-- 1 page: WHERE r >= 1 AND r <= 10; 
+          2 page: WHERE r >= 11 AND r <= 20;
+          3 page: WHERE r >= 21 AND r <= 30; -->
+  </select>
+  
+  <!-- 패스워드 검사 -->
+  <select id="password_check" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt 
+    FROM weather
+    WHERE weatherno = #{weatherno} AND passwd=#{passwd}
+  </select>
+  
+  <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.weather.WeatherVO">
+    UPDATE weather
+    SET title=#{title}, content=#{content},  word=#{word}
+    WHERE weatherno = #{weatherno}
+  </update>
 
-    <!-- Update Weather Information -->
-    <update id="updateWeather" parameterType="WeatherVO">
-        UPDATE weather
-        SET
-            title = #{title},
-            content = #{content},
-            cnt = #{cnt},
-            word = #{word},
-            rdate = #{rdate},
-            map = #{map},
-            youtube = #{youtube},
-            passwd = #{passwd}
-        WHERE 
-            weather = #{weather}
-    </update>
 
-    <!-- Delete Weather Information -->
-    <delete id="deleteWeather" parameterType="int">
-        DELETE FROM weather
-        WHERE weather = #{weather}
-    </delete>
+  <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.weather.WeatherVO">
+    UPDATE weather
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE weatherno = #{weatherno}
+  </update>  
 
-</mapper>
+  <!-- 글 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM weather
+    WHERE weatherno=#{weatherno}
+  </delete>
+  
+  <!-- FK classifyno 컬럼에 대응하는 필수 SQL -->
+  <!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
+  <select id="count_by_classifyno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt 
+    FROM weather 
+    WHERE classifyno=#{classifyno}
+  </select>
+  
+  <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
+  <delete id="delete_by_classifyno" parameterType="int">
+    DELETE FROM weather
+    WHERE classifyno=#{classifyno}
+  </delete>
+
+  <!-- FK memberno 컬럼에 대응하는 필수 SQL -->
+  <!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
+  <select id="count_by_memberno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt 
+    FROM weather 
+    WHERE memberno=#{memberno}
+  </select>
+  
+  <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
+  <delete id="delete_by_memberno" parameterType="int">
+    DELETE FROM weather
+    WHERE memberno=#{memberno}
+  </delete>
+
+   <!-- 댓글 수 증가 -->
+   <update id="increaseReplycnt" parameterType="int">
+     UPDATE weather
+     SET replycnt = replycnt + 1
+     WHERE weatherno = #{weatherno}
+   </update>
+
+   <!-- 댓글 수 감소 -->
+   <update id="decreaseReplycnt" parameterType="int">
+     UPDATE weather
+     SET replycnt = replycnt - 1
+     WHERE weatherno = #{weatherno}
+   </update>
+               
+</mapper> 
