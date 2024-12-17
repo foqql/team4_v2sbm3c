@@ -22,16 +22,16 @@
     </tr>
    
 
-    <tr th:each="contentsVO, status:${list}" 
-         th:attr="onclick=|location.href='/contents/read?contentsno=${contentsVO.contentsno}'|"
+    <tr th:each="weatherVO, status:${list}" 
+         th:attr="onclick=|location.href='/weather/read?weatherno=${weatherVO.weatherno}'|"
          style="cursor: pointer;">
-      <td class='td_basic' th:text="${contentsVO.file1}"></td>
+      <td class='td_basic' th:text="${weatherVO.file1}"></td>
       <td class='td_left'>
-        <span th:text="${contentsVO.title}" style="font-weight: bold;"></span><br>
-        <span th:if="${contentsVO.content.length() > 160 }" 
-                  th:text="|${contentsVO.content.substring(0, 160) }...|"></span>
-        <span th:if="${contentsVO.content.length() <= 160 }" 
-                  th:text="|${contentsVO.content}|"></span>
+        <span th:text="${weatherVO.title}" style="font-weight: bold;"></span><br>
+        <span th:if="${weatherVO.content.length() > 160 }" 
+                  th:text="|${weatherVO.content.substring(0, 160) }...|"></span>
+        <span th:if="${weatherVO.content.length() <= 160 }" 
+                  th:text="|${weatherVO.content}|"></span>
 
       </td>
     </tr>

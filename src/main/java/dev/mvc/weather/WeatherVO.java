@@ -27,8 +27,6 @@ CREATE TABLE weather (
   private int weatherno;
   /** 관리자 권한의 회원 번호 */
   private int memberno;
-  /** 파일 번호 */
-  private int filesno;
   /** 장르 번호 */
   private int classifyno;
   /** 크롤링한 날씨 번호 */
@@ -37,8 +35,6 @@ CREATE TABLE weather (
   private String title = "";
   /** 내용 */
   private String content = "";
-  /** 조회수 */
-  private int cnt = 0;
   /** 검색어 */
   private String word = "";
   /** 등록 날짜 */
