@@ -58,9 +58,9 @@
                             role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">                                                            
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_all|}">카테고리 목록</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_search|}">카테고리 목록</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{|/member/list|}">회원 목록</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{|/news/list_all|}">전체 글 목록</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{|/news/list_search|}">전체 글 목록</a></li>
                     </ul>
                 </li>
                        
@@ -74,7 +74,7 @@
       <!-- 메뉴 종료 -->
       
   <a  href="/classify/create" role="button">생성 </a>
-  <a th:href="@{|/classify/list_all|}" role="button">리스트 조회</a>
+  <a th:href="@{|/classify/list_search|}" role="button">리스트 조회</a>
 
             
     </div>
