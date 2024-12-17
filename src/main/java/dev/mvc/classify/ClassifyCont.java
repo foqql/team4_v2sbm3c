@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 public class ClassifyCont {
 
     @Autowired
-    @Qualifier("ClassifyProc") 
+    @Qualifier("dev.mvc.classify.ClassifyProc") 
     private ClassifyProcInter classifyProc;
   
   @Autowired

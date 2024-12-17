@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class NewsCont {
   private MemberProcInter memberProc;
 
   @Autowired
-  @Qualifier("ClassifyProc") // @Component("dev.mvc.classify.ClassifyProc")
+  @Qualifier("dev.mvc.classify.ClassifyProc") // @Component("dev.mvc.classify.ClassifyProc")
   private ClassifyProcInter classifyProc;
 
   @Autowired
@@ -55,7 +56,8 @@ public class NewsCont {
    * @return
    */
   @GetMapping(value = "/msg")
-  public String post2get(Model model, String url) {
+  public String post2get(Model model, 
+      @RequestParam(name="url", defaultValue = "") String url) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -68,7 +70,8 @@ public class NewsCont {
   // http://localhost:9091/news/create?classifyno=2
   // http://localhost:9091/news/create?classifyno=5
   @GetMapping(value = "/create")
-  public String create(Model model, 
+  public String create(
+      Model model, 
       @ModelAttribute("newsVO") NewsVO newsVO, 
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
@@ -86,11 +89,11 @@ public class NewsCont {
    * @return
    */
   @PostMapping(value = "/create")
-  public String create(HttpServletRequest request, 
+  public String create(
+      HttpServletRequest request, 
       HttpSession session, 
       Model model, 
       @ModelAttribute("newsVO") NewsVO newsVO,
-      @ModelAttribute("filesVO") FilesVO filesVO,
       RedirectAttributes ra) {
 
     if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
@@ -108,7 +111,7 @@ public class NewsCont {
       // 전송 파일이 없어도 file1MF 객체가 생성됨.
       // <input type='file' class="form-control" name='file1MF' id='file1MF'
       // value='' placeholder="파일 선택">
-      MultipartFile mf = filesVO.getFile1MF();
+      MultipartFile mf = newsVO.getFile1MF();
 
       file1 = mf.getOriginalFilename(); // 원본 파일명 산출, 01.jpg
       System.out.println("-> 원본 파일명 산출 file1: " + file1);
@@ -124,10 +127,10 @@ public class NewsCont {
             thumb1 = Tool.preview(upDir, file1saved, 200, 150);
           }
 
-          filesVO.setFile1(file1); // 순수 원본 파일명
-          filesVO.setFile1saved(file1saved); // 저장된 파일명(파일명 중복 처리)
-          filesVO.setThumb1(thumb1); // 원본이미지 축소판
-          filesVO.setSize1(size1); // 파일 크기
+          newsVO.setFile1(file1); // 순수 원본 파일명
+          newsVO.setFile1saved(file1saved); // 저장된 파일명(파일명 중복 처리)
+          newsVO.setThumb1(thumb1); // 원본이미지 축소판
+          newsVO.setSize1(size1); // 파일 크기
 
         } else { // 전송 못하는 파일 형식
           ra.addFlashAttribute("code", "check_upload_file_fail"); // 업로드 할 수 없는 파일
@@ -189,7 +192,7 @@ public class NewsCont {
   }
 
   /**
-   * 전체 목록, 관리자만 사용 가능 http://localhost:9093/news/list_all
+   * 전체 목록, 관리자만 사용 가능 http://localhost:9091/news/list_all
    * 
    * @return
    */
@@ -234,7 +237,8 @@ public class NewsCont {
 //   * @return
 //   */
 //  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno(HttpSession session, Model model, int classifyno) {
+//  public String list_by_classifyno(HttpSession session, Model model, 
+//      @RequestParam(name="classifyno", defaultValue = "") int classifyno) {
 //    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
 //    model.addAttribute("menu", menu);
 //    
@@ -246,7 +250,7 @@ public class NewsCont {
 //    
 //    // System.out.println("-> size: " + list.size());
 //
-//    return "news/list_by_classifyno";
+//    return "/news/list_by_classifyno";
 //  }
 
 //  /**
@@ -258,14 +262,15 @@ public class NewsCont {
 //   */
 //  @GetMapping(value="/list_by_classifyno")
 //  public String list_by_classifyno_search(HttpSession session, Model model, 
-//                                                    int classifyno, @RequestParam(name="word", defaultValue = "") String word) {
+//                                                   @RequestParam(name="classifyno", defaultValue = "0" ) int classifyno, 
+//                                                   @RequestParam(name="word", defaultValue = "") String word) {
 //    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
 //    model.addAttribute("menu", menu);
 //    
 //     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
 //     model.addAttribute("classifyVO", classifyVO);
 //    
-//     word = Tool.checkNull(word).trim();
+//     word = Tool.checkNull(word).trim(); // 검색어 공백 삭제
 //     
 //     HashMap<String, Object> map = new HashMap<>();
 //     map.put("classifyno", classifyno);
@@ -280,66 +285,21 @@ public class NewsCont {
 //    int search_count = this.newsProc.list_by_classifyno_search_count(map);
 //    model.addAttribute("search_count", search_count);
 //    
-//    return "news/list_by_classifyno_search"; // /templates/news/list_by_classifyno_search.html
-//  }
-
-//  /**
-//   * 유형 3
-//   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=6
-//   * 
-//   * @return
-//   */
-//  @GetMapping(value = "/list_by_classifyno")
-//  public String list_by_classifyno_search_paging(HttpSession session, Model model, int classifyno,
-//      @RequestParam(name = "word", defaultValue = "") String word,
-//      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
-//
-//    // System.out.println("-> classifyno: " + classifyno);
-//
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//
-//    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//    model.addAttribute("classifyVO", classifyVO);
-//
-//    word = Tool.checkNull(word).trim();
-//
-//    HashMap<String, Object> map = new HashMap<>();
-//    map.put("classifyno", classifyno);
-//    map.put("word", word);
-//    map.put("now_page", now_page);
-//
-//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search_paging(map);
-//    model.addAttribute("list", list);
-//
-//    // System.out.println("-> size: " + list.size());
-//    model.addAttribute("word", word);
-//
-//    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-//    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno", search_count,
-//        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
-//    model.addAttribute("paging", paging);
-//    model.addAttribute("now_page", now_page);
-//
-//    model.addAttribute("search_count", search_count);
-//
-//    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-//    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
-//    model.addAttribute("no", no);
-//
-//    return "news/list_by_classifyno_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
+//    return "/news/list_by_classifyno_search"; // /templates/news/list_by_classifyno_search.html
 //  }
 
   /**
-   * 카테고리별 목록 + 검색 + 페이징 + Grid
-   * http://localhost:9091/news/list_by_classifyno?classifyno=5
+   * 유형 3
+   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/news/list_by_classifyno?classifyno=5
    * http://localhost:9091/news/list_by_classifyno?classifyno=6
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno_grid")
-  public String list_by_classifyno_search_paging_grid(HttpSession session, Model model, int classifyno,
+  @GetMapping(value = "/list_by_classifyno")
+  public String list_by_classifyno_search_paging(
+      HttpSession session, 
+      Model model, 
+      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
 
@@ -376,8 +336,59 @@ public class NewsCont {
     int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
     model.addAttribute("no", no);
 
+    return "/news/list_by_classifyno_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
+  }
+
+  /**
+   * 카테고리별 목록 + 검색 + 페이징 + Grid
+   * http://localhost:9091/news/list_by_classifyno?classifyno=5
+   * http://localhost:9091/news/list_by_classifyno?classifyno=6
+   * 
+   * @return
+   */
+  @GetMapping(value = "/list_by_classifyno_grid")
+  public String list_by_classifyno_search_paging_grid(
+      HttpSession session, 
+      Model model, 
+      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
+      @RequestParam(name = "word", defaultValue = "") String word,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+
+    // System.out.println("-> classifyno: " + classifyno);
+
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+
+    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+    model.addAttribute("classifyVO", classifyVO);
+
+    word = Tool.checkNull(word).trim();
+
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("classifyno", classifyno);
+    map.put("word", word);
+    map.put("now_page", now_page);
+
+    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search_paging(map);
+    model.addAttribute("list", list);
+
+    // System.out.println("-> size: " + list.size());
+    model.addAttribute("word", word);
+
+    int search_count = this.newsProc.list_by_classifyno_search_count(map);
+    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_grid", search_count,
+        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
+    model.addAttribute("now_page", now_page);
+
+    model.addAttribute("search_count", search_count);
+
+    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
+
     // /templates/news/list_by_classifyno_search_paging_grid.html
-    return "news/list_by_classifyno_search_paging_grid";
+    return "/news/list_by_classifyno_search_paging_grid";
   }
 
   /**
@@ -387,11 +398,10 @@ public class NewsCont {
    */
   @GetMapping(value = "/read")
   public String read(Model model, 
-      int newsno, 
-      String word, 
-      int now_page,
-      @ModelAttribute("filesVO") FilesVO filesVO) { // int classifyno =
-                                                                               // (int)request.getParameter("classifyno");
+      @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+      @RequestParam(name="word", defaultValue = "") String word, 
+      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
+    
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -406,9 +416,9 @@ public class NewsCont {
 //    newsVO.setTitle(title);
 //    newsVO.setContent(content);  
 
-    long size1 = filesVO.getSize1();
+    long size1 = newsVO.getSize1();
     String size1_label = Tool.unit(size1);
-    filesVO.setSize1_label(size1_label);
+    newsVO.setSize1_label(size1_label);
 
     model.addAttribute("newsVO", newsVO);
 
@@ -422,16 +432,17 @@ public class NewsCont {
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
 
-    return "news/read";
+    return "/news/read";
   }
 
   /**
-   * 맵 등록/수정/삭제 폼 http://localhost:9091/news/map?newsno=1
+   * 맵 등록/수정/삭제 폼 http://localhost:9091/news/map?newsno=19
    * 
    * @return
    */
   @GetMapping(value = "/map")
-  public String map(Model model, int newsno) {
+  public String map(Model model, 
+                            @RequestParam(name="newsno", defaultValue="0") int newsno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -441,7 +452,7 @@ public class NewsCont {
     ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno()); // 그룹 정보 읽기
     model.addAttribute("classifyVO", classifyVO);
 
-    return "news/map";
+    return "/news/map"; // //templates/news/map.html
   }
 
   /**
@@ -451,7 +462,9 @@ public class NewsCont {
    * @return
    */
   @PostMapping(value = "/map")
-  public String map_update(Model model, int newsno, String map) {
+  public String map_update(Model model, 
+      @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+      @RequestParam(name="map", defaultValue = "") String map) {
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
     hashMap.put("newsno", newsno);
     hashMap.put("map", map);
@@ -467,7 +480,10 @@ public class NewsCont {
    * @return
    */
   @GetMapping(value = "/youtube")
-  public String youtube(Model model, int newsno, String word, int now_page) {
+  public String youtube(Model model, 
+      @RequestParam(name="newsno", defaultValue="0") int newsno,
+      @RequestParam(name="word", defaultValue="")  String word, 
+      @RequestParam(name="now_page", defaultValue="0") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -480,7 +496,7 @@ public class NewsCont {
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
     
-    return "news/youtube";  // forward
+    return "/news/youtube";  // forward, /templates/news/youtube.html
   }
 
   /**
@@ -491,11 +507,11 @@ public class NewsCont {
    */
   @PostMapping(value = "/youtube")
   public String youtube_update(Model model, 
-                                             RedirectAttributes ra,
-                                             int newsno, 
-                                             String youtube, 
-                                             String word, 
-                                             int now_page) {
+                                            RedirectAttributes ra,
+                                            @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+                                            @RequestParam(name="youtube", defaultValue = "") String youtube, 
+                                            @RequestParam(name="word", defaultValue = "") String word, 
+                                            @RequestParam(name="now_page", defaultValue = "0") int now_page) {
 
     if (youtube.trim().length() > 0) { // 삭제 중인지 확인, 삭제가 아니면 youtube 크기 변경
       youtube = Tool.youtubeResize(youtube, 640); // youtube 영상의 크기를 width 기준 640 px로 변경
@@ -520,8 +536,14 @@ public class NewsCont {
    *
    */
   @GetMapping(value = "/update_text")
-  public String update_text(HttpSession session, Model model, int newsno, RedirectAttributes ra, String word,
-      int now_page) {
+  public String update_text(
+      HttpSession session, 
+      Model model,  
+      RedirectAttributes ra,
+      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="word", defaultValue = "") String word,
+      @RequestParam(name="now_page", defaultValue = "0") int now_page) {
+    
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -540,8 +562,9 @@ public class NewsCont {
       // model.addAttribute("content", content);
 
     } else {
-      ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
-      return "redirect:/news/msg"; // @GetMapping(value = "/read")
+      // ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
+      // return "redirect:/news/msg"; // @GetMapping(value = "/msg")
+      return "/member/login_cookie_need"; // /templates/member/login_cookie_need.html
     }
 
   }
@@ -552,10 +575,14 @@ public class NewsCont {
    * @return
    */
   @PostMapping(value = "/update_text")
-  public String update_text(HttpSession session, Model model, NewsVO newsVO, 
-           RedirectAttributes ra,
-           String search_word, // newsVO.word와 구분 필요
-           int now_page) {
+  public String update_text(
+      HttpSession session, 
+      Model model, 
+      RedirectAttributes ra,
+      @ModelAttribute("newsVO") NewsVO newsVO, 
+      @RequestParam(name="search_word", defaultValue = "") String search_word, // newsVO.word와 구분 필요
+      @RequestParam(name="now_page", defaultValue = "0") int now_page) {
+    
     ra.addAttribute("word", search_word);
     ra.addAttribute("now_page", now_page);
 
@@ -577,11 +604,11 @@ public class NewsCont {
         ra.addFlashAttribute("cnt", 0);
         ra.addAttribute("url", "/news/msg"); // msg.html, redirect parameter 적용
 
-        return "redirect:/news/msg"; // @GetMapping(value = "/msg")
+        return "redirect:/news/post2get"; // @GetMapping(value = "/msg")
       }
     } else { // 정상적인 로그인이 아닌 경우 로그인 유도
       ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
-      return "redirect:/news/msg"; // @GetMapping(value = "/msg")
+      return "redirect:/news/post2get"; // @GetMapping(value = "/msg")
     }
 
   }
@@ -592,10 +619,11 @@ public class NewsCont {
    * @return
    */
   @GetMapping(value = "/update_file")
-  public String update_file(HttpSession session, Model model, 
-                                      int newsno,
-                                      String word, 
-                                      int now_page) {
+  public String update_file(
+      HttpSession session, Model model, 
+     @RequestParam(name="newsno", defaultValue = "0") int newsno,
+     @RequestParam(name="word", defaultValue = "") String word, 
+     @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
     
@@ -619,15 +647,10 @@ public class NewsCont {
    */
   @PostMapping(value = "/update_file")
   public String update_file(
-      HttpSession session, 
-      Model model, 
-      RedirectAttributes ra,
-      FilesVO filesVO,
-      NewsVO newsVO,
-      String word, 
-      int now_page
-      ) {
-
+      HttpSession session, Model model, RedirectAttributes ra,
+       @ModelAttribute("newsVO") NewsVO newsVO,
+       @RequestParam(name="word", defaultValue = "") String word, 
+       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     if (this.memberProc.isMemberAdmin(session)) {
       // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
       NewsVO newsVO_old = newsProc.read(newsVO.getNewsno());
@@ -635,8 +658,8 @@ public class NewsCont {
       // -------------------------------------------------------------------
       // 파일 삭제 시작
       // -------------------------------------------------------------------
-      String file1saved =newsVO_old.getFilesVO().getFile1saved(); // 실제 저장된 파일명
-      String thumb1 = newsVO_old.getFilesVO().getThumb1(); // 실제 저장된 preview 이미지 파일명
+      String file1saved = newsVO_old.getFile1saved(); // 실제 저장된 파일명
+      String thumb1 = newsVO_old.getThumb1(); // 실제 저장된 preview 이미지 파일명
       long size1 = 0;
 
       String upDir = News.getUploadDir(); // C:/kd/deploy/resort_v4sbm3c/news/storage/
@@ -655,7 +678,7 @@ public class NewsCont {
       // 전송 파일이 없어도 file1MF 객체가 생성됨.
       // <input type='file' class="form-control" name='file1MF' id='file1MF'
       // value='' placeholder="파일 선택">
-      MultipartFile mf = filesVO.getFile1MF();
+      MultipartFile mf = newsVO.getFile1MF();
 
       file1 = mf.getOriginalFilename(); // 원본 파일명
       size1 = mf.getSize(); // 파일 크기
@@ -676,10 +699,10 @@ public class NewsCont {
         size1 = 0;
       }
 
-      filesVO.setFile1(file1);
-      filesVO.setFile1saved(file1saved);
-      filesVO.setThumb1(thumb1);
-      filesVO.setSize1(size1);
+      newsVO.setFile1(file1);
+      newsVO.setFile1saved(file1saved);
+      newsVO.setThumb1(thumb1);
+      newsVO.setSize1(size1);
       // -------------------------------------------------------------------
       // 파일 전송 코드 종료
       // -------------------------------------------------------------------
@@ -704,11 +727,12 @@ public class NewsCont {
    * @return
    */
   @GetMapping(value = "/delete")
-  public String delete(HttpSession session, Model model, RedirectAttributes ra,
-                               int classifyno, 
-                               int newsno, 
-                               String word, 
-                               int now_page) {
+  public String delete(
+      HttpSession session, Model model, RedirectAttributes ra,
+      @RequestParam(name="classifyno", defaultValue = "0") int classifyno,
+      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="word", defaultValue = "") String word, 
+      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     if (this.memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
       model.addAttribute("classifyno", classifyno);
       model.addAttribute("word", word);
@@ -739,15 +763,19 @@ public class NewsCont {
    */
   @PostMapping(value = "/delete")
   public String delete(RedirectAttributes ra,
-                              int newsno, int classifyno, String word, int now_page) {
+      @RequestParam(name="classifyno", defaultValue = "0") int classifyno,
+      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="word", defaultValue = "") String word, 
+      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
+    
     // -------------------------------------------------------------------
     // 파일 삭제 시작
     // -------------------------------------------------------------------
     // 삭제할 파일 정보를 읽어옴.
     NewsVO newsVO_read = newsProc.read(newsno);
         
-    String file1saved = newsVO_read.getFilesVO().getFile1saved();
-    String thumb1 = newsVO_read.getFilesVO().getThumb1();
+    String file1saved = newsVO_read.getFile1saved();
+    String thumb1 = newsVO_read.getThumb1();
     
     String uploadDir = News.getUploadDir();
     Tool.deleteFile(uploadDir, file1saved);  // 실제 저장된 파일삭제
@@ -756,7 +784,7 @@ public class NewsCont {
     // 파일 삭제 종료
     // -------------------------------------------------------------------
         
-    this.newsProc.delete(newsno); // DBMS 삭제
+    this.newsProc.delete(newsno); // DBMS 글 삭제
         
     // -------------------------------------------------------------------------------------
     // 마지막 페이지의 마지막 레코드 삭제시의 페이지 번호 -1 처리
@@ -785,5 +813,5 @@ public class NewsCont {
     
   }   
    
-  
+ 
 }
