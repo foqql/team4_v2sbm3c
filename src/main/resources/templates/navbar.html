@@ -40,7 +40,7 @@
 
 <a class="dropdown-item"  
    th:if="${classifyVO.classify == '환율'}" 
-   th:href="@{|/exchange/list?classifyno=${classifyVO.classifyno}|}"  
+   th:href="@{|/exchange/list_by_classifyno?classifyno=${classifyVO.classifyno}|}"  
    th:text="${classifyVO.name}"></a>
    
    <a class="dropdown-item"  
