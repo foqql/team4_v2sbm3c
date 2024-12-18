@@ -394,9 +394,13 @@ public class Tool {
       } else {
           // Linux 배포
           // 기본 명령어
+<<<<<<< HEAD
 
           // pwd: 현재 경로 확인, mkdir deploy: 폴더 생성, cd deploy: 폴더 이동, rmdir team4: 폴더 삭제, cd ..: 상위 폴더로 이동 
 
+=======
+          // pwd: 현재 경로 확인, mkdir deploy: 폴더 생성, cd deploy: 폴더 이동, rmdir team4: 폴더 삭제, cd ..: 상위 폴더로 이동 
+>>>>>>> 6c8b9a4fd37b21bf87901a3686da5302f85e4aff
           path = "/home/ubuntu/deploy/team4";
       }
       // System.out.println("path: " + path);
