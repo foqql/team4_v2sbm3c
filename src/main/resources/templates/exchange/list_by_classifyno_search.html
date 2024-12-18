@@ -9,11 +9,17 @@
   </div>
 
   <aside class="aside_right">
-    <a th:href="@{|/exchange/create?classifyno=${classifyVO.classifyno}|}">등록</a>
-    <span class="menu_divide">|</span>    
+    <span th:if="${session.grade == 'admin'}">
+      <a th:href="@{|/exchange/create?classifyno=${classifyVO.classifyno}|}">등록</a>
+      <span class="menu_devide">│</span>    
+    </span>
+    
     <a href="javascript:location.reload();">새로고침</a>
   </aside> 
-   
+
+  <!-- /exchange/list_search_com.html 파일의 list_search_fragment import -->
+  <div th:replace="~{exchange/list_search_com::list_search_fragment}"></div>
+     
   <div class='menu_line'></div>
        
   <table class="table table-striped" style='width: 100%;'>
@@ -27,8 +33,8 @@
     </tr>
    
     <tr th:each="exchangeVO, status:${list}" 
-        th:attr="onclick=|location.href='/exchange/read?exchangeno=${exchangeVO.exchangeno}'|"
-        style="cursor: pointer; height: 90px;">
+         th:attr="onclick=|location.href='/exchange/read?exchangeno=${exchangeVO.exchangeno}&word=${word}'|"
+         style="cursor: pointer; height: 90px;">
       <td class='td_basic' style="vertical-align: middle; text-align: center;">
         <div th:if="${exchangeVO.file1.endsWith('jpg') or exchangeVO.file1.endsWith('png')  or exchangeVO.file1.endsWith('gif')}">
           <img th:src="@{|/exchange/storage/${exchangeVO.thumb1}|}" style="width: 120px; height: 90px;">
@@ -42,7 +48,6 @@
           <img src="/exchange/images/none1.png" style="width: 120px; height: 90px;">
         </div>
                 
-      </td>
       </td>
       <td class='td_left'>
         <span th:text="${exchangeVO.title}" style="font-weight: bold;"></span><br>
@@ -62,4 +67,3 @@
 </div>
 </html>
 
- 

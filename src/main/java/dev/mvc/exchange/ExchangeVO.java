@@ -1,41 +1,68 @@
 package dev.mvc.exchange;
+  
+import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-@Getter
-@Setter
-@ToString
+  
+@Getter @Setter @ToString
 public class ExchangeVO {
-    private int exchangeno; // 환율 번호
 
-    @NotEmpty(message = "제목은 필수 항목입니다.")
-    @Size(max = 100, message = "제목은 100자를 넘을 수 없습니다.")
-    private String title; // 제목
+  /*
+CREATE TABLE exchange (
+  exchangeno         NUMBER(10)          NOT NULL,
+  title                 VARCHAR2(100)     NOT NULL,
+  content             CLOB                      NOT NULL,
+  cnt                 NUMBER(7)         NOT NULL,
+  word                  VARCHAR2(200)     NOT NULL,
+  rdate                 DATE                      NOT NULL,
+  map                 VARCHAR2(1000)  NULL,
+  youtube             VARCHAR2(1000)  NULL,
+  passwd              VARCHAR2(100)     NULL
+);
+  */
 
-    @NotEmpty(message = "내용은 필수 항목입니다.")
-    private String contents; // 내용 (CLOB type handled as String)
+  /** 컨텐츠 번호 */
+  private int exchangeno;
+  /** 관리자 권한의 회원 번호 */
+  private int memberno;
+  /** 장르 번호 */
+  private int classifyno;
+  /** 크롤링한 환율 번호 */
+  private int crawlingno;
+  /** 제목 */
+  private String title = "";
+  /** 내용 */
+  private String content = "";
+  /** 검색어 */
+  private String word = "";
+  /** 등록 날짜 */
+  private String rdate = "";
+  /** 지도 */
+  private String map = "";
+  /** Youtube */
+  private String youtube = "";
+  /** 암호 */
+  private String passwd = "";
+  
+  // 파일 업로드 관련
+  // -----------------------------------------------------------------------------------
+  /**
+  이미지 파일
+  <input type='file' class="form-control" name='file1MF' id='file1MF' 
+             value='' placeholder="파일 선택">
+  */
+  private MultipartFile file1MF = null;
+  /** 메인 이미지 크기 단위, 파일 크기 */
+  private String size1_label = "";
+  /** 메인 이미지 */
+  private String file1 = "";
+  /** 실제 저장된 메인 이미지 */
+  private String file1saved = "";
+  /** 메인 이미지 preview */
+  private String thumb1 = "";
+  /** 메인 이미지 크기 */
+  private long size1 = 0;
 
-    private int cnt; // 조회수
-
-    @NotEmpty(message = "검색어는 필수 항목입니다.")
-    @Size(max = 200, message = "검색어는 200자를 넘을 수 없습니다.")
-    private String word; // 검색어
-
-    @NotNull(message = "등록일은 필수 항목입니다.")
-    private LocalDate rdate; // 등록일
-
-    @Size(max = 1000, message = "지도 URL은 1000자를 넘을 수 없습니다.")
-    private String map; // 지도
-
-    @Size(max = 1000, message = "유튜브 URL은 1000자를 넘을 수 없습니다.")
-    private String youtube; // 유튜브
-
-    @Size(max = 1000, message = "암호는 1000자를 넘을 수 없습니다.")
-    private String passwd; // 암호
 }

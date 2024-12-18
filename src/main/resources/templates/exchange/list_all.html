@@ -22,16 +22,16 @@
     </tr>
    
 
-    <tr th:each="contentsVO, status:${list}" 
-         th:attr="onclick=|location.href='/contents/read?contentsno=${contentsVO.contentsno}'|"
+    <tr th:each="exchangeVO, status:${list}" 
+         th:attr="onclick=|location.href='/exchange/read?exchangeno=${exchangeVO.exchangeno}'|"
          style="cursor: pointer;">
-      <td class='td_basic' th:text="${contentsVO.file1}"></td>
+      <td class='td_basic' th:text="${exchangeVO.file1}"></td>
       <td class='td_left'>
-        <span th:text="${contentsVO.title}" style="font-weight: bold;"></span><br>
-        <span th:if="${contentsVO.content.length() > 160 }" 
-                  th:text="|${contentsVO.content.substring(0, 160) }...|"></span>
-        <span th:if="${contentsVO.content.length() <= 160 }" 
-                  th:text="|${contentsVO.content}|"></span>
+        <span th:text="${exchangeVO.title}" style="font-weight: bold;"></span><br>
+        <span th:if="${exchangeVO.content.length() > 160 }" 
+                  th:text="|${exchangeVO.content.substring(0, 160) }...|"></span>
+        <span th:if="${exchangeVO.content.length() <= 160 }" 
+                  th:text="|${exchangeVO.content}|"></span>
 
       </td>
     </tr>

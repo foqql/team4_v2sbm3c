@@ -395,6 +395,7 @@ public class Tool {
           // Linux 배포
           // 기본 명령어
           // pwd: 현재 경로 확인, mkdir deploy: 폴더 생성, cd deploy: 폴더 이동, rmdir team4: 폴더 삭제, cd ..: 상위 폴더로 이동 
+
           path = "/home/ubuntu/deploy/team4";
       }
       // System.out.println("path: " + path);
