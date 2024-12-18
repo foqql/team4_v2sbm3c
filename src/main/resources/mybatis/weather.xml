@@ -15,7 +15,7 @@
   <select id="list_all" resultType="dev.mvc.weather.WeatherVO">
     SELECT weatherno, memberno, classifyno, title, content, cnt,  passwd, word, rdate,
                file1, file1saved, thumb1, size1
-
+    FROM weather
     ORDER BY weatherno DESC
   </select>
   

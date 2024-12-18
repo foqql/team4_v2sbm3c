@@ -328,9 +328,9 @@ public class MemberCont {
     Cookie[] cookies = request.getCookies();
     Cookie cookie = null;
 
-    String ck_id = ""; // id 저장
+    String ck_id = "admin"; // id 저장
     String ck_id_save = ""; // id 저장 여부를 체크
-    String ck_passwd = ""; // passwd 저장
+    String ck_passwd = "1234"; // passwd 저장
     String ck_passwd_save = ""; // passwd 저장 여부를 체크
 
     if (cookies != null) { // 쿠키가 존재한다면

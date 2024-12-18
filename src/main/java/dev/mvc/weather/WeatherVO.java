@@ -35,6 +35,8 @@ CREATE TABLE weather (
   private String title = "";
   /** 내용 */
   private String content = "";
+  /** 조회수 */
+  private int cnt = 0;
   /** 검색어 */
   private String word = "";
   /** 등록 날짜 */
