@@ -29,9 +29,9 @@ public class Download {
       @RequestParam(name="dir", defaultValue = "") String dir,
       @RequestParam(name="filename", defaultValue = "") String filename,
       @RequestParam(name="downname", defaultValue = "") String downname) {
-    // C:/kd/deploy/resort/contents/storage
-    // C:/kd/deploy/resort/member/storage
-    // C:/kd/deploy/resort/product/storage
+    // C:/kd/deploy/team4/contents/storage
+    // C:/kd/deploy/team4/member/storage
+    // C:/kd/deploy/team4/product/storage
     File file = new File(Tool.getUploadDir() + dir, filename);
     
     if(!file.exists()) {
