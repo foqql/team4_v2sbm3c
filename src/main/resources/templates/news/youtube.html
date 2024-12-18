@@ -11,9 +11,9 @@
   <aside class="aside_right">
     <A href="javascript:location.reload();">새로고침</A>
     <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_classifyno?classifyno=${classifyno}&word=${word }&now_page=${now_page}|}">기본 목록형</a>    
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">기본 목록형</a>                          
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
   </aside>
   
   <div class='menu_line'></div>

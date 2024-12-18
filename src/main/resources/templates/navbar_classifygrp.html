@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li th:each="classifyVO:${menu}" class="nav-item">
-                <a class="nav-link" href="#" th:text="${classifyVO.genre}"></a>
+                <a class="nav-link" href="#" th:text="${classifyVO.classify}"></a>
               </li>          
               <li class="nav-item">
                 <a class="nav-link" th:href="@{/classify/list_all}">카테고리 목록</a>

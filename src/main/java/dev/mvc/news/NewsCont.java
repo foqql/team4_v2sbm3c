@@ -441,8 +441,11 @@ public class NewsCont {
    * @return
    */
   @GetMapping(value = "/map")
-  public String map(Model model, 
-                            @RequestParam(name="newsno", defaultValue="0") int newsno) {
+  public String map(
+      Model model, 
+      @RequestParam(name="newsno", defaultValue="0") int newsno,
+      @RequestParam(name="now_page", defaultValue="0") int now_page,
+      @RequestParam(name="word", defaultValue="")  String word) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -451,6 +454,9 @@ public class NewsCont {
 
     ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno()); // 그룹 정보 읽기
     model.addAttribute("classifyVO", classifyVO);
+    
+    model.addAttribute("word", word);
+    model.addAttribute("now_page", now_page);
 
     return "/news/map"; // //templates/news/map.html
   }
@@ -462,16 +468,26 @@ public class NewsCont {
    * @return
    */
   @PostMapping(value = "/map")
-  public String map_update(Model model, 
+  public String map_update(
+      Model model, 
+      RedirectAttributes ra,
       @RequestParam(name="newsno", defaultValue = "0") int newsno, 
-      @RequestParam(name="map", defaultValue = "") String map) {
+      @RequestParam(name="map", defaultValue = "") String map,
+      @RequestParam(name="now_page", defaultValue="0") int now_page,
+      @RequestParam(name="word", defaultValue="")  String word) {
+    
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
     hashMap.put("newsno", newsno);
     hashMap.put("map", map);
 
     this.newsProc.map(hashMap);
 
-    return "redirect:/news/read?newsno=" + newsno;
+    ra.addAttribute("newsno", newsno);
+    ra.addAttribute("word", word);
+    ra.addAttribute("now_page", now_page);
+
+    // return "redirect:/news/read?newsno=" + newsno;
+    return "redirect:/news/read";
   }
 
   /**
@@ -506,12 +522,13 @@ public class NewsCont {
    * @return
    */
   @PostMapping(value = "/youtube")
-  public String youtube_update(Model model, 
-                                            RedirectAttributes ra,
-                                            @RequestParam(name="newsno", defaultValue = "0") int newsno, 
-                                            @RequestParam(name="youtube", defaultValue = "") String youtube, 
-                                            @RequestParam(name="word", defaultValue = "") String word, 
-                                            @RequestParam(name="now_page", defaultValue = "0") int now_page) {
+  public String youtube_update(
+      Model model, 
+    RedirectAttributes ra,
+    @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+    @RequestParam(name="youtube", defaultValue = "") String youtube, 
+    @RequestParam(name="word", defaultValue = "") String word, 
+    @RequestParam(name="now_page", defaultValue = "0") int now_page) {
 
     if (youtube.trim().length() > 0) { // 삭제 중인지 확인, 삭제가 아니면 youtube 크기 변경
       youtube = Tool.youtubeResize(youtube, 640); // youtube 영상의 크기를 width 기준 640 px로 변경
