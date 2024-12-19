@@ -76,11 +76,11 @@ INSERT INTO classify (
 
   <!-- List categories (main) that are public -->
   <select id="list_all_classifygrp_y" resultType="dev.mvc.classify.ClassifyVO">
-    SELECT c.classifyno, g.genre as bigcla, c.classify ,c.RDATE, c.SEQNO, c.VISIBLE
-    FROM classify c 
-    JOIN genre g ON c.genreno = g.genreno
-    WHERE c.VISIBLE = 'Y'
-    ORDER BY c.SEQNO ASC    
+SELECT DISTINCT g.genre as bigcla
+FROM classify c
+JOIN genre g ON c.genreno = g.genreno
+WHERE c.VISIBLE = 'Y'
+ORDER BY g.genre DESC
   </select>
 
   <!-- List categories (sub) that are public 

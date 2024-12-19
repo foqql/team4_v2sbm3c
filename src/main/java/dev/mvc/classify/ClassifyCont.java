@@ -48,7 +48,10 @@ public class ClassifyCont {
 
   @GetMapping(value = "/create") // http://localhost:9092/classify/create
   public String create(Model model) {
-
+    // 상단 메뉴 출력
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+    
 //    LocalDate today = LocalDate.now();
     ClassifyVO classifyVO = new ClassifyVO();
     model.addAttribute("classifyVO", classifyVO);
@@ -58,13 +61,6 @@ public class ClassifyCont {
     System.out.println(" -> Model Test [ ClassifyCont.java ] ");
     return "/classify/create";
   }
-
-//  @GetMapping(value = "/create") // http://localhost:9092/classify/create
-//  public String create(ClassifyVO classifyVO) {
-//    classifyVO.setName("이름을 입력하세요.");
-//    classifyVO.setPrice(120000);
-//    return "/classify/create";
-//  }
 
   /**
    * 등록 처리, http://localhost:9092/classify/create
@@ -441,7 +437,7 @@ public class ClassifyCont {
       ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);
 //    ArrayList<ClassifyVO> list = this.classifyProc.list_all();
       model.addAttribute("list", list);
-      System.out.println(list);
+//      System.out.println(list);
 
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
 
