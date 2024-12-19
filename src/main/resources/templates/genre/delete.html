@@ -3,21 +3,21 @@
 <html layout:decorate="~{layout}">
 <!-- layout.html 상속-->
 <div layout:fragment="content">
-  <div class="title_line"><img src="/images/pepe del.gif" style="width:50px; height: 50px;"> 삭제</div>
+  <div class="title_line"><img src="/images/pepe del.gif" style="width:50px; height: 50px;">영양제 삭제</div>
   <div style="width : 60%; margin: 0px auto;">
-    <form name="frm" method="post" action="/classify/delete" th:object="${classifyVO}">
-      <input type="hidden" name="classifyno" th:value="${classifyVO.classifyno}">
+    <form name="frm" method="post" action="/genre/delete" th:object="${genreVO}">
+      <input type="hidden" name="genreno" th:value="${genreVO.genreno}">
       <div class="msg_warning">
         카테고리를 삭제하면 복구할 수 없습니다. <br>
         삭제하시려면 [삭제] 버튼을 클릭하세요</div>
 
       <div style="width:60%; margin: 0px auto; background-color: #DDDDDD;">
-        <label> 종류</label> : <span th:text="${classifyVO.classify}"></span><br>
-        <label> 이름</label> : <span th:text="${classifyVO.classify}"></span>
+        <label>대분류</label> : <span th:text="${genreVO.genre}"></span><br>
+        <label>번호</label> : <span th:text="${genreVO.genreno}"></span>
       </div>
       <div class="content_body_bottom">
         <button type="submit" class="btn btn-secondary btn-sm">삭제</button>
-        <button type="button" onclick="location.href='/classify/list_all'" class="btn btn-secondary btn-sm">목록</button>
+        <button type="button" onclick="location.href='/genre/list_all'" class="btn btn-secondary btn-sm">목록</button>
       </div>
 
     </form>

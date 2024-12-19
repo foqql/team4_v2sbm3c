@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+<!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line"><img src="/images/pepe edit.gif" style="width:50px; height: 50px;">영양제 수정</div>
+  <div style="width : 60%; margin: 0px auto;">
+    <form name="frm" method="post" action="/genre/update" th:object="${genreVO}">
+            <input type="hidden" name ="genreno" th:value="${genreVO.genreno}">
+      <div>
+        <label>대분류 이름</label>
+        <input type="text" name="genre" value="" autofocus="autofocus" class="form-control fom-control-sm"
+          style="width: 50%;" th:field="*{genre}">
+        <div th:if="${#fields.hasErrors('genre')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+          <div th:each="err: ${#lists.sort(#fields.errors('genre'))}" th:text="${err}"></div>
+        </div>
+      </div>
+      <div>
+
+
+
+        <div class="content_body_bottom">
+          <button type="submit" class="btn btn-secondary btn-sm">저장</button>
+          <button type="button" onclick="location.href='/genre/list_all'" class="btn btn-secondary btn-sm">목록</button>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+</html>

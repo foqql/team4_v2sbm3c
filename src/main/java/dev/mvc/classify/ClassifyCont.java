@@ -45,17 +45,6 @@ public class ClassifyCont {
     System.out.println(" -> ClassifyCont  created.");
   }
 
-//  @GetMapping(value = "/create") // http://localhost:9092/PRODUCT/create
-//  @ResponseBody // html 파일 내용임.
-//  public String create() {
-//    return "<h2>Create test [ Classify Cont ] </h2>";
-//  }
-
-//  @ResponseBody // html 파일 내용임.
-//  @GetMapping(value = "/create") // http://localhost:9092/PRODUCT/create
-//  public String create() {
-//    return "/classify/create";
-//  }
 
   @GetMapping(value = "/create") // http://localhost:9092/classify/create
   public String create(Model model) {
@@ -63,7 +52,7 @@ public class ClassifyCont {
 //    LocalDate today = LocalDate.now();
     ClassifyVO classifyVO = new ClassifyVO();
     model.addAttribute("classifyVO", classifyVO);
-    classifyVO.setName("이름을 입력하세요.");
+//    classifyVO.setGenreno();
 //    classifyVO.setPrice(120000);
 //    classifyVO.setExpdate(today.plusDays(180)); // 유통기한 기본 180일 추가
     System.out.println(" -> Model Test [ ClassifyCont.java ] ");
@@ -236,7 +225,7 @@ public class ClassifyCont {
       @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     System.out.println(" -> update post [ classify/update ]");
-    System.out.println(" 이름 : " + classifyVO.getName());
+    System.out.println(" 이름 : " + classifyVO.getGenreno());
 
     if (this.memberProc.isMemberAdmin(session)) {
       if (bindingResult.hasErrors()) {
@@ -438,7 +427,6 @@ public class ClassifyCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     if (this.memberProc.isMemberAdmin(session)) {
       ClassifyVO classifyVO = new ClassifyVO();
-
       this.classifyProc.update_classify_cnt();
       this.classifyProc.update_classify_genre_cnt();
       
@@ -451,15 +439,19 @@ public class ClassifyCont {
       word = Tool.checkNull(word);
 
       ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);
-      model.addAttribute("list", list);
-
 //    ArrayList<ClassifyVO> list = this.classifyProc.list_all();
-//    model.addAttribute("list", list);
+      model.addAttribute("list", list);
+      System.out.println(list);
 
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+
+
       model.addAttribute("menu", menu);
 
+
       int search_cnt = this.classifyProc.list_search_count(word);
+
+
       model.addAttribute("search_cnt", search_cnt);
       model.addAttribute("word", word);
 
@@ -467,6 +459,7 @@ public class ClassifyCont {
       int search_count = this.classifyProc.list_search_count(word);
       String paging = this.classifyProc.pagingBox(now_page, word, this.list_file_name, search_count, this.record_per_page,
           this.page_per_block);
+
       model.addAttribute("paging", paging);
       model.addAttribute("now_page", now_page);
       // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)

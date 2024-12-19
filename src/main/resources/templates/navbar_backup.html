@@ -24,7 +24,7 @@
                     <!--/* 중분류명(카테고리) 출력, private ArrayList<ClassifyVO> list_name; */-->
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li th:each="classifyVO:${classifyVOMenu.list_name}">
-                            <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.name}"></a>
+                            <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
                         </li>
                     </ul>
                 </li>

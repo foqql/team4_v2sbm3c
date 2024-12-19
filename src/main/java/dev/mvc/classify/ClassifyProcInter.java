@@ -139,4 +139,5 @@ public interface ClassifyProcInter {
   
   public int update_classify_cnt();
   public int update_classify_genre_cnt();
+  
 }

@@ -109,16 +109,18 @@ public class ClassifyProc implements ClassifyProcInter {
 
     ArrayList<ClassifyVO> type = this.classifyDAO.list_all_classifygrp_y(); // 대분류 목록 추출
     for (ClassifyVO classifyVO : type) {
-//      System.out.println(classifyVO.getClassify());
       ClassifyVOMenu classifyVOMenu = new ClassifyVOMenu();
-      classifyVOMenu.setType(classifyVO.getClassify()); // 대분류명 저장
+      classifyVOMenu.setBigcla(classifyVO.getBigcla());
 
-      // 카테고리 그룹(대분류)에 해당하는 카테고리 목록(중분류) 로딩
       ArrayList<ClassifyVO> list_name = this.classifyDAO.list_all_classify_y(classifyVO.getClassify());
       classifyVOMenu.setList_name(list_name);
 
       menu.add(classifyVOMenu);
+
     }
+
+//    System.out.println(menu);
+
     return menu;
   }
 
@@ -282,4 +284,7 @@ public class ClassifyProc implements ClassifyProcInter {
   //  System.out.println("프록 업데이트 카테 씨엔티  실행 됨?");
     return cnt;
   }
+
+  
+
 }

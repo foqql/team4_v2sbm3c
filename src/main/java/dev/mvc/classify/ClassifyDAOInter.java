@@ -1,6 +1,7 @@
 package dev.mvc.classify;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public interface ClassifyDAOInter {
@@ -60,5 +61,4 @@ public interface ClassifyDAOInter {
   public int update_classify_genre_cnt();
   
   public Integer[] select_newsno(int classifyno);
-
 }

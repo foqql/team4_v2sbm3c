@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+<!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line">비타민 정보</div>
+
+  <table class="table table-hover">
+    <colgroup>
+      <col style='width: 25%;' /> <!-- 순서 -->
+      <col style='width: 25%;' /> <!-- 이름 -->
+      <col style='width: 25%;' /> <!-- 회사 -->
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">genreno</th>
+        <th class="th_bs">genre</th>
+        <th class="th_bs">수정삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="genreVO:${list}">
+        <td class="td_bs" th:text="${genreVO.genreno}"></td>
+        <td class="td_bs">
+          <a th:href="@{|./read/${genreVO.genreno}|}" style="display:block;" th:text="${genreVO.genre}"></a>
+        </td>
+        <td class="td_bs">
+          <a th:href="@{|/genre/update/${genreVO.genreno}|}">
+            <img src="/genre/images/free-icon-pen-12300927.png" class="icon" title="수정">
+          </a>
+          <!--/* /static 기준 */-->
+          <a th:href="@{|/genre/delete/${genreVO.genreno}|}">
+          <img src="/genre/images/free-icon-cancel-8345013.png" class="icon" title="삭제">
+          </a><!--/static 기준-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</html>

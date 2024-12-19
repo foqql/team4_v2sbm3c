@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line">카테고리 조회</div>
+
+  <div class="container mt-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">번호: <span th:text="${genreVO.genreno}"></span></li>
+      <li class="list-group-item">이름: <span th:text="${genreVO.genre}"></span></li>
+    </ul>  
+  </div>
+
+ <div class="content_body_bottom">
+<button type="button" onclick="location.href='/genre/list_all'" class="btn btn-secondary btn-sm">목록</button>
+<button type="button" th:onclick="|location.href='/genre/update/' + ${genreVO.genreno}|"
+        class="btn btn-secondary btn-sm">수정</button>
+     <button type="button" th:onclick="|location.href='/genre/delete/' + ${genreVO.genreno}|" 
+     class="btn btn-secondary btn-sm">삭제</button>
+    <button type="button" onclick="location.href='/genre/create'" class="btn btn-secondary btn-sm">등록</button>
+  </div>
+</div>
+</html>
