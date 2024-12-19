@@ -21,8 +21,6 @@
     <span class='menu_divide' >│</span>
     <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
     <span class='menu_divide' >│</span>
-    <a th:href="@{|/news/map?classifyno=${newsVO.classifyno }&newsno=${newsVO.newsno}|}">지도</a>
-    <span class='menu_divide' >│</span>
     <a th:href="@{|/news/youtube?classifyno=${newsVO.classifyno }&newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">Youtube</a>
     <span class='menu_divide' >│</span>
     <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  

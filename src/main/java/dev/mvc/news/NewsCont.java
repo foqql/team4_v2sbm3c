@@ -94,6 +94,8 @@ public class NewsCont {
       HttpSession session, 
       Model model, 
       @ModelAttribute("newsVO") NewsVO newsVO,
+      @RequestParam(name="word", defaultValue = "") String word, 
+      @RequestParam(name="now_page", defaultValue = "1") int now_page,
       RedirectAttributes ra) {
 
     if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
