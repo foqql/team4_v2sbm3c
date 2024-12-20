@@ -826,114 +826,149 @@ public class NewsCont {
     return "redirect:/news/list_by_classifyno";    
     
   }   
-   
-  /**
-   * 유형 3
-   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9093/news/list_by_classifyno?classifyno=5
-   * http://localhost:9093/news/list_by_classifyno?classifyno=6
-   * 
-   * @return
-   */
-  @GetMapping(value = "/list_by_classifyno_newsgenre")
-  public String list_by_classifyno_newsgenre_search_paging(
-      HttpSession session, 
-      Model model, 
-      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
-      @RequestParam(name = "newsgenre", defaultValue = "1") int newsgenre,
-      @RequestParam(name = "word", defaultValue = "") String word,
-      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
-
-    // System.out.println("-> classifyno: " + classifyno);
-
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-
-    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-    model.addAttribute("classifyVO", classifyVO);
-
-    word = Tool.checkNull(word).trim();
-
-    HashMap<String, Object> map = new HashMap<>();
-    map.put("classifyno", classifyno);
-    map.put("newsgenre", newsgenre);
-    map.put("word", word);
-    map.put("now_page", now_page);
-
-    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
-    model.addAttribute("list", list);
-
-    // System.out.println("-> size: " + list.size());
-    model.addAttribute("word", word);
-
-    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre", search_count,
-        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
-    model.addAttribute("paging", paging);
-    model.addAttribute("now_page", now_page);
-
-    model.addAttribute("search_count", search_count);
-
-    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
-    model.addAttribute("no", no);
-
-    return "/news/list_by_classifyno_newsgenre_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
-  }
-
-  /**
-   * 카테고리별 목록 + 검색 + 페이징 + Grid
-   * http://localhost:9093/news/list_by_classifyno?classifyno=5
-   * http://localhost:9093/news/list_by_classifyno?classifyno=6_newsgenre?newsgenre='사업'
-   * 
-   * @return
-   */
   
-  @GetMapping(value = "/list_by_classifyno_newsgenre_grid")
-  public String list_by_classifyno_newsgenre_search_paging_grid(
-      HttpSession session, 
-      Model model, 
-      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
-      @RequestParam(name = "newsgenre", defaultValue = "0") int newsgenre,
-      @RequestParam(name = "word", defaultValue = "") String word,
-      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
-
-    // System.out.println("-> classifyno: " + classifyno);
-
+  
+  /**
+   * 전체 목록, 관리자만 사용 가능 http://localhost:9093/news/list_all
+   * 
+   * @return
+   */
+  @GetMapping(value = "/list_newsgenre")
+  public String list_newsgenre(HttpSession session, Model model) {
+    // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
-    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-    model.addAttribute("classifyVO", classifyVO);
+      ArrayList<NewsVO> list = this.newsProc.list_newsgenre(); // 모든 목록
 
-    word = Tool.checkNull(word).trim();
+      // Thymeleaf는 CSRF(크로스사이트) 스크립팅 해킹 방지 자동 지원
+      // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
+//      for (NewsVO newsVO : list) {
+//        String title = newsVO.getTitle();
+//        String content = newsVO.getContent();
+//        
+//        title = Tool.convertChar(title);  // 특수 문자 처리
+//        content = Tool.convertChar(content); 
+//        
+//        newsVO.setTitle(title);
+//        newsVO.setContent(content);  
+//
+//      }
 
-    HashMap<String, Object> map = new HashMap<>();
-    map.put("classifyno", classifyno);
-    map.put("newsgenre", newsgenre);
-    map.put("word", word);
-    map.put("now_page", now_page);
+      model.addAttribute("list", list);
+      return "/news/list_newsgenre";
 
-    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
-    model.addAttribute("list", list);
+    } 
 
-    // System.out.println("-> size: " + list.size());
-    model.addAttribute("word", word);
-
-    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre_grid", search_count,
-        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
-    model.addAttribute("paging", paging);
-    model.addAttribute("now_page", now_page);
-
-    model.addAttribute("search_count", search_count);
-
-    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
-    model.addAttribute("no", no);
-
-    // /templates/news/list_by_classifyno_search_paging_grid.html
-    return "/news/list_by_classifyno_newsgenre_search_paging_grid";
-  }
+  
+   
+//  /**
+//   * 유형 3
+//   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9093/news/list_by_classifyno?classifyno=5
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=6
+//   * 
+//   * @return
+//   */
+//  @GetMapping(value = "/list_by_classifyno_newsgenre")
+//  public String list_by_classifyno_newsgenre_search_paging(
+//      HttpSession session, 
+//      Model model, 
+//      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
+//      @RequestParam(name = "newsgenre", defaultValue = "1") int newsgenre,
+//      @RequestParam(name = "word", defaultValue = "") String word,
+//      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+//
+//    // System.out.println("-> classifyno: " + classifyno);
+//
+//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+//    model.addAttribute("menu", menu);
+//
+//    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+//    model.addAttribute("classifyVO", classifyVO);
+//
+//    word = Tool.checkNull(word).trim();
+//
+//    HashMap<String, Object> map = new HashMap<>();
+//    map.put("classifyno", classifyno);
+//    map.put("newsgenre", newsgenre);
+//    map.put("word", word);
+//    map.put("now_page", now_page);
+//
+//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
+//    model.addAttribute("list", list);
+//
+//    // System.out.println("-> size: " + list.size());
+//    model.addAttribute("word", word);
+//
+//    int search_count = this.newsProc.list_by_classifyno_search_count(map);
+//    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre", search_count,
+//        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+//    model.addAttribute("paging", paging);
+//    model.addAttribute("now_page", now_page);
+//
+//    model.addAttribute("search_count", search_count);
+//
+//    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+//    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+//    model.addAttribute("no", no);
+//
+//    return "/news/list_by_classifyno_newsgenre_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
+//  }
+//
+//  /**
+//   * 카테고리별 목록 + 검색 + 페이징 + Grid
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=5
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=6_newsgenre?newsgenre='사업'
+//   * 
+//   * @return
+//   */
+//  
+//  @GetMapping(value = "/list_by_classifyno_newsgenre_grid")
+//  public String list_by_classifyno_newsgenre_search_paging_grid(
+//      HttpSession session, 
+//      Model model, 
+//      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
+//      @RequestParam(name = "newsgenre", defaultValue = "0") int newsgenre,
+//      @RequestParam(name = "word", defaultValue = "") String word,
+//      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+//
+//    // System.out.println("-> classifyno: " + classifyno);
+//
+//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+//    model.addAttribute("menu", menu);
+//
+//    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+//    model.addAttribute("classifyVO", classifyVO);
+//
+//    word = Tool.checkNull(word).trim();
+//
+//    HashMap<String, Object> map = new HashMap<>();
+//    map.put("classifyno", classifyno);
+//    map.put("newsgenre", newsgenre);
+//    map.put("word", word);
+//    map.put("now_page", now_page);
+//
+//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
+//    model.addAttribute("list", list);
+//
+//    // System.out.println("-> size: " + list.size());
+//    model.addAttribute("word", word);
+//
+//    int search_count = this.newsProc.list_by_classifyno_search_count(map);
+//    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre_grid", search_count,
+//        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+//    model.addAttribute("paging", paging);
+//    model.addAttribute("now_page", now_page);
+//
+//    model.addAttribute("search_count", search_count);
+//
+//    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+//    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+//    model.addAttribute("no", no);
+//
+//    // /templates/news/list_by_classifyno_search_paging_grid.html
+//    return "/news/list_by_classifyno_newsgenre_search_paging_grid";
+//  }
 
   
 }

@@ -76,21 +76,6 @@ public interface NewsDAOInter {
   public ArrayList<NewsVO> list_by_classifyno_search_paging(HashMap<String, Object> map);
   
   /**
-   * 카테고리별 검색 목록
-   * @param map
-   * @return
-   */
-  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap);
-  
-  /**
-   * 카테고리별 검색 목록 + 페이징
-   * @param newsVO
-   * @return
-   */
-  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map);  
-
-  
-  /**
    * 패스워드 검사
    * @param hashMap
    * @return
@@ -159,4 +144,26 @@ public interface NewsDAOInter {
    * @return
    */   
   public int decreaseReplycnt(int newsno);
+  
+  
+  /**
+   * 모든 카테고리의 등록된 글목록
+   * @return
+   */
+  public ArrayList<NewsVO> list_newsgenre(String newsgenre);
+ 
+//  /**
+//   * 카테고리별 검색 목록
+//   * @param map
+//   * @return
+//   */
+//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap);
+//  
+//  /**
+//   * 카테고리별 검색 목록 + 페이징
+//   * @param newsVO
+//   * @return
+//   */
+//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map);  
+
 }

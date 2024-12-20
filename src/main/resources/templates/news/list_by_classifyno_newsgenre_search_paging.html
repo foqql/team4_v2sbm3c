@@ -5,7 +5,7 @@
 
   <div class='title_line'>
     <span th:text="${classifyVO.bigcla}" class="title_line_text"></span >
-    > 뉴스 분류<span th:text="${classifyVO.classify}" class="title_line_text"></span >
+    > 1111111111111111111<span th:text="${classifyVO.classify}" class="title_line_text"></span >
     전체 글<span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
   </div>
   
@@ -34,7 +34,7 @@
       <span class="menu_devide">│</span>    
     </span>
     -->
-    <a href="javascript:location.reload();">새로고침</a>
+    <a href="javascript:location.reload();">새로고침1</a>
     <span class='menu_divide' >│</span>    
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
     <span class='menu_divide' >│</span>
