@@ -9,34 +9,34 @@
   </select>
   
   <insert id="create" parameterType="dev.mvc.member.MemberVO">
-    INSERT INTO member(memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, img, grade)
-    VALUES (member_seq.nextval, #{id}, #{passwd}, #{mname}, #{tel}, #{zipcode}, 
-                 #{address1}, #{address2}, sysdate, #{img}, #{grade})
+    INSERT INTO member(memberno, id, passwd, mname, birth, tel, gender, zipcode, address1, address2, mdate, grade)
+    VALUES (member_seq.nextval, #{id}, #{passwd}, #{mname}, #{birth}, #{tel}, #{gender}, #{zipcode}, 
+                 #{address1}, #{address2}, sysdate, #{grade})
   </insert>
 
   <select id="list" resultType="dev.mvc.member.MemberVO">
-    SELECT memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, img, grade
+    SELECT memberno, id, passwd, mname, birth, tel, gender, zipcode, address1, address2, mdate, grade
     FROM member
     ORDER BY grade ASC, id ASC
   </select>
   
   <!-- memberno로 회원 정보 조회 -->
   <select id="read" resultType="dev.mvc.member.MemberVO" parameterType="int">
-    SELECT memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, img, grade
+    SELECT memberno, id, passwd, mname, birth, tel, gender, zipcode, address1, address2, mdate, grade
     FROM member
     WHERE memberno = #{memberno}
   </select>  
 
   <!-- id(이메일)로 회원 정보 조회 -->
   <select id="readById" resultType="dev.mvc.member.MemberVO" parameterType="String">
-    SELECT memberno, id, passwd, mname, tel, zipcode, address1, address2, mdate, img, grade
+    SELECT memberno, id, passwd, mname, birth, tel, gender, zipcode, address1, address2, mdate, grade
     FROM member
     WHERE id = #{id}
   </select>
   
   <update id="update" parameterType="dev.mvc.member.MemberVO">
     UPDATE member 
-    SET mname=#{mname}, tel=#{tel}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}
+    SET mname=#{mname}, birth=#{birth}, tel=#{tel}, gender=#{gender}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}
     WHERE memberno=#{memberno}
   </update>
   
