@@ -65,10 +65,10 @@ public class NewsCont {
   }
 
   // 등록 폼, news 테이블은 FK로 classifyno를 사용함.
-  // http://localhost:9091/news/create X
-  // http://localhost:9091/news/create?classifyno=1 // classifyno 변수값을 보내는 목적
-  // http://localhost:9091/news/create?classifyno=2
-  // http://localhost:9091/news/create?classifyno=5
+  // http://localhost:9093/news/create X
+  // http://localhost:9093/news/create?classifyno=1 // classifyno 변수값을 보내는 목적
+  // http://localhost:9093/news/create?classifyno=2
+  // http://localhost:9093/news/create?classifyno=5
   @GetMapping(value = "/create")
   public String create(
       Model model, 
@@ -84,7 +84,7 @@ public class NewsCont {
   }
 
   /**
-   * 등록 처리 http://localhost:9091/news/create
+   * 등록 처리 http://localhost:9093/news/create
    * 
    * @return
    */
@@ -194,7 +194,7 @@ public class NewsCont {
   }
 
   /**
-   * 전체 목록, 관리자만 사용 가능 http://localhost:9091/news/list_all
+   * 전체 목록, 관리자만 사용 가능 http://localhost:9093/news/list_all
    * 
    * @return
    */
@@ -234,8 +234,8 @@ public class NewsCont {
 //  /**
 //   * 유형 1
 //   * 카테고리별 목록
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=6 
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=5
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=6 
 //   * @return
 //   */
 //  @GetMapping(value="/list_by_classifyno")
@@ -258,8 +258,8 @@ public class NewsCont {
 //  /**
 //   * 유형 2
 //   * 카테고리별 목록 + 검색
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/news/list_by_classifyno?classifyno=6 
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=5
+//   * http://localhost:9093/news/list_by_classifyno?classifyno=6 
 //   * @return
 //   */
 //  @GetMapping(value="/list_by_classifyno")
@@ -292,8 +292,8 @@ public class NewsCont {
 
   /**
    * 유형 3
-   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/news/list_by_classifyno?classifyno=5
-   * http://localhost:9091/news/list_by_classifyno?classifyno=6
+   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9093/news/list_by_classifyno?classifyno=5
+   * http://localhost:9093/news/list_by_classifyno?classifyno=6
    * 
    * @return
    */
@@ -343,8 +343,8 @@ public class NewsCont {
 
   /**
    * 카테고리별 목록 + 검색 + 페이징 + Grid
-   * http://localhost:9091/news/list_by_classifyno?classifyno=5
-   * http://localhost:9091/news/list_by_classifyno?classifyno=6
+   * http://localhost:9093/news/list_by_classifyno?classifyno=5
+   * http://localhost:9093/news/list_by_classifyno?classifyno=6
    * 
    * @return
    */
@@ -394,7 +394,7 @@ public class NewsCont {
   }
 
   /**
-   * 조회 http://localhost:9091/news/read?newsno=17
+   * 조회 http://localhost:9093/news/read?newsno=17
    * 
    * @return
    */
@@ -438,7 +438,7 @@ public class NewsCont {
   }
 
   /**
-   * 맵 등록/수정/삭제 폼 http://localhost:9091/news/map?newsno=19
+   * 맵 등록/수정/삭제 폼 http://localhost:9093/news/map?newsno=19
    * 
    * @return
    */
@@ -464,7 +464,7 @@ public class NewsCont {
   }
 
   /**
-   * MAP 등록/수정/삭제 처리 http://localhost:9091/news/map
+   * MAP 등록/수정/삭제 처리 http://localhost:9093/news/map
    * 
    * @param newsVO
    * @return
@@ -493,7 +493,7 @@ public class NewsCont {
   }
 
   /**
-   * Youtube 등록/수정/삭제 폼 http://localhost:9091/news/youtube?newsno=1
+   * Youtube 등록/수정/삭제 폼 http://localhost:9093/news/youtube?newsno=1
    * 
    * @return
    */
@@ -518,7 +518,7 @@ public class NewsCont {
   }
 
   /**
-   * Youtube 등록/수정/삭제 처리 http://localhost:9091/news/youtube
+   * Youtube 등록/수정/삭제 처리 http://localhost:9093/news/youtube
    * 
    * @param newsVO
    * @return
@@ -551,7 +551,7 @@ public class NewsCont {
   }
 
   /**
-   * 수정 폼 http:// localhost:9091/news/update_text?newsno=1
+   * 수정 폼 http:// localhost:9093/news/update_text?newsno=1
    *
    */
   @GetMapping(value = "/update_text")
@@ -589,7 +589,7 @@ public class NewsCont {
   }
 
   /**
-   * 수정 처리 http://localhost:9091/news/update_text?newsno=1
+   * 수정 처리 http://localhost:9093/news/update_text?newsno=1
    * 
    * @return
    */
@@ -633,7 +633,7 @@ public class NewsCont {
   }
 
   /**
-   * 파일 수정 폼 http://localhost:9091/news/update_file?newsno=1
+   * 파일 수정 폼 http://localhost:9093/news/update_file?newsno=1
    * 
    * @return
    */
@@ -660,7 +660,7 @@ public class NewsCont {
   }
 
   /**
-   * 파일 수정 처리 http://localhost:9091/news/update_file
+   * 파일 수정 처리 http://localhost:9093/news/update_file
    * 
    * @return
    */
@@ -741,7 +741,7 @@ public class NewsCont {
 
   /**
    * 파일 삭제 폼
-   * http://localhost:9091/news/delete?newsno=1
+   * http://localhost:9093/news/delete?newsno=1
    * 
    * @return
    */
@@ -776,7 +776,7 @@ public class NewsCont {
   }
   
   /**
-   * 삭제 처리 http://localhost:9091/news/delete
+   * 삭제 처리 http://localhost:9093/news/delete
    * 
    * @return
    */
