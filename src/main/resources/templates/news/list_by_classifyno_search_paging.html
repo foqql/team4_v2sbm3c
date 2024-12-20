@@ -4,19 +4,36 @@
 <div layout:fragment="content">
 
   <div class='title_line'>
-    <span th:text="${classifyVO.classify}" class="title_line_text"></span >
-    > <span th:text="${classifyVO.name}" class="title_line_text"></span >
+    <span th:text="${classifyVO.bigcla}" class="title_line_text"></span >
+    > <span th:text="${classifyVO.classify}" class="title_line_text"></span >
     전체 글<span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
   </div>
-
-
+  
+  <aside class="aside_left">
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">메인 홈</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">스포츠</a>
+    <span class='menu_divide' >│</span>    
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">사업</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">투자</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">문화</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">예술</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">여행</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">지구촌</a>    
+  </aside> 
 
   <aside class="aside_right">
+    <!--
     <span th:if="${session.grade == 'admin'}">
       <a th:href="@{|/news/create?classifyno=${classifyVO.classifyno}|}">등록</a>
       <span class="menu_devide">│</span>    
     </span>
-    
+    -->
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    

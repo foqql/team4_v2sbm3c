@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.genre.GenreDAOInter">
+  
+<!--  SQL -> Insert into genre table  -->
+<insert id="create" parameterType="dev.mvc.genre.GenreVO">
+ INSERT INTO genre (genreno, genre)
+  VALUES (genre_SEQ.NEXTVAL, #{genre}) </insert>
+<!--  SQL -> Select all records from genre table  -->
+
+<select id="list_all" resultType="dev.mvc.genre.GenreVO">
+ SELECT * FROM genre ORDER BY genreno ASC 
+ </select>
+ 
+<!--  SQL -> Select record by genreno from genre table  -->
+<select id="read" resultType="dev.mvc.genre.GenreVO" parameterType="Integer">
+ SELECT * FROM genre WHERE genreno=#{genreno} 
+ </select>
+ 
+ 
+<!--  처리결과 : 레코드 갯수  -->
+<update id="update" parameterType="dev.mvc.genre.GenreVO">
+ UPDATE genre SET
+  genre = #{genre}
+  WHERE genreno = #{genreno} 
+ </update>
+ 
+<delete id="delete" parameterType="int">
+DELETE FROM genre WHERE genreno = #{genreno} 
+</delete>
+
+</mapper>

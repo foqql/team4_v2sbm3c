@@ -3,163 +3,156 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dev.mvc.classify.ClassifyDAOInter">
-  <!-- SQL -> Insert into classify table -->
+  
+  <!-- Insert into classify table -->
   <insert id="create" parameterType="dev.mvc.classify.ClassifyVO">
-  INSERT INTO classify (classifyno, NAME,  cnt, classify, seqno, visible, RDATE)
-    VALUES (classify_SEQ.NEXTVAL, #{name}, 0, #{classify},  #{seqno}, #{visible} ,sysdate)
-  </insert>
-
-
-  <select id="list_all" resultType="dev.mvc.classify.ClassifyVO">
-    SELECT * FROM classify
-    ORDER BY seqno ASC, classifyno asc
-  </select>
-
-  <!-- SQL -> Select record by classifyno from classify table -->
-  <select id="read" resultType="dev.mvc.classify.ClassifyVO" parameterType="Integer">
-    SELECT *
-    FROM classify
-    WHERE classifyno=#{classifyno}
-  </select>
-
-  <!-- 처리결과 : 레코드 갯수 -->
-  <update id="update" parameterType="dev.mvc.classify.ClassifyVO">
-  UPDATE classify
-  SET NAME = #{name},
-      classify = #{classify},
-      seqno = #{seqno},
-      visible = #{visible},
-      RDATE = sysdate
-  WHERE classifyno = #{classifyno}
-</update>
-
-
-  <delete id="delete" parameterType="int">
-DELETE FROM classify
-WHERE classifyno = #{classifyno}
-</delete>
-
-  <!-- 우선순위 높임 -->
-  <update id="update_seqno_forward" parameterType="dev.mvc.classify.ClassifyVO">
-  UPDATE classify
-  SET seqno = seqno - 1
-  WHERE classifyno = #{classifyno}
-</update>
-
-  <!-- 우선순위 낮춤 -->
-  <update id="update_seqno_backward" parameterType="dev.mvc.classify.ClassifyVO">
-  UPDATE classify
-  SET seqno = seqno + 1
-  WHERE classifyno = #{classifyno}
-</update>
-
-  <!-- 공개설정(visible) 공개 -->
-  <update id="update_visible_y" parameterType="dev.mvc.classify.ClassifyVO">
-  UPDATE classify
-  SET visible = 'Y'
-  WHERE classifyno = #{classifyno}
-</update>
-
-  <!-- 공개설정(visible) 비공개 -->
-  <update id="update_visible_n" parameterType="dev.mvc.classify.ClassifyVO">
-  UPDATE classify
-  SET visible = 'N'
-  WHERE classifyno = #{classifyno}
-</update>
-
-  <!-- SQL -> 회원/비회원에게 공개할 카테고리 그룹(대분류) 목록 -->
-  <select id="list_all_classifygrp_y" resultType="dev.mvc.classify.ClassifyVO">
-    SELECT
-        *
-    FROM
-        classify
-    WHERE
-             name='--'
-        AND visible = 'Y'
-    ORDER BY
-        seqno ASC
-  </select>
-
-  <!-- SQL ->회원/비회원에게 공개할 카테고리(중분류) 목록  -->
-  <select id="list_all_classify_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
-    SELECT *
-    FROM classify 
-    WHERE name!='--' AND visible='Y' AND classify=#{classify}
-    ORDER BY seqno ASC
-</select>
-
-  <!-- 종류 목록 -->
-  <select id="classifyset" resultType="String">
-    SELECT classify
-    FROM classify 
-    WHERE name='--'
-    ORDER BY seqno ASC
-  </select>
-
-  <!--  검색 결과 출력  -->
-  <select id="list_search" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
-    select classifyno, classify, name, cnt, seqno, visible, rdate, company,price, expdate
-    FROM classify
-    <if test="word != null and word !=''">
-      <!--  검색 상태라면 WHERE 생성  -->
-      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%') OR (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
-    </if>
-    ORDER BY seqno ASC, classifyno asc
-  </select>
-
-  <!--  검색 결과 개수 출력  -->
-  <select id="list_search_count" resultType="Integer" parameterType="String">
-    select count(*) as cnt
-    FROM classify
-    <if test="word != null and word !=''">
-      <!--  검색 상태라면 WHERE 생성  -->
-      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%') 
-      OR (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
-    </if>
-    ORDER BY seqno ASC, classifyno asc
-  </select>
-
-
-  <!--  검색 + 페이징  -->
-  <select id="list_search_paging" resultType="dev.mvc.classify.ClassifyVO" parameterType="Map">
-SELECT classifyno, classify, name, cnt, seqno, visible, rdate, r
-FROM (
-    SELECT classifyno, classify, name, cnt, seqno, visible, rdate,  rownum AS r
-    FROM (
-        SELECT classifyno, classify, name, cnt, seqno, visible, rdate
-        FROM classify
-        WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%')
-           OR (UPPER(name) LIKE '%' || UPPER(#{word}) || '%')
-        ORDER BY seqno ASC, classifyno ASC
-    )
+INSERT INTO classify (
+    Classifyno, Classify, cnt, seqno, visible, rdate, genreno
+) VALUES (
+    classify_SEQ.NEXTVAL,  
+    #{classify},   
+    0,                 
+    #{seqno},                  
+    #{visible},                
+    sysdate,          
+    #{genreno}   
 )
-WHERE r BETWEEN #{start_num} AND #{end_num}
-
-  </select>
+  </insert>
   
-  <update id="update_classify_cnt">
-      UPDATE classify
-      SET cnt = (
-          SELECT COUNT(*)
-          FROM news
-          WHERE news.classifyno = classify.classifyno
-      )
+  <!-- Select all classify records -->
+    <select id="list_all" resultType="dev.mvc.classify.ClassifyVO">
+    SELECT *
+     FROM classify 
+     ORDER BY seqno ASC, classifyno ASC
+  </select>
+
+  <!-- Select record by classifyno from classify table -->
+    <select id="read" resultType="dev.mvc.classify.ClassifyVO" parameterType="Integer">
+      SELECT c.classifyno , g.genre,  c.rdate, c.SEQNO, c.VISIBLE , c.classify, g.genre as bigcla
+   FROM classify c 
+   JOIN genre g ON c.genreno  = g.genreno 
+   WHERE c.classifyno =#{classifyno} 
+    </select>
+
+  <!-- Update classify record -->
+  <update id="update" parameterType="dev.mvc.classify.ClassifyVO">
+    UPDATE classify
+    SET genreno = #{genreno}, 
+    classify = #{classify}, 
+    seqno = #{seqno}, 
+    visible = #{visible}, 
+    RDATE = sysdate
+    WHERE classifyno = #{classifyno}
   </update>
-  
-<update id="update_classify_genre_cnt">
-    UPDATE classify c
-    SET cnt = COALESCE((
-        SELECT SUM(cnt)
-        FROM classify s
-        WHERE s.classify = c.classify AND s.name != '--'
-    ), 0)
-    WHERE c.name = '--'
-</update>
 
+  <!-- Delete classify record -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM classify WHERE classifyno = #{classifyno}
+  </delete>
 
+  <!-- Increase seqno (higher priority) -->
+  <update id="update_seqno_forward" parameterType="dev.mvc.classify.ClassifyVO">
+    UPDATE classify SET seqno = seqno - 1 
+    WHERE classifyno = #{classifyno}
+  </update>
 
-  <select id="select_newsno" parameterType="int"  resultType="java.lang.Integer">
-    select newsno FROM news
-     WHERE classifyno=#{classifyno} 
+  <!-- Decrease seqno (lower priority) -->
+  <update id="update_seqno_backward" parameterType="dev.mvc.classify.ClassifyVO">
+    UPDATE classify SET seqno = seqno + 1 
+    WHERE classifyno = #{classifyno}
+  </update>
+
+  <!-- Set visible to 'Y' (public) -->
+  <update id="update_visible_y" parameterType="dev.mvc.classify.ClassifyVO">
+    UPDATE classify SET visible = 'Y' 
+    WHERE classifyno = #{classifyno}
+  </update>
+
+  <!-- Set visible to 'N' (private) -->
+  <update id="update_visible_n" parameterType="dev.mvc.classify.ClassifyVO">
+    UPDATE classify SET visible = 'N' 
+    WHERE classifyno = #{classifyno}
+  </update>
+
+  <!-- List categories (main) that are public -->
+  <select id="list_all_classifygrp_y" resultType="dev.mvc.classify.ClassifyVO">
+SELECT DISTINCT g.genre as bigcla
+FROM classify c
+JOIN genre g ON c.genreno = g.genreno
+WHERE c.VISIBLE = 'Y'
+ORDER BY g.genre DESC
   </select>
+
+  <!-- List categories (sub) that are public 
+    g.genreno = #{genreno}-->
+  <select id="list_all_classify_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+    SELECT c.classifyno, g.genre as bigcla, c.classify,c.RDATE, c.SEQNO, c.VISIBLE
+    FROM classify c 
+    JOIN genre g ON c.genreno = g.genreno
+    WHERE c.VISIBLE = 'Y'
+    ORDER BY c.SEQNO ASC    
+  </select>
+
+  
+  <select id="classifyset" resultType="String">
+        SELECT classify FROM classify WHERE classify='--' ORDER BY seqno ASC
+  </select>
+
+  <!-- Search result output -->
+  <select id="list_search" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+    SELECT classifyno, classify,  cnt, seqno, visible, rdate, company, price, expdate
+    FROM classify
+    <if test="word != null and word != ''">
+      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%')
+    </if>
+    ORDER BY seqno ASC, classifyno ASC
+  </select>
+
+  <!-- Search result count -->
+  <select id="list_search_count" resultType="Integer" parameterType="String">
+    SELECT count(*) as cnt FROM classify
+    <if test="word != null and word != ''">
+      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%')
+    </if>
+    ORDER BY seqno ASC, classifyno ASC
+  </select>
+
+  <!-- Search result with paging -->
+  <select id="list_search_paging" resultType="dev.mvc.classify.ClassifyVO" parameterType="Map">
+        SELECT classifyno, bigcla, classify,rdate, seqno, visible, r
+    FROM (
+        SELECT classifyno, bigcla, classify, rdate, seqno, visible, rownum as r
+        FROM (
+            SELECT c.classifyno, g.genre as bigcla, c.classify, c.rdate,  c.seqno, c.visible
+            FROM classify c join genre g on c.genreno = g.genreno
+            WHERE (UPPER(c.classify) LIKE '%' || UPPER(#{word}) || '%')
+            ORDER BY c.seqno ASC
+        )
+    )
+    WHERE r BETWEEN #{start_num} AND #{end_num}
+  </select>
+
+
+
+
+
+  <!-- Update classify cnt based on related news -->
+  <update id="update_classify_cnt">
+    UPDATE classify SET cnt = (SELECT COUNT(*) FROM news WHERE news.classifyno = classify.classifyno)
+  </update>
+
+  <!-- Update classify genre cnt -->
+  <update id="update_classify_genre_cnt">
+    UPDATE classify c
+    SET cnt = COALESCE(
+      (SELECT SUM(cnt) FROM classify s WHERE s.classify = c.classify),
+      0
+    )
+  </update>
+
+  <!-- Get newsno related to a specific classify -->
+  <select id="select_newsno" parameterType="int" resultType="java.lang.Integer">
+    SELECT newsno FROM news WHERE classifyno=#{classifyno}
+  </select>
+
 </mapper>

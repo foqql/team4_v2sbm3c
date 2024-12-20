@@ -11,7 +11,7 @@ public class ClassifyVOMenu {
   /**
    *  종류(대분류)
    */
-  private String type;
+  private String bigcla;
   /**
    *  이름(중분류)
    */

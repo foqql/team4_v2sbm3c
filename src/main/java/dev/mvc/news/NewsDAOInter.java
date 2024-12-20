@@ -24,7 +24,8 @@ public interface NewsDAOInter {
    * @return
    */
   public ArrayList<NewsVO> list_all();
-  
+
+
   /**
    * 카테고리별 등록된 글 목록
    * @param classifyno
@@ -73,6 +74,21 @@ public interface NewsDAOInter {
    * @return
    */
   public ArrayList<NewsVO> list_by_classifyno_search_paging(HashMap<String, Object> map);
+  
+  /**
+   * 카테고리별 검색 목록
+   * @param map
+   * @return
+   */
+  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap);
+  
+  /**
+   * 카테고리별 검색 목록 + 페이징
+   * @param newsVO
+   * @return
+   */
+  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map);  
+
   
   /**
    * 패스워드 검사

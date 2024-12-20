@@ -4,8 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import dev.mvc.classify.ClassifyProc;
+
 @Controller
 public class HomeCont {
+
+  private ClassifyProc classifyProc;
 
   public HomeCont() {
     System.out.println("-> HomeCnont created.");
@@ -15,6 +19,10 @@ public class HomeCont {
   // http://localhost:9092/index.do
   @GetMapping(value = { "/", "/index.do" })
   public String home(Model model) {
+    /*
+     * ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+     * model.addAttribute("menu", menu);
+     */
     return "index"; // /templates/index.html
 
   }

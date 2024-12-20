@@ -3,24 +3,16 @@ package dev.mvc.news;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.classify.ClassifyProcInter;
@@ -29,6 +21,8 @@ import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping(value = "/news")
 @Controller
@@ -230,7 +224,7 @@ public class NewsCont {
     }
 
   }
-
+  
 //  /**
 //   * 유형 1
 //   * 카테고리별 목록
@@ -348,6 +342,7 @@ public class NewsCont {
    * 
    * @return
    */
+  
   @GetMapping(value = "/list_by_classifyno_grid")
   public String list_by_classifyno_search_paging_grid(
       HttpSession session, 
@@ -832,5 +827,113 @@ public class NewsCont {
     
   }   
    
- 
+  /**
+   * 유형 3
+   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9093/news/list_by_classifyno?classifyno=5
+   * http://localhost:9093/news/list_by_classifyno?classifyno=6
+   * 
+   * @return
+   */
+  @GetMapping(value = "/list_by_classifyno_newsgenre")
+  public String list_by_classifyno_newsgenre_search_paging(
+      HttpSession session, 
+      Model model, 
+      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
+      @RequestParam(name = "newsgenre", defaultValue = "1") int newsgenre,
+      @RequestParam(name = "word", defaultValue = "") String word,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+
+    // System.out.println("-> classifyno: " + classifyno);
+
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+
+    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+    model.addAttribute("classifyVO", classifyVO);
+
+    word = Tool.checkNull(word).trim();
+
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("classifyno", classifyno);
+    map.put("newsgenre", newsgenre);
+    map.put("word", word);
+    map.put("now_page", now_page);
+
+    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
+    model.addAttribute("list", list);
+
+    // System.out.println("-> size: " + list.size());
+    model.addAttribute("word", word);
+
+    int search_count = this.newsProc.list_by_classifyno_search_count(map);
+    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre", search_count,
+        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
+    model.addAttribute("now_page", now_page);
+
+    model.addAttribute("search_count", search_count);
+
+    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
+
+    return "/news/list_by_classifyno_newsgenre_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
+  }
+
+  /**
+   * 카테고리별 목록 + 검색 + 페이징 + Grid
+   * http://localhost:9093/news/list_by_classifyno?classifyno=5
+   * http://localhost:9093/news/list_by_classifyno?classifyno=6_newsgenre?newsgenre='사업'
+   * 
+   * @return
+   */
+  
+  @GetMapping(value = "/list_by_classifyno_newsgenre_grid")
+  public String list_by_classifyno_newsgenre_search_paging_grid(
+      HttpSession session, 
+      Model model, 
+      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
+      @RequestParam(name = "newsgenre", defaultValue = "0") int newsgenre,
+      @RequestParam(name = "word", defaultValue = "") String word,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+
+    // System.out.println("-> classifyno: " + classifyno);
+
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+
+    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+    model.addAttribute("classifyVO", classifyVO);
+
+    word = Tool.checkNull(word).trim();
+
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("classifyno", classifyno);
+    map.put("newsgenre", newsgenre);
+    map.put("word", word);
+    map.put("now_page", now_page);
+
+    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
+    model.addAttribute("list", list);
+
+    // System.out.println("-> size: " + list.size());
+    model.addAttribute("word", word);
+
+    int search_count = this.newsProc.list_by_classifyno_search_count(map);
+    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre_grid", search_count,
+        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
+    model.addAttribute("now_page", now_page);
+
+    model.addAttribute("search_count", search_count);
+
+    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
+
+    // /templates/news/list_by_classifyno_search_paging_grid.html
+    return "/news/list_by_classifyno_newsgenre_search_paging_grid";
+  }
+
+  
 }

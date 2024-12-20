@@ -13,8 +13,8 @@
     <thead>
       <tr>
         <th class="th_bs">순서</th>
-        <th class="th_bs">종류</th>
-        <th class="th_bs">이름</th>
+        <th class="th_bs">대분류</th>
+        <th class="th_bs">중분류</th>
         <th class="th_bs">관련 자료수</th>
         <th class="th_bs">생성일</th>
         <th class="th_bs">출력 순서</th>
@@ -32,12 +32,12 @@
         <!-- 타입 -->
         <td class="td_bs">
           <a th:href="@{|/classify/read/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}" style="display:block;"
-            th:text="${classifyVO.classify}"></a>
+            th:text="${classifyVO.bigcla}"></a>
         </td>
         <!-- 이름 -->
         <td class="td_bs">
           <a th:href="@{|/classify/read/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}" style="display:block;"
-            th:text="${classifyVO.name}"></a>
+            th:text="${classifyVO.classify}"></a>
         </td>
         <!-- 관련 자료수 -->
         <td class="td_bs" th:text="${classifyVO.cnt}"></td>
@@ -73,7 +73,7 @@
           <a th:href="@{|/classify/delete/${classifyVO.classifyno}?word=${word}&now_page=${now_page}|}">
             <img src="/classify/images/trash.png" class="icon" title="삭제">
           </a>
-       <!--   <a th:if="${classifyVO.name != '--'}" th:href="@{|/news/create?classifyno=${classifyVO.classifyno}&word=${word}&now_page=${now_page}|}">
+       <!--   <a th:if="${classifyVO.classify != '--'}" th:href="@{|/news/create?classifyno=${classifyVO.classifyno}&word=${word}&now_page=${now_page}|}">
             <img src="/classify/images/plus.png" class="icon" title="pluoooos">
           </a>-->
 

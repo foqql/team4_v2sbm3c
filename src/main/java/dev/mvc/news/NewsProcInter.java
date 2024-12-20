@@ -22,7 +22,7 @@ public interface NewsProcInter {
    * @return
    */
   public ArrayList<NewsVO> list_all();
- 
+
   /**
    * 카테고리별 등록된 글 목록
    * @param classifyno
@@ -71,6 +71,21 @@ public interface NewsProcInter {
    * @return
    */
   public ArrayList<NewsVO> list_by_classifyno_search_paging(HashMap<String, Object> map);
+  
+  /**
+   * 카테고리별 검색 목록
+   * @param map
+   * @return
+   */
+  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap);
+  
+  /**
+   * 카테고리별 검색 목록 + 페이징
+   * @param newsVO
+   * @return
+   */
+  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map);  
+
   
   /** 
    * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 

@@ -10,22 +10,22 @@
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
-  <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>
+<!--  <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>-->
   <div class="menu_line"></div>
 
   <div style="width : 60%; margin: 0px auto;">
     <form name="frm" method="post" action="/classify/create" th:object="${classifyVO}">
       <div>
-        <label> 국가 </label>
-        <input type="text" name="name" value="" autofocus="autofocus" class="form-control fom-control-sm"
-          style="width: 50%;" th:field="*{name}">
-        <div th:if="${#fields.hasErrors('name')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
-          <div th:each="err: ${#lists.sort(#fields.errors('name'))}" th:text="${err}"></div>
+        <label> 대분류 숫자 </label>
+        <input type="text" name="genreno" value="" autofocus="autofocus" class="form-control fom-control-sm"
+          style="width: 50%;" th:field="*{genreno}">
+        <div th:if="${#fields.hasErrors('genreno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+          <div th:each="err: ${#lists.sort(#fields.errors('genreno'))}" th:text="${err}"></div>
         </div>
       </div>
 
         <div>
-          <label> 카테고리 </label>
+          <label> 중분류 이름 </label>
           <input type="text" name="classify" value="Y" class="form-control fom-control-sm" style="width: 50%;"
             th:field="*{classify}">
           <div th:if="${#fields.hasErrors('classify')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">

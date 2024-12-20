@@ -53,6 +53,8 @@ public class NewsVO {
   private String youtube = "";
   /** mp3 */
   private String mp3 = "";
+  /** 뉴스 분류 */
+  private String newsgenre = "";
   
   // 파일 업로드 관련
   // -----------------------------------------------------------------------------------

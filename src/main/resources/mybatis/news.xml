@@ -6,10 +6,17 @@
   <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.news.NewsVO">
     INSERT INTO news(newsno, memberno, classifyno, title, content, passwd, word,
-                                     file1, file1saved, thumb1, size1, rdate)
-    VALUES(news_seq.nextval, #{memberno}, #{classifyno}, #{title}, #{content}, #{passwd}, #{word},
-                #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+                                     file1, file1saved, thumb1, size1, rdate, newsgenre)
+    VALUES(news_seq.nextval, #{memberno}, #{classifyno},  #{title}, #{content}, #{passwd}, #{word},
+                #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate, #{newsgenre})
   </insert>
+
+  <select id="list_newsgenre" resultType="dev.mvc.news.NewsVO">
+    SELECT newsgenre, newsno, memberno, classifyno, title, content, passwd, word, file1, file1saved, thumb1, size1, rdate
+    FROM news
+    WHERE newsgenre = #{newsgenre};
+    ORDER BY newsno DESC
+  </select>
 
 
   <select id="list_all" resultType="dev.mvc.news.NewsVO">
