@@ -24,10 +24,10 @@ import jakarta.validation.Valid;
 @RequestMapping("/classify")
 public class ClassifyCont {
 
-    @Autowired
-    @Qualifier("dev.mvc.classify.ClassifyProc") 
-    private ClassifyProcInter classifyProc;
-  
+  @Autowired
+  @Qualifier("dev.mvc.classify.ClassifyProc")
+  private ClassifyProcInter classifyProc;
+
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
@@ -45,13 +45,12 @@ public class ClassifyCont {
     System.out.println(" -> ClassifyCont  created.");
   }
 
-
   @GetMapping(value = "/create") // http://localhost:9092/classify/create
   public String create(Model model) {
     // 상단 메뉴 출력
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
-    
+
 //    LocalDate today = LocalDate.now();
     ClassifyVO classifyVO = new ClassifyVO();
     model.addAttribute("classifyVO", classifyVO);
@@ -78,11 +77,16 @@ public class ClassifyCont {
       System.out.println(" -> Error 에러 발생  [ classify/msg ]");
       return "/classify/create";
     }
-//    System.out.println(" 이름 : " + classifyVO.getName());
+    System.out.println(" 이름 : " + classifyVO.getClassifyno());
+    System.out.println(" 이름 : " + classifyVO.getClassify());
+    System.out.println(" 이름 : " + classifyVO.getGenreno());
+    System.out.println(" 이름 : " + classifyVO.getSeqno());
+    System.out.println(" 이름 : " + classifyVO.getVisible());
 //    System.out.println(" 가격 : " + classifyVO.getPrice());
 //    System.out.println(" 개봉일 : " + classifyVO.getRdate());
 
     int cnt = this.classifyProc.create(classifyVO);
+    System.out.println(" 이름 : " + classifyVO.getClassify());
     System.out.println(" -> cnt [classifyCont]: " + cnt);
 
     if (cnt == 1) {
@@ -217,8 +221,8 @@ public class ClassifyCont {
    * @return
    */
   @PostMapping(value = "/update")
-  public String update(Model model, @Valid @ModelAttribute("classifyVO") ClassifyVO classifyVO, BindingResult bindingResult,
-      @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
+  public String update(Model model, @Valid @ModelAttribute("classifyVO") ClassifyVO classifyVO,
+      BindingResult bindingResult, @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     System.out.println(" -> update post [ classify/update ]");
     System.out.println(" 이름 : " + classifyVO.getGenreno());
@@ -247,7 +251,7 @@ public class ClassifyCont {
       return "/classify/msg"; // templates/classify/msg.html
     } else {
       return "redirect:/member/login_cookie_need"; // redirect
-   }
+    }
   }
 
   /**
@@ -275,8 +279,8 @@ public class ClassifyCont {
       model.addAttribute("word", word);
 
       int search_count = this.classifyProc.list_search_count(word);
-      String paging = this.classifyProc.pagingBox(now_page, word, this.list_file_name, search_count, this.record_per_page,
-          this.page_per_block);
+      String paging = this.classifyProc.pagingBox(now_page, word, this.list_file_name, search_count,
+          this.record_per_page, this.page_per_block);
       model.addAttribute("paging", paging);
       model.addAttribute("now_page", now_page);
       // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
@@ -303,7 +307,7 @@ public class ClassifyCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     System.out.println(" -> delete post [ classify/delete ]");
 
-   if (this.memberProc.isMemberAdmin(session)) {
+    if (this.memberProc.isMemberAdmin(session)) {
       ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 수정: 실제 classifyno를 전달
       model.addAttribute("classifyVO", classifyVO);
 
@@ -339,7 +343,7 @@ public class ClassifyCont {
       return "/classify/msg"; // templates/classify/msg.html
     } else {
       return "redirect:/member/login_cookie_need"; // redirect
-      }
+    }
   }
 
   /**
@@ -425,7 +429,7 @@ public class ClassifyCont {
       ClassifyVO classifyVO = new ClassifyVO();
       this.classifyProc.update_classify_cnt();
       this.classifyProc.update_classify_genre_cnt();
-      
+
       // 카테고리 그룹 목록
       ArrayList<String> list_type = this.classifyProc.classifyset();
       classifyVO.setClassify(String.join("/", list_type));
@@ -441,20 +445,17 @@ public class ClassifyCont {
 
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
 
-
       model.addAttribute("menu", menu);
 
-
       int search_cnt = this.classifyProc.list_search_count(word);
-
 
       model.addAttribute("search_cnt", search_cnt);
       model.addAttribute("word", word);
 
       // 페이지 번호 목록 생성
       int search_count = this.classifyProc.list_search_count(word);
-      String paging = this.classifyProc.pagingBox(now_page, word, this.list_file_name, search_count, this.record_per_page,
-          this.page_per_block);
+      String paging = this.classifyProc.pagingBox(now_page, word, this.list_file_name, search_count,
+          this.record_per_page, this.page_per_block);
 
       model.addAttribute("paging", paging);
       model.addAttribute("now_page", now_page);
@@ -464,7 +465,7 @@ public class ClassifyCont {
       return "/classify/list_search";
     } else {
       return "redirect:/member/login_cookie_need"; // redirect
-   }
+    }
 
   }
 

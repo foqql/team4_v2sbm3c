@@ -6,17 +6,17 @@
   
   <!-- Insert into classify table -->
   <insert id="create" parameterType="dev.mvc.classify.ClassifyVO">
-INSERT INTO classify (
-    Classifyno, Classify, cnt, seqno, visible, rdate, genreno
-) VALUES (
-    classify_SEQ.NEXTVAL,  
-    #{classify},   
-    0,                 
-    #{seqno},                  
-    #{visible},                
-    sysdate,          
-    #{genreno}   
-)
+    INSERT INTO classify (
+        Classifyno, Classify, cnt, seqno, visible, rdate, genreno
+    ) VALUES (
+        classify_SEQ.NEXTVAL,  
+        #{classify},   
+        0,                 
+        #{seqno},                  
+        #{visible},                
+        sysdate,          
+        #{genreno}   
+    )
   </insert>
   
   <!-- Select all classify records -->
@@ -37,13 +37,13 @@ INSERT INTO classify (
   <!-- Update classify record -->
   <update id="update" parameterType="dev.mvc.classify.ClassifyVO">
     UPDATE classify
-    SET genreno = #{genreno}, 
-    classify = #{classify}, 
-    seqno = #{seqno}, 
-    visible = #{visible}, 
-    RDATE = sysdate
+    SET classify = #{classify},
+        seqno = #{seqno},
+        visible = #{visible},
+        RDATE = sysdate
     WHERE classifyno = #{classifyno}
-  </update>
+</update>
+
 
   <!-- Delete classify record -->
   <delete id="delete" parameterType="int">
@@ -76,11 +76,11 @@ INSERT INTO classify (
 
   <!-- List categories (main) that are public -->
   <select id="list_all_classifygrp_y" resultType="dev.mvc.classify.ClassifyVO">
-SELECT DISTINCT g.genre as bigcla
+SELECT DISTINCT g.genre as bigcla, c.genreno
 FROM classify c
 JOIN genre g ON c.genreno = g.genreno
 WHERE c.VISIBLE = 'Y'
-ORDER BY g.genre DESC
+ORDER BY c.genreno ASC
   </select>
 
   <!-- List categories (sub) that are public 
