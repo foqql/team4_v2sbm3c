@@ -11,40 +11,42 @@ public class ExchangeVO {
 
   /*
 CREATE TABLE exchange (
-  exchangeno         NUMBER(10)          NOT NULL,
-  title                 VARCHAR2(100)     NOT NULL,
-  content             CLOB                      NOT NULL,
-  cnt                 NUMBER(7)         NOT NULL,
-  word                  VARCHAR2(200)     NOT NULL,
-  rdate                 DATE                      NOT NULL,
-  map                 VARCHAR2(1000)  NULL,
-  youtube             VARCHAR2(1000)  NULL,
-  passwd              VARCHAR2(100)     NULL
+  exchangeno  NUMBER(10)   NOT NULL PRIMARY KEY,
+    classifyno NUMBER(10) NOT NULL,
+  name  VARCHAR2(50)  NOT NULL,
+  price NUMBER(10,2)  NOT NULL,
+  krw NUMBER(10,2)  NOT NULL,
+  value NUMBER(10,2)  NOT NULL,
+  yesterday NUMBER(10,2)  NOT NULL,
+  recent  DATE  NOT NULL,
+  map VARCHAR2(1000)  NULL,
+  file1 VARCHAR(100)  NULL,
+  file1saved  VARCHAR(100)  NULL,
+  thumb1  VARCHAR(100)  NULL,
+  size1 NUMBER(10)  NULL
 );
   */
 
   /** 컨텐츠 번호 */
   private int exchangeno;
-  /** 관리자 권한의 회원 번호 */
-  private int memberno;
   /** 장르 번호 */
   private int classifyno;
   /** 크롤링한 환율 번호 */
   private int crawlingno;
-  /** 제목 */
-  private String title = "";
-  /** 내용 */
-  private String content = "";
-  /** 검색어 */
-  private String word = "";
-  /** 등록 날짜 */
-  private String rdate = "";
+  /** 이름 */
+  private String name = "";
+  /** 가격 */
+  private int price;
+  /** 원당 가격 */
+  private int krw;
+  /** 변동 값 */
+  private int value;
+  /** 종가 변동 값*/
+  private int yesterday;
+  /** 최근 업데이트 날짜 */
+  private String recent = "";
   /** 지도 */
   private String map = "";
-  /** Youtube */
-  private String youtube = "";
-  /** 암호 */
-  private String passwd = "";
   
   // 파일 업로드 관련
   // -----------------------------------------------------------------------------------

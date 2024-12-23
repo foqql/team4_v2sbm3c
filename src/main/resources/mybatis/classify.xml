@@ -98,15 +98,43 @@ ORDER BY c.genreno ASC
         SELECT classify FROM classify WHERE classify='--' ORDER BY seqno ASC
   </select>
 
-  <!-- Search result output -->
-  <select id="list_search" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
-    SELECT classifyno, classify,  cnt, seqno, visible, rdate, company, price, expdate
-    FROM classify
-    <if test="word != null and word != ''">
-      WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%')
-    </if>
-    ORDER BY seqno ASC, classifyno ASC
-  </select>
+<!-- Search result output -->
+<select id="list_search" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
+SELECT 
+    classifyno, 
+    classify,  
+    cnt, 
+    seqno, 
+    visible, 
+    rdate, 
+    bigcla
+FROM 
+    (SELECT 
+        c.classifyno as classifyno, 
+        c.classify as classify,   
+        c.cnt as cnt, 
+        c.seqno as seqno, 
+        c.visible as visible, 
+        c.rdate as rdate, 
+        g.genre as bigcla
+    FROM 
+        classify c
+    JOIN 
+        genre g ON c.genreno = g.genreno
+    )
+  <if test="word != null and word != ''">
+    WHERE (UPPER(classify) LIKE '%' || UPPER(#{word}) || '%'
+    OR UPPER(bigcla) LIKE '%' || UPPER(#{word}) || '%')
+  </if>
+  ORDER BY 
+    seqno ASC, 
+    classifyno ASC;
+</select>
+
+
+
+
+
 
   <!-- Search result count -->
   <select id="list_search_count" resultType="Integer" parameterType="String">
@@ -118,19 +146,22 @@ ORDER BY c.genreno ASC
   </select>
 
   <!-- Search result with paging -->
-  <select id="list_search_paging" resultType="dev.mvc.classify.ClassifyVO" parameterType="Map">
-        SELECT classifyno, bigcla, classify,rdate, seqno, visible, r
+<select id="list_search_paging" resultType="dev.mvc.classify.ClassifyVO" parameterType="Map">
+    SELECT classifyno, bigcla, classify, rdate, seqno, visible, r
     FROM (
         SELECT classifyno, bigcla, classify, rdate, seqno, visible, rownum as r
         FROM (
-            SELECT c.classifyno, g.genre as bigcla, c.classify, c.rdate,  c.seqno, c.visible
-            FROM classify c join genre g on c.genreno = g.genreno
-            WHERE (UPPER(c.classify) LIKE '%' || UPPER(#{word}) || '%')
+            SELECT c.classifyno, g.genre as bigcla, c.classify, c.rdate, c.seqno, c.visible
+            FROM classify c
+            JOIN genre g ON c.genreno = g.genreno
+            WHERE (UPPER(c.classify) LIKE '%' || UPPER(#{word}) || '%'
+                OR UPPER(g.genre) LIKE '%' || UPPER(#{word}) || '%')  
             ORDER BY c.seqno ASC
         )
     )
     WHERE r BETWEEN #{start_num} AND #{end_num}
-  </select>
+</select>
+
 
 
 
