@@ -102,8 +102,11 @@ public class MemberCont {
   public String list(HttpSession session, Model model) {
     if (this.memberProc.isMemberAdmin(session)) {
       ArrayList<MemberVO> list = this.memberProc.list();
-
       model.addAttribute("list", list);
+
+      // 메뉴 추가
+      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+      model.addAttribute("menu", menu);
 
       return "/member/list"; // /templates/member/list.html
     } else {

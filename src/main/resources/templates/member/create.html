@@ -9,6 +9,7 @@
           document.getElementById('btn_checkID').focus();
         }
       });
+      
 
       document.querySelector('#passwd').addEventListener('keypress', (event) => {
         if(event.key === 'Enter') {
@@ -76,53 +77,61 @@
     }
 
     function send() {
-      let id = document.getElementById('id');
-      let id_msg = document.getElementById('id_msg');
+    let id = document.getElementById('id');
+    let id_msg = document.getElementById('id_msg');
 
-      if (id.value.trim().length == 0) {
+    if (id.value.trim().length == 0) {
         id_msg.innerHTML= 'ID 입력은 필수 입니다. ID(이메일)는 3자이상 권장합니다.';
         id_msg.classList.add('span_warning');
         id.focus();
         return false;
-      }
+    }
 
-      let passwd = document.getElementById('passwd');
-      let passwd2 = document.getElementById('passwd2');
-      let passwd2_msg = document.getElementById('passwd2_msg');
+    let passwd = document.getElementById('passwd');
+    let passwd2 = document.getElementById('passwd2');
+    let passwd2_msg = document.getElementById('passwd2_msg');
 
-      if (passwd.value != passwd2.value) {
+    if (passwd.value != passwd2.value) {
         passwd2_msg.innerHTML= '입력된 패스워드가 일치하지 않습니다.';
         passwd2_msg.classList.add('span_warning');
         passwd.focus();
         return false;
-      }
+    }
 
-      let mname = document.getElementById('mname');
-      let mname_msg = document.getElementById('mname_msg');
+    let mname = document.getElementById('mname');
+    let mname_msg = document.getElementById('mname_msg');
 
-      if (mname.value.length == 0) {
+    if (mname.value.length == 0) {
         mname_msg.innerHTML= '이름 입력은 필수입니다.';
         mname_msg.classList.add('span_warning');
         mname.focus();
         return false;
-      }
-      
+    }
+
     // 성별 선택 확인
     let gender = document.querySelector('input[name="gender"]:checked');
     if (!gender) {
-      alert('성별을 선택해주세요.');
-      return false;
+        alert('성별을 선택해주세요.');
+        return false;
     }
 
-      // 약관 동의 체크 여부 확인
-      let termsAgreement = document.getElementById('termsAgreement');
-      if (!termsAgreement.checked) {
+    // 약관 동의 체크 여부 확인
+    let termsAgreement = document.getElementById('termsAgreement');
+    if (!termsAgreement.checked) {
         alert('약관에 동의해 주세요.');
         return false;
-      }
-
-      document.getElementById('frm').submit(); // form 제출
     }
+
+    // 생년월일 입력 확인
+    let birth = document.querySelector('input[name="birth"]').value;
+    if (!birth) {
+        alert('생년월일을 입력해주세요.');
+        return false; // 폼 제출을 막음
+    }
+
+    // 폼 제출
+    document.getElementById('frm').submit(); // form 제출
+}
     
     
   </script>
@@ -206,9 +215,8 @@
       </div>
       
       <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
-        <label for="birth" style="margin-right: 10px; width: 20%;">생년월일</label>
-        <input type="date" name="birth" id="birth" placeholder="생년월일" 
-         class="form-control form-control-sm" style="width: 50%;">
+          <label for="birth" style="margin-right: 10px; width: 20%;">생년월일</label>
+          <input type="date" name="birth" id="birth" placeholder="생년월일" class="form-control form-control-sm" style="width: 50%;">
       </div>
   
       <!-- 전화 번호 -->

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        .chat-box { width: 50%; margin: 0 auto; border: 1px solid #ccc; padding: 10px; }
+        .chat-message { margin-bottom: 10px; }
+        .chat-input { width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="chat-box">
+    <h2>채팅창</h2>
+    <div id="chat-content">
+        <ul>
+            <th:block th:each="chat : ${chatList}">
+                <li class="chat-message" 
+                    th:style="'color: ' + (${chat.grade} <= 10 ? 'blue' : 'black')">
+                    <b th:text="${chat.id}">아이디</b>: 
+                    <span th:text="${chat.message}">메시지</span>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+    <form action="/chat/create" method="post" th:if="${id != null}">
+        <textarea name="message" class="chat-input" placeholder="메시지를 입력하세요" required></textarea>
+        <input type="hidden" name="recom" value="0">
+        <button type="submit">전송</button>
+    </form>
+    <div th:if="${id == null}">
+        <p>채팅을 하시려면 <a th:href="@{/member/login}">로그인</a> 해주세요.</p>
+    </div>
+</div>
+</body>
+</html>
