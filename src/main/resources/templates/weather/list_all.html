@@ -27,11 +27,20 @@
          style="cursor: pointer;">
       <td class='td_basic' th:text="${weatherVO.file1}"></td>
       <td class='td_left'>
-        <span th:text="${weatherVO.title}" style="font-weight: bold;"></span><br>
-        <span th:if="${weatherVO.content.length() > 160 }" 
-                  th:text="|${weatherVO.content.substring(0, 160) }...|"></span>
-        <span th:if="${weatherVO.content.length() <= 160 }" 
-                  th:text="|${weatherVO.content}|"></span>
+      
+        <span th:text="${weatherVO.weather}" style="font-weight: bold;"></span><br>
+        
+        <span th:if="${areaVO.continent.length() > 160 }" 
+                  th:text="|${areaVO.continent.substring(0, 160) }...|"></span>
+        <span th:if="${areaVO.continent.length() <= 160 }" 
+                  th:text="|${areaVO.continent}|"></span>
+                  
+        <span th:if="${areaVO.country.length() > 160 }" 
+                  th:text="|${areaVO.country.substring(0, 160) }...|"></span>
+        <span th:if="${areaVO.country.length() <= 160 }" 
+                  th:text="|${areaVO.country}|"></span
+
+
 
       </td>
     </tr>

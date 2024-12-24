@@ -9,8 +9,8 @@
   </div>
   
   <aside class="aside_right">
-    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
-    <span class='menu_divide' >│</span>
+  <!--   <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
+    <span class='menu_divide' >│</span>-->
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }|}">기본 목록형</a>    
@@ -40,8 +40,13 @@
         </div>
   
         <div style='text-align: left; width: 47%; float: left;'>
-          <span style='font-size: 1.5em;' th:text="${weatherVO.title}"></span>
+          <span style='font-size: 1.5em;' th:text="${weatherVO.city}"></span>
           <br>
+          
+          <span style='font-size: 1.5em;' th:text="${weatherVO.weather}"></span>
+          <span>/</span>
+          <span style='font-size: 1.5em;' th:text="${weatherVO.temp}"></span>
+          
           <form name='frm' method='POST' action='./delete'>
             <input type="hidden" name="classifyno" th:value="${classifyVO.classifyno }">
             <input type="hidden" name="weatherno" th:value="${weatherVO.weatherno }">

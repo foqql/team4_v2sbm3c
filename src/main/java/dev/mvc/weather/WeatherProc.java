@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.exchange.ExchangeVO;
 import dev.mvc.tool.Security;
 import dev.mvc.tool.Tool;
 
@@ -50,7 +51,13 @@ public class WeatherProc implements WeatherProcInter {
     WeatherVO weatherVO = this.weatherDAO.read(weatherno);
     return weatherVO;
   }
-
+  
+//  @Override
+//  public WeatherVO reading(int classifyno) {
+//    WeatherVO weatherVO = this.weatherDAO.reading(classifyno);
+//    return weatherVO;
+//  }
+  
   @Override
   public int map(HashMap<String, Object> map) {
     int cnt = this.weatherDAO.map(map);

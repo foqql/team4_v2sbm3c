@@ -3,32 +3,27 @@ package dev.mvc.weather;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.exchange.ExchangeVO;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping(value = "/weather")
 @Controller
@@ -319,6 +314,7 @@ public class WeatherCont {
     map.put("now_page", now_page);
 
     ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search_paging(map);
+   // ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno(classifyno);
     model.addAttribute("list", list);
 
     // System.out.println("-> size: " + list.size());
@@ -435,6 +431,40 @@ public class WeatherCont {
     return "/weather/read";
   }
 
+  
+  
+//  /**
+//   * 조회 http://localhost:9093/exchange/read?classifyno=34
+//   * 조회 http://localhost:9093/exchange/read?exchangeno=17
+//   * 
+//   * @return
+//   */
+//  @GetMapping(value = "/reading")
+//  public String reading(Model model, 
+//      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno) {
+//    
+//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+//    model.addAttribute("menu", menu);
+//
+//    WeatherVO weatherVO = this.weatherProc.reading(classifyno);
+//
+//    long size1 = weatherVO.getSize1();
+//    String size1_label = Tool.unit(size1);
+//    weatherVO.setSize1_label(size1_label);
+//
+//    model.addAttribute("weatherVO", weatherVO);
+//
+//    ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
+//    model.addAttribute("classifyVO", classifyVO);
+//
+//
+//    return "/weather/read";
+//  }
+  
+  
+  
+  
+  
   /**
    * 맵 등록/수정/삭제 폼 http://localhost:9091/weather/map?weatherno=19
    * 
@@ -531,43 +561,45 @@ public class WeatherCont {
     return "redirect:/weather/read";
   }
 
-  /**
-   * 수정 폼 http:// localhost:9091/weather/update_text?weatherno=1
-   *
-   */
-  @GetMapping(value = "/update_text")
-  public String update_text(
-      HttpSession session, 
-      Model model,  
-      RedirectAttributes ra,
-      @RequestParam(name="weatherno", defaultValue = "0") int weatherno,
-      @RequestParam(name="word", defaultValue = "") String word,
-      @RequestParam(name="now_page", defaultValue = "0") int now_page) {
-    
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-
-    model.addAttribute("word", word);
-    model.addAttribute("now_page", now_page);
-
-    if (this.memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
-      WeatherVO weatherVO = this.weatherProc.read(weatherno);
-      model.addAttribute("weatherVO", weatherVO);
-
-      ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
-      model.addAttribute("classifyVO", classifyVO);
-
-      return "/weather/update_text"; // /templates/weather/update_text.html
-      // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
-      // model.addAttribute("content", content);
-
-    } else {
-      // ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
-      // return "redirect:/weather/msg"; // @GetMapping(value = "/msg")
-      return "/member/login_cookie_need"; // /templates/member/login_cookie_need.html
-    }
-
-  }
+  
+  
+//  /**
+//   * 수정 폼 http:// localhost:9091/weather/update_text?weatherno=1
+//   *
+//   */
+//  @GetMapping(value = "/update_text")
+//  public String update_text(
+//      HttpSession session, 
+//      Model model,  
+//      RedirectAttributes ra,
+//      @RequestParam(name="weatherno", defaultValue = "0") int weatherno,
+//      @RequestParam(name="word", defaultValue = "") String word,
+//      @RequestParam(name="now_page", defaultValue = "0") int now_page) {
+//    
+//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+//    model.addAttribute("menu", menu);
+//
+//    model.addAttribute("word", word);
+//    model.addAttribute("now_page", now_page);
+//
+//    if (this.memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
+//      WeatherVO weatherVO = this.weatherProc.read(weatherno);
+//      model.addAttribute("weatherVO", weatherVO);
+//
+//      ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
+//      model.addAttribute("classifyVO", classifyVO);
+//
+//      return "/weather/update_text"; // /templates/weather/update_text.html
+//      // String content = "장소:\n인원:\n준비물:\n비용:\n기타:\n";
+//      // model.addAttribute("content", content);
+//
+//    } else {
+//      // ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
+//      // return "redirect:/weather/msg"; // @GetMapping(value = "/msg")
+//      return "/member/login_cookie_need"; // /templates/member/login_cookie_need.html
+//    }
+//
+//  }
 
   /**
    * 수정 처리 http://localhost:9091/weather/update_text?weatherno=1
