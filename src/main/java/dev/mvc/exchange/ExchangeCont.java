@@ -20,6 +20,7 @@ import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
@@ -235,61 +236,6 @@ public class ExchangeCont {
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno1")
-  public String list_by_classifyno_search_paging1(
-      HttpSession session, 
-      Model model, 
-      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
-      @RequestParam(name = "word", defaultValue = "") String word,
-      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
-
-    // System.out.println("-> classifyno: " + classifyno);
-
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-
-    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-    ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
-    model.addAttribute("classifyVO", classifyVO);
-    model.addAttribute("exchangeVO", exchangeVO);
-
-    word = Tool.checkNull(word).trim();
-
-    HashMap<String, Object> map = new HashMap<>();
-    map.put("classifyno", classifyno);
-    map.put("word", word);
-    map.put("now_page", now_page);
-
-    ArrayList<ExchangeVO> list = this.exchangeProc.list_by_classifyno_search_paging(map);
-    model.addAttribute("list", list);
-
-    // System.out.println("-> size: " + list.size());
-    model.addAttribute("word", word);
-
-    int search_count = this.exchangeProc.list_by_classifyno_search_count(map);
-    String paging = this.exchangeProc.pagingBox(classifyno, now_page, word, "/exchange/list_by_classifyno", search_count,
-        Exchange.RECORD_PER_PAGE, Exchange.PAGE_PER_BLOCK);
-    model.addAttribute("paging", paging);
-    model.addAttribute("now_page", now_page);
-
-    model.addAttribute("search_count", search_count);
-
-    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-    int no = search_count - ((now_page - 1) * Exchange.RECORD_PER_PAGE);
-    model.addAttribute("no", no);
-
-    return "/exchange/list_by_classifyno_search_paging"; // /templates/exchange/list_by_classifyno_search_paging.html
-//    return "/exchange/read"; // /templates/exchange/list_by_classifyno_search_paging.html
-  }
-
-  
-  /**
-   * 유형 3
-   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/exchange/list_by_classifyno?classifyno=5
-   * http://localhost:9091/exchange/list_by_classifyno?classifyno=6
-   * 
-   * @return
-   */
   @GetMapping(value = "/list_by_classifyno")
   public String list_by_classifyno_search_paging(
       HttpSession session, 
@@ -298,8 +244,10 @@ public class ExchangeCont {
 
     // System.out.println("-> classifyno: " + classifyno);
 
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);

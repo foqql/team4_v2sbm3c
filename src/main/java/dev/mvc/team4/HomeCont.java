@@ -35,15 +35,15 @@ public class HomeCont {
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
-
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 //    for (ClassifyVOMenu i : menu) {
 //      System.out.println(i.getBigcla());
 //      System.out.println(i.getList_name().get(0).getClassify().toString());
 //      System.out.println(i.toString());
 //    }
 
-    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
-    model.addAttribute("menu1", menu1);
+
 
     return "index"; // /templates/index.html
 

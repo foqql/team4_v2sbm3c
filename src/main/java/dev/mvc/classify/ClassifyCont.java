@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +30,10 @@ public class ClassifyCont {
   @Qualifier("dev.mvc.classify.ClassifyProc")
   private ClassifyProcInter classifyProc;
 
+  @Autowired
+  @Qualifier("dev.mvc.genre.GenreProc")
+  private GenreProcInter genreProc;
+  
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
@@ -47,9 +53,10 @@ public class ClassifyCont {
 
   @GetMapping(value = "/create") // http://localhost:9092/classify/create
   public String create(Model model) {
-    // 상단 메뉴 출력
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
 //    LocalDate today = LocalDate.now();
     ClassifyVO classifyVO = new ClassifyVO();
@@ -92,7 +99,7 @@ public class ClassifyCont {
     if (cnt == 1) {
 //      model.addAttribute("code", "create_success");
 //      model.addAttribute("name", classifyVO.getName());
-      return "redirect:/classify/list_search"; // @GetMapping(value = "/list_all")
+      return "redirect:/classify/list_search"; // @GetMapping(value = "/list_search")
     } else {
       model.addAttribute("code", "create_fail");
     }
@@ -100,31 +107,6 @@ public class ClassifyCont {
     model.addAttribute("cnt", cnt);
 
     return "/classify/msg"; // templates/classify/msg.html
-  }
-
-  /**
-   * 전체 리스트 조회 http://localhost:9092/classify/create
-   * 
-   * @param model
-   * @return
-   */
-  @GetMapping(value = "/list_all") // http://localhost:9092/classify/create
-  public String list_all(Model model) {
-    ClassifyVO classifyVO = new ClassifyVO();
-
-    // 카테고리 그룹 목록
-    ArrayList<String> list_type = this.classifyProc.classifyset();
-    classifyVO.setClassify(String.join("/", list_type));
-
-    model.addAttribute("classifyVO", classifyVO);
-
-    ArrayList<ClassifyVO> list = this.classifyProc.list_all();
-    model.addAttribute("list", list);
-
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-
-    return "/classify/list_search";
   }
 
   /**
@@ -146,8 +128,10 @@ public class ClassifyCont {
     ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);
     model.addAttribute("list", list);
 
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
     model.addAttribute("word", word);
 
     // 프로젝트 목록 번호 생성
@@ -190,8 +174,10 @@ public class ClassifyCont {
       ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);
       model.addAttribute("list", list);
 
-      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
       model.addAttribute("menu", menu);
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
       model.addAttribute("word", word);
 
       // 프로젝트 목록 번호 생성
@@ -274,8 +260,10 @@ public class ClassifyCont {
       ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);
       model.addAttribute("list", list);
 
-      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
       model.addAttribute("menu", menu);
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
       model.addAttribute("word", word);
 
       int search_count = this.classifyProc.list_search_count(word);
@@ -443,9 +431,10 @@ public class ClassifyCont {
       model.addAttribute("list", list);
 //      System.out.println(list);
 
-      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-
+      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
       model.addAttribute("menu", menu);
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
 
       int search_cnt = this.classifyProc.list_search_count(word);
 
