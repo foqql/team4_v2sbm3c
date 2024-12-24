@@ -147,7 +147,7 @@ public class ExchangeCont {
 
       // Call By Reference: 메모리 공유, Hashcode 전달
       int memberno = (int) session.getAttribute("memberno"); // memberno FK
-      exchangeVO.setMemberno(memberno);
+//      exchangeVO.setMemberno(memberno);
       int cnt = this.exchangeProc.create(exchangeVO);
 
       // ------------------------------------------------------------------------------
@@ -529,7 +529,7 @@ public class ExchangeCont {
     if (this.memberProc.isMemberAdmin(session)) { // 관리자 로그인 확인
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("exchangeno", exchangeVO.getExchangeno());
-      map.put("passwd", exchangeVO.getPasswd());
+//      map.put("passwd", exchangeVO.getPasswd());
 
       if (this.exchangeProc.password_check(map) == 1) { // 패스워드 일치
         this.exchangeProc.update_text(exchangeVO); // 글수정

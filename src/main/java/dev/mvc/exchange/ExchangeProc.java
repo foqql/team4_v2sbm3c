@@ -21,9 +21,9 @@ public class ExchangeProc implements ExchangeProcInter {
   @Override // 추상 메소드를 구현했음.
   public int create(ExchangeVO exchangeVO) {
     // -------------------------------------------------------------------
-    String passwd = exchangeVO.getPasswd();
-    String passwd_encoded = this.security.aesEncode(passwd);
-    exchangeVO.setPasswd(passwd_encoded);
+//    String passwd = exchangeVO.getPasswd();
+//    String passwd_encoded = this.security.aesEncode(passwd);
+//    exchangeVO.setPasswd(passwd_encoded);
     // -------------------------------------------------------------------
     
     int cnt = this.exchangeDAO.create(exchangeVO);
