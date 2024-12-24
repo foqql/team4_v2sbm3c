@@ -52,6 +52,11 @@ public class ExchangeProc implements ExchangeProcInter {
   }
 
   @Override
+  public ExchangeVO reading(int classifyno) {
+    ExchangeVO exchangeVO = this.exchangeDAO.reading(classifyno);
+    return exchangeVO;
+  }
+  @Override
   public int map(HashMap<String, Object> map) {
     int cnt = this.exchangeDAO.map(map);
     return cnt;
@@ -316,6 +321,8 @@ public class ExchangeProc implements ExchangeProcInter {
     int count = exchangeDAO.decreaseReplycnt(exchangeno);
     return count;
   }
+
+
   
   
 }

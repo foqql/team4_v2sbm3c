@@ -77,8 +77,8 @@
   <!-- List categories (main) that are public -->
   <select id="list_all_classifygrp_y" resultType="dev.mvc.classify.ClassifyVO">
 SELECT DISTINCT g.genre as bigcla, c.genreno
-FROM classify c
-JOIN genre g ON c.genreno = g.genreno
+FROM classify c inner JOIN genre g 
+ON c.genreno = g.genreno
 WHERE c.VISIBLE = 'Y'
 ORDER BY c.genreno ASC
   </select>
@@ -87,9 +87,10 @@ ORDER BY c.genreno ASC
     g.genreno = #{genreno}-->
   <select id="list_all_classify_y" resultType="dev.mvc.classify.ClassifyVO" parameterType="String">
     SELECT c.classifyno, g.genre as bigcla, c.classify,c.RDATE, c.SEQNO, c.VISIBLE
-    FROM classify c 
-    JOIN genre g ON c.genreno = g.genreno
-    WHERE c.VISIBLE = 'Y'
+    FROM classify c inner JOIN genre g 
+    ON c.genreno = g.genreno
+    WHERE c.VISIBLE = 'Y' 
+    AND g.genre = #{genre}
     ORDER BY c.SEQNO ASC    
   </select>
 
@@ -128,7 +129,7 @@ FROM
   </if>
   ORDER BY 
     seqno ASC, 
-    classifyno ASC;
+    classifyno ASC
 </select>
 
 

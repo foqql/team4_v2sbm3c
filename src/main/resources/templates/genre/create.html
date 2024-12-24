@@ -7,13 +7,35 @@
   <div style="width : 60%; margin: 0px auto;">
     <form name="frm" method="post" action="/genre/create" th:object="${genreVO}">
       <div>
-        <label>영양제 이름 [  ]</label>
+        <label>대분류 이름 [  ]</label>
         <input type="text" name="genre" value="" autofocus="autofocus" class="form-control fom-control-sm"
           style="width: 50%;" th:field="*{genre}">
         <div th:if="${#fields.hasErrors('genre')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
           <div th:each="err: ${#lists.sort(#fields.errors('genre'))}" th:text="${err}"></div>
         </div>
       </div>
+      
+      <div>
+        <label>대분류 출력 순서 [  ]</label>
+        <input type="number" name="seqno" value="1" min="1" max="1000000" step="1"
+               class="form-control" style="width: 50%;" th:field="*{seqno}">        
+           <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+          <div th:each="err: ${#lists.sort(#fields.errors('seqno'))}" th:text="${err}"></div>
+        </div>  
+      </div>
+      
+      <div>
+        <label>대분류 공개/비공개 [  ]</label>
+          <select id="visible" name="visible" class="form-control">
+            <option value="출력 모드" selected="selected">출력 모드</option>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+          </select>
+          <div th:if="${#fields.hasErrors('visible')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+            <div th:each="err: ${#lists.sort(#fields.errors('visible'))}" th:text="${err}"></div>
+          </div>
+        </div>
+      
       <div>
 
 

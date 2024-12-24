@@ -7,12 +7,12 @@
   
 <!--  SQL -> Insert into genre table  -->
 <insert id="create" parameterType="dev.mvc.genre.GenreVO">
- INSERT INTO genre (genreno, genre)
-  VALUES (genre_SEQ.NEXTVAL, #{genre}) </insert>
+ INSERT INTO genre (genreno, genre, seqno, visible,rdate)
+  VALUES (genre_SEQ.NEXTVAL, #{genre}, #{seqno}, #{visible}, sysdate) </insert>
 <!--  SQL -> Select all records from genre table  -->
 
 <select id="list_all" resultType="dev.mvc.genre.GenreVO">
- SELECT * FROM genre ORDER BY genreno ASC 
+ SELECT * FROM genre ORDER BY seqno ASC, genreno ASC 
  </select>
  
 <!--  SQL -> Select record by genreno from genre table  -->
@@ -21,10 +21,21 @@
  </select>
  
  
+   <!-- 공개만 조회 -->
+  <select id="genre" resultType="dev.mvc.genre.GenreVO">
+    SELECT *
+    FROM genre 
+    WHERE visible ='Y'
+    ORDER BY seqno ASC, genreno ASC
+  </select>
+  
 <!--  처리결과 : 레코드 갯수  -->
 <update id="update" parameterType="dev.mvc.genre.GenreVO">
  UPDATE genre SET
-  genre = #{genre}
+  genre = #{genre},
+        seqno = #{seqno},
+        visible = #{visible},
+        RDATE = sysdate
   WHERE genreno = #{genreno} 
  </update>
  
@@ -32,4 +43,28 @@
 DELETE FROM genre WHERE genreno = #{genreno} 
 </delete>
 
+  <!-- Set visible to 'Y' (public) -->
+  <update id="update_visible_y" parameterType="dev.mvc.genre.GenreVO">
+    UPDATE genre SET visible = 'Y' 
+    WHERE genreno = #{genreno}
+  </update>
+
+  <!-- Set visible to 'N' (private) -->
+  <update id="update_visible_n" parameterType="dev.mvc.genre.GenreVO">
+    UPDATE genre SET visible = 'N' 
+    WHERE genreno = #{genreno}
+  </update>
+  
+  
+    <!-- Increase seqno (higher priority) -->
+  <update id="update_seqno_forward" parameterType="dev.mvc.genre.GenreVO">
+    UPDATE genre SET seqno = seqno - 1 
+    WHERE genreno = #{genreno}
+  </update>
+
+  <!-- Decrease seqno (lower priority) -->
+  <update id="update_seqno_backward" parameterType="dev.mvc.genre.GenreVO">
+    UPDATE genre SET seqno = seqno + 1 
+    WHERE genreno = #{genreno}
+  </update>
 </mapper>

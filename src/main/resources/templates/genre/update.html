@@ -15,6 +15,28 @@
           <div th:each="err: ${#lists.sort(#fields.errors('genre'))}" th:text="${err}"></div>
         </div>
       </div>
+      
+      
+            <div>
+        <label>출력 순서</label>
+        <input type="text" name="seqno" value="" autofocus="autofocus" class="form-control fom-control-sm"
+          style="width: 50%;" th:field="*{seqno}">
+        <div th:if="${#fields.hasErrors('seqno')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+          <div th:each="err: ${#lists.sort(#fields.errors('seqno'))}" th:text="${err}"></div>
+        </div>
+      </div>
+      
+      
+            <div>
+        <label>공개/비공개</label>
+        <select id="visible" name="visible" class="form-control">
+          <option value="출력 모드">출력 모드</option>
+          <option value="Y" th:selected="*{visible=='Y'}">Y</option>
+          <option value="N" th:selected="*{visible=='N'}">N</option>
+        </select>
+      </div>
+      
+      
       <div>
 
 

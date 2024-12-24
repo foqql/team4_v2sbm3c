@@ -107,12 +107,12 @@ public class ClassifyProc implements ClassifyProcInter {
   public ArrayList<ClassifyVOMenu> menu() {
     ArrayList<ClassifyVOMenu> menu = new ArrayList<ClassifyVOMenu>();
 
-    ArrayList<ClassifyVO> type = this.classifyDAO.list_all_classifygrp_y(); // 대분류 목록 추출
+    ArrayList<ClassifyVO> type = this.classifyDAO.list_all_classifygrp_y(); // 중분류 목록 추출
     for (ClassifyVO classifyVO : type) {
       ClassifyVOMenu classifyVOMenu = new ClassifyVOMenu();
       classifyVOMenu.setBigcla(classifyVO.getBigcla());
 
-      ArrayList<ClassifyVO> list_name = this.classifyDAO.list_all_classify_y(classifyVO.getClassify());
+      ArrayList<ClassifyVO> list_name = this.classifyDAO.list_all_classify_y(classifyVO.getBigcla());
       classifyVOMenu.setList_name(list_name);
 
       menu.add(classifyVOMenu);

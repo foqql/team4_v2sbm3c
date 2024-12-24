@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import dev.mvc.classify.ClassifyProc;
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 
 @Controller
 public class HomeCont {
@@ -19,7 +20,10 @@ public class HomeCont {
   @Qualifier("dev.mvc.classify.ClassifyProc")
   private ClassifyProcInter classifyProc;
 
-  
+  @Autowired
+  @Qualifier("dev.mvc.genre.GenreProc")
+  private GenreProcInter genreProc;
+
   public HomeCont() {
     System.out.println("-> HomeCnont created.");
   }
@@ -29,8 +33,17 @@ public class HomeCont {
   @GetMapping(value = { "/", "/index.do" })
   public String home(Model model) {
 
-     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-     model.addAttribute("menu", menu);
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
+    model.addAttribute("menu", menu);
+
+//    for (ClassifyVOMenu i : menu) {
+//      System.out.println(i.getBigcla());
+//      System.out.println(i.getList_name().get(0).getClassify().toString());
+//      System.out.println(i.toString());
+//    }
+
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     return "index"; // /templates/index.html
 

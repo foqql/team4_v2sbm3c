@@ -36,6 +36,7 @@ public interface ExchangeProcInter {
    * @return
    */
   public ExchangeVO read(int exchangeno);
+  public ExchangeVO reading(int classifyno);
   
   /**
    * map 등록, 수정, 삭제
