@@ -146,7 +146,7 @@ public interface NewsDAOInter {
    */   
   public int decreaseReplycnt(int newsno);
   
-  public ArrayList<NewsVO> newsgenre(String newsgenre);
+//  public ArrayList<NewsVO> newsgenre(String newsgenre);
   
 //  /**
 //   * 검색 + 페이징 목록
@@ -164,5 +164,12 @@ public interface NewsDAOInter {
 //   * @return
 //   */
 //  public Integer list_search_count(String newsgenre);
-
+  
+  /**
+   * 조회
+   * @param newsno
+   * @return
+   */
+  public NewsVO trans_summ(int newsno);
+  
 }

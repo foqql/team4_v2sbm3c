@@ -332,7 +332,6 @@ public class NewsCont {
     // System.out.println("-> size: " + list.size());
     model.addAttribute("word", word);
     model.addAttribute("newsgenre", newsgenre);
-    System.out.println("newsgenre:" +newsgenre );
     
     int search_count = this.newsProc.list_by_classifyno_search_count(map);
     String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno", search_count,
@@ -410,15 +409,14 @@ public class NewsCont {
   @GetMapping(value = "/read")
   public String read(Model model, 
       @RequestParam(name="newsno", defaultValue = "0") int newsno,
-      @RequestParam(name="newsgenre", defaultValue = "0") int newsgenre,
+      @RequestParam(name="newscrawlingno", defaultValue = "0") int newscrawlingno,
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
+    System.out.println("newscrawlingno : "+ newscrawlingno);
+    System.out.println("newsno : "+ newsno);
 
     NewsVO newsVO = this.newsProc.read(newsno);
-
 //    String title = newsVO.getTitle();
 //    String content = newsVO.getContent();
 //    
@@ -433,14 +431,15 @@ public class NewsCont {
     newsVO.setSize1_label(size1_label);
 
     model.addAttribute("newsVO", newsVO);
+    System.out.println("newsno : "+ newsno);
 
     ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
     model.addAttribute("classifyVO", classifyVO);
+    System.out.println("newsVO.getClassifyno() : "+ newsVO.getClassifyno());
 
     // 조회에서 화면 하단에 출력
     // ArrayList<ReplyVO> reply_list = this.replyProc.list_news(newsno);
     // mav.addObject("reply_list", reply_list);
-    model.addAttribute("newsgenre", newsgenre);
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
 
@@ -843,35 +842,35 @@ public class NewsCont {
   }   
 
 
-  /**
-   * 전체 목록, 관리자만 사용 가능 http://localhost:9093/news/list_all
-   * 
-   * @return
-   */
-  @GetMapping(value = "/newsgenre")
-  public String newsgenre(HttpSession session, Model model,
-      @RequestParam(name="newsgenre", defaultValue = "") String newsgenre) {
-
-
-    System.out.println("newsgenre1111:" + newsgenre);
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-  
-    ArrayList<NewsVO> list = this.newsProc.newsgenre(newsgenre); // 모든 목록
-    model.addAttribute("list", list);
-    
-    newsgenre = Tool.checkNull(newsgenre).trim();
-    
-    HashMap<String, Object> map = new HashMap<>();
-    map.put("newsgenre", newsgenre);
-    model.addAttribute("newsgenre", newsgenre);
-    
-    System.out.println("newsgenre:" + newsgenre);
-    
-    return "/news/newsgenre";
-
-   
-  }
+//  /**
+//   * 전체 목록, 관리자만 사용 가능 http://localhost:9093/news/list_all
+//   * 
+//   * @return
+//   */
+//  @GetMapping(value = "/newsgenre")
+//  public String newsgenre(HttpSession session, Model model,
+//      @RequestParam(name="newsgenre", defaultValue = "") String newsgenre) {
+//
+//
+//    System.out.println("newsgenre1111:" + newsgenre);
+//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+//    model.addAttribute("menu", menu);
+//  
+//    ArrayList<NewsVO> list = this.newsProc.newsgenre(newsgenre); // 모든 목록
+//    model.addAttribute("list", list);
+//    
+//    newsgenre = Tool.checkNull(newsgenre).trim();
+//    
+//    HashMap<String, Object> map = new HashMap<>();
+//    map.put("newsgenre", newsgenre);
+//    model.addAttribute("newsgenre", newsgenre);
+//    
+//    System.out.println("newsgenre:" + newsgenre);
+//    
+//    return "/news/newsgenre";
+//
+//   
+//  }
 
   
 }

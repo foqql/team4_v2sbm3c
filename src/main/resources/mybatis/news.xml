@@ -29,11 +29,18 @@
   </select> 
   
   <!-- 일반적인 조회 -->
-  <select id="read" resultType="dev.mvc.news.NewsVO" parameterType="int">
-    SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, passwd, word, rdate,
-              file1, file1saved, thumb1, size1, map, youtube
-    FROM news
-    WHERE newsno = #{newsno}
+<!--  <select id="read" resultType="dev.mvc.news.NewsVO" parameterType="int">-->
+<!--  SELECT n.newsno, n.memberno, n.classifyno, c.title AS title, c.content as content, n.recom, n.cnt, n.replycnt, -->
+<!--         n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre-->
+<!--  FROM news n, newscrawling c-->
+<!--  WHERE n.newsno =#{newsno} and c.newscrawlingno = n.newscrawlingno -->
+<!--  </select>-->
+  
+    <select id="read" resultType="dev.mvc.news.NewsVO" parameterType="int">
+  SELECT n.newsno, n.memberno, n.classifyno, t.title AS title, t.content as content, n.recom, n.cnt, n.replycnt, 
+         n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre
+  FROM news n, translate t
+  WHERE n.newsno =#{newsno} and t.translateno = n.translateno 
   </select>
   
   <!-- map 등록, 수정, 삭제, 

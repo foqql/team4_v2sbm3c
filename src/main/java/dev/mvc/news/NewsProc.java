@@ -319,11 +319,11 @@ public class NewsProc implements NewsProcInter {
     return count;
   }
 
-  @Override
-  public ArrayList<NewsVO> newsgenre(String newsgenre) {
-    ArrayList<NewsVO> list = this.newsDAO.newsgenre(newsgenre);
-    return list;
-  }
+//  @Override
+//  public ArrayList<NewsVO> newsgenre(String newsgenre) {
+//    ArrayList<NewsVO> list = this.newsDAO.newsgenre(newsgenre);
+//    return list;
+//  }
 
 //  @Override
 //  public ArrayList<NewsVO> list_search_paging(String newsgenre, int now_page, int record_per_page) {
@@ -362,9 +362,11 @@ public class NewsProc implements NewsProcInter {
 //    int cnt = this.newsDAO.list_search_count(newsgenre);
 //    return cnt;
 //  }
-  
-  
-  
-
+ 
+  @Override
+  public NewsVO trans_summ(int newsno) {
+    NewsVO newsVO = this.newsDAO.trans_summ(newsno);
+    return newsVO;
+  }
 
 }
