@@ -7,14 +7,20 @@
 
   <table class="table table-hover">
     <colgroup>
-      <col style='width: 25%;' /> <!-- 순서 -->
-      <col style='width: 25%;' /> <!-- 이름 -->
-      <col style='width: 25%;' /> <!-- 회사 -->
+      <col style='width: 15%;' /> <!-- 대분류 번호 -->
+      <col style='width: 15%;' /> <!-- 대분류 이름 -->
+      <col style='width: 15%;' /> <!-- 출력 순서 -->
+      <col style='width: 15%;' /> <!-- 공개/비공개 -->
+      <col style='width: 15%;' /> <!-- 최근 업데이트 -->
+      <col style='width: 15%;' /> <!-- 수정삭제 -->
     </colgroup>
     <thead>
       <tr>
-        <th class="th_bs">genreno</th>
-        <th class="th_bs">genre</th>
+        <th class="th_bs">대분류 번호</th>
+        <th class="th_bs">대분류 이름</th>
+        <th class="th_bs">출력 순서</th>
+        <th class="th_bs">공개/비공개</th>
+        <th class="th_bs">최근 업데이트</th>
         <th class="th_bs">수정삭제</th>
       </tr>
     </thead>
@@ -24,7 +30,29 @@
         <td class="td_bs">
           <a th:href="@{|./read/${genreVO.genreno}|}" style="display:block;" th:text="${genreVO.genre}"></a>
         </td>
+        <td class="td_bs" th:text="${genreVO.seqno}"></td>
+        <td class="td_bs" th:text="${genreVO.visible}"></td>
+        <td class="td_bs" th:text="${genreVO.rdate.substring(5, 16)}"></td>
         <td class="td_bs">
+          <span th:if="${genreVO.visible == 'Y'}">
+            <a th:href="@{|/genre/update_visible_n/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+              <img src="/genre/images/o.png" class="icon" title="공개">
+            </a>
+          </span>
+
+          <span th:if="${genreVO.visible == 'N'}">
+            <a th:href="@{|/genre/update_visible_y/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+              <img src="/genre/images/against.png" class="icon" title="비공개">
+            </a>
+          </span>
+
+          <a th:href="@{|/genre/update_seqno_forward/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/arrow-up.png" class="icon" title="상승">
+          </a>
+          <a th:href="@{|/genre/update_seqno_backward/${genreVO.genreno}?word=${word}&now_page=${now_page}|}">
+            <img src="/genre/images/arrow-down.png" class="icon" title="하락">
+          </a>
+          <br>
           <a th:href="@{|/genre/update/${genreVO.genreno}|}">
             <img src="/genre/images/free-icon-pen-12300927.png" class="icon" title="수정">
           </a>

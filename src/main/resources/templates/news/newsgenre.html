@@ -2,9 +2,17 @@
 
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
-
-  <div class='title_line'>1111111111111</div>
-
+  <span th:if="${newsgenre == '메인홈'}">
+    <div class='title_line'>메인홈</div>
+  </span>
+  <span th:if="${newsgenre == '스포츠'}">
+    <div class='title_line'>스포츠</div>
+  </span>
+  <span th:if="${newsgenre == '사업'}">
+    <div class='title_line'>사업</div>
+  </span>
+  
+   
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침111111111111111</a>
   </aside> 

@@ -5,7 +5,7 @@
 <mapper namespace="dev.mvc.exchange.ExchangeDAOInter">
   <!-- 등록한 레코드 갯수 1 리턴 호출됨 -->
   <insert id="create" parameterType="dev.mvc.exchange.ExchangeVO">
-    INSERT INTO exchange(exchangeno,  classifyno, name, price, passwd, word,
+    INSERT INTO exchange(exchangeno,  classifyno, name, price, 
                                      file1, file1saved, thumb1, size1, recent)
     VALUES(exchange_seq.nextval, #{memberno}, #{classifyno}, #{name}, #{price}, #{passwd}, #{word},
                 #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
@@ -13,7 +13,7 @@
 
 
   <select id="list_all" resultType="dev.mvc.exchange.ExchangeVO">
-    SELECT exchangeno,  classifyno, name, price,   passwd, word, recent,
+    SELECT exchangeno,  classifyno, name, price,    recent,
                file1, file1saved, thumb1, size1
       FROM exchange
     ORDER BY exchangeno DESC
@@ -30,23 +30,36 @@
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.exchange.ExchangeVO" parameterType="int">
-    SELECT exchangeno,  classifyno, name, price,  passwd, word, recent,
-              file1, file1saved, thumb1, size1, map
+    SELECT *
     FROM exchange
     WHERE exchangeno = #{exchangeno}
   </select>
   
-  <!-- map 등록, 수정, 삭제, 
-         HashMap: VO 클래스는 변수가 너무 많아서 메모리 낭비가 발생함으로,
-                       보통 3개 이하의 적은 변수만 전달하는 경우 HashMap 사용 권장 -->
-  <update id="map" parameterType="HashMap">
-    UPDATE exchange SET map=#{map} WHERE exchangeno=#{exchangeno}
-  </update>
 
+  <select id="reading" resultType="dev.mvc.exchange.ExchangeVO" parameterType="int">
+ SELECT * FROM(   
+        SELECT * 
+    FROM (
+        SELECT * 
+        FROM exchange
+        ORDER BY recent DESC
+    ) 
+    WHERE ROWNUM &lt;= 3
+    ORDER BY exchangeno)
+    WHERE classifyno =#{classifyno}
+  </select>
+  
+  <!-- 일반적인 조회 -->
+  <select id="genre" resultType="dev.mvc.exchange.ExchangeVO">
+    SELECT *
+    FROM genre 
+    ORDER BY seqno ASC
+  </select>
+  
 
   <!-- 카테고리별 검색 목록 -->
   <select id="list_by_classifyno_search" resultType="dev.mvc.exchange.ExchangeVO" parameterType="HashMap">
-    SELECT exchangeno,  classifyno, name, price,  word, recent,
+    SELECT exchangeno,  classifyno, name, price,   recent,
             file1, file1saved, thumb1, size1, map
     FROM exchange
     <choose>
@@ -106,26 +119,7 @@
           3 page: WHERE r >= 21 AND r <= 30; -->
   </select>
   
-  <!-- 패스워드 검사 -->
-  <select id="password_check" resultType="int" parameterType="HashMap">
-    SELECT COUNT(*) as cnt 
-    FROM exchange
-    WHERE exchangeno = #{exchangeno} AND passwd=#{passwd}
-  </select>
-  
-  <!-- 글 수정 -->
-  <update id="update_text" parameterType="dev.mvc.exchange.ExchangeVO">
-    UPDATE exchange
-    SET name=#{name}, price=#{price},  word=#{word}
-    WHERE exchangeno = #{exchangeno}
-  </update>
 
-  <!-- 파일 수정 -->
-  <update id="update_file" parameterType="dev.mvc.exchange.ExchangeVO">
-    UPDATE exchange
-    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
-    WHERE exchangeno = #{exchangeno}
-  </update>  
 
   <!-- 글 삭제 -->
   <delete id="delete" parameterType="int">

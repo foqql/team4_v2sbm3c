@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dev.mvc.classify.ClassifyProcInter;
+import dev.mvc.classify.ClassifyVOMenu;
 import jakarta.validation.Valid;
 
 @Controller
@@ -21,6 +23,10 @@ public class GenreCont {
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc")
   private GenreProcInter genreProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.classify.ClassifyProc")
+  private ClassifyProcInter classifyProc;
 
   public GenreCont() {
     System.out.println(" -> GenreCont  created.");
@@ -82,6 +88,11 @@ public class GenreCont {
     ArrayList<GenreVO> list = this.genreProc.list_all();
     model.addAttribute("list", list);
 
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu();
+    model.addAttribute("menu1", menu1);
     return "/genre/list_all";
   }
 
@@ -194,4 +205,59 @@ public class GenreCont {
 
     return "/genre/msg"; // templates/genre/msg.html
   }
+
+  /**
+   * 우선 순위 높임, 10 등 -> 1 등, http://localhost:9091/cate/update_seqno_forward/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_seqno_forward/{genreno}")
+  public String update_seqno_forward(Model model, @PathVariable("genreno") Integer genreno) {
+    this.genreProc.update_seqno_forward(genreno);
+
+    return "redirect:/genre/list_all"; // @GetMapping(value="/list_all")
+  }
+
+  /**
+   * 우선 순위 낮춤, 1 등 -> 10 등, http://localhost:9091/cate/update_seqno_backward/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_seqno_backward/{genreno}")
+  public String update_seqno_backward(Model model, @PathVariable("genreno") Integer genreno) {
+    this.genreProc.update_seqno_backward(genreno);
+
+    return "redirect:/genre/list_all"; // @GetMapping(value="/list_all")
+  }
+
+  /**
+   * 카테고리 공개 설정, http://localhost:9091/cate/update_visible_y/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_visible_y/{genreno}")
+  public String update_visible_y(Model model, @PathVariable("genreno") Integer genreno) {
+    this.genreProc.update_visible_y(genreno);
+
+    return "redirect:/genre/list_all"; // @GetMapping(value="/list_all")
+  }
+
+  /**
+   * 카테고리 비공개 설정, http://localhost:9091/cate/update_visible_n/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_visible_n/{genreno}")
+  public String update_visible_n(Model model, @PathVariable("genreno") Integer genreno) {
+
+
+    this.genreProc.update_visible_n(genreno);
+    return "redirect:/genre/list_all"; // @GetMapping(value="/list_all")
+  }
+
+  
 }

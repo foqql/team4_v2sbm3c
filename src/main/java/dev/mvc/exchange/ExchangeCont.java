@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,6 @@ import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.genre.GenreProcInter;
-import dev.mvc.genre.GenreVO;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
@@ -146,7 +146,7 @@ public class ExchangeCont {
       // ------------------------------------------------------------------------------
 
       // Call By Reference: 메모리 공유, Hashcode 전달
-      int memberno = (int) session.getAttribute("memberno"); // memberno FK
+    //  int memberno = (int) session.getAttribute("memberno"); // memberno FK
 //      exchangeVO.setMemberno(memberno);
       int cnt = this.exchangeProc.create(exchangeVO);
 
@@ -235,8 +235,8 @@ public class ExchangeCont {
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno")
-  public String list_by_classifyno_search_paging(
+  @GetMapping(value = "/list_by_classifyno1")
+  public String list_by_classifyno_search_paging1(
       HttpSession session, 
       Model model, 
       @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
@@ -249,7 +249,9 @@ public class ExchangeCont {
     model.addAttribute("menu", menu);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+    ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
     model.addAttribute("classifyVO", classifyVO);
+    model.addAttribute("exchangeVO", exchangeVO);
 
     word = Tool.checkNull(word).trim();
 
@@ -277,6 +279,36 @@ public class ExchangeCont {
     model.addAttribute("no", no);
 
     return "/exchange/list_by_classifyno_search_paging"; // /templates/exchange/list_by_classifyno_search_paging.html
+//    return "/exchange/read"; // /templates/exchange/list_by_classifyno_search_paging.html
+  }
+
+  
+  /**
+   * 유형 3
+   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/exchange/list_by_classifyno?classifyno=5
+   * http://localhost:9091/exchange/list_by_classifyno?classifyno=6
+   * 
+   * @return
+   */
+  @GetMapping(value = "/list_by_classifyno")
+  public String list_by_classifyno_search_paging(
+      HttpSession session, 
+      Model model, 
+      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno) {
+
+    // System.out.println("-> classifyno: " + classifyno);
+
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+
+    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+    model.addAttribute("classifyVO", classifyVO);
+    ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
+    model.addAttribute("exchangeVO", exchangeVO);
+
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("classifyno", classifyno);
+    return "/exchange/read"; // /templates/exchange/list_by_classifyno_search_paging.html
   }
 
   /**
@@ -376,24 +408,57 @@ public class ExchangeCont {
   }
 
   /**
+   * 조회 http://localhost:9093/exchange/read?classifyno=34
+   * 조회 http://localhost:9093/exchange/read?exchangeno=17
+   * 
+   * @return
+   */
+  @GetMapping(value = "/reading")
+  public String reading(Model model, 
+      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno) {
+    
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+
+    ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
+
+    long size1 = exchangeVO.getSize1();
+    String size1_label = Tool.unit(size1);
+    exchangeVO.setSize1_label(size1_label);
+
+    model.addAttribute("exchangeVO", exchangeVO);
+
+    ClassifyVO classifyVO = this.classifyProc.read(exchangeVO.getClassifyno());
+    model.addAttribute("classifyVO", classifyVO);
+
+
+    return "/exchange/read";
+  }
+
+  
+  /**
    * 맵 등록/수정/삭제 폼 http://localhost:9091/exchange/map?exchangeno=19
    * 
    * @return
    */
   @GetMapping(value = "/map")
   public String map(Model model, 
-                            @RequestParam(name="exchangeno", defaultValue="0") int exchangeno) {
+                            @RequestParam(name="exchangeno", defaultValue="0") int exchangeno,
+                            @RequestParam(name="classifyno", defaultValue="0") int classifyno
+                            ) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
-    ExchangeVO exchangeVO = this.exchangeProc.read(exchangeno); // map 정보 읽어 오기
+//    ExchangeVO exchangeVO = this.exchangeProc.read(exchangeno); // map 정보 읽어 오기
+    ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno); // map 정보 읽어 오기
     model.addAttribute("exchangeVO", exchangeVO); // request.setAttribute("exchangeVO", exchangeVO);
 
     ClassifyVO classifyVO = this.classifyProc.read(exchangeVO.getClassifyno()); // 그룹 정보 읽기
     model.addAttribute("classifyVO", classifyVO);
-
+System.out.println("겟 맵 확인");
     return "/exchange/map"; // //templates/exchange/map.html
   }
+
 
   /**
    * MAP 등록/수정/삭제 처리 http://localhost:9091/exchange/map
@@ -403,74 +468,24 @@ public class ExchangeCont {
    */
   @PostMapping(value = "/map")
   public String map_update(Model model, 
+      @RequestParam(name="classifyno", defaultValue = "0") int classifyno, 
       @RequestParam(name="exchangeno", defaultValue = "0") int exchangeno, 
       @RequestParam(name="map", defaultValue = "") String map) {
+    
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
+    hashMap.put("classifyno", classifyno);
     hashMap.put("exchangeno", exchangeno);
     hashMap.put("map", map);
-
-    this.exchangeProc.map(hashMap);
-
-    return "redirect:/exchange/read?exchangeno=" + exchangeno;
-  }
-
-  /**
-   * Youtube 등록/수정/삭제 폼 http://localhost:9091/exchange/youtube?exchangeno=1
-   * 
-   * @return
-   */
-  @GetMapping(value = "/youtube")
-  public String youtube(Model model, 
-      @RequestParam(name="exchangeno", defaultValue="0") int exchangeno,
-      @RequestParam(name="word", defaultValue="")  String word, 
-      @RequestParam(name="now_page", defaultValue="0") int now_page) {
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-
-    ExchangeVO exchangeVO = this.exchangeProc.read(exchangeno); // map 정보 읽어 오기
-    model.addAttribute("exchangeVO", exchangeVO); // request.setAttribute("exchangeVO", exchangeVO);
-
-    ClassifyVO classifyVO = this.classifyProc.read(exchangeVO.getClassifyno()); // 그룹 정보 읽기
+    
+    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
-
-    model.addAttribute("word", word);
-    model.addAttribute("now_page", now_page);
-    
-    return "/exchange/youtube";  // forward, /templates/exchange/youtube.html
+    ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
+    model.addAttribute("exchangeVO", exchangeVO);
+    this.exchangeProc.map(hashMap);
+    return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
   }
 
-  /**
-   * Youtube 등록/수정/삭제 처리 http://localhost:9091/exchange/youtube
-   * 
-   * @param exchangeVO
-   * @return
-   */
-  @PostMapping(value = "/youtube")
-  public String youtube_update(Model model, 
-                                            RedirectAttributes ra,
-                                            @RequestParam(name="exchangeno", defaultValue = "0") int exchangeno, 
-                                            @RequestParam(name="youtube", defaultValue = "") String youtube, 
-                                            @RequestParam(name="word", defaultValue = "") String word, 
-                                            @RequestParam(name="now_page", defaultValue = "0") int now_page) {
-
-    if (youtube.trim().length() > 0) { // 삭제 중인지 확인, 삭제가 아니면 youtube 크기 변경
-      youtube = Tool.youtubeResize(youtube, 640); // youtube 영상의 크기를 width 기준 640 px로 변경
-    }
-
-    HashMap<String, Object> hashMap = new HashMap<String, Object>();
-    hashMap.put("exchangeno", exchangeno);
-    hashMap.put("youtube", youtube);
-
-    this.exchangeProc.youtube(hashMap);
-    
-    ra.addAttribute("exchangeno", exchangeno);
-    ra.addAttribute("word", word);
-    ra.addAttribute("now_page", now_page);
-
-    // return "redirect:/exchange/read?exchangeno=" + exchangeno;
-    return "redirect:/exchange/read";
-  }
-
+ 
   /**
    * 수정 폼 http:// localhost:9091/exchange/update_text?exchangeno=1
    *
@@ -753,5 +768,74 @@ public class ExchangeCont {
     
   }   
    
+  
+  /**
+   * 우선 순위 높임, 10 등 -> 1 등, http://localhost:9091/cate/update_seqno_forward/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_seqno_forward/{classifyno}")
+  public String update_seqno_forward(Model model, @PathVariable("classifyno") Integer classifyno,
+      @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+    ra.addAttribute("now_page", now_page);
+    this.classifyProc.update_seqno_forward(classifyno);
+
+    ra.addAttribute("word", word);
+    return "redirect:/classify/list_search"; // @GetMapping(value="/list_all")
+  }
+
+  /**
+   * 우선 순위 낮춤, 1 등 -> 10 등, http://localhost:9091/cate/update_seqno_backward/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_seqno_backward/{classifyno}")
+  public String update_seqno_backward(Model model, @PathVariable("classifyno") Integer classifyno,
+      @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+    ra.addAttribute("now_page", now_page);
+    this.classifyProc.update_seqno_backward(classifyno);
+
+    ra.addAttribute("word", word);
+    return "redirect:/classify/list_search"; // @GetMapping(value="/list_all")
+  }
+
+  /**
+   * 카테고리 공개 설정, http://localhost:9091/cate/update_visible_y/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_visible_y/{classifyno}")
+  public String update_visible_y(Model model, @PathVariable("classifyno") Integer classifyno,
+      @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+    ra.addAttribute("now_page", now_page);
+    this.classifyProc.update_visible_y(classifyno);
+
+    ra.addAttribute("word", word);
+    return "redirect:/classify/list_search"; // @GetMapping(value="/list_all")
+  }
+
+  /**
+   * 카테고리 비공개 설정, http://localhost:9091/cate/update_visible_n/1
+   * 
+   * @param model Controller -> Thymeleaf HTML로 데이터 전송에 사용
+   * @return
+   */
+  @GetMapping(value = "/update_visible_n/{classifyno}")
+  public String update_visible_n(Model model, @PathVariable("classifyno") Integer classifyno,
+      @RequestParam(name = "word", defaultValue = "") String word, RedirectAttributes ra,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+    ra.addAttribute("now_page", now_page);
+    this.classifyProc.update_visible_n(classifyno);
+
+    ra.addAttribute("word", word);
+    return "redirect:/classify/list_search"; // @GetMapping(value="/list_all")
+  }
+
  
 }

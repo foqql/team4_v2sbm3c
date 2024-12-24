@@ -3,39 +3,34 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class='title_line'>
-    <span th:text="${classifyVO.classify }" class="title_line_text"></span > 
+   <span th:text="${classifyVO.bigcla }" class="title_line_text"></span > >
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
-    > 글 조회
+    > 글 조회 
+    > <span th:text="${exchangeVO.exchangeno}" class="title_line_text"></span > 
+    > <span th:text="${exchangeVO.price}" class="title_line_text"></span > >
+    > <span th:text="${exchangeVO.name}" class="title_line_text"></span > 
   </div>
   
   <aside class="aside_right" th:if="${session.grade == 'admin'}">
     <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./update_file?exchangeno=${exchangeVO.exchangeno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|/exchange/map?classifyno=${exchangeVO.classifyno }&exchangeno=${exchangeVO.exchangeno}|}">지도</a>
+  <!--  <span class='menu_divide' >│</span>    
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
     <span class='menu_divide' >│</span>
     <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|/exchange/update_text?exchangeno=${exchangeVO.exchangeno}&now_page=${now_page}&word=${word }|}">글 수정</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./update_file?exchangeno=${exchangeVO.exchangeno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|/exchange/map?classifyno=${exchangeVO.classifyno }&exchangeno=${exchangeVO.exchangeno}|}">지도</a>
+    <span class='menu_divide' >│</span>    <a th:href="@{|/exchange/update_text?exchangeno=${exchangeVO.exchangeno}&now_page=${now_page}&word=${word }|}">글 수정</a>
+
     <span class='menu_divide' >│</span>
     <a th:href="@{|/exchange/youtube?classifyno=${exchangeVO.classifyno }&exchangeno=${exchangeVO.exchangeno}&word=${word}&now_page=${now_page}|}">Youtube</a>
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./delete?exchangeno=${exchangeVO.exchangeno}&word=${word}&now_page=${now_page}&classifyno=${exchangeVO.classifyno}|}">삭제</a>  
+    <a th:href="@{|./delete?exchangeno=${exchangeVO.exchangeno}&word=${word}&now_page=${now_page}&classifyno=${exchangeVO.classifyno}|}">삭제</a> --> 
  </aside> 
 
-  <aside class="aside_right" th:if="${session.grade != 'admin'}">
-     <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
-  </aside> 
- 
   <div class='menu_line'></div>
 
   <fieldset class="fieldset_basic">
@@ -47,10 +42,19 @@
             <img th:src="@{|/exchange/storage/${exchangeVO.file1saved}|}" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'>
           </div>
 
-          <span style="font-size: 1.5em; font-weight: bold;" th:text="${exchangeVO.title}"></span>
-          <span style="font-size: 1em;" th:text="${exchangeVO.rdate }"></span><br><br>
-          <div style="white-space: pre-wrap;"><span th:text="${exchangeVO.content}"></span></div>
-        </div>
+          <span style="font-size: 1.5em; font-weight: bold;" th:text="${exchangeVO.name}"></span>
+          <span style="font-size: 1em;" th:text="${exchangeVO.recent }"></span><br><br>
+          <div style="white-space: pre-wrap;">
+              <p>환율 번호: <span th:text="${exchangeVO.exchangeno}"></span></p>
+              <p>중분류 번호: <span th:text="${exchangeVO.classifyno}"></span></p>
+              <p>국가 명: <span th:text="${exchangeVO.name}"></span></p>
+              <p>현재 매매가: <span th:text="${exchangeVO.price}"></span></p>
+              <p>1원 기준 가격 KRW: <span th:text="${exchangeVO.krw}"></span></p>
+              <p>변동 퍼센트: <span th:text="${exchangeVO.value}"></span></p>
+              <p>전일 종가: <span th:text="${exchangeVO.yesterday}"></span></p>
+              <p>최근 변동일: <span th:text="${exchangeVO.recent}"></span></p>
+          </div>
+
       </li>
 
       <li class="li_none" style="clear: both; padding-top: 10px; padding-bottom: 25px;" 
@@ -60,15 +64,15 @@
         </div>
       </li>
 
-      <li class="li_none" style="clear: both; padding-top: 10px; padding-bottom: 25px;" 
+<!--      <li class="li_none" style="clear: both; padding-top: 10px; padding-bottom: 25px;"
           th:if="${exchangeVO.youtube.length() > 0}">
         <div style='text-align: center; width:640px; margin: 0px auto;'
            th:utext = "${exchangeVO.youtube }">
         </div>
-      </li>
+      </li> 
 
       <li class="li_none" th:text="|검색어(키워드): ${exchangeVO.word }|">
-      </li>
+      </li>-->
       
       <li class="li_none" th:if="${exchangeVO.size1 > 0}">
         <div >

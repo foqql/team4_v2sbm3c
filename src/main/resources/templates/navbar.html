@@ -17,34 +17,54 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- 대분류 메뉴 -->
-          <li class="nav-item dropdown" th:each="classifyVOMenu:${menu}">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" 
-               data-bs-toggle="dropdown" aria-expanded="false" th:text="${classifyVOMenu.bigcla}">
-            </a>
+  <li class="nav-item dropdown" th:each="genreVOMenu:${menu1}">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" 
+       data-bs-toggle="dropdown" aria-expanded="false" th:text="${genreVOMenu.genre}">
+    </a>
 
-            <!-- 중분류 메뉴 (대분류에 맞는 중분류만 표시) -->
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li th:each="classifyVO:${classifyVOMenu.list_name}" th:if="${classifyVO.bigcla == classifyVOMenu.bigcla}">
-                <!-- '뉴스' 카테고리 -->
-                <a th:if="${classifyVO.bigcla == '뉴스'}" class="dropdown-item"
-                   th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
-                   th:text="${classifyVO.classify}">
-                </a>
-
-                <!-- '환율' 카테고리 -->
-                <a th:if="${classifyVO.bigcla == '환율'}" class="dropdown-item"
-                   th:href="@{|/exchange/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
-                   th:text="${classifyVO.classify}">
-                </a>
-
-                <!-- '날씨' 카테고리 -->
-                <a th:if="${classifyVO.bigcla == '날씨'}" class="dropdown-item"
-                   th:href="@{|/weather/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
-                   th:text="${classifyVO.classify}">
-                </a>
-              </li>
+    <!-- 뉴스 카테고리 -->
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '뉴스'}">
+        <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '뉴스'}">
+            <ul>
+                <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                    <a class="dropdown-item"
+                       th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
+                       th:text="${classifyVO.classify}">
+                    </a>
+                </li>
             </ul>
-          </li>
+        </li>
+    </ul>
+
+    <!-- 환율 카테고리 -->
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '환율'}">
+        <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '환율'}">
+            <ul>
+                <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                    <a class="dropdown-item"
+                       th:href="@{|/exchange/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
+                       th:text="${classifyVO.classify}">
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    
+        <!-- 날씨 카테고리 -->
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '날씨'}">
+        <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '날씨'}">
+            <ul>
+                <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                    <a class="dropdown-item"
+                       th:href="@{|/weather/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
+                       th:text="${classifyVO.classify}">
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>
+
 
           <!-- 회원 메뉴 -->
           <li class="nav-item dropdown">
