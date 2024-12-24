@@ -1,259 +1,188 @@
 <!DOCTYPE html>
-
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 
 <div layout:fragment="content">
   <script>
     window.onload = () => {
       document.querySelector('#id').addEventListener('keypress', (event) => {
-      // document.getElementById('passwd').addEventListener('keypress', (event) => {
-        if(event.key === 'Enter') { // ===: 타입까지 확인
+        if(event.key === 'Enter') {
           document.getElementById('btn_checkID').focus();
         }
-      }); 
-  
+      });
+
       document.querySelector('#passwd').addEventListener('keypress', (event) => {
-      // document.getElementById('passwd').addEventListener('keypress', (event) => {
         if(event.key === 'Enter') {
           document.getElementById('passwd2').focus();
         }
-      }); 
-  
+      });
+
       document.querySelector('#passwd2').addEventListener('keypress', (event) => {
-      // document.getElementById('passwd').addEventListener('keypress', (event) => {
         if(event.key === 'Enter') {
           document.getElementById('mname').focus();
         }
-      }); 
-  
+      });
+
       document.querySelector('#mname').addEventListener('keypress', (event) => {
-      // document.getElementById('passwd').addEventListener('keypress', (event) => {
         if(event.key === 'Enter') {
           document.getElementById('tel').focus();
         }
       });
-      
+
       document.querySelector('#tel').addEventListener('keypress', (event) => {
-      // document.getElementById('passwd').addEventListener('keypress', (event) => {
         if(event.key === 'Enter') {
           document.getElementById('btn_DaumPostcode').focus();
         }
-      }); 
-      
+      });
+
       document.querySelector('#address2').addEventListener('keypress', (event) => {
-      // document.getElementById('passwd').addEventListener('keypress', (event) => {
         if(event.key === 'Enter') {
           document.getElementById('btn_send').focus();
         }
-      }); 
-      
+      });
     }
-    
+
     function checkID() {
-      // alert('checkID()');
-      
       let id = document.getElementById('id');
       let id_msg = document.getElementById('id_msg');
-  
+
       if (id.value.trim().length == 0) {
         id_msg.innerHTML= 'ID 입력은 필수 입니다. ID(이메일)는 3자이상 권장합니다.';
-        id_msg.classList.add('span_warning');    // class 적용
+        id_msg.classList.add('span_warning');
         id.focus();
-  
-        return false;  // 회원 가입 진행 중지
-        
-      } else {  // when ID is entered
-        id_msg.classList.remove('span_warning'); // class 삭제
-  
-       // ---------------------------------------------------------------------------------------
-       // fetch 관련 시작
-       // ---------------------------------------------------------------------------------------
-        let id = document.getElementById('id');
+        return false;
+      } else {
+        id_msg.classList.remove('span_warning');
+
         let url = './checkID?id=' + id.value;
     
-        fetch(url, {
-            method: 'GET',
-            // headers: {
-            //   'Content-Type': 'application/json' // JSON 형식으로 데이터 전송을 알림
-            // },
-            // body: JSON.stringify(dataToSend) // JSON 데이터를 문자열로 변환하여 요청 본문에 포함            
-        })
+        fetch(url)
         .then(response => response.json())
         .then(rdata => {
-          if (rdata.cnt > 0) { // 아이디 중복
+          if (rdata.cnt > 0) {
             id_msg.innerHTML= '이미 사용중인 ID(이메일) 입니다. 다른 ID(이메일)을 지정해주세요.';
             id_msg.classList.add('span_warning');
-            id_msg.classList.remove('span_warning'); // class 삭제
             id.focus();
-              
-          } else { // 아이디 중복 안됨.
+          } else {
             id_msg.innerHTML= '사용 가능한 ID(이메일) 입니다.';
-            // id_msg.classList.add('span_info');
             document.getElementById('passwd').focus(); 
           }
         })
-        .catch(error => { // 서버 다운등 통신 에러
+        .catch(error => {
             console.error('Error:', error);
-        });      
-            
-        // 처리중 출력
-        id_msg.innerHTML="<img src='/images/progress.gif' style='width: 5%;'>"; // static 기준
-
-       // ---------------------------------------------------------------------------------------
-       // fetch 관련 종료
-       // ---------------------------------------------------------------------------------------
-        
+        });
+    
+        id_msg.innerHTML="<img src='/images/progress.gif' style='width: 5%;'>";
       }
     }
-    
-    function send() { // 회원 가입 처리
+
+    function send() {
       let id = document.getElementById('id');
       let id_msg = document.getElementById('id_msg');
-  
+
       if (id.value.trim().length == 0) {
         id_msg.innerHTML= 'ID 입력은 필수 입니다. ID(이메일)는 3자이상 권장합니다.';
-        id_msg.classList.add('span_warning');    // class 적용
+        id_msg.classList.add('span_warning');
         id.focus();
-  
-        return false;  // 회원 가입 진행 중지
-        
+        return false;
       }
-  
-      // 패스워드를 정상적으로 2번 입력했는지 확인
+
       let passwd = document.getElementById('passwd');
       let passwd2 = document.getElementById('passwd2');
       let passwd2_msg = document.getElementById('passwd2_msg');
-  
+
       if (passwd.value != passwd2.value) {
         passwd2_msg.innerHTML= '입력된 패스워드가 일치하지 않습니다.';
-        passwd2_msg.classList.add('span_warning');    // class 적용
-        passwd.focus();  // 첫번째 패스워드로 focus 설정
-  
-        return false;  // 회원 가입 진행 중지
-      }
-  
-      let mname = document.getElementById('mname');
-      let mname_msg = document.getElementById('mname_msg');
-  
-      if (mname.value.length == 0) {
-        mname_msg.innerHTML= '이름 입력은 필수입니다.';
-        mname_msg.classList.add('span_warning');    // class 적용
-        mname.focus();
-  
-        return false;  // 회원 가입 진행 중지
-      }
-  
-      // 약관 동의 확인
-      let termsAgree = document.getElementById('termsAgree');
-      if (!termsAgree.checked) {
-        alert("약관에 동의하셔야 회원가입을 진행할 수 있습니다.");
+        passwd2_msg.classList.add('span_warning');
+        passwd.focus();
         return false;
       }
-  
-      document.getElementById('frm').submit(); // required="required" 작동 안됨.
-    }    
+
+      let mname = document.getElementById('mname');
+      let mname_msg = document.getElementById('mname_msg');
+
+      if (mname.value.length == 0) {
+        mname_msg.innerHTML= '이름 입력은 필수입니다.';
+        mname_msg.classList.add('span_warning');
+        mname.focus();
+        return false;
+      }
+      
+    // 성별 선택 확인
+    let gender = document.querySelector('input[name="gender"]:checked');
+    if (!gender) {
+      alert('성별을 선택해주세요.');
+      return false;
+    }
+
+      // 약관 동의 체크 여부 확인
+      let termsAgreement = document.getElementById('termsAgreement');
+      if (!termsAgreement.checked) {
+        alert('약관에 동의해 주세요.');
+        return false;
+      }
+
+      document.getElementById('frm').submit(); // form 제출
+    }
+    
+    
   </script>
 
   <div class="title_line">회원 가입(*: 필수)</div>
-  
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span> 
+    <span class='menu_divide'>│</span> 
     <a href='./create'>회원 가입</a>
-    <span class='menu_divide' >│</span> 
+    <span class='menu_divide'>│</span> 
     <a href='./list'>목록</a>
   </aside> 
 
   <div class="menu_line"></div>
-  
-    <!-- 약관 동의 추가 부분 -->
-  <div style="padding: 20px; border: 1px solid #ddd; margin-bottom: 20px; text-align: center;">
-    <h4>약관 동의</h4>
-    <p>회원 가입을 위해 약관에 동의해 주세요.</p>
-    <textarea readonly style="width: 100%; height: 150px; margin-bottom: 10px; text-align: center;">
-
-뉴스 서비스 이용 약관
-
-제 1조 (목적)
-본 약관은 [서비스명] (이하 '회사')가 제공하는 뉴스 서비스(이하 '서비스')의 이용에 관한 조건과 절차, 회사와 사용자 간의 권리와 의무 및 책임사항 등을 규정함을 목적으로 합니다.
-
-제 2조 (정의)
-1. 서비스: 회사가 제공하는 뉴스 콘텐츠 및 관련 서비스를 말합니다.
-2. 회원: 회사의 서비스에 가입하여 이용하는 자를 말합니다.
-3. 이용자: 서비스를 이용하는 모든 자를 포함하며, 회원뿐만 아니라 비회원도 포함됩니다.
-4. 서비스 제공자: 서비스를 제공하는 회사 또는 제휴된 외부 업체를 의미합니다.
-
-제 3조 (약관의 동의)
-1. 본 약관은 서비스 이용자가 서비스를 이용하기 전 반드시 동의해야 합니다.
-2. 이용자는 회사의 약관을 충분히 읽고 이해한 후 동의 여부를 결정해야 합니다.
-3. 약관에 동의하지 않으면 서비스 이용이 불가능합니다.
-
-제 4조 (약관의 변경)
-1. 회사는 필요 시 본 약관을 변경할 수 있으며, 변경된 약관은 서비스 내 공지사항을 통해 고지합니다.
-2. 변경된 약관은 공지일로부터 7일 이내에 효력이 발생하며, 이용자는 변경된 약관에 동의하지 않을 경우 서비스 이용을 중지할 수 있습니다.
-
-제 5조 (회원 가입)
-1. 서비스 이용을 원하는 자는 회원 가입 절차를 거쳐야 하며, 회사는 가입자의 정보를 수집하여 관리합니다.
-2. 회원 가입 시 제공되는 개인정보는 정확하게 입력되어야 하며, 허위 정보 제공 시 이용에 제한이 있을 수 있습니다.
-3. 회원 가입 시 제공한 이메일 주소는 중요한 서비스 관련 공지 및 알림에 사용됩니다.
-
-제 6조 (서비스의 제공)
-1. 회사는 뉴스 서비스, 정보 제공, 콘텐츠 공유, 사용자 맞춤형 뉴스 제공 등의 서비스를 제공합니다.
-2. 서비스는 기본적으로 무료로 제공되나, 특정 프리미엄 서비스는 유료로 제공될 수 있습니다.
-3. 서비스 제공에 있어 기술적 문제나 기타 사유로 인한 중단이 있을 수 있으며, 이 경우 회사는 이용자에게 사전 고지할 의무가 있습니다.
-
-제 7조 (이용자의 의무)
-1. 이용자는 서비스를 이용하면서 불법적이거나, 타인의 권리를 침해하는 행위를 해서는 안 됩니다.
-2. 이용자는 회사의 사전 동의 없이 서비스를 상업적 목적으로 이용할 수 없습니다.
-3. 이용자는 회사가 제공하는 뉴스 콘텐츠를 상업적 목적으로 복제하거나 배포하지 않아야 합니다.
-
-제 8조 (개인정보 보호)
-1. 회사는 이용자의 개인정보를 보호하기 위해 최선을 다합니다.
-2. 이용자는 회원 가입 시 제공한 개인정보를 열람, 수정, 삭제할 수 있으며, 개인정보 보호 정책에 따라 관리됩니다.
-3. 회사는 이용자의 개인정보를 제3자에게 제공하지 않으며, 관련 법률에 따라 개인정보 보호를 철저히 이행합니다.
-
-제 9조 (저작권)
-1. 서비스 내 제공되는 뉴스 콘텐츠 및 모든 정보는 회사 또는 제휴사에 저작권이 있으며, 무단으로 복제, 배포, 전송할 수 없습니다.
-2. 이용자가 작성한 댓글, 게시물 등은 회사가 무상으로 사용할 수 있는 권리를 가집니다.
-
-제 10조 (서비스의 중단)
-1. 회사는 서비스의 품질 개선, 유지보수 또는 기타 기술적 문제로 인한 서비스 중단을 예고 없이 진행할 수 있습니다.
-2. 서비스 중단으로 인한 피해에 대해서 회사는 책임지지 않습니다.
-
-제 11조 (면책 조항)
-1. 회사는 이용자가 서비스 이용 중 발생하는 직접적인 피해나 손실에 대해 책임을 지지 않습니다.
-2. 이용자는 본 서비스 이용 시 발생하는 모든 행위에 대한 책임을 지며, 회사는 그에 대한 법적 책임을 지지 않습니다.
-3. 천재지변, 정부의 법령 변경 등 외부 요인에 의한 서비스 제공의 불가피한 중단에 대해 회사는 면책됩니다.
-
-제 12조 (서비스 이용 계약의 해지)
-1. 이용자는 언제든지 서비스 이용 계약을 해지할 수 있으며, 해지 시 회사는 이용자의 개인정보를 즉시 삭제합니다.
-2. 회사는 이용자가 본 약관을 위반하거나 서비스 제공이 불가능하다고 판단될 경우 서비스 이용을 제한하거나 해지할 수 있습니다.
-
-제 13조 (분쟁 해결)
-1. 본 약관과 관련된 분쟁이 발생한 경우, 회사와 이용자는 분쟁 해결을 위한 협의를 우선적으로 진행합니다.
-2. 협의가 이루어지지 않는 경우, 관할 법원은 회사의 본사가 위치한 지역을 관할 법원으로 합니다.
-
-제 14조 (기타)
-1. 본 약관에 명시되지 않은 사항은 관계 법령에 따르며, 서비스 이용에 필요한 세부사항은 회사가 별도로 정한 정책에 따릅니다.
-2. 서비스 이용자는 본 약관을 이해하고 동의한 것으로 간주합니다.</textarea>
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <input type="checkbox" id="termsAgree">
-      <label for="termsAgree"> 위 약관에 동의합니다.</label>
-    </div>
-  </div>
 
   <div style="display: flex; justify-content: center; align-items: center; padding-top: 20px;">
     <form name="frm" id="frm" th:object="${memberVO}" method="post" action="/member/create" 
           style="display: flex; flex-direction: column; align-items: flex-start; width: 60%;">
   
-      <!-- 아이디 -->
+
+      <!-- 약관 내용을 추가하는 예시 -->
+      <div style="display: block; width: 100%; border: 1px solid #ccc; padding: 15px; margin-top: 10px; background-color: #f9f9f9; max-height: 200px; overflow-y: auto;">
+          <h4>이용약관</h4>
+          <p>제 1조 (목적)
+본 약관은 [서비스명] (이하 '회사')가 제공하는 뉴스 서비스(이하 '서비스')의 이용에 관한 조건과 절차, 회사와 사용자 간의 권리와 의무 및 책임사항 등을 규정함을 목적으로 합니다.</p>
+          <p>제 2조 (정의)
+1. 서비스: 회사가 제공하는 뉴스 콘텐츠 및 관련 서비스를 말합니다.
+2. 회원: 회사의 서비스에 가입하여 이용하는 자를 말합니다.
+3. 이용자: 서비스를 이용하는 모든 자를 포함하며, 회원뿐만 아니라 비회원도 포함됩니다.
+4. 서비스 제공자: 서비스를 제공하는 회사 또는 제휴된 외부 업체를 의미합니다.</p>
+          <p>제 3조 (약관의 동의)
+1. 본 약관은 서비스 이용자가 서비스를 이용하기 전 반드시 동의해야 합니다.
+2. 이용자는 회사의 약관을 충분히 읽고 이해한 후 동의 여부를 결정해야 합니다.
+3. 약관에 동의하지 않으면 서비스 이용이 불가능합니다.</p>
+          <p>제 4조 (약관의 변경)
+1. 회사는 필요 시 본 약관을 변경할 수 있으며, 변경된 약관은 서비스 내 공지사항을 통해 고지합니다.
+2. 변경된 약관은 공지일로부터 7일 이내에 효력이 발생하며, 이용자는 변경된 약관에 동의하지 않을 경우 서비스 이용을 중지할 수 있습니다.</p>
+          <p>제 5조 (회원 가입)
+1. 서비스 이용을 원하는 자는 회원 가입 절차를 거쳐야 하며, 회사는 가입자의 정보를 수집하여 관리합니다.
+2. 회원 가입 시 제공되는 개인정보는 정확하게 입력되어야 하며, 허위 정보 제공 시 이용에 제한이 있을 수 있습니다.
+3. 회원 가입 시 제공한 이메일 주소는 중요한 서비스 관련 공지 및 알림에 사용됩니다.</p>
+          <p>제 6조 (서비스의 제공)
+1. 회사는 뉴스 서비스, 정보 제공, 콘텐츠 공유, 사용자 맞춤형 뉴스 제공 등의 서비스를 제공합니다.
+2. 서비스는 기본적으로 무료로 제공되나, 특정 프리미엄 서비스는 유료로 제공될 수 있습니다.
+3. 서비스 제공에 있어 기술적 문제나 기타 사유로 인한 중단이 있을 수 있으며, 이 경우 회사는 이용자에게 사전 고지할 의무가 있습니다.</p>
+        </div>
+       
+       <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
+        <input type="checkbox" id="termsAgreement" required="required">
+        <label for="termsAgreement" style="margin-left: 10px;">이용약관에 동의합니다. <a href="#terms" style="color: #007bff;">[약관 확인]</a></label>
+        </div>
+  
       <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
-        <label for="id" style="margin-right: 10px; width: 20%;">아이디</label>
+        <label for="id" style="margin-right: 10px; width: 20%;">아이디*</label>
         <input type="text" name="id" id="id" value="" autofocus="autofocus"
-               class="form-control form-control-sm" style="width: 50%; margin-right: 10px;" th:field="*{id}">
+           class="form-control form-control-sm" style="width: 50%; margin-right: 10px;" th:field="*{id}">
         <button type="button" id="btn_checkID" onclick="checkID()" 
-                class="btn btn-primary btn-sm" style="flex-shrink: 0;">중복확인</button>
-      </div>
+            class="btn btn-primary btn-sm" style="flex-shrink: 0;">중복확인</button>
+       </div>
+          <span id="id_msg" style="font-size: 14px; margin-top: 5px;"></span>
   
       <!-- 패스워드 -->
       <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
@@ -275,6 +204,12 @@
         <input type="text" name="mname" id="mname" placeholder="성명" required="required" 
                class="form-control form-control-sm" style="width: 50%;">
       </div>
+      
+      <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
+        <label for="birth" style="margin-right: 10px; width: 20%;">생년월일</label>
+        <input type="date" name="birth" id="birth" placeholder="생년월일" 
+         class="form-control form-control-sm" style="width: 50%;">
+      </div>
   
       <!-- 전화 번호 -->
       <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
@@ -282,6 +217,20 @@
         <input type="text" name="tel" id="tel" value="010 1234 5678" required="required" 
                placeholder="전화번호" class="form-control form-control-sm" style="width: 50%;">
       </div>
+      
+      
+      <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
+          <label for="gender" style="margin-right: 10px; width: 20%;">성별*</label>
+        <div style="display: flex; width: 50%;">
+          <input type="radio" id="male" name="gender" value="남자" required="required" style="margin-right: 10px;">
+          <label for="male" style="margin-right: 20px;">남자</label>
+
+          <input type="radio" id="female" name="gender" value="여자" required="required" style="margin-right: 10px;">
+          <label for="female">여자</label>
+        </div>
+      </div>
+      
+
   
       <!-- 우편 번호 -->
       <div style="display: flex; align-items: center; margin-bottom: 10px; width: 100%;">
@@ -305,15 +254,10 @@
         <input type="text" name="address2" id="address2" value="" placeholder="상세 주소"
                class="form-control form-control-sm" style="width: 50%;">
       </div>
+      
 
-      <div class="content_body_bottom" style="text-align: center;">
-        <button type="button" onclick="send();" class="btn btn-secondary btn-sm">가입</button>
-        <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소</button>
-      </div>
 
-    </form>
-  </div>
-</div>
+      
 
 <!-- ------------------------------ DAUM 우편번호 API 시작 ------------------------------ -->
 <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
@@ -403,7 +347,23 @@
 
 <!-- ------------------------------ DAUM 우편번호 API 종료 ------------------------------ -->
 
+      <div class="content_body_bottom" style="text-align: center;">
+            <button type="button" onclick="send();" class="btn btn-secondary btn-sm">가입</button>
+            <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소</button>
+          </div>
 
+        </form>
+      </div>
+    </div>
  </div>
 
 </html>
+
+
+
+
+
+
+
+
+

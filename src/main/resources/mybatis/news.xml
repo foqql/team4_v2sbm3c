@@ -99,7 +99,8 @@
                           <otherwise>
                             WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
                                                               OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
-                                                              OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+                                                              OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%'
+                                                              )
                           </otherwise>
                         </choose>
                         ORDER BY newsno DESC
@@ -181,59 +182,44 @@
      WHERE newsno = #{newsno}
    </update>
                     
-  <select id="list_newsgenre" resultType="dev.mvc.news.NewsVO" parameterType="String">
-    SELECT newsgenre, newsno, memberno, classifyno, title, content, passwd, word, file1, file1saved, thumb1, size1, rdate
+  <select id="newsgenre" resultType="dev.mvc.news.NewsVO" parameterType="String">
+    SELECT newsgenre, newsno, memberno, classifyno, title, content, recom, cnt, replycnt, passwd, word, rdate,
+               file1, file1saved, thumb1, size1, mp3
     FROM news
-    WHERE newsgenre = #{newsgenre};
+    WHERE newsgenre = #{newsgenre}
     ORDER BY newsno DESC
   </select>
 
-  <!-- 카테고리별 검색 목록 -->
-  <select id="list_by_classifyno_newsgenre_search" resultType="dev.mvc.news.NewsVO" parameterType="HashMap">
-    SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, word, rdate,
-            file1, file1saved, thumb1, size1, map, youtube, newsgenre
+  <!-- 검색 갯수 -->
+  <select id="list_search_count" resultType="Integer" parameterType="String">
+    SELECT COUNT(*) as cnt
     FROM news
-    <choose>
-      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-        WHERE classifyno=#{classifyno}
-      </when>
-      <otherwise> <!-- 검색하는 경우 -->
-        WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
-                                                  OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
-                                                  OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%'
-                                                  OR UPPER(newsgenre) LIKE '%' || UPPER(#{word}) || '%')
-      </otherwise>
-    </choose>
-    ORDER BY newsno DESC   
+    <if test="word != null and word != ''"> <!-- 검색 상태라면 WHERE 생성 -->
+      WHERE (UPPER(title) LIKE '%' || UPPER(#{word}) || '%') 
+               OR (UPPER(content) LIKE '%' || UPPER(#{word}) || '%')
+               OR (UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+    </if> 
+    ORDER BY rdate ASC
   </select>
-  
-   <!-- 카테고리별 검색 + 페이징 목록 -->
-  <select id="list_by_classifyno_newsgenre_search_paging" resultType="dev.mvc.news.NewsVO" parameterType="HashMap">
-   SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, newsgenre, r
-   FROM (
-              SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, newsgenre , rownum as r
-              FROM (
-                        SELECT newsno, memberno, classifyno, title, content, recom, cnt, replycnt, rdate, file1, file1saved, thumb1, size1, map, youtube, newsgenre
-                        FROM news
-                        <choose>
-                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-                            WHERE classifyno=#{classifyno}
-                          </when>
-                          <otherwise>
-                            WHERE classifyno=#{classifyno} AND (UPPER(title) LIKE '%' || UPPER(#{word}) || '%' 
-                                                              OR UPPER(content) LIKE '%' || UPPER(#{word}) || '%' 
-                                                              OR UPPER(word) LIKE '%' || UPPER(#{word}) || '%'
-                                                              OR UPPER(newsgenre) LIKE '%' || UPPER(#{word}) || '%')
-                          </otherwise>
-                        </choose>
-                        ORDER BY newsno DESC
-               )
+
+  <!-- 검색 + 페이징 -->
+  <select id="list_search_paging" resultType="dev.mvc.news.NewsVO" parameterType="Map">
+    SELECT newsno, classifyno, memberno, title, content, recom, cnt, replycnt, passwd, word, rdate, file1, file1saved, thumb1, size1, map, youtube, mp3, newsgenre, r
+    FROM (
+        SELECT newsno, classifyno, memberno, title, content, recom, cnt, replycnt, passwd, word, rdate, file1, file1saved, thumb1, size1, map, youtube, mp3, newsgenre, rownum AS r
+        FROM (
+            SELECT newsno, classifyno, memberno, title, content, recom, cnt, replycnt, passwd, word, rdate, file1, file1saved, thumb1, size1, map, youtube, mp3, newsgenre  
+            FROM news
+            <if test="word != null and word != ''"> <!-- 검색 상태라면 WHERE 생성 -->
+                WHERE (UPPER(title) LIKE '%' || UPPER(#{word}) || '%') 
+                   OR (UPPER(content) LIKE '%' || UPPER(#{word}) || '%')
+                   OR (UPPER(word) LIKE '%' || UPPER(#{word}) || '%')
+            </if>
+            ORDER BY rdate DESC  <!-- 예시로 등록일을 기준으로 내림차순 정렬 -->
+                 
+        )
     )
-    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
-     
-    <!-- 1 page: WHERE r >= 1 AND r <= 10; 
-          2 page: WHERE r >= 11 AND r <= 20;
-          3 page: WHERE r >= 21 AND r <= 30; -->
-  </select>                    
+    WHERE r &gt;= #{start_num} AND r &lt;= #{end_num}  <!-- WHERE r >= 1 AND r <= 3 -->
+  </select>
                     
 </mapper> 

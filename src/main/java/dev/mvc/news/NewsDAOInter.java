@@ -3,6 +3,7 @@ package dev.mvc.news;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.classify.ClassifyVO;
 
@@ -145,25 +146,23 @@ public interface NewsDAOInter {
    */   
   public int decreaseReplycnt(int newsno);
   
+  public ArrayList<NewsVO> newsgenre(String newsgenre);
   
-  /**
-   * 모든 카테고리의 등록된 글목록
-   * @return
-   */
-  public ArrayList<NewsVO> list_newsgenre(String newsgenre);
- 
 //  /**
-//   * 카테고리별 검색 목록
-//   * @param map
+//   * 검색 + 페이징 목록
+//   * select id="list_search_paging" resultType="dev.mvc.cate.CateVO" parameterType="Map" 
+//   * @param word 검색어
+//   * @param now_page 현재 페이지, 시작 페이지 번호: 1 ★
+//   * @param record_per_page 페이지당 출력할 레코드 수
 //   * @return
 //   */
-//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap);
-//  
+//  public ArrayList<NewsVO> list_search_paging(Map<String, Object> map);
+//
 //  /**
-//   * 카테고리별 검색 목록 + 페이징
-//   * @param newsVO
+//   * 검색 갯수
+//   * @param word
 //   * @return
 //   */
-//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map);  
+//  public Integer list_search_count(String newsgenre);
 
 }

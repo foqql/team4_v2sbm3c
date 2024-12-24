@@ -27,6 +27,16 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping(value = "/news")
 @Controller
 public class NewsCont {
+  
+  /** 페이지당 출력할 레코드 갯수, nowPage는 1부터 시작 */
+  public int record_per_page = 10;
+
+  /** 블럭당 페이지 수, 하나의 블럭은 10개의 페이지로 구성됨 */
+  public int page_per_block = 10;
+
+  /** 페이징 목록 주소 */
+  private String list_file_name = "/news/list_search";
+  
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc") // @Service("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
@@ -297,35 +307,39 @@ public class NewsCont {
       Model model, 
       @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
-      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page,
+      @RequestParam(name = "newsgenre", defaultValue = "") String newsgenre) {
 
     // System.out.println("-> classifyno: " + classifyno);
-
+    
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
-
+    
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
-
+    
     word = Tool.checkNull(word).trim();
-
+    newsgenre = Tool.checkNull(newsgenre).trim();
+    
     HashMap<String, Object> map = new HashMap<>();
     map.put("classifyno", classifyno);
     map.put("word", word);
     map.put("now_page", now_page);
-
+    map.put("newsgenre", newsgenre);
+    
     ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
-
     // System.out.println("-> size: " + list.size());
     model.addAttribute("word", word);
-
+    model.addAttribute("newsgenre", newsgenre);
+    System.out.println("newsgenre:" +newsgenre );
+    
     int search_count = this.newsProc.list_by_classifyno_search_count(map);
     String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno", search_count,
         News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
     model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
-
+    
     model.addAttribute("search_count", search_count);
 
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
@@ -352,20 +366,20 @@ public class NewsCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
 
     // System.out.println("-> classifyno: " + classifyno);
-
+    // newsgenre
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
-
+    
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
-
+    
     word = Tool.checkNull(word).trim();
 
     HashMap<String, Object> map = new HashMap<>();
     map.put("classifyno", classifyno);
     map.put("word", word);
     map.put("now_page", now_page);
-
+    
     ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
 
@@ -395,7 +409,8 @@ public class NewsCont {
    */
   @GetMapping(value = "/read")
   public String read(Model model, 
-      @RequestParam(name="newsno", defaultValue = "0") int newsno, 
+      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="newsgenre", defaultValue = "0") int newsgenre,
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     
@@ -425,7 +440,7 @@ public class NewsCont {
     // 조회에서 화면 하단에 출력
     // ArrayList<ReplyVO> reply_list = this.replyProc.list_news(newsno);
     // mav.addObject("reply_list", reply_list);
-
+    model.addAttribute("newsgenre", newsgenre);
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
 
@@ -826,149 +841,37 @@ public class NewsCont {
     return "redirect:/news/list_by_classifyno";    
     
   }   
-  
-  
+
+
   /**
    * 전체 목록, 관리자만 사용 가능 http://localhost:9093/news/list_all
    * 
    * @return
    */
-  @GetMapping(value = "/list_newsgenre")
-  public String list_newsgenre(HttpSession session, Model model) {
-    // System.out.println("-> list_all");
+  @GetMapping(value = "/newsgenre")
+  public String newsgenre(HttpSession session, Model model,
+      @RequestParam(name="newsgenre", defaultValue = "") String newsgenre) {
+
+
+    System.out.println("newsgenre1111:" + newsgenre);
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
-
-      ArrayList<NewsVO> list = this.newsProc.list_newsgenre(); // 모든 목록
-
-      // Thymeleaf는 CSRF(크로스사이트) 스크립팅 해킹 방지 자동 지원
-      // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-//      for (NewsVO newsVO : list) {
-//        String title = newsVO.getTitle();
-//        String content = newsVO.getContent();
-//        
-//        title = Tool.convertChar(title);  // 특수 문자 처리
-//        content = Tool.convertChar(content); 
-//        
-//        newsVO.setTitle(title);
-//        newsVO.setContent(content);  
-//
-//      }
-
-      model.addAttribute("list", list);
-      return "/news/list_newsgenre";
-
-    } 
-
   
+    ArrayList<NewsVO> list = this.newsProc.newsgenre(newsgenre); // 모든 목록
+    model.addAttribute("list", list);
+    
+    newsgenre = Tool.checkNull(newsgenre).trim();
+    
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("newsgenre", newsgenre);
+    model.addAttribute("newsgenre", newsgenre);
+    
+    System.out.println("newsgenre:" + newsgenre);
+    
+    return "/news/newsgenre";
+
    
-//  /**
-//   * 유형 3
-//   * 카테고리별 목록 + 검색 + 페이징 http://localhost:9093/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9093/news/list_by_classifyno?classifyno=6
-//   * 
-//   * @return
-//   */
-//  @GetMapping(value = "/list_by_classifyno_newsgenre")
-//  public String list_by_classifyno_newsgenre_search_paging(
-//      HttpSession session, 
-//      Model model, 
-//      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
-//      @RequestParam(name = "newsgenre", defaultValue = "1") int newsgenre,
-//      @RequestParam(name = "word", defaultValue = "") String word,
-//      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
-//
-//    // System.out.println("-> classifyno: " + classifyno);
-//
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//
-//    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//    model.addAttribute("classifyVO", classifyVO);
-//
-//    word = Tool.checkNull(word).trim();
-//
-//    HashMap<String, Object> map = new HashMap<>();
-//    map.put("classifyno", classifyno);
-//    map.put("newsgenre", newsgenre);
-//    map.put("word", word);
-//    map.put("now_page", now_page);
-//
-//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
-//    model.addAttribute("list", list);
-//
-//    // System.out.println("-> size: " + list.size());
-//    model.addAttribute("word", word);
-//
-//    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-//    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre", search_count,
-//        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
-//    model.addAttribute("paging", paging);
-//    model.addAttribute("now_page", now_page);
-//
-//    model.addAttribute("search_count", search_count);
-//
-//    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-//    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
-//    model.addAttribute("no", no);
-//
-//    return "/news/list_by_classifyno_newsgenre_search_paging"; // /templates/news/list_by_classifyno_search_paging.html
-//  }
-//
-//  /**
-//   * 카테고리별 목록 + 검색 + 페이징 + Grid
-//   * http://localhost:9093/news/list_by_classifyno?classifyno=5
-//   * http://localhost:9093/news/list_by_classifyno?classifyno=6_newsgenre?newsgenre='사업'
-//   * 
-//   * @return
-//   */
-//  
-//  @GetMapping(value = "/list_by_classifyno_newsgenre_grid")
-//  public String list_by_classifyno_newsgenre_search_paging_grid(
-//      HttpSession session, 
-//      Model model, 
-//      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
-//      @RequestParam(name = "newsgenre", defaultValue = "0") int newsgenre,
-//      @RequestParam(name = "word", defaultValue = "") String word,
-//      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
-//
-//    // System.out.println("-> classifyno: " + classifyno);
-//
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//
-//    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//    model.addAttribute("classifyVO", classifyVO);
-//
-//    word = Tool.checkNull(word).trim();
-//
-//    HashMap<String, Object> map = new HashMap<>();
-//    map.put("classifyno", classifyno);
-//    map.put("newsgenre", newsgenre);
-//    map.put("word", word);
-//    map.put("now_page", now_page);
-//
-//    ArrayList<NewsVO> list = this.newsProc.list_by_classifyno_newsgenre_search_paging(map);
-//    model.addAttribute("list", list);
-//
-//    // System.out.println("-> size: " + list.size());
-//    model.addAttribute("word", word);
-//
-//    int search_count = this.newsProc.list_by_classifyno_search_count(map);
-//    String paging = this.newsProc.pagingBox(classifyno, now_page, word, "/news/list_by_classifyno_newsgenre_grid", search_count,
-//        News.RECORD_PER_PAGE, News.PAGE_PER_BLOCK);
-//    model.addAttribute("paging", paging);
-//    model.addAttribute("now_page", now_page);
-//
-//    model.addAttribute("search_count", search_count);
-//
-//    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-//    int no = search_count - ((now_page - 1) * News.RECORD_PER_PAGE);
-//    model.addAttribute("no", no);
-//
-//    // /templates/news/list_by_classifyno_search_paging_grid.html
-//    return "/news/list_by_classifyno_newsgenre_search_paging_grid";
-//  }
+  }
 
   
 }

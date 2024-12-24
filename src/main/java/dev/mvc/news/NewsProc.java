@@ -3,6 +3,7 @@ package dev.mvc.news;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -317,57 +318,53 @@ public class NewsProc implements NewsProcInter {
     int count = newsDAO.decreaseReplycnt(newsno);
     return count;
   }
-  
+
   @Override
-  public ArrayList<NewsVO> list_newsgenre(String newsgenre) {
-    ArrayList<NewsVO> list = this.newsDAO.list_newsgenre(newsgenre);
+  public ArrayList<NewsVO> newsgenre(String newsgenre) {
+    ArrayList<NewsVO> list = this.newsDAO.newsgenre(newsgenre);
     return list;
   }
+
+//  @Override
+//  public ArrayList<NewsVO> list_search_paging(String newsgenre, int now_page, int record_per_page) {
+//    /*
+//    페이지당 10개의 레코드 출력
+//    1 page: WHERE r >= 1 AND r <= 10
+//    2 page: WHERE r >= 11 AND r <= 20
+//    3 page: WHERE r >= 21 AND r <= 30
+//    
+//    now_page 1: WHERE r >= 1 AND r <= 10
+//    now_page 2: WHERE r >= 11 AND r <= 20
+//    now_page 3: WHERE r >= 21 AND r <= 30
+//    
+//    int start_num = (now_page - 1) * record_per_page;
+//    int end_num=start_num + record_per_page;
+//    */
+//
+//   int start_num = ((now_page - 1) * record_per_page) + 1;
+//   int end_num=(start_num + record_per_page) - 1;
+//
+//   // System.out.println("WHERE r >= "+start_num+" AND r <= " + end_num);
+//   
+//   Map<String, Object> map = new HashMap<String, Object>();
+//   map.put("newsgenre", newsgenre);
+//   map.put("start_num", start_num);
+//   map.put("end_num", end_num);
+//   
+//   ArrayList<NewsVO> list = this.newsDAO.list_search_paging(map);
+//   // System.out.println("-> " + list.size());
+//   
+//   return list;
+//  }
+//
+//  @Override
+//  public Integer list_search_count(String newsgenre) {
+//    int cnt = this.newsDAO.list_search_count(newsgenre);
+//    return cnt;
+//  }
   
-//  @Override
-//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap) {
-//    ArrayList<NewsVO> list = this.newsDAO.list_by_classifyno_newsgenre_search(hashMap);
-//    return list;
-//  }
-//
-//  @Override
-//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map) {
-//    /*
-//     * 예) 페이지당 10개의 레코드 출력 1 page: WHERE r >= 1 AND r <= 10 2 page: WHERE r >= 11
-//     * AND r <= 20 3 page: WHERE r >= 21 AND r <= 30
-//     * 
-//     * 페이지에서 출력할 시작 레코드 번호 계산 기준값, nowPage는 1부터 시작 1 페이지 시작 rownum: now_page = 1, (1
-//     * - 1) * 10 --> 0 2 페이지 시작 rownum: now_page = 2, (2 - 1) * 10 --> 10 3 페이지 시작
-//     * rownum: now_page = 3, (3 - 1) * 10 --> 20
-//     */
-//    int begin_of_page = ((int)map.get("now_page") - 1) * News.RECORD_PER_PAGE;
-//
-//    // 시작 rownum 결정
-//    // 1 페이지 = 0 + 1: 1
-//    // 2 페이지 = 10 + 1: 11
-//    // 3 페이지 = 20 + 1: 21
-//    int start_num = begin_of_page + 1;
-//
-//    // 종료 rownum
-//    // 1 페이지 = 0 + 10: 10
-//    // 2 페이지 = 10 + 10: 20
-//    // 3 페이지 = 20 + 10: 30
-//    int end_num = begin_of_page + News.RECORD_PER_PAGE;
-//    /*
-//     * 1 페이지: WHERE r >= 1 AND r <= 10 2 페이지: WHERE r >= 11 AND r <= 20 3 페이지: WHERE
-//     * r >= 21 AND r <= 30
-//     */
-//
-//    // System.out.println("begin_of_page: " + begin_of_page);
-//    // System.out.println("WHERE r >= "+start_num+" AND r <= " + end_num);
-//
-//    map.put("start_num", start_num);
-//    map.put("end_num", end_num);
-//
-//    ArrayList<NewsVO> list = this.newsDAO.list_by_classifyno_newsgenre_search_paging(map);
-//
-//    return list;
-//  }
+  
+  
 
 
 }

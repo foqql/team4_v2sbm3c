@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 /**
  * 개발자가 구현합니다.
  * @author soldesk
@@ -158,24 +159,24 @@ public interface NewsProcInter {
    */   
   public int decreaseReplycnt(int newsno);
   
-  /**
-   * 모든 카테고리의 등록된 글목록
-   * @return
-   */
-  public ArrayList<NewsVO> list_newsgenre();
+  public ArrayList<NewsVO> newsgenre(String newsgenre);
+
+//  /**
+//   * 검색 + 페이징 목록
+//   * select id="list_search_paging" resultType="dev.mvc.cate.CateVO" parameterType="Map" 
+//   * @param word 검색어
+//   * @param now_page 현재 페이지, 시작 페이지 번호: 1 ★
+//   * @param record_per_page 페이지당 출력할 레코드 수
+//   * @return
+//   */
+//  public ArrayList<NewsVO> list_search_paging(String newsgenre, int now_page, int record_per_page);
+//
+//  /**
+//   * 검색 갯수
+//   * @param word
+//   * @return
+//   */
+//  public Integer list_search_count(String newsgenre);
   
-//  /**
-//   * 카테고리별 검색 목록
-//   * @param map
-//   * @return
-//   */
-//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search(HashMap<String, Object> hashMap);
-//  
-//  /**
-//   * 카테고리별 검색 목록 + 페이징
-//   * @param newsVO
-//   * @return
-//   */
-//  public ArrayList<NewsVO> list_by_classifyno_newsgenre_search_paging(HashMap<String, Object> map);  
 }
 

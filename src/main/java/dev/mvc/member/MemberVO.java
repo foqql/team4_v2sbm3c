@@ -1,5 +1,7 @@
 package dev.mvc.member;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +28,11 @@ public class MemberVO {
     private String passwd = "";
     /** 회원 성명 */
     private String mname = "";
-    /** 전화 번호 */
+    /** 생년월일 */
+    private Date birth;
+    /** 성별 */
+    private String gender = "";
+    /** 전화번호 */
     private String tel = "";
     /** 우편 번호 */
     private String zipcode = "";
@@ -36,8 +42,6 @@ public class MemberVO {
     private String address2 = "";
     /** 가입일 */
     private String mdate = "";
-    /** 프로필 이미지 */
-    private String  img= "";
     /** 등급 */
     private int grade = 0;
     
