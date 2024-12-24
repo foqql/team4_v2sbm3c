@@ -34,7 +34,11 @@ public class GenreCont {
 
   @GetMapping(value = "/create") // http://localhost:9092/genre/create
   public String create(Model model) {
-
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
+    model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
     GenreVO genreVO = new GenreVO();
     model.addAttribute("genreVO", genreVO);
     genreVO.setGenre("이름을 입력하세요.");
@@ -88,10 +92,9 @@ public class GenreCont {
     ArrayList<GenreVO> list = this.genreProc.list_all();
     model.addAttribute("list", list);
 
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
-
-    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu();
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
     return "/genre/list_all";
   }
@@ -105,6 +108,11 @@ public class GenreCont {
    */
   @GetMapping(value = "/read/{genreno}")
   public String read(Model model, @PathVariable("genreno") Integer genreno) { // 변경: "genreno"를 "ProductID"로
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
+    model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
     GenreVO genreVO = this.genreProc.read(genreno); // 수정: 실제 genreno를 전달
     model.addAttribute("genreVO", genreVO);
     return "/genre/read";
@@ -119,6 +127,11 @@ public class GenreCont {
    */
   @GetMapping(value = "/update/{genreno}")
   public String update(Model model, @PathVariable("genreno") Integer genreno) { // 변경: "genreno"를 "ProductID"로
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
+    model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
     GenreVO genreVO = this.genreProc.read(genreno); // 수정: 실제 genreno를 전달
     model.addAttribute("genreVO", genreVO);
 
@@ -169,6 +182,11 @@ public class GenreCont {
    */
   @GetMapping(value = "/delete/{genreno}")
   public String delete(Model model, @PathVariable("genreno") Integer genreno) { // 변경: "genreno"를 "ProductID"로
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
+    model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
     GenreVO genreVO = this.genreProc.read(genreno); // 수정: 실제 genreno를 전달
     model.addAttribute("genreVO", genreVO);
 
