@@ -3,7 +3,7 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class='title_line'>
-    <span th:text="${classifyVO.classify }" class="title_line_text"></span > 
+    <span th:text="뉴스" class="title_line_text"></span > 
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
     > 글 조회
   </div>
@@ -14,21 +14,17 @@
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+<!--    <span class='menu_divide' >│</span>-->
+<!--    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>-->
+<!--    <span class='menu_divide' >│</span>-->
+<!--    <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>-->
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
+    <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>
+<!--    <span class='menu_divide' >│</span>-->
+<!--    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  -->
  </aside> 
 
-  <aside class="aside_right" th:if="${session.grade != 'admin'}">
-     <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
-  </aside> 
+
  
   <div class='menu_line'></div>
 

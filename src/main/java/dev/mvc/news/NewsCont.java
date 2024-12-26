@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
@@ -48,6 +50,10 @@ public class NewsCont {
   @Autowired
   @Qualifier("dev.mvc.news.NewsProc") // @Component("dev.mvc.news.NewsProc")
   private NewsProcInter newsProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
+  private GenreProcInter genreProc;
 
   public NewsCont() {
     System.out.println("-> NewsCont created.");
@@ -103,6 +109,8 @@ public class NewsCont {
       RedirectAttributes ra) {
 
     if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
+      
+      
       // ------------------------------------------------------------------------------
       // 파일 전송 코드 시작
       // ------------------------------------------------------------------------------
@@ -315,6 +323,9 @@ public class NewsCont {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
     
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
     
@@ -412,6 +423,12 @@ public class NewsCont {
       @RequestParam(name="newscrawlingno", defaultValue = "0") int newscrawlingno,
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page) {
+    
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
     
     System.out.println("newscrawlingno : "+ newscrawlingno);
     System.out.println("newsno : "+ newsno);

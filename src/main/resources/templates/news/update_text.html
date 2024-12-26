@@ -13,9 +13,9 @@
     <span class='menu_divide' >│</span>
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_search_paging?classifyno=${classifyVO.classifyno }|}">기본 목록형</a>    
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }|}">갤러리형</a>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
   </aside>
   
   <div class='menu_line'></div>
@@ -36,11 +36,7 @@
        <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;' 
                       th:text='${newsVO.content}'></textarea>
     </div>
-    <div>
-       <label>검색어</label>
-       <input type='text' name='word' th:value='${newsVO.word}' required="required" 
-                 class="form-control" style='width: 100%;'>
-    </div>   
+
     <div>
        <label>패스워드</label>
        <input type='password' name='passwd' th:value='1234' required="required" 
@@ -48,8 +44,8 @@
     </div>
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-secondary btn-sm">저장</button>
-      <button type="button" th:attr="onclick=|location.href='./list_by_classifyno_search_paging?classifyno=${classifyno}'|" class="btn btn-secondary btn-sm">목록</button>
-    </div>
+<!--      <button type="button" th:attr="onclick=|location.href='./list_by_classifyno_search_paging?classifyno=${classifyno}'|" class="btn btn-secondary btn-sm">목록</button>-->
+    </div>                                                                        
   
   </form>
 

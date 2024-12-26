@@ -13,10 +13,9 @@
     <span class='menu_divide' >│</span>
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">기본 목록형</a>
-        
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }|}">목록형</a>    
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }|}">갤러리형</a>
   </aside>
   
   <div class='menu_line'></div>
@@ -26,18 +25,14 @@
     
     <div>
        <label>제목</label>
-       <input type='text' name='title' value='화통' required="required" 
+       <input type='text' name='title' value='기사 제목' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
     <div>
        <label>내용</label>
-       <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'>카페 추천합니다.</textarea>
-    </div>
-    <div>
-       <label>검색어</label>
-       <input type='text' name='word' value='cafe,카페,까페,남한산성,일상탈피,힐링,내공,추진력,문제해결' required="required" 
-                 class="form-control" style='width: 100%;'>
-    </div>   
+       <textarea name='content' required="required" class="form-control" 
+                      rows="12" style='width: 100%;'>기사 내용을 가져와 주세요.</textarea>
+    </div>  
     <div>
        <label>이미지</label>
        <input type='file' class="form-control" name='file1MF' id='file1MF' value='' placeholder="파일 선택">
@@ -49,8 +44,8 @@
     </div>   
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-secondary btn-sm">등록</button>
-      <button type="button" th:attr="onclick=|location.href='./list_by_classifyno_search_paging?classifyno=${classifyno}'|" class="btn btn-secondary btn-sm">목록</button>
-    </div>
+<!--      <button type="button" th:attr="onclick=|location.href='./list_by_classifyno_search_paging?classifyno=${classifyno}'|" class="btn btn-secondary btn-sm">목록</button>-->
+    </div>                                                                      
   
   </form>
 

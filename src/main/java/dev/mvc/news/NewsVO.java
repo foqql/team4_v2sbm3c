@@ -31,8 +31,8 @@ public class NewsVO {
   private int memberno;
   /** 장르 번호 */
   private int classifyno;
-  /** 요약된 기사 번호 */
-  private int summaryno;
+  /** 크롤링된 기사 번호 */
+  private int newscrawlingno; 
   /** 제목 */
   private String title = "";
   /** 내용 */
@@ -74,5 +74,8 @@ public class NewsVO {
   private String thumb1 = "";
   /** 메인 이미지 크기 */
   private long size1 = 0;
+  
+
+
 
 }
