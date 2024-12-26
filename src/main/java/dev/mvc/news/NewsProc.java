@@ -364,8 +364,8 @@ public class NewsProc implements NewsProcInter {
 //  }
  
   @Override
-  public NewsVO trans_summ(int newsno) {
-    NewsVO newsVO = this.newsDAO.trans_summ(newsno);
+  public NewsVO trans_sum(int newsno) {
+    NewsVO newsVO = this.newsDAO.trans_sum(newsno);
     return newsVO;
   }
 

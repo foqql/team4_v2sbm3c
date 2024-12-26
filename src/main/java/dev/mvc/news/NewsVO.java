@@ -33,10 +33,16 @@ public class NewsVO {
   private int classifyno;
   /** 크롤링된 기사 번호 */
   private int newscrawlingno; 
+  /** 번역된 기사 번호 */
+  private int translateno;
+  /** 요약된 기사 번호 */
+  private int summaryno;
   /** 제목 */
   private String title = "";
   /** 내용 */
   private String content = "";
+  /** 요약된 내용 */
+  private String content2 = "";
   /** 추천수 */
   private int recom;
   /** 조회수 */

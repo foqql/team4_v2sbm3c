@@ -17,9 +17,9 @@
 
   <aside class="aside_right">
 
-<!--    <span th:if="${session.grade == 'admin'}">-->
-<!--      <a th:href="@{|/news/create?classifyno=${classifyVO.classifyno}|}">등록</a>-->
-<!--      <span class="menu_devide">│</span>    -->
+    <span th:if="${session.grade == 'admin' and classifyVO.classifyno == 70}">
+      <a th:href="@{|/news/create?classifyno=${classifyVO.classifyno}|}">등록</a>
+      <span class="menu_devide">│</span>    
     </span>
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    

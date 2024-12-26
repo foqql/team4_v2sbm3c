@@ -86,6 +86,9 @@ public class NewsCont {
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
@@ -104,13 +107,10 @@ public class NewsCont {
       HttpSession session, 
       Model model, 
       @ModelAttribute("newsVO") NewsVO newsVO,
-      @RequestParam(name="word", defaultValue = "") String word, 
-      @RequestParam(name="now_page", defaultValue = "1") int now_page,
       RedirectAttributes ra) {
 
     if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
-      
-      
+            
       // ------------------------------------------------------------------------------
       // 파일 전송 코드 시작
       // ------------------------------------------------------------------------------
@@ -195,10 +195,7 @@ public class NewsCont {
         // return "redirect:/news/list_by_classifyno?classifyno=" + newsVO.getClassifyno();
         // // /templates/news/list_by_classifyno.html
       } else {
-        ra.addFlashAttribute("code", "create_fail"); // DBMS 등록 실패
-        ra.addFlashAttribute("cnt", 0); // 업로드 실패
-        ra.addFlashAttribute("url", "/news/msg"); // msg.html, redirect parameter 적용
-        return "redirect:/news/msg"; // Post -> Get - param...
+        return "redirect:/news/list_by_classifyno?classifyno=70"; // Post -> Get - param...
       }
     } else { // 로그인 실패 한 경우
       return "redirect:/member/login_cookie_need"; // /member/login_cookie_need.html
@@ -379,6 +376,9 @@ public class NewsCont {
     // newsgenre
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
     
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
@@ -591,6 +591,9 @@ public class NewsCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -786,6 +789,9 @@ public class NewsCont {
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
       model.addAttribute("menu", menu);
       
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
+      
       NewsVO newsVO = this.newsProc.read(newsno);
       model.addAttribute("newsVO", newsVO);
       
@@ -888,6 +894,57 @@ public class NewsCont {
 //
 //   
 //  }
+  
+  /**
+   * 조회 http://localhost:9093/news/trans_sum?newsno=17
+   * 
+   * @return
+   */
+  @GetMapping(value = "/trans_sum")
+  public String trans_sum(Model model, 
+      @RequestParam(name="newsno", defaultValue = "0") int newsno,
+      @RequestParam(name="newscrawlingno", defaultValue = "0") int newscrawlingno,
+      @RequestParam(name="word", defaultValue = "") String word, 
+      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
+    
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
+    System.out.println("newscrawlingno : "+ newscrawlingno);
+    System.out.println("newsno : "+ newsno);
+
+    NewsVO newsVO = this.newsProc.trans_sum(newsno);
+//    String title = newsVO.getTitle();
+//    String content = newsVO.getContent();
+//    
+//    title = Tool.convertChar(title);  // 특수 문자 처리
+//    content = Tool.convertChar(content); 
+//    
+//    newsVO.setTitle(title);
+//    newsVO.setContent(content);  
+
+    long size1 = newsVO.getSize1();
+    String size1_label = Tool.unit(size1);
+    newsVO.setSize1_label(size1_label);
+
+    model.addAttribute("newsVO", newsVO);
+    System.out.println("newsno : "+ newsno);
+
+    ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
+    model.addAttribute("classifyVO", classifyVO);
+    System.out.println("newsVO.getClassifyno() : "+ newsVO.getClassifyno());
+
+    // 조회에서 화면 하단에 출력
+    // ArrayList<ReplyVO> reply_list = this.replyProc.list_news(newsno);
+    // mav.addObject("reply_list", reply_list);
+    model.addAttribute("word", word);
+    model.addAttribute("now_page", now_page);
+
+    return "/news/trans_sum";
+  }
 
   
 }

@@ -166,10 +166,10 @@ public interface NewsDAOInter {
 //  public Integer list_search_count(String newsgenre);
   
   /**
-   * 조회
+   * 번역,요약 조회
    * @param newsno
    * @return
    */
-  public NewsVO trans_summ(int newsno);
+  public NewsVO trans_sum(int newsno);
   
 }

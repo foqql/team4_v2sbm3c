@@ -5,7 +5,7 @@
   <div class='title_line'>
     <span th:text="${classifyVO.classify }" class="title_line_text"></span > 
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
-    > 글 조회
+    > 번역 및 요약 조회
   </div>
   
   <aside class="aside_right" th:if="${session.grade == 'admin'}">
@@ -15,11 +15,13 @@
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
+    <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>
+<!--    <span class='menu_divide' >│</span>-->
+<!--    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>-->
+<!--    <span class='menu_divide' >│</span>-->
+<!--    <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>-->
+<!--    <span class='menu_divide' >│</span>-->
+<!--    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  -->
  </aside> 
 
   <aside class="aside_right" th:if="${session.grade != 'admin'}">
@@ -44,11 +46,15 @@
           <span style="font-size: 1.5em; font-weight: bold;" th:text="${newsVO.title}"></span>
           <span style="font-size: 1em;" th:text="${newsVO.rdate }"></span><br><br>
           <div style="white-space: pre-wrap;"><span th:text="${newsVO.content}"></span></div>
-          
         </div>
       </li>   
       
-      <a href="/classify/create" role="button" style="margin-left:45%;">번역 및 요약</a>
+      <li class="li_none">
+      <span style="font-size: 1.3em; font-weight: bold; margin-left:50%;"> 요약 </span>
+      <div style="white-space: pre-wrap;"><span th:text="${newsVO.content2}"></span></div>
+      </li>
+      
+      <a th:href="@{|/news/read?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:50%; font-size: 1.3em;">원문</a>
     </ul>
   </fieldset>
   

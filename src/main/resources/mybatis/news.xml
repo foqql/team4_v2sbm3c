@@ -5,11 +5,20 @@
 <mapper namespace="dev.mvc.news.NewsDAOInter">
   <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.news.NewsVO">
-
-    INSERT INTO news(newsno, memberno, classifyno, newscrawlingno, title, content, passwd,
-                                     file1, file1saved, thumb1, size1, rdate, newsgenre)
-    VALUES(news_seq.nextval, #{memberno}, #{classifyno}, #{newscrawlingno}, #{title}, #{content}, #{passwd},
-                #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate, #{newsgenre});
+    INSERT ALL
+        INTO newscrawling(newscrawlingno, title, content, rdate)
+        VALUES(newscrawling_seq.nextval, #{title}, #{content}, sysdate)
+        
+        INTO translate(translateno, title, content)
+        VALUES(translate_seq.nextval, #{title}, #{content})
+        
+        INTO summary(summaryno, content)
+        VALUES(summary_seq.nextval, #{content})
+        
+        INTO news(newsno, memberno, classifyno, newscrawlingno, translateno, summaryno, title, content, passwd, file1, file1saved, thumb1, size1, rdate)
+        VALUES(news_seq.nextval, #{memberno}, #{classifyno}, newscrawling_seq.currval, translate_seq.currval, summary_seq.currval, 
+        #{title}, #{content}, #{passwd}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+    SELECT * FROM dual
   </insert>
 
   <select id="list_all" resultType="dev.mvc.news.NewsVO">
@@ -31,10 +40,10 @@
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.news.NewsVO" parameterType="int">
-SELECT n.newsno, n.memberno, n.classifyno, c.title AS title, c.content as content, n.recom, n.cnt, n.replycnt, 
-       n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre
-FROM news n, newscrawling c
-WHERE n.newsno = #{newsno} and c.newscrawlingno = n.newscrawlingno
+    SELECT n.newsno, n.memberno, n.classifyno, c.title AS title, c.content as content, n.recom, n.cnt, n.replycnt, 
+           n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre
+    FROM news n, newscrawling c
+    WHERE n.newsno = #{newsno} and c.newscrawlingno = n.newscrawlingno
   </select>
   
   <!-- map 등록, 수정, 삭제, 
@@ -123,9 +132,11 @@ WHERE n.newsno = #{newsno} and c.newscrawlingno = n.newscrawlingno
   
   <!-- 글 수정 -->
   <update id="update_text" parameterType="dev.mvc.news.NewsVO">
-    UPDATE news
-    SET title=#{title}, content=#{content},  word=#{word}
-    WHERE newsno = #{newsno}
+    MERGE INTO newscrawling c
+    USING news n
+    ON (n.newsno = #{newsno} AND n.newscrawlingno = c.newscrawlingno)
+    WHEN MATCHED THEN
+    UPDATE SET c.title = #{title}, c.content = #{content}
   </update>
 
   <!-- 파일 수정 -->
@@ -222,5 +233,13 @@ WHERE n.newsno = #{newsno} and c.newscrawlingno = n.newscrawlingno
     )
     WHERE r &gt;= #{start_num} AND r &lt;= #{end_num}  <!-- WHERE r >= 1 AND r <= 3 -->
   </select>
-                    
+              
+  <select id="trans_sum" resultType="dev.mvc.news.NewsVO" parameterType="int">                    
+    SELECT n.newsno, n.memberno, n.classifyno, t.title AS title, t.content as content, s.content as content2, n.recom, n.cnt, n.replycnt, 
+           n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre
+    FROM news n, translate t, summary s
+    WHERE n.newsno = #{newsno} and t.translateno = n.translateno and s.summaryno = n.summaryno
+                  
+  </select>                    
+  
 </mapper> 
