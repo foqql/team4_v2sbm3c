@@ -3,14 +3,14 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
 
-  <div class='title_line'>
-    <span th:text="${classifyVO.classify}" class="title_line_text"></span >
-    > <span th:text="${classifyVO.classify}" class="title_line_text"></span >
+  <div class='weather_line'>
+    <span th:text="${classifyVO.classify}" class="weather_line_text"></span >
+    > <span th:text="${classifyVO.classify}" class="weather_line_text"></span >
   </div>
 
   <aside class="aside_right">
-    <a th:href="@{|/weather/create?classifyno=${classifyVO.classifyno}|}">등록</a>
-    <span class="menu_divide">|</span>    
+   <!-- <a th:href="@{|/weather/create?classifyno=${classifyVO.classifyno}|}">등록</a>
+    <span class="menu_divide">|</span>    -->
     <a href="javascript:location.reload();">새로고침</a>
   </aside> 
    
@@ -45,11 +45,14 @@
       </td>
       </td>
       <td class='td_left'>
-        <span th:text="${weatherVO.title}" style="font-weight: bold;"></span><br>
-        <span th:if="${weatherVO.content.length() > 160 }" 
-                  th:text="|${weatherVO.content.substring(0, 160) }...|"></span>
-        <span th:if="${weatherVO.content.length() <= 160 }" 
-                  th:text="|${weatherVO.content}|"></span>
+        <span th:text="${weatherVO.city}" style="font-weight: bold;"></span><br>
+        
+        <span th:if="${weatherVO.weather.length() > 160 }" 
+                  th:text="|${weatherVO.weather.substring(0, 160) }...|"></span>
+        <span th:if="${weatherVO.weather.length() <= 160 }" 
+                  th:text="|${weatherVO.weather}|"></span>
+ 
+
 
       </td>
     </tr>

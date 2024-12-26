@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dev.mvc.exchange.ExchangeVO;
+
 /**
  * 개발자가 구현합니다.
  * @author soldesk
@@ -36,6 +38,7 @@ public interface WeatherProcInter {
    * @return
    */
   public WeatherVO read(int weatherno);
+//  public WeatherVO reading(int classifyno);
   
   /**
    * map 등록, 수정, 삭제

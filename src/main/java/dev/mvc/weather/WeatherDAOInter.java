@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import dev.mvc.classify.ClassifyVO;
+import dev.mvc.exchange.ExchangeVO;
 
 /**
  * Spring Boot가 자동 구현
@@ -38,6 +39,7 @@ public interface WeatherDAOInter {
    * @return
    */
   public WeatherVO read(int weatherno);
+//  public WeatherVO reading(int weatherno);  
   
   /**
    * map 등록, 수정, 삭제
@@ -144,3 +146,4 @@ public interface WeatherDAOInter {
    */   
   public int decreaseReplycnt(int weatherno);
 }
+

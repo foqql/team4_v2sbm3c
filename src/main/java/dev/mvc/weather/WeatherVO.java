@@ -9,44 +9,88 @@ import lombok.ToString;
 @Getter @Setter @ToString
 public class WeatherVO {
 
-  /*
-CREATE TABLE weather (
-  weatherno         NUMBER(10)          NOT NULL,
-  title                 VARCHAR2(100)     NOT NULL,
-  content             CLOB                      NOT NULL,
-  cnt                 NUMBER(7)         NOT NULL,
-  word                  VARCHAR2(200)     NOT NULL,
-  rdate                 DATE                      NOT NULL,
-  map                 VARCHAR2(1000)  NULL,
-  youtube             VARCHAR2(1000)  NULL,
-  passwd              VARCHAR2(100)     NULL
-);
-  */
-
+  
   /** 컨텐츠 번호 */
   private int weatherno;
+  
   /** 관리자 권한의 회원 번호 */
   private int memberno;
+  
   /** 장르 번호 */
   private int classifyno;
-  /** 크롤링한 날씨 번호 */
-  private int wcrawlingno;
-  /** 제목 */
-  private String title = "";
-  /** 내용 */
-  private String content = "";
-  /** 조회수 */
-  private int cnt = 0;
-  /** 검색어 */
-  private String word = "";
-  /** 등록 날짜 */
+  
+//  /** 대륙 */
+//  private String continent = "";
+//  
+//  /** 국가 */
+//  private String country = "";
+//  
+//  /** 도시 */
+//  private String city = "";
+  
+  /** 날씨 */
+  private String weather = "";
+  
+  /** 날짜 */
   private String rdate = "";
+  
+  /** 기온 */
+  private String temp  = "";
+  
+  /** 체감온도 */
+  private String windchill = "";
+  
+  /** 최저기온 */
+  private String mintemp = "";
+  
+  /** 최고기온 */
+  private String maxtemp = "";
+  
+  /** 습도 */
+  private String humidity = "";
+  
+  /** 강수량 */
+  private String rainfall = "";
+  
+  /** 강수확률 */
+  private String pop = "";
+  
+  /** 풍속 */
+  private String speed = "";
+  
+  /** 풍향 */
+  private String direction = "";
+  
+  /** 최근 업데이트 시간 */
+  private String udate = "";
+
   /** 지도 */
   private String map = "";
+  
   /** Youtube */
   private String youtube = "";
-  /** 암호 */
+  
+  /** 패스워드 */
   private String passwd = "";
+  
+  
+// 지역VO
+ // -----------------------------------------------------------------------------------
+ /**
+  
+  /** 지역 번호 */
+  private int areano;
+  
+  /** 대륙 */
+  private String continent = "";
+  
+  /** 국가 */
+  private String country = "";
+  
+  /** 도시 */
+  private String city;
+  
+  
   
   // 파일 업로드 관련
   // -----------------------------------------------------------------------------------

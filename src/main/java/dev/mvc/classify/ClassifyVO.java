@@ -24,5 +24,6 @@ public class ClassifyVO {
 
     private String bigcla;  //장르 
 //    private GenreVO genreVO;
+
  }
 

@@ -9,8 +9,8 @@
   </div>
   
   <aside class="aside_right">
-    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
-    <span class='menu_divide' >│</span>
+    <!-- <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
+    <span class='menu_divide' >│</span> -->
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno_search_paging?classifyno=${classifyVO.classifyno }|}">기본 목록형</a>    
@@ -24,17 +24,21 @@
     <input type="hidden" name="classifyno" th:value="${param.classifyno }">
     
     <div>
-       <label>제목</label>
-       <input type='text' name='title' value='화통' required="required" 
-                 autofocus="autofocus" class="form-control" style='width: 100%;'>
+       <label>날씨</label>
+       <input type='text' name='title' value='맑음' required="required" 
+                 autofocus="autofocus" class="form-control" style='width: 5%;'>
     </div>
     <div>
-       <label>내용</label>
-       <textarea name='content' required="required" class="form-control" rows="12" style='width: 100%;'>카페 추천합니다.</textarea>
+       <label>기온</label>
+       <textarea name='content' required="required" class="form-control" rows="1" style='width: 5%;'>3.7℃</textarea>
+    </div>
+        <div>
+       <label>풍향</label>
+       <textarea name='wind' required="required" class="form-control" rows="1" style='width: 5.5%;'>남동풍</textarea>
     </div>
     <div>
        <label>검색어</label>
-       <input type='text' name='word' value='cafe,카페,까페,남한산성,일상탈피,힐링,내공,추진력,문제해결' required="required" 
+       <input type='text' name='word' value='날씨, 온도' required="required" 
                  class="form-control" style='width: 100%;'>
     </div>   
     <div>
