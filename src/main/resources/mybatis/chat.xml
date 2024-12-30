@@ -6,12 +6,13 @@
 <mapper namespace="dev.mvc.chat.Chat">
 
     <insert id="create" parameterType="dev.mvc.chat.ChatVO">
-    INSERT INTO Chat (chatno, message, recom, rdate, memberno)
-    VALUES (chat_seq.nextval, #{message}, #{recom}, SYSDATE, #{memberno})
+    INSERT INTO Chat (chatno, message, recom, rdate, memberno, imageUrl)
+    VALUES (chat_seq.nextval, #{message}, #{recom}, SYSDATE, #{memberno}, #{imageUrl,jdbcType=VARCHAR})
     </insert>
 
+
     <select id="list" resultType="dev.mvc.chat.ChatVO">
-    SELECT c.chatno, c.message, c.recom, c.rdate, c.memberno, m.id, m.grade
+    SELECT c.chatno, c.message, c.recom, c.rdate, c.memberno, m.id, m.grade, c.imageUrl
     FROM Chat c
     JOIN Member m ON c.memberno = m.memberno
     ORDER BY c.chatno DESC

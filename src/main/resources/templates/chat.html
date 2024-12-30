@@ -22,29 +22,30 @@
         <p>현재 로그인된 계정의 등급: <span th:text="${loggedInUserGrade}"></span></p>
     </div>
     <div id="chat-content" class="scrollable">
-        <ul>
-            <th:block th:each="chat : ${chatList}">
-                <li class="chat-message" 
-                    th:style="'color: ' + (${chat.grade} <= 10 ? 'blue' : 'black')">
-                    <b th:text="${chat.id}">아이디</b>: 
-                    <span th:text="${chat.message}">메시지</span>
-                    <span class="chat-time" th:text="${#dates.format(chat.rdate, 'yyyy-MM-dd HH:mm:ss')}">시간</span>
-                    <form th:if="${loggedInUserGrade == 'admin'}" th:action="@{'/chat/delete/' + ${chat.chatno}}" method="post">
-                        <button type="submit" class="delete-btn">삭제</button>
-                    </form>
-                </li>
-            </th:block>
-        </ul>
-    </div>
-    <form action="/chat/create" method="post" th:if="${id != null}">
-        <textarea name="message" class="chat-input" placeholder="메시지를 입력하세요" required></textarea>
-        <input type="hidden" name="recom" value="0">
-        <button type="submit">전송</button>
-    </form>
-    <div th:if="${id == null}">
-        <p>채팅을 하시려면 <a th:href="@{/member/login}">로그인</a> 해주세요.</p>
-    </div>
-    <a href="http://localhost:9093/" class="back-btn">메인 페이지로 돌아가기</a> <!-- 메인 페이지로 돌아가기 버튼 추가 -->
+    <ul>
+        <th:block th:each="chat : ${chatList}">
+            <li class="chat-message" th:style="'color: ' + (${chat.grade} <= 10 ? 'blue' : 'black')">
+                <b th:text="${chat.id}">아이디</b>: 
+                <span th:text="${chat.message}">메시지</span>
+                <span class="chat-time" th:text="${#dates.format(chat.rdate, 'yyyy-MM-dd HH:mm:ss')}">시간</span>
+                <form th:if="${loggedInUserGrade == 'admin'}" th:action="@{'/chat/delete/' + ${chat.chatno}}" method="post">
+                    <button type="submit" class="delete-btn">삭제</button>
+                </form>
+                <!-- 이미지 출력 추가 -->
+                <img th:if="${chat.imageUrl != ''}" th:src="${chat.imageUrl}" alt="Uploaded Image" style="max-width: 100px; max-height: 100px;"/>
+            </li>
+        </th:block>
+    </ul>
 </div>
+
+
+    <form th:action="@{/chat/create}" method="post" enctype="multipart/form-data">
+        <textarea name="message" rows="4" cols="50" placeholder="메시지를 입력하세요..."></textarea>
+        <br>
+        <input type="file" name="image"/>
+        <button type="submit">메시지 전송</button>
+    </form>
+</div>
+<a class="back-btn" href="/">메인으로 돌아가기</a>
 </body>
 </html>

@@ -23,6 +23,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     registry.addResourceHandler("/news/storage/**").addResourceLocations("file:///" + News.getUploadDir());
     registry.addResourceHandler("/exchange/storage/**").addResourceLocations("file:///" + Exchange.getUploadDir());
     registry.addResourceHandler("/weather/storage/**").addResourceLocations("file:///" + Weather.getUploadDir());
+    registry.addResourceHandler("/uploads/**") .addResourceLocations("file:///C:/uploads/");
 
     // JSP 인식되는 경로: http://localhost:9091/food/storage";
     // registry.addResourceHandler("/exchange/storage/**").addResourceLocations("file:///"

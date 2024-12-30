@@ -10,6 +10,7 @@ public class ChatVO {
     private int memberno;
     private String id; // 아이디 추가
     private int grade; // 회원 등급 추가
+    private String imageUrl; // 이미지 URL 추가
 
     // Getter & Setter
     public int getChatno() { return chatno; }
@@ -32,4 +33,7 @@ public class ChatVO {
 
     public int getGrade() { return grade; }
     public void setGrade(int grade) { this.grade = grade; }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 }
