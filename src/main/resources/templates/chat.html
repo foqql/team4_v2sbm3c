@@ -6,20 +6,32 @@
     <title>Chat</title>
     <style>
         .chat-box { width: 50%; margin: 0 auto; border: 1px solid #ccc; padding: 10px; }
-        .chat-message { margin-bottom: 10px; }
+        .chat-message { margin-bottom: 5px; position: relative; height: 100px; overflow: hidden; }
+        .chat-time { position: absolute; right: 70px; font-size: 0.7em; color: gray; }
+        .delete-btn { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
         .chat-input { width: 100%; margin-top: 10px; }
+        .scrollable { height: 500px; overflow-y: scroll; }
+        .back-btn { display: block; margin: 20px auto; text-align: center; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; }
+        .back-btn:hover { background-color: #45a049; }
     </style>
 </head>
 <body>
 <div class="chat-box">
     <h2>채팅창</h2>
-    <div id="chat-content">
+    <div th:if="${id != null}">
+        <p>현재 로그인된 계정의 등급: <span th:text="${loggedInUserGrade}"></span></p>
+    </div>
+    <div id="chat-content" class="scrollable">
         <ul>
             <th:block th:each="chat : ${chatList}">
                 <li class="chat-message" 
                     th:style="'color: ' + (${chat.grade} <= 10 ? 'blue' : 'black')">
                     <b th:text="${chat.id}">아이디</b>: 
                     <span th:text="${chat.message}">메시지</span>
+                    <span class="chat-time" th:text="${#dates.format(chat.rdate, 'yyyy-MM-dd HH:mm:ss')}">시간</span>
+                    <form th:if="${loggedInUserGrade == 'admin'}" th:action="@{'/chat/delete/' + ${chat.chatno}}" method="post">
+                        <button type="submit" class="delete-btn">삭제</button>
+                    </form>
                 </li>
             </th:block>
         </ul>
@@ -32,6 +44,7 @@
     <div th:if="${id == null}">
         <p>채팅을 하시려면 <a th:href="@{/member/login}">로그인</a> 해주세요.</p>
     </div>
+    <a href="http://localhost:9093/" class="back-btn">메인 페이지로 돌아가기</a> <!-- 메인 페이지로 돌아가기 버튼 추가 -->
 </div>
 </body>
 </html>

@@ -1,8 +1,6 @@
 package dev.mvc.chat;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,9 @@ public class ChatProc implements ChatProcInter {
         // 최신 15개의 메시지만 반환
         return allMessages.stream().sorted((a, b) -> b.getChatno() - a.getChatno()).limit(15).collect(Collectors.toList());
     }
+
+    @Override
+    public int delete(int chatno) {
+        return chatDAO.delete(chatno);
+    }
 }
-
-
-

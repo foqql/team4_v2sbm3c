@@ -1,11 +1,11 @@
-  <!DOCTYPE html> 
+   <!DOCTYPE html> 
   
   <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
   <div layout:fragment="content">
-    <div class='weather_line'>
-      <span th:text="${classifyVO.classify }" class="weather_line_text"></span > 
-      > <span th:text="${classifyVO.classify}" class="weather_line_text"></span > 
-      > 글 조회
+    <div class='title_line'>
+      <span th:text="날씨" class="title_line_text"></span > 
+      > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
+      > <span th:text="${weatherVO.city}" class="title_line_text"></span > 
     </div>
     
     <aside class="aside_right" th:if="${session.grade == 'admin'}">
@@ -50,8 +50,8 @@
             
             <!-- 12/23일 월 -->
             
-<div style="white-space: pre-wrap; padding: 8px; margin: 8px 0; background-color: #f0f8ff; border-radius: 6px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
-    <div style="font-size: 14px; color: #333; flex: 1; margin-right: 8px;">
+<div style="white-space: pre-wrap; padding: 0px; margin: -30px 0; background-color: #f0f8ff; border-radius: 6px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
+    <div style="font-size: 14px; color: #333; flex: 1; margin-right: 8px; line-height: 1.5;">
         <span>대륙: </span><span th:text="${weatherVO.continent}"></span>&nbsp;/&nbsp;<span>국가: </span><span th:text="${weatherVO.country}"></span>&nbsp;/&nbsp;<span>도시: </span><span th:text="${weatherVO.city}"></span><br>
         <span>날씨: </span><span th:text="${weatherVO.weather}"></span><br>
         <span>날짜: </span><span th:text="${weatherVO.rdate}"></span><br>
