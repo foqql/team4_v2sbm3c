@@ -19,6 +19,8 @@ import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.exchange.ExchangeVO;
+import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
@@ -39,6 +41,12 @@ public class WeatherCont {
   @Autowired
   @Qualifier("dev.mvc.weather.WeatherProc") // @Component("dev.mvc.weather.WeatherProc")
   private WeatherProcInter weatherProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
+  private GenreProcInter genreProc;
+
+
 
   public WeatherCont() {
     System.out.println("-> WeatherCont created.");
@@ -302,6 +310,9 @@ public class WeatherCont {
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+    
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
@@ -400,6 +411,9 @@ public class WeatherCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     WeatherVO weatherVO = this.weatherProc.read(weatherno);
 
