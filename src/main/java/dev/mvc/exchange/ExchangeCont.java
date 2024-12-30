@@ -111,7 +111,7 @@ public class ExchangeCont {
 
     ClassifyVO classifyVO = this.classifyProc.read(exchangeVO.getClassifyno()); // 그룹 정보 읽기
     model.addAttribute("classifyVO", classifyVO);
-System.out.println("겟 맵 확인");
+//System.out.println("겟 맵 확인");
     return "/exchange/map"; // //templates/exchange/map.html
   }
 
