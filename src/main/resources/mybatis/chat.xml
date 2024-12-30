@@ -17,5 +17,8 @@
     ORDER BY c.chatno DESC
     </select>
 
+    <delete id="delete" parameterType="int">
+    DELETE FROM Chat WHERE chatno = #{chatno}
+    </delete>
 
 </mapper>
