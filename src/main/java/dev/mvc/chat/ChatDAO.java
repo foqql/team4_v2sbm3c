@@ -1,6 +1,5 @@
 package dev.mvc.chat;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,9 @@ public class ChatDAO implements ChatDAOInter {
     public List<ChatVO> list() {
         return sqlSession.selectList(namespace + ".list");
     }
-    
 
-
+    @Override
+    public int delete(int chatno) {
+        return sqlSession.delete(namespace + ".delete", chatno);
+    }
 }

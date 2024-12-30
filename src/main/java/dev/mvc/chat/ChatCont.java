@@ -24,6 +24,9 @@ public class ChatCont {
         model.addAttribute("grade", session.getAttribute("grade"));
         model.addAttribute("id", session.getAttribute("id"));
         
+        // 로그인된 계정의 등급을 모델에 추가
+        model.addAttribute("loggedInUserGrade", session.getAttribute("grade"));
+        
         return "chat";
     }
 
@@ -39,6 +42,15 @@ public class ChatCont {
         chatVO.setId(id);
 
         chatProc.create(chatVO);
+        return "redirect:/chat/list";
+    }
+
+    @PostMapping("/delete/{chatno}")
+    public String delete(@PathVariable("chatno") int chatno, HttpSession session) {
+        String grade = (String) session.getAttribute("grade");
+        if (grade != null && grade.equals("admin")) {
+            chatProc.delete(chatno);
+        }
         return "redirect:/chat/list";
     }
 }
