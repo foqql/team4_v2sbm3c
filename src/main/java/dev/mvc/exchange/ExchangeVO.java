@@ -36,13 +36,13 @@ CREATE TABLE exchange (
   /** 이름 */
   private String name = "";
   /** 가격 */
-  private int price;
+  private double price;
   /** 원당 가격 */
-  private int krw;
+  private double krw;
   /** 변동 값 */
-  private int value;
+  private double value;
   /** 종가 변동 값*/
-  private int yesterday;
+  private double yesterday;
   /** 최근 업데이트 날짜 */
   private String recent = "";
   /** 지도 */
@@ -66,5 +66,8 @@ CREATE TABLE exchange (
   private String thumb1 = "";
   /** 메인 이미지 크기 */
   private long size1 = 0;
+  
 
 }
+  
+  
