@@ -9,11 +9,11 @@
         INTO newscrawling(newscrawlingno, title, content, rdate)
         VALUES(newscrawling_seq.nextval, #{title}, #{content}, sysdate)
         
-        INTO translate(translateno, title, content)
-        VALUES(translate_seq.nextval, #{title}, #{content})
+        INTO translate(translateno)
+        VALUES(translate_seq.nextval)
         
-        INTO summary(summaryno, content)
-        VALUES(summary_seq.nextval, #{content})
+        INTO summary(summaryno)
+        VALUES(summary_seq.nextval)
         
         INTO news(newsno, memberno, classifyno, newscrawlingno, translateno, summaryno, title, content, passwd, file1, file1saved, thumb1, size1, rdate)
         VALUES(news_seq.nextval, #{memberno}, #{classifyno}, newscrawling_seq.currval, translate_seq.currval, summary_seq.currval, 
@@ -40,8 +40,8 @@
   
   <!-- 일반적인 조회 -->
   <select id="read" resultType="dev.mvc.news.NewsVO" parameterType="int">
-    SELECT n.newsno, n.memberno, n.classifyno, c.title AS title, c.content as content, n.recom, n.cnt, n.replycnt, 
-           n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre
+    SELECT n.newsno, n.memberno, n.classifyno, c.title AS title, c.content as content, c.url as content2, n.recom, n.cnt, n.replycnt, 
+           n.passwd, n.word, n.rdate, n.file1, n.file1saved, n.thumb1, n.size1, n.map, n.youtube, n.newsgenre 
     FROM news n, newscrawling c
     WHERE n.newsno = #{newsno} and c.newscrawlingno = n.newscrawlingno
   </select>
