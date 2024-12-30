@@ -59,7 +59,7 @@ public class Tool {
       if (file.endsWith("jpg") || file.endsWith(".jpeg") || file.endsWith(".png") || file.endsWith("gif")
           || file.endsWith("txt") || file.endsWith("hwp") || file.endsWith("xls") || file.endsWith("xlsx")
           || file.endsWith("ppt") || file.endsWith("pptx") || file.endsWith("zip") || file.endsWith("tar")
-          || file.endsWith("gz") || file.endsWith("ipynb") || file.endsWith("doc")) {
+          || file.endsWith("gz") || file.endsWith("ipynb") || file.endsWith("doc")){
         sw = true;
       }
     }

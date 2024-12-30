@@ -3,10 +3,12 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class='title_line'>
-    <span th:text="뉴스" class="title_line_text"></span > 
+    <span th:text="${classifyVO.bigcla}" class="title_line_text"></span > 
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
     > 원문 조회
   </div>
+  
+
   
   <aside class="aside_right" th:if="${session.grade == 'admin'}">
     <a href="javascript:location.reload();">새로고침</a>
@@ -17,13 +19,13 @@
     <span class='menu_divide' >│</span>
     <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>
     <span class='menu_divide' >│</span>
+    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
+    <span class='menu_divide' >│</span>
     
     <span th:if="${classifyVO.classifyno == 70}">
       <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
       <span class='menu_divide' >│</span>
       <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
     </span>
     
  </aside> 
@@ -47,8 +49,19 @@
           
         </div>
       </li>   
+      
+      <li class="li_none" th:if="${newsVO.size1 > 0}">
+        <div >
+          첨부 파일: <a th:href='@{|/download?dir=news/storage&filename=${newsVO.file1saved}&downname=${newsVO.file1}|}'
+                             th:text='|${newsVO.file1}|'></a> <span th:text="|(${newsVO.size1_label})|"></span>  
+                         <a th:href='@{|/download?dir=news/storage&filename=${newsVO.file1saved}&downname=${newsVO.file1}|}'><img src="/news/images/download.png"></a>
+        </div>
+      </li>  
     </ul>
-    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:50%; font-size: 1.3em;">번역 및 요약</a>
+    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:36%; font-size: 1.3em;">번역 및 요약 이동</a>
+    <span th:if="${classifyVO.classifyno != 70}">
+      <a th:href="${newsVO.content2}" target="_blank" style="margin-left:10%; font-size: 1.3em;">해당 기사 이동</a>
+    </span>
   </fieldset>
   
 

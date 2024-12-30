@@ -3,7 +3,7 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class='title_line'>
-    <span th:text="${classifyVO.classify }" class="title_line_text"></span > 
+    <span th:text="${classifyVO.bigcla }" class="title_line_text"></span > 
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
     > 번역 및 요약 조회
   </div>
@@ -20,8 +20,8 @@
 <!--    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>-->
 <!--    <span class='menu_divide' >│</span>-->
 <!--    <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>-->
-<!--    <span class='menu_divide' >│</span>-->
-<!--    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  -->
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
  </aside> 
 
   <aside class="aside_right" th:if="${session.grade != 'admin'}">
@@ -54,7 +54,7 @@
       <div style="white-space: pre-wrap;"><span th:text="${newsVO.content2}"></span></div>
       </li>
       
-      <a th:href="@{|/news/read?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:50%; font-size: 1.3em;">원문</a>
+      <a th:href="@{|/news/read?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:48.5%; font-size: 1.3em;">원문 이동</a>
     </ul>
   </fieldset>
   
