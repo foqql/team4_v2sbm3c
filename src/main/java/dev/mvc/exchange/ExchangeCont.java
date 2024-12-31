@@ -1,5 +1,8 @@
 package dev.mvc.exchange;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
@@ -23,9 +22,6 @@ import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
-import dev.mvc.tool.Tool;
-import dev.mvc.tool.Upload;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping(value = "/exchange")
@@ -117,7 +113,7 @@ public class ExchangeCont {
 
 
   /**
-   * MAP 등록/수정/삭제 처리 http://localhost:9091/exchange/map
+   * MAP 등록/수정/삭제 처리 http://localhost:9093/exchange/ajax
    * 
    * @param exchangeVO
    * @return
@@ -141,5 +137,32 @@ public class ExchangeCont {
     return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
   }
   
+  
+  @GetMapping(value = "/ajax")
+  public String test() {
+    System.out.println("-> JSONContGradle created.");
+    try {
+      // Python 스크립트 실행
+      String pythonScriptPath = "C:/kd/ws_python/team4/exc.py";
+      System.out.println("Running Python script at: " + pythonScriptPath);
+      ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+
+      processBuilder.redirectErrorStream(true);
+      Process process = processBuilder.start();
+      
+      // Python 스크립트의 출력 결과를 읽기
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      String line;
+      while ((line = reader.readLine()) != null) {
+          System.out.println(line);
+      }
+      
+      int exitCode = process.waitFor();
+      System.out.println("Python script finished with exit code: " + exitCode);
+  } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+  }
+    return "/exchange/ajax";
+  }
  
 }
