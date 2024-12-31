@@ -1,18 +1,65 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<!-- layout.html 상속-->
+<head>
+    <meta charset="UTF-8">
+    <title>일단 오르니.. 좋았쓰!</title>
+    <script>
+        function runJava(classifyno) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:9093/exchange/run-java?classifyno=" + classifyno, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log("AJAX request status: " + xhr.status);
+                    if (xhr.status === 200) {
+                        document.getElementById("result").innerText = xhr.responseText;
+            javascript:location.reload();
+                    } else {
+                        console.error("Error: " + xhr.statusText);
+                    }
+                }
+            };
+            xhr.onerror = function() {
+                console.error("Request failed");
+            };
+            console.log("Sending AJAX request with classifyno: " + classifyno);
+            xhr.send();
+        }
+    </script>
+    
+        <style>
+        /* 링크 스타일 */
+        .hover-link {
+            text-decoration: none; /* 기본적으로 밑줄 없애기 */
+            color: inherit; /* 링크 색상을 부모로 상속 */
+        }
 
-<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
-<div layout:fragment="content">
-  <div class='title_line'>
-   <span th:text="${classifyVO.bigcla }" class="title_line_text"></span > 
-    > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
-    > <span th:text="${exchangeVO.exchangeno}" class="title_line_text"></span > 
-    > <span th:text="${exchangeVO.name}" class="title_line_text"></span > 
-  </div>
-  
-  <aside class="aside_right" th:if="${session.grade == 'admin'}">
-    <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|/exchange/map?classifyno=${exchangeVO.classifyno }&exchangeno=${exchangeVO.exchangeno}|}">지도</a>
+        /* 호버 시 밑줄을 추가하고, 마우스 포인터를 손가락으로 변경 */
+        .hover-link:hover {
+            text-decoration: underline; /* 밑줄 추가 */
+            cursor: pointer; /* 마우스 포인터를 손가락으로 변경 */
+        }
+    </style>
+    
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class='title_line'>
+            <span th:text="${classifyVO.bigcla}" class="title_line_text"></span>
+            > <span th:text="${classifyVO.classify}" class="title_line_text"></span>
+<!--            > <span th:text="${exchangeVO.exchangeno}" class="title_line_text"></span>>
+            > <span th:text="${exchangeVO.name}" class="title_line_text"></span>-->
+        </div>
+        <aside class="aside_right" th:if="${session.grade == 'admin'}">
+            <a href="javascript:location.reload();">새로고침</a>
+            <span class='menu_divide'>│</span>
+            <a th:href="@{|/exchange/map?classifyno=${exchangeVO.classifyno }&exchangeno=${exchangeVO.exchangeno}|}">지도</a>
+            <span class='menu_divide'>│</span>
+            <a th:onclick="|runJava('${classifyVO.classifyno}')|"
+                                                 class="hover-link">업데이트</a>
+
+            <pre id="result"></pre>
+<!--            <button th:onclick="|runJava('${classifyVO.classifyno}')|">업데이트</button>-->
   <!--  <span class='menu_divide' >│</span>    
     <a th:href="@{|./update_file?exchangeno=${exchangeVO.exchangeno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
     <span class='menu_divide' >│</span>
@@ -43,14 +90,14 @@
           <span style="font-size: 1.5em; font-weight: bold;" th:text="${exchangeVO.name}"></span>
           <span style="font-size: 1em;" th:text="${exchangeVO.recent }"></span><br><br>
           <div style="white-space: pre-wrap;">
-              <p>환율 번호: <span th:text="${exchangeVO.exchangeno}"></span></p>
+<!--              <p>환율 번호: <span th:text="${exchangeVO.exchangeno}"></span></p>>
               <p>중분류 번호: <span th:text="${exchangeVO.classifyno}"></span></p>
-              <p>국가 명: <span th:text="${exchangeVO.name}"></span></p>
+              <p>국가 명: <span th:text="${exchangeVO.name}"></span></p>-->
               <p>현재 매매가: <span th:text="${exchangeVO.price}"></span></p>
               <p>1원 기준 가격 KRW: <span th:text="${krw}"></span></p>
               <p>변동 퍼센트: <span th:text="${exchangeVO.value}"></span></p>
-              <p>전일 종가: <span th:text="${exchangeVO.yesterday}"></span></p>
               <p>최근 변동일: <span th:text="${exchangeVO.recent}"></span></p>
+              <p>전일 종가: <span th:text="${exchangeVO.yesterday}"></span></p>
           </div>
 
       </li>
@@ -72,12 +119,12 @@
       <li class="li_none" th:text="|검색어(키워드): ${exchangeVO.word }|">
       </li>-->
       
-      <li class="li_none" th:if="${exchangeVO.size1 > 0}">
+<!--      <li class="li_none" th:if="${exchangeVO.size1 > 0}">>
         <div >
           첨부 파일: <a th:href='@{|/download?dir=/exchange/storage&filename=${exchangeVO.file1saved}&downname=${exchangeVO.file1}|}'
                              th:text='|${exchangeVO.file1}|'></a> <span th:text="|(${exchangeVO.size1_label})|"></span>  
                          <a th:href='@{|/download?dir=/exchange/storage&filename=${exchangeVO.file1saved}&downname=${exchangeVO.file1}|}'>
-                         <img src="/exchange/images/download.png"></a>
+                         <img src="/exchange/images/download.png"></a>-->  
                          
                          
          <!-- 첨부 파일: <a th:href='@{|/download?dir=/contents/storage&filename=${contentsVO.file1saved}&downname=${contentsVO.file1}|}'

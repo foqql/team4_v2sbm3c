@@ -59,7 +59,8 @@ public class ExchangeCont {
       Model model, 
       @RequestParam(name = "classifyno", defaultValue = "1") int classifyno) {
 
-    // System.out.println("-> classifyno: " + classifyno);
+   
+//     System.out.println("-> classifyno: " + classifyno);
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
@@ -113,7 +114,7 @@ public class ExchangeCont {
 
 
   /**
-   * MAP 등록/수정/삭제 처리 http://localhost:9093/exchange/ajax
+   * MAP 등록/수정/삭제 처리 
    * 
    * @param exchangeVO
    * @return
@@ -137,10 +138,15 @@ public class ExchangeCont {
     return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
   }
   
-  
-  @GetMapping(value = "/ajax")
-  public String test() {
-    System.out.println("-> JSONContGradle created.");
+  /**
+   * http://localhost:9093/exchange/crawling
+   * @return
+   */
+  @GetMapping(value = "/crawling")
+  public String crawling() {
+    System.out.println("-> python crawling created.");
+    //------------------------------------------------
+    System.out.println("파이썬 크롤링 시작 ");
     try {
       // Python 스크립트 실행
       String pythonScriptPath = "C:/kd/ws_python/team4/exc.py";
@@ -162,7 +168,49 @@ public class ExchangeCont {
   } catch (IOException | InterruptedException e) {
       e.printStackTrace();
   }
-    return "/exchange/ajax";
+    System.out.println("파이썬 크롤링 끝");
+    //------------------------------------------------
+    return "/exchange/read";
   }
+  
+  
+  
+  
+  
+  
+  
+  
+  @GetMapping("/run-java")
+  public String runJava(@RequestParam(name="classifyno", defaultValue = "0") int classifyno) {
+    System.out.println("런투 자바");
+      System.out.println("-> python crawling created.");
+      //------------------------------------------------
+      System.out.println("파이썬 크롤링 시작 ");
+      try {
+        // Python 스크립트 실행
+        String pythonScriptPath = "C:/kd/ws_python/team4/exc.py";
+        System.out.println("Running Python script at: " + pythonScriptPath);
+        ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+
+        processBuilder.redirectErrorStream(true);
+        Process process = processBuilder.start();
+        
+        // Python 스크립트의 출력 결과를 읽기
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        
+        int exitCode = process.waitFor();
+        System.out.println("Python script finished with exit code: " + exitCode);
+    } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
+    }
+      System.out.println("파이썬 크롤링 끝");
+      //------------------------------------------------
+      System.out.println(classifyno);
+      return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
+    }
  
 }
