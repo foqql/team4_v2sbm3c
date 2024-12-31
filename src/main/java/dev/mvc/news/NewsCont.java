@@ -93,7 +93,7 @@ public class NewsCont {
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
 
-    return "/news/create"; // /templates/news/create.html
+    return "/th/news/create"; // /templates/news/create.html
   }
 
   /**
@@ -231,7 +231,7 @@ public class NewsCont {
 //      }
 
       model.addAttribute("list", list);
-      return "/news/list_all";
+      return "/th/news/list_all";
 
     } else {
       return "redirect:/member/login_cookie_need";
