@@ -7,16 +7,18 @@ public class LogVO {
     private String ip;
     private Date logdate;
     private int memberno;
+    private String mname; // 닉네임 대신 mname
 
     // 기본 생성자
     public LogVO() {}
 
     // 필드를 초기화하는 생성자
-    public LogVO(int logno, String ip, Date logdate, int memberno) {
+    public LogVO(int logno, String ip, Date logdate, int memberno, String mname) {
         this.logno = logno;
         this.ip = ip;
         this.logdate = logdate;
         this.memberno = memberno;
+        this.mname = mname;
     }
 
     // Getter 및 Setter 메서드
@@ -50,5 +52,13 @@ public class LogVO {
 
     public void setMemberno(int memberno) {
         this.memberno = memberno;
+    }
+
+    public String getMname() {
+        return mname;
+    }
+
+    public void setMname(String mname) {
+        this.mname = mname;
     }
 }

@@ -1,26 +1,63 @@
-<!-- src/main/resources/templates/log.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>로그 기록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
     <h1>로그 기록</h1>
     <table>
         <thead>
             <tr>
-                <th>로그 번호</th>
-                <th>IP</th>
                 <th>로그인 날짜</th>
+                <th>IP</th>
                 <th>회원 번호</th>
+                <th>성명</th> <!-- 닉네임 대신 성명 -->
+                <th>삭제</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="log : ${logs}">
-                <td th:text="${log.logno}"></td>
+                <td th:text="${#dates.format(log.logdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td th:text="${log.ip}"></td>
-                <td th:text="${log.logdate}"></td>
                 <td th:text="${log.memberno}"></td>
+                <td th:text="${log.mname}"></td> <!-- 닉네임 대신 성명 -->
+                <td><a th:href="@{/log/delete(logno=${log.logno})}">삭제</a></td> <!-- 삭제 링크 추가 -->
             </tr>
         </tbody>
     </table>

@@ -17,7 +17,8 @@
             TO_CHAR(l.logdate, 'YYYY-MM-DD HH24:MI:SS') AS logdate, 
             l.memberno, 
             m.id AS memberId, 
-            m.grade AS memberGrade
+            m.grade AS memberGrade,
+            m.mname AS mname <!-- 닉네임 대신 성명 -->
         FROM log l
         JOIN member m ON l.memberno = m.memberno
         ORDER BY l.logdate DESC
