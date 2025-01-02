@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.log.LogProcInter;
+import dev.mvc.log.LogVO;
 import dev.mvc.classify.ClassifyVOMenu;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +33,10 @@ public class MemberCont {
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")  // @Service("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.log.LogProc")
+  private LogProcInter logProc; 
   
   @Autowired
   @Qualifier("dev.mvc.classify.ClassifyProc")
@@ -386,86 +392,88 @@ public class MemberCont {
    */
   @PostMapping(value = "/login")
   public String login_proc(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model,
-      @RequestParam(value = "id", defaultValue = "") String id,
-      @RequestParam(value = "passwd", defaultValue = "") String passwd,
-      @RequestParam(value = "id_save", defaultValue = "") String id_save,
-      @RequestParam(value = "passwd_save", defaultValue = "") String passwd_save) {
-    HashMap<String, Object> map = new HashMap<String, Object>();
-    map.put("id", id);
-    map.put("passwd", passwd);
+                           @RequestParam(value = "id", defaultValue = "") String id,
+                           @RequestParam(value = "passwd", defaultValue = "") String passwd,
+                           @RequestParam(value = "id_save", defaultValue = "") String id_save,
+                           @RequestParam(value = "passwd_save", defaultValue = "") String passwd_save) {
+      HashMap<String, Object> map = new HashMap<>();
+      map.put("id", id);
+      map.put("passwd", passwd);
 
-    int cnt = this.memberProc.login(map);
-    System.out.println("-> login_proc cnt: " + cnt);
+      int cnt = this.memberProc.login(map);
+      System.out.println("-> login_proc cnt: " + cnt);
 
-    model.addAttribute("cnt", cnt);
+      model.addAttribute("cnt", cnt);
 
-    if (cnt == 1) {
-      // id를 이용하여 회원 정보 조회
-      MemberVO memverVO = this.memberProc.readById(id);
-      session.setAttribute("memberno", memverVO.getMemberno());
-      session.setAttribute("id", memverVO.getId());
-      session.setAttribute("mname", memverVO.getMname());
-      // session.setAttribute("grade", memverVO.getGrade());
+      if (cnt == 1) {
+          // id를 이용하여 회원 정보 조회
+          MemberVO memberVO = this.memberProc.readById(id); // 여기서 memberVO를 선언 및 초기화
+          session.setAttribute("memberno", memberVO.getMemberno());
+          session.setAttribute("id", memberVO.getId());
+          session.setAttribute("mname", memberVO.getMname());
 
-      if (memverVO.getGrade() >= 1 && memverVO.getGrade() <= 10) {
-        session.setAttribute("grade", "admin");
-      } else if (memverVO.getGrade() >= 11 && memverVO.getGrade() <= 20) {
-        session.setAttribute("grade", "member");
-      } else if (memverVO.getGrade() >= 21) {
-        session.setAttribute("grade", "guest");
+          if (memberVO.getGrade() >= 1 && memberVO.getGrade() <= 10) {
+              session.setAttribute("grade", "admin");
+          } else if (memberVO.getGrade() >= 11 && memberVO.getGrade() <= 20) {
+              session.setAttribute("grade", "member");
+          } else if (memberVO.getGrade() >= 21) {
+              session.setAttribute("grade", "guest");
+          }
+
+          // 로그 기록 추가
+          LogVO log = new LogVO();
+          log.setIp(request.getRemoteAddr());
+          log.setMemberno(memberVO.getMemberno()); // 여기서 memberVO 사용
+          this.logProc.insertLog(log);
+
+          // Cookie 관련 코드 ---------------------------------------------------------
+          // id 관련 쿠키 저장
+          if (id_save.equals("Y")) {
+              Cookie ck_id = new Cookie("ck_id", id);
+              ck_id.setPath("/"); // root 폴더에 쿠키를 기록함으로 모든 경로에서 쿠키 접근 가능
+              ck_id.setMaxAge(60 * 60 * 24 * 30); // 30일
+              response.addCookie(ck_id); // id 저장
+          } else {
+              Cookie ck_id = new Cookie("ck_id", "");
+              ck_id.setPath("/");
+              ck_id.setMaxAge(0); // 0초
+              response.addCookie(ck_id); // id 저장
+          }
+
+          // id를 저장할지 선택하는 CheckBox 체크 여부
+          Cookie ck_id_save = new Cookie("ck_id_save", id_save);
+          ck_id_save.setPath("/");
+          ck_id_save.setMaxAge(60 * 60 * 24 * 30); // 30일
+          response.addCookie(ck_id_save);
+
+          // 패스워드 관련 쿠키 저장
+          if (passwd_save.equals("Y")) {
+              Cookie ck_passwd = new Cookie("ck_passwd", passwd);
+              ck_passwd.setPath("/");
+              ck_passwd.setMaxAge(60 * 60 * 24 * 30); // 30일
+              response.addCookie(ck_passwd);
+          } else {
+              Cookie ck_passwd = new Cookie("ck_passwd", "");
+              ck_passwd.setPath("/");
+              ck_passwd.setMaxAge(0);
+              response.addCookie(ck_passwd);
+          }
+
+          // 패스워드를 저장할지 선택하는 CheckBox 체크 여부
+          Cookie ck_passwd_save = new Cookie("ck_passwd_save", passwd_save);
+          ck_passwd_save.setPath("/");
+          ck_passwd_save.setMaxAge(60 * 60 * 24 * 30); // 30일
+          response.addCookie(ck_passwd_save);
+          // ----------------------------------------------------------------------------
+
+          return "redirect:/";
+      } else {
+          model.addAttribute("code", "login_fail");
+          return "/member/msg";
       }
-
-      // Cookie 관련 코드---------------------------------------------------------
-      // -------------------------------------------------------------------
-      // id 관련 쿠기 저장
-      // -------------------------------------------------------------------
-      if (id_save.equals("Y")) { // id를 저장할 경우, Checkbox를 체크한 경우
-        Cookie ck_id = new Cookie("ck_id", id);
-        ck_id.setPath("/"); // root 폴더에 쿠키를 기록함으로 모든 경로에서 쿠기 접근 가능
-        ck_id.setMaxAge(60 * 60 * 24 * 30); // 30 day, 초단위
-        response.addCookie(ck_id); // id 저장
-      } else { // N, id를 저장하지 않는 경우, Checkbox를 체크 해제한 경우
-        Cookie ck_id = new Cookie("ck_id", "");
-        ck_id.setPath("/");
-        ck_id.setMaxAge(0); // 0초
-        response.addCookie(ck_id); // id 저장
-      }
-
-      // id를 저장할지 선택하는 CheckBox 체크 여부
-      Cookie ck_id_save = new Cookie("ck_id_save", id_save);
-      ck_id_save.setPath("/");
-      ck_id_save.setMaxAge(60 * 60 * 24 * 30); // 30 day
-      response.addCookie(ck_id_save);
-      // -------------------------------------------------------------------
-
-      // -------------------------------------------------------------------
-      // Password 관련 쿠기 저장
-      // -------------------------------------------------------------------
-      if (passwd_save.equals("Y")) { // 패스워드 저장할 경우
-        Cookie ck_passwd = new Cookie("ck_passwd", passwd);
-        ck_passwd.setPath("/");
-        ck_passwd.setMaxAge(60 * 60 * 24 * 30); // 30 day
-        response.addCookie(ck_passwd);
-      } else { // N, 패스워드를 저장하지 않을 경우
-        Cookie ck_passwd = new Cookie("ck_passwd", "");
-        ck_passwd.setPath("/");
-        ck_passwd.setMaxAge(0);
-        response.addCookie(ck_passwd);
-      }
-      // passwd를 저장할지 선택하는 CheckBox 체크 여부
-      Cookie ck_passwd_save = new Cookie("ck_passwd_save", passwd_save);
-      ck_passwd_save.setPath("/");
-      ck_passwd_save.setMaxAge(60 * 60 * 24 * 30); // 30 day
-      response.addCookie(ck_passwd_save);
-      // -------------------------------------------------------------------
-      // ----------------------------------------------------------------------------
-
-      return "redirect:/";
-    } else {
-      model.addAttribute("code", "login_fail");
-      return "/member/msg";
-    }
   }
+
+
 
   // ----------------------------------------------------------------------------------
   // Cookie 사용 로그인 관련 코드 종료

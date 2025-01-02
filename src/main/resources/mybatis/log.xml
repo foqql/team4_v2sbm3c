@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.log.LogDAOInter">
+
+    <insert id="insertLog" parameterType="dev.mvc.log.LogVO">
+        INSERT INTO log (logno, ip, logdate, memberno)
+        VALUES (log_seq.NEXTVAL, #{ip}, SYSDATE, #{memberno})
+    </insert>
+
+    <select id="getLogs" resultType="dev.mvc.log.LogVO">
+        SELECT 
+            l.logno, 
+            l.ip, 
+            TO_CHAR(l.logdate, 'YYYY-MM-DD HH24:MI:SS') AS logdate, 
+            l.memberno, 
+            m.id AS memberId, 
+            m.grade AS memberGrade
+        FROM log l
+        JOIN member m ON l.memberno = m.memberno
+        ORDER BY l.logdate DESC
+    </select>
+
+    <delete id="deleteLog" parameterType="int">
+        DELETE FROM log WHERE logno = #{logno}
+    </delete>
+
+</mapper>
