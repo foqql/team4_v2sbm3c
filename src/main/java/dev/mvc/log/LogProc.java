@@ -29,9 +29,7 @@ public class LogProc implements LogProcInter {
     }
 
     @Override
-    public void deleteLog(int logno) {  // deleteLog 메서드 구현
+    public void deleteLog(int logno) {
         logDAO.deleteLog(logno);  // LogDAO에 있는 삭제 메서드 호출
     }
-    
-    
 }

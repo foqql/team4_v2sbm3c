@@ -11,18 +11,19 @@
     </insert>
 
     <select id="getLogs" resultType="dev.mvc.log.LogVO">
-        SELECT 
-            l.logno, 
-            l.ip, 
-            TO_CHAR(l.logdate, 'YYYY-MM-DD HH24:MI:SS') AS logdate, 
-            l.memberno, 
-            m.id AS memberId, 
-            m.grade AS memberGrade,
-            m.mname AS mname <!-- 닉네임 대신 성명 -->
-        FROM log l
-        JOIN member m ON l.memberno = m.memberno
-        ORDER BY l.logdate DESC
-    </select>
+    SELECT 
+        l.logno, 
+        l.ip, 
+        TO_CHAR(l.logdate, 'YYYY-MM-DD HH24:MI:SS') AS logdate, 
+        l.memberno, 
+        m.id AS memberId, 
+        m.grade AS memberGrade,
+        m.mname AS mname
+    FROM log l
+    JOIN member m ON l.memberno = m.memberno
+    ORDER BY l.logdate DESC
+</select>
+
 
     <delete id="deleteLog" parameterType="int">
         DELETE FROM log WHERE logno = #{logno}
