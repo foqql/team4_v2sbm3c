@@ -182,35 +182,42 @@ public class ExchangeCont {
   
   @GetMapping("/run-java")
   public String runJava(@RequestParam(name="classifyno", defaultValue = "0") int classifyno) {
-    System.out.println("런투 자바");
+      System.out.println("런투 자바");
       System.out.println("-> python crawling created.");
       //------------------------------------------------
       System.out.println("파이썬 크롤링 시작 ");
       try {
-        // Python 스크립트 실행
-        String pythonScriptPath = "C:/kd/ws_python/team4/exc.py";
-        System.out.println("Running Python script at: " + pythonScriptPath);
-        ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+          // Python 스크립트 실행
+          String pythonScriptPath = "src/main/python/exc.py";
+          System.out.println("Running Python script at: " + pythonScriptPath);
+          ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
 
-        processBuilder.redirectErrorStream(true);
-        Process process = processBuilder.start();
-        
-        // Python 스크립트의 출력 결과를 읽기
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
-        
-        int exitCode = process.waitFor();
-        System.out.println("Python script finished with exit code: " + exitCode);
-    } catch (IOException | InterruptedException e) {
-        e.printStackTrace();
-    }
+          processBuilder.redirectErrorStream(true);
+          Process process = processBuilder.start();
+          
+          // Python 스크립트의 출력 결과를 읽기
+          BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+          StringBuilder output = new StringBuilder();
+          String line;
+          while ((line = reader.readLine()) != null) {
+              System.out.println(line);
+              output.append(line).append("\n");
+          }
+          
+          int exitCode = process.waitFor();
+          System.out.println("Python script finished with exit code: " + exitCode);
+          
+          if (exitCode != 0) {
+              System.out.println("Python script execution failed:");
+              System.out.println(output.toString());
+          }
+      } catch (IOException | InterruptedException e) {
+          e.printStackTrace();
+      }
       System.out.println("파이썬 크롤링 끝");
       //------------------------------------------------
       System.out.println(classifyno);
       return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
-    }
+  }
  
 }
