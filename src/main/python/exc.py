@@ -76,11 +76,11 @@ def getConnection():
 conn, cursor = getConnection()
 
 # Options 클래스의 인스턴스를 생성합니다.
-options = Options()
+#options = Options()
 # Chrome 브라우저 창이 즉시 닫히는 것을 방지합니다.
-options.add_experimental_option('detach', True)
+#options.add_experimental_option('detach', True)
 # 불필요한 콘솔 메시지를 제거합니다.
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
+#options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 # Service 객체를 생성하고 ChromeDriverManager를 통해 드라이버를 설치합니다.
 # service = Service(ChromeDriverManager().install())
