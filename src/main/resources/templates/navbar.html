@@ -77,6 +77,21 @@
         </li>
     </ul>
     
+        <!-- 설문조사 카테고리 -->
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '설문조사'}">
+        <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '설문조사'}">
+            <ul>
+                <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                    <a class="dropdown-item"
+                       th:href="@{|/survey/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
+                       th:text="${classifyVO.classify}">
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    
+    
 </li>
 
 
@@ -126,6 +141,7 @@
       <!-- 메뉴 종료 -->
 
       <!-- 관리 및 생성 메뉴 (관리자에게만 보임) -->
+      <a href="/survey/list_by_survey" role="button">설문조사1</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>    
       <a href="/classify/create" role="button">생성</a><br>                              <span class="menu_divide">&nbsp;|&nbsp;</span>    
       <a th:href="@{|/classify/list_search|}" role="button">리스트 조회</a><br>        <span class="menu_divide">&nbsp;|&nbsp;</span>
       <a th:href="@{|/genre/create|}" role="button">대분류 생성</a><br>               <span class="menu_divide">&nbsp;|&nbsp;</span>
