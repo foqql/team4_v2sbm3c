@@ -1,5 +1,8 @@
 package dev.mvc.weather;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
-import dev.mvc.exchange.ExchangeVO;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
@@ -45,13 +47,42 @@ public class WeatherCont {
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
   private GenreProcInter genreProc;
-
-
-
+  
+ 
   public WeatherCont() {
     System.out.println("-> WeatherCont created.");
   }
+  
+ 
+  
+  @GetMapping(value = "/arealist")
+  public String arealist(HttpSession session, Model model) {
+      // 메뉴 정보 추가
+      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+      model.addAttribute("menu", menu);
 
+      if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
+          // 'classifyno'를 쿼리에서 사용하지 않으므로, 해당 정보 없이 모든 지역 리스트를 불러옴
+          ArrayList<WeatherVO> list = this.weatherProc.arealist(); // arealist() 메서드를 사용하여 데이터를 불러옴
+
+          
+          // 페이지네이션 추가 (예시로 임시 데이터를 넣어주세요. 실제 페이지네이션 구현 필요)
+          String paging = ""; // 페이지네이션 문자열 추가 (예시로 비워두었음)
+          
+          model.addAttribute("list", list);  // WeatherVO 리스트
+          model.addAttribute("paging", paging);  // 페이지네이션
+         
+
+          return "/weather/arealist"; // HTML에서 데이터 출력 (arealist 페이지로 반환)
+      } else {
+          return "redirect:/member/login_cookie_need"; // 로그인 필요 시 리디렉션
+      }
+  }
+
+
+ 
+ 
+  
   /**
    * POST 요청시 새로고침 방지, POST 요청 처리 완료 → redirect → url → GET → forward -> html 데이터
    * 전송
@@ -97,9 +128,20 @@ public class WeatherCont {
       HttpSession session, 
       Model model, 
       @ModelAttribute("weatherVO") WeatherVO weatherVO,
+      @RequestParam("continent") String continent,
+      @RequestParam("country") String country,
+      @RequestParam("city") String city,
       RedirectAttributes ra) {
 
-    if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
+      System.out.println("대륙: " + continent);
+      System.out.println("국가: " + country);
+      System.out.println("도시: " + city);
+
+      if (memberProc.isMemberAdmin(session)) {
+          System.out.println("-> JSONContGradle created.");
+
+      
+      
       // ------------------------------------------------------------------------------
       // 파일 전송 코드 시작
       // ------------------------------------------------------------------------------
@@ -149,33 +191,39 @@ public class WeatherCont {
       // 파일 전송 코드 종료
       // ------------------------------------------------------------------------------
 
-      // Call By Reference: 메모리 공유, Hashcode 전달
       int memberno = (int) session.getAttribute("memberno"); // memberno FK
       weatherVO.setMemberno(memberno);
       int cnt = this.weatherProc.create(weatherVO);
+      weatherVO.getAreano();
 
       // ------------------------------------------------------------------------------
-      // PK의 return
+      // 파이썬 실행 코드
       // ------------------------------------------------------------------------------
-      // System.out.println("--> weatherno: " + weatherVO.getWeatherno());
-      // mav.addObject("weatherno", weatherVO.getWeatherno()); // redirect
-      // parameter 적용
-      // ------------------------------------------------------------------------------
-
+        try {
+          
+          String pythonScriptPath = "C:/kd/ws_python/team4/wea.py";
+          System.out.println("Running Python script at: " + pythonScriptPath);
+  
+          ProcessBuilder processBuilder = new ProcessBuilder(
+              "python", pythonScriptPath, continent, country, city);
+          processBuilder.redirectErrorStream(true);
+  
+          Process process = processBuilder.start();
+  
+          BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+          String line;
+          while ((line = reader.readLine()) != null) {
+              System.out.println(line);
+          }
+  
+          int exitCode = process.waitFor();
+          System.out.println("Python script finished with exit code: " + exitCode);
+      } catch (IOException | InterruptedException e) {
+          e.printStackTrace();
+      }
+      
       if (cnt == 1) {
-        // type 1, 재업로드 발생
-        // return "<h1>파일 업로드 성공</h1>"; // 연속 파일 업로드 발생
 
-        // type 2, 재업로드 발생
-        // model.addAttribute("cnt", cnt);
-        // model.addAttribute("code", "create_success");
-        // return "weather/msg";
-
-        // type 3 권장
-        // return "redirect:/weather/list_all"; // /templates/weather/list_all.html
-
-        // System.out.println("-> weatherVO.getClassifyno(): " + weatherVO.getClassifyno());
-        // ra.addFlashAttribute("classifyno", weatherVO.getClassifyno()); // controller ->
         // controller: X
 
         ra.addAttribute("classifyno", weatherVO.getClassifyno()); // controller -> controller: O
@@ -183,6 +231,8 @@ public class WeatherCont {
 
         // return "redirect:/weather/list_by_classifyno?classifyno=" + weatherVO.getClassifyno();
         // // /templates/weather/list_by_classifyno.html
+        
+        
       } else {
         ra.addFlashAttribute("code", "create_fail"); // DBMS 등록 실패
         ra.addFlashAttribute("cnt", 0); // 업로드 실패
@@ -208,19 +258,6 @@ public class WeatherCont {
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<WeatherVO> list = this.weatherProc.list_all(); // 모든 목록
 
-      // Thymeleaf는 CSRF(크로스사이트) 스크립팅 해킹 방지 자동 지원
-      // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
-//      for (WeatherVO weatherVO : list) {
-//        String title = weatherVO.getTitle();
-//        String content = weatherVO.getContent();
-//        
-//        title = Tool.convertChar(title);  // 특수 문자 처리
-//        content = Tool.convertChar(content); 
-//        
-//        weatherVO.setTitle(title);
-//        weatherVO.setContent(content);  
-//
-//      }
 
       model.addAttribute("list", list);
       return "/weather/list_all";
@@ -232,64 +269,6 @@ public class WeatherCont {
 
   }
 
-//  /**
-//   * 유형 1
-//   * 카테고리별 목록
-//   * http://localhost:9091/weather/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/weather/list_by_classifyno?classifyno=6 
-//   * @return
-//   */
-//  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno(HttpSession session, Model model, 
-//      @RequestParam(name="classifyno", defaultValue = "") int classifyno) {
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//    
-//     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//     model.addAttribute("classifyVO", classifyVO);
-//    
-//    ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno(classifyno);
-//    model.addAttribute("list", list);
-//    
-//    // System.out.println("-> size: " + list.size());
-//
-//    return "/weather/list_by_classifyno";
-//  }
-
-//  /**
-//   * 유형 2
-//   * 카테고리별 목록 + 검색
-//   * http://localhost:9091/weather/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/weather/list_by_classifyno?classifyno=6 
-//   * @return
-//   */
-//  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno_search(HttpSession session, Model model, 
-//                                                   @RequestParam(name="classifyno", defaultValue = "0" ) int classifyno, 
-//                                                   @RequestParam(name="word", defaultValue = "") String word) {
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//    
-//     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//     model.addAttribute("classifyVO", classifyVO);
-//    
-//     word = Tool.checkNull(word).trim(); // 검색어 공백 삭제
-//     
-//     HashMap<String, Object> map = new HashMap<>();
-//     map.put("classifyno", classifyno);
-//     map.put("word", word);
-//     
-//    ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search(map);
-//    model.addAttribute("list", list);
-//    
-//    // System.out.println("-> size: " + list.size());
-//    model.addAttribute("word", word);
-//    
-//    int search_count = this.weatherProc.list_by_classifyno_search_count(map);
-//    model.addAttribute("search_count", search_count);
-//    
-//    return "/weather/list_by_classifyno_search"; // /templates/weather/list_by_classifyno_search.html
-//  }
 
   /**
    * 유형 3
@@ -327,6 +306,7 @@ public class WeatherCont {
     ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search_paging(map);
    // ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno(classifyno);
     model.addAttribute("list", list);
+    
 
     // System.out.println("-> size: " + list.size());
     model.addAttribute("word", word);
@@ -417,14 +397,6 @@ public class WeatherCont {
 
     WeatherVO weatherVO = this.weatherProc.read(weatherno);
 
-//    String title = weatherVO.getTitle();
-//    String content = weatherVO.getContent();
-//    
-//    title = Tool.convertChar(title);  // 특수 문자 처리
-//    content = Tool.convertChar(content); 
-//    
-//    weatherVO.setTitle(title);
-//    weatherVO.setContent(content);  
 
     long size1 = weatherVO.getSize1();
     String size1_label = Tool.unit(size1);
@@ -435,9 +407,6 @@ public class WeatherCont {
     ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
     model.addAttribute("classifyVO", classifyVO);
 
-    // 조회에서 화면 하단에 출력
-    // ArrayList<ReplyVO> reply_list = this.replyProc.list_weather(weatherno);
-    // mav.addObject("reply_list", reply_list);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -446,36 +415,7 @@ public class WeatherCont {
   }
 
   
-  
-//  /**
-//   * 조회 http://localhost:9093/exchange/read?classifyno=34
-//   * 조회 http://localhost:9093/exchange/read?exchangeno=17
-//   * 
-//   * @return
-//   */
-//  @GetMapping(value = "/reading")
-//  public String reading(Model model, 
-//      @RequestParam(name = "classifyno", defaultValue = "1") int classifyno) {
-//    
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//
-//    WeatherVO weatherVO = this.weatherProc.reading(classifyno);
-//
-//    long size1 = weatherVO.getSize1();
-//    String size1_label = Tool.unit(size1);
-//    weatherVO.setSize1_label(size1_label);
-//
-//    model.addAttribute("weatherVO", weatherVO);
-//
-//    ClassifyVO classifyVO = this.classifyProc.read(weatherVO.getClassifyno());
-//    model.addAttribute("classifyVO", classifyVO);
-//
-//
-//    return "/weather/read";
-//  }
-  
-  
+
   
   
   
@@ -858,6 +798,36 @@ public class WeatherCont {
     return "redirect:/weather/list_by_classifyno";    
     
   }   
+  
+  
+  
+  @GetMapping(value = "/ajax")
+  public String test() {
+    System.out.println("-> JSONContGradle created.");
+    try {
+      // Python 스크립트 실행
+      String pythonScriptPath = "C:/kd/ws_python/team4/wea.py";
+      System.out.println("Running Python script at: " + pythonScriptPath);
+      ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+
+      processBuilder.redirectErrorStream(true);
+      Process process = processBuilder.start();
+      
+      // Python 스크립트의 출력 결과를 읽기
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      String line;
+      while ((line = reader.readLine()) != null) {
+          System.out.println(line);
+      }
+      
+      int exitCode = process.waitFor();
+      System.out.println("Python script finished with exit code: " + exitCode);
+  } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+  }
+    return "/weather/read";
+  }
+ 
    
  
 }

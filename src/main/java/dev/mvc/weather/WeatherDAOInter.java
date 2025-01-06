@@ -7,6 +7,8 @@ import java.util.List;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.exchange.ExchangeVO;
 
+
+
 /**
  * Spring Boot가 자동 구현
  * @author soldesk
@@ -145,5 +147,10 @@ public interface WeatherDAOInter {
    * @return
    */   
   public int decreaseReplycnt(int weatherno);
+  
+  public ArrayList<WeatherVO> list();
+  public String getPaging();
+  
+
 }
 

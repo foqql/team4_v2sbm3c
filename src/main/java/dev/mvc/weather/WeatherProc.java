@@ -2,14 +2,11 @@ package dev.mvc.weather;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.mvc.exchange.ExchangeVO;
 import dev.mvc.tool.Security;
-import dev.mvc.tool.Tool;
 
 @Component("dev.mvc.weather.WeatherProc")
 public class WeatherProc implements WeatherProcInter {
@@ -322,6 +319,11 @@ public class WeatherProc implements WeatherProcInter {
   public int decreaseReplycnt(int weatherno) {
     int count = weatherDAO.decreaseReplycnt(weatherno);
     return count;
+  }
+
+  @Override
+  public ArrayList<WeatherVO> arealist() {
+    return null;
   }
   
   

@@ -160,6 +160,10 @@ public interface WeatherProcInter {
    * @return
    */   
   public int decreaseReplycnt(int weatherno);
+
+  public ArrayList<WeatherVO> arealist();
   
+ 
 }
+
 

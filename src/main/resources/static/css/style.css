@@ -556,6 +556,23 @@
   color: transparent;
 }
 
+
+/* 도시선택 박스 css*/
+ .flex_container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .flex_item {
+    width: 30%;
+  }
+
+  .form-control {
+    width: 100%;
+    
+    
     }
 
   

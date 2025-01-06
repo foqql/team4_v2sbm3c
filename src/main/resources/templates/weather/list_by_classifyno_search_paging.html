@@ -10,11 +10,11 @@
   </div>
 
   <aside class="aside_right">
-    <!-- <span th:if="${session.grade == 'admin'}"> -->
-   <!--   <a th:href="@{|/weather/create?classifyno=${classifyVO.classifyno}|}">등록</a>
-      <span class="menu_devide">│</span> -->
-   <!-- </span> -->
-    
+    <span th:if="${session.grade == 'admin'}"> 
+      <a th:href="@{|/weather/create?classifyno=${classifyVO.classifyno}|}">등록</a>
+      <span class="menu_devide">│</span> 
+    </span> 
+   
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
@@ -60,23 +60,31 @@
       </td>
       
       
+             <!-- <span th:text="${weatherVO.city}" style="font-weight: bold;"></span>-->
+      
       <!--% 날씨 미리 보기 http://192.168.12.145:9093/weather/list_by_classifyno?classifyno=44  %-->
       
       <td class='td_left'>
+        
         <span th:text="${weatherVO.city}" style="font-weight: bold;"></span>
         <span th:text="| ${weatherVO.rdate.substring(0, 10)}|"></span><br>
-
+  
+        날씨: 
+        <span th:if="${weatherVO.weather.length() > 160 }" 
+                  th:text="|${weatherVO.weather.substring(0, 160) }...|"></span>
+        <span th:if="${weatherVO.weather.length() <= 160 }" 
+                  th:text="|${weatherVO.weather}|"></span>
+                  
+       <span>/</span>       
+                        
+        기온: 
         <span th:if="${weatherVO.temp.length() > 160 }" 
                   th:text="|${weatherVO.temp.substring(0, 160) }...|"></span>
         <span th:if="${weatherVO.temp.length() <= 160 }" 
-                  th:text="|${weatherVO.temp}|"></span>
-                  
-         <span>/</span>         
-                  
-         <span th:if="${weatherVO.humidity.length() > 160 }" 
-                  th:text="|${weatherVO.humidity.substring(0, 160) }...|"></span>
-        <span th:if="${weatherVO.humidity.length() <= 160 }" 
-                  th:text="|${weatherVO.humidity}|"></span>
+                  th:text="|${weatherVO.temp}|"></span>       
+           
+                
+
         
       </td>
     </tr>
