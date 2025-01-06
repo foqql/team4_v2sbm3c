@@ -11,7 +11,7 @@
   <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
   </aside>
-  <!--/* '/cate/list_search_com.html' 파일의 list_search_fragment를 가져다 사용 */-->
+  <!--/* '/cate/list_search_com.html' 파일의 list_search_fragment를 가져다 사용 th:field="*{genreno}"*/-->
   <div th:replace="~{classify/list_search_com::list_search_fragment}"></div>
 
   <div class="menu_line"></div>
@@ -19,23 +19,28 @@
   <div class="flex_div_center">
     <form class="list_form" name="frm" method="post" action="/classify/create" th:object="${classifyVO}">
       <div style="width: 20%;">
-        <input type="text" name="genreno" value="" autofocus="autofocus" class="form-control" style="width: 100%;"
-          th:field="*{genreno}" placeholder=" 국가 ">
+        <select id="genreno" name="genreno" class="form-control">
+          <option value="대분류" selected="selected">대분류</option>
+          <option value="1">뉴스</option>
+          <option value="2">환율</option>
+          <option value="3">날씨</option>
+          <option value="4">개인 기사</option>
+        </select>
       </div>
 
+      <div style="width: 30%;">
+        <input type="text" name="classify" value="Y" class="form-control" style="width: 100%;" th:field="*{classify}"
+          placeholder="카테고리(중분류) ">
+      </div>
 
-      <div style="width: 20%;">
+      <div style="width: 15%;">
         <input type="number" name="cnt" min="1" max="10000000" step="1" class="form-control" style="width: 100%;"
           th:field="*{seqno}" placeholder="출력 순서 ">
       </div>
 
-      <div style="width: 20%;">
-        <input type="text" name="classify" value="Y" class="form-control" style="width: 100%;" th:field="*{classify}"
-          placeholder="카테고리 ">
-      </div>
 
 
-      <div style="margin-right: 2px; width: 20%; float: left;">
+      <div style="margin-right: 2px; width: 15%; float: left;">
         <select id="visible" name="visible" class="form-control">
           <option value="출력 모드" selected="selected">출력 모드</option>
           <option value="Y">Y</option>

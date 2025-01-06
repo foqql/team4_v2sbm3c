@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"> <!-- layout.html 상속 -->
+  <div layout:fragment="content" style="width: 80%; margin: 50px auto; text-align: center;">
+
+ 
+  <form action="/sms/confirm" method="post">
+    <input type="text" name="auth_no" placeholder="인증번호를 입력하세요" required>
+    <button type="submit">확인</button>
+</form>
+ 
+  </div> 
+</html>
+

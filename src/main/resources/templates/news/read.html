@@ -54,15 +54,6 @@
         </div>
       </li>   
       
-      <span th:if="${classifyVO.seqno > 1000}">
-          <li class="li_none" id="summaryContent" style="display: none;">
-              <span style="font-size: 1.3em; font-weight: bold; margin-left:50%;"> 요약 </span>
-              <div style="white-space: pre-wrap;">
-                  <span th:text="${newsVO.content2}"></span>
-              </div>
-          </li>
-      </span>
-      
       <li class="li_none" th:if="${newsVO.size1 > 0}">
         <div >
           첨부 파일: <a th:href='@{|/download?dir=news/storage&filename=${newsVO.file1saved}&downname=${newsVO.file1}|}'
@@ -73,33 +64,21 @@
     </ul>
     
   </fieldset>
+
+  <span th:if="${classifyVO.seqno > 1000}">
+    <select id="news" style="margin-left:36%; font-size: 1.3em;">
+      <option value="0">모드를 선택하세요.</option>
+      <option th:each="newsVO, ststus: ${news}" th:value="${newsVO.newsno}" th:text="${newsVO.mod}"></option> 
+    </select> <span id="progress" style="display: none;"></span>
+  </span>
+
   <span th:if="${classifyVO.seqno < 1000}">
     <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:36%; font-size: 1.3em;">번역 및 요약 이동</a>
     <a th:href="${newsVO.content2}" target="_blank" style="margin-left:10%; font-size: 1.3em;">해당 기사 이동</a>
   </span>
-  
-   <span th:if="${classifyVO.seqno > 1000}">
-    <a id="toggleButton" style="margin-left:50.5%; font-size: 1.3em; cursor: pointer;"  >번역 및 요약</a>
-  </span>
+
 </div>
 
 </html>
 
 
-<script>
-    document.getElementById("toggleButton").addEventListener("click", function() {
-        var content = document.getElementById("summaryContent");
-        var button = document.getElementById("toggleButton");
-
-        // 요약 내용을 토글
-        if (content.style.display === "none" || content.style.display === "") {
-            content.style.display = "block";
-            button.innerText = "원문";  // 버튼 텍스트를 '원문'으로 변경
-            button.style.marginLeft = "51%";  // 버튼의 margin-left를 50.5%로 변경
-        } else {
-            content.style.display = "none";
-            button.innerText = "번역 및 요약";  // 버튼 텍스트를 '번역 및 요약'으로 변경
-            button.style.marginLeft = "48.5%";  // 버튼의 margin-left를 48.5%로 변경
-        }
-    });
-</script>

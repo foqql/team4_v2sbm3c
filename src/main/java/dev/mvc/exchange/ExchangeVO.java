@@ -67,7 +67,16 @@ CREATE TABLE exchange (
   /** 메인 이미지 크기 */
   private long size1 = 0;
   
-
+/**
+ * 화폐 코드 관련
+ */
+  /** 이름 */
+  private String country = "";
+  /** 이름 */
+  private String currencyname = "";
+  /** 이름 */
+  private String currencycode = "";
+  
 }
   
   

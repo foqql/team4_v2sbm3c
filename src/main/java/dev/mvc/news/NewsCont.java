@@ -3,6 +3,8 @@ package dev.mvc.news;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -86,6 +88,7 @@ public class NewsCont {
       HttpSession session,
       @ModelAttribute("newsVO") NewsVO newsVO, 
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
+
     if (this.memberProc.isMember(session)) {
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
       model.addAttribute("menu", menu);
@@ -101,6 +104,7 @@ public class NewsCont {
       ra.addAttribute("url", "/member/login_cookie_need"); 
       return "redirect:/news/msg"; // GET
     }
+
   }
 
   /**
@@ -238,7 +242,7 @@ public class NewsCont {
 //      }
 
       model.addAttribute("list", list);
-      return "/news/list_all";
+      return "/th/news/list_all";
 
     } else {
       return "redirect:/member/login_cookie_need";
@@ -429,7 +433,8 @@ public class NewsCont {
       @RequestParam(name="newsno", defaultValue = "0") int newsno,
       @RequestParam(name="newscrawlingno", defaultValue = "0") int newscrawlingno,
       @RequestParam(name="word", defaultValue = "") String word, 
-      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
+      @RequestParam(name="now_page", defaultValue = "1") int now_page,
+      @RequestParam(name="modno", defaultValue="0") int modno) {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
@@ -467,6 +472,31 @@ public class NewsCont {
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
 
+    ArrayList<NewsVO> news = new ArrayList<NewsVO>();
+        
+    news.add(new NewsVO(1, "원문"));
+    news.add(new NewsVO(2, "번역 및 요약")); 
+    
+    model.addAttribute("news", news);
+    
+    JSONArray reads = new JSONArray();
+    JSONObject read = null;
+    
+    if (modno == 1) { // 김밥 천국
+      read = new JSONObject();
+      read.put("title", 1);
+      read.put("content2", 2);
+      read.put("content3", 3);
+      reads.put(read);
+      System.out.println(1111);
+    } else if (modno == 2) {
+      read = new JSONObject();
+      read.put("title", 11);
+      read.put("content2", 22);
+      read.put("content3", 33);
+      reads.put(read);
+      System.out.println(2222);
+    }
     return "/news/read";
   }
 
