@@ -1,28 +1,112 @@
-<!-- src/main/resources/templates/log.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>로그 기록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px auto;
+            display: block;
+            width: 200px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <!-- moment.js 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 페이지 로드 시 Ajax로 데이터 요청
+            function loadLogs() {
+                $.ajax({
+                    url: '/log/list-ajax',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        var rows = '';
+                        data.forEach(function(log) {
+                            // 서버에서 전달된 logdate가 ISO 8601 형식이면 (예: "2025-01-02T03:01:06")
+                            // moment.js로 로컬 시간대로 변환 후 포맷팅
+                            var logDate = moment(log.logdate).local().format('YYYY-MM-DD HH:mm:ss');
+                            rows += '<tr>';
+                            rows += '<td>' + logDate + '</td>';
+                            rows += '<td>' + log.ip + '</td>';
+                            rows += '<td>' + log.memberno + '</td>';
+                            rows += '<td>' + log.mname + '</td>';
+                            rows += '<td><a href="/log/delete?logno=' + log.logno + '">삭제</a></td>';
+                            rows += '</tr>';
+                        });
+                        $('tbody').html(rows);
+                    }
+                });
+            }
+
+            loadLogs(); // 페이지 로드 시 로그 목록을 불러옵니다.
+        });
+    </script>
 </head>
 <body>
     <h1>로그 기록</h1>
     <table>
         <thead>
             <tr>
-                <th>로그 번호</th>
-                <th>IP</th>
                 <th>로그인 날짜</th>
+                <th>IP</th>
                 <th>회원 번호</th>
+                <th>성명</th>
+                <th>삭제</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="log : ${logs}">
-                <td th:text="${log.logno}"></td>
-                <td th:text="${log.ip}"></td>
-                <td th:text="${log.logdate}"></td>
-                <td th:text="${log.memberno}"></td>
-            </tr>
+            <!-- Ajax로 로드된 로그 데이터가 여기에 표시됩니다. -->
         </tbody>
     </table>
+    <a href="/" class="btn">메인화면으로 돌아가기</a> <!-- 홈 페이지로 돌아가는 링크 -->
 </body>
 </html>

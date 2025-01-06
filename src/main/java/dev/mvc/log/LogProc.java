@@ -13,7 +13,7 @@ public class LogProc implements LogProcInter {
 
     @Autowired
     private LogDAOInter logDAO;
-    
+
     @Autowired
     private JdbcTemplate jdbcTemplate; // JdbcTemplate 주입
 
@@ -26,5 +26,10 @@ public class LogProc implements LogProcInter {
     public void insertLog(LogVO logVO) {
         String sql = "INSERT INTO log (logno, ip, logdate, memberno) VALUES (log_seq.NEXTVAL, ?, SYSDATE, ?)";
         jdbcTemplate.update(sql, logVO.getIp(), logVO.getMemberno());
+    }
+
+    @Override
+    public void deleteLog(int logno) {
+        logDAO.deleteLog(logno);  // LogDAO에 있는 삭제 메서드 호출
     }
 }
