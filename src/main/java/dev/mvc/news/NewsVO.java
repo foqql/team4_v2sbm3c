@@ -64,13 +64,15 @@ public class NewsVO {
   /** 뉴스 분류 */
   private String newsgenre = "";
   
-  private int modno;
-  private String mod = "";
-  
-  public NewsVO(int modno, String mod) {
-    this.modno = modno;
-    this.mod = mod;
-  }
+//  private int modno;
+//  private String mod;
+//  
+//  public NewsVO() {}
+//  
+//  public NewsVO(int modno, String mod) {
+//    this.modno = modno;
+//    this.mod = mod;
+//  }
   
   // 파일 업로드 관련
   // -----------------------------------------------------------------------------------

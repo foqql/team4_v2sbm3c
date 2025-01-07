@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.newsrecom.NewsrecomDAOInter">
+  <!-- 등록 -->
+  <insert id="create" parameterType="dev.mvc.newsrecom.NewsrecomVO">
+    INSERT INTO NEWSRECOM(newsrecomno, rdate, newsno, memberno)
+    VALUES (NEWSRECOM_SEQ.nextval, sysdate, #{newsno}, #{memberno})
+  </insert>
+  
+    <!-- 전체 목록 -->
+  <select id="list_all" resultType="dev.mvc.newsrecom.NewsrecomVO">
+    SELECT newsrecomno, rdate, newsno, memberno
+    FROM NEWSRECOM
+    ORDER BY newsrecomno DESC
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM NEWSRECOM
+    WHERE newsrecomno = #{newsrecomno}
+  </delete>
+  
+   <!-- 특정 컨텐츠의 특정 회원 추천 갯수 산출 -->
+  <select id="heartCnt" resultType="int" parameterType='HashMap'>
+    SELECT COUNT(*) as cnt
+    FROM newsrecom
+    WHERE newsno=#{newsno} AND memberno=#{memberno}
+  </select>
+</mapper>

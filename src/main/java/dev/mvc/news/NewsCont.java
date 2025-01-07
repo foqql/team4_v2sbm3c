@@ -1,8 +1,14 @@
 package dev.mvc.news;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +29,7 @@ import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.newsrecom.NewsrecomProcInter;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,6 +63,10 @@ public class NewsCont {
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
   private GenreProcInter genreProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.newsrecom.NewsrecomProc")
+  NewsrecomProcInter newsrecomProc;
 
   public NewsCont() {
     System.out.println("-> NewsCont created.");
@@ -175,6 +186,37 @@ public class NewsCont {
       newsVO.setMemberno(memberno);
       int cnt = this.newsProc.create(newsVO);
 
+      
+      // ------------------------------------------------------------------------------
+      // Python 스크립트 실행 (추가된 부분)
+      // ------------------------------------------------------------------------------
+      try {
+          String pythonScriptPath = "src/main/python/pernews.py"; // Python 스크립트 경로
+          ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+          processBuilder.redirectErrorStream(true);
+          Process process = processBuilder.start();
+
+          // Python 스크립트의 출력 결과를 읽기
+          BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+          String line;
+          while ((line = reader.readLine()) != null) {
+              System.out.println(line);
+          }
+
+          int exitCode = process.waitFor();
+          System.out.println("Python script finished with exit code: " + exitCode);
+
+          if (exitCode != 0) {
+              System.out.println("Python script execution failed");
+          }
+      } catch (IOException | InterruptedException e) {
+          e.printStackTrace();
+      }
+      
+      // ------------------------------------------------------------------------------
+      // 리다이렉트 처리
+      // ------------------------------------------------------------------------------
+      
       // ------------------------------------------------------------------------------
       // PK의 return
       // ------------------------------------------------------------------------------
@@ -429,7 +471,9 @@ public class NewsCont {
    * @return
    */
   @GetMapping(value = "/read")
-  public String read(Model model, 
+  public String read(
+      HttpSession session,
+      Model model, 
       @RequestParam(name="newsno", defaultValue = "0") int newsno,
       @RequestParam(name="newscrawlingno", defaultValue = "0") int newscrawlingno,
       @RequestParam(name="word", defaultValue = "") String word, 
@@ -442,7 +486,6 @@ public class NewsCont {
     ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
     
-    System.out.println("newscrawlingno : "+ newscrawlingno);
     System.out.println("newsno : "+ newsno);
 
     NewsVO newsVO = this.newsProc.read(newsno);
@@ -459,44 +502,46 @@ public class NewsCont {
     String size1_label = Tool.unit(size1);
     newsVO.setSize1_label(size1_label);
 
+   // 조건에 맞는 뉴스 모드 처리
+    if (modno == 1) {
+        System.out.println("원문 모드");
+        newsVO.setTitle("1111");
+    } else if (modno == 2) {
+        System.out.println("번역 및 요약 모드");
+        newsVO.setTitle("2222");
+    }
+    
     model.addAttribute("newsVO", newsVO);
-    System.out.println("newsno : "+ newsno);
 
     ClassifyVO classifyVO = this.classifyProc.read(newsVO.getClassifyno());
     model.addAttribute("classifyVO", classifyVO);
     System.out.println("newsVO.getClassifyno() : "+ newsVO.getClassifyno());
-
+    
+    System.out.println("modno : " + modno);
+    
     // 조회에서 화면 하단에 출력
     // ArrayList<ReplyVO> reply_list = this.replyProc.list_news(newsno);
     // mav.addObject("reply_list", reply_list);
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
-
-    ArrayList<NewsVO> news = new ArrayList<NewsVO>();
-        
-    news.add(new NewsVO(1, "원문"));
-    news.add(new NewsVO(2, "번역 및 요약")); 
     
-    model.addAttribute("news", news);
+    // -------------------------------------------------------------------------------------------
+    // 추천 관련
+    // -------------------------------------------------------------------------------------------
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("newsno", newsno);
     
-    JSONArray reads = new JSONArray();
-    JSONObject read = null;
+    int heartCnt = 0;
+    if (session.getAttribute("memberno") != null ) { // 회원인 경우만 카운트 처리
+      int memberno = (int)session.getAttribute("memberno");
+      map.put("memberno", memberno);
+      
+      heartCnt = this.newsrecomProc.heartCnt(map);
+    } 
     
-    if (modno == 1) { // 김밥 천국
-      read = new JSONObject();
-      read.put("title", 1);
-      read.put("content2", 2);
-      read.put("content3", 3);
-      reads.put(read);
-      System.out.println(1111);
-    } else if (modno == 2) {
-      read = new JSONObject();
-      read.put("title", 11);
-      read.put("content2", 22);
-      read.put("content3", 33);
-      reads.put(read);
-      System.out.println(2222);
-    }
+    model.addAttribute("heartCnt", heartCnt);
+    // -------------------------------------------------------------------------------------------
+    
     return "/news/read";
   }
 

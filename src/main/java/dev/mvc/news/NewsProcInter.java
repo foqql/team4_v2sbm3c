@@ -184,5 +184,19 @@ public interface NewsProcInter {
    * @return
    */
   public NewsVO trans_sum(int newsno);
+  
+  /**
+   * 추천 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseRecom(int newsrecomno);
+  
+  /**
+   * 추천 수 감소
+   * @param 
+   * @return
+   */  
+  public int decreaseRecom(int newsrecomno);
 }
 

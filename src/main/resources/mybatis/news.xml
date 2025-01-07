@@ -242,4 +242,17 @@
                   
   </select>                    
   
+    <!-- 추천 수 증가 -->
+   <update id="increaseRecom" parameterType="int">
+     UPDATE news
+     SET recom = recom + 1
+     WHERE newsno = #{newsno}
+   </update>
+   
+   <!-- 추천 수 감소 -->
+   <update id="decreaseRecom" parameterType="int">
+     UPDATE news
+     SET recom = recom - 1
+     WHERE newsno = #{newsno}
+   </update>
 </mapper> 
