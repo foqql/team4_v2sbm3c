@@ -45,7 +45,6 @@
       <div>
         <label> 중분류 </label>
         <input type="text" name="classify" class="form-control" style="width: 100%;" th:field="*{classify}">
-        <span th:text="|유형 : ${list_type}|"></span><br>
         <div th:if="${#fields.hasErrors('classify')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
           <div th:each="err: ${#lists.sort(#fields.errors('classify'))}" th:text="${err}"></div>
         </div>

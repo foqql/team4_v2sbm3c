@@ -32,6 +32,27 @@ INSERT INTO survey (
     
 </select>
 
+<select id="list_search_paging" resultType="dev.mvc.survey.SurveyVO" parameterType="HashMap">
+  SELECT surveyno, topic, startdate, enddate, cnt, continueyn, r
+  FROM (
+    SELECT surveyno, topic, startdate, enddate, cnt, continueyn, rownum as r
+    FROM (
+      SELECT surveyno, topic, startdate, enddate, cnt, continueyn
+      FROM Survey
+      <choose>
+        <when test="word != null and word != ''">
+          WHERE UPPER(topic) LIKE '%' || UPPER(#{word}) || '%'
+        </when>
+        <otherwise>
+          WHERE 1=1
+        </otherwise>
+      </choose>
+      ORDER BY surveyno DESC
+    )
+  )
+  WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+</select>
+
 
 
 <!-- 카테고리별 검색 레코드 갯수 -->
@@ -47,6 +68,14 @@ INSERT INTO survey (
     </choose>
   </select>   
 
+<select id="list_search_count" resultType="Integer" parameterType="String">
+  SELECT count(*) as cnt FROM survey
+  <if test="word != null and word != ''">
+    WHERE (UPPER(topic) LIKE '%' || UPPER(#{word}) || '%')
+  </if>
+  ORDER BY surveyno ASC
+</select>
+
 
   <select id="read" resultType="dev.mvc.survey.SurveyVO">
     SELECT *
@@ -54,11 +83,6 @@ INSERT INTO survey (
     where surveyno = #{surveyno}
   </select>
   
-    <select id="read_item" resultType="dev.mvc.survey.SurveyVO" parameterType="Integer">
-    SELECT *
-    FROM Surveyitem
-    where surveyno = #{surveyno}
-  </select>
   
     <!-- 모든 카테고리의 등록된 글목록 -->
   <select id="read_item_list" resultType="dev.mvc.survey.SurveyVO">
@@ -66,4 +90,45 @@ INSERT INTO survey (
     FROM Surveyitem
     where surveyno = #{surveyno}
   </select>
+  
+  
+<update id="update_pick_surveyitem" parameterType="int">
+    UPDATE Surveyitem SET pick = pick + 1
+    WHERE Surveyitemno = #{Surveyitemno}
+</update>
+
+    <insert id="create_item" parameterType="dev.mvc.survey.SurveyVO">
+INSERT INTO surveyitem (
+    surveyitemno,
+itemseq,
+item,
+ITEMCNT,
+surveyno,
+pick
+) VALUES (
+    surveyitem_seq.nextval, #{itemseq},#{item}, 1,#{surveyno}, 0)
+</insert>
+
+    <update id="update" parameterType="dev.mvc.survey.SurveyVO">
+    UPDATE survey
+    SET topic = #{topic},
+        startdate = sysdate
+    WHERE surveyno = #{surveyno}
+</update>
+
+    <delete id="delete" parameterType="int">
+    DELETE FROM survey WHERE surveyno = #{surveyno}
+</delete>
+
+      <update id="update_item" parameterType="dev.mvc.survey.SurveyVO">
+      UPDATE surveyitem
+      SET item = #{item},
+          startdate = sysdate
+      WHERE surveyitemno = #{surveyitemno}
+  </update>
+  
+      <delete id="delete_item" parameterType="int">
+      DELETE FROM surveyitem WHERE surveyitemno = #{surveyitemno}
+  </delete>
+
 </mapper>

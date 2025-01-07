@@ -2,6 +2,7 @@ package dev.mvc.survey;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import dev.mvc.tool.Security;
 public class SurveyProc implements SurveyProcInter {
   @Autowired
   Security security;
-  
+
   @Autowired // ExchangeDAOInter interface를 구현한 클래스의 객체를 만들어 자동으로 할당해라.
   private SurveyDAOInter surveyDAO;
 
@@ -23,8 +24,8 @@ public class SurveyProc implements SurveyProcInter {
   }
 
   @Override
-  public String pagingBox(int now_page, String word, String list_file, int search_count,
-      int record_per_page, int page_per_block) {
+  public String pagingBox(int now_page, String word, String list_file, int search_count, int record_per_page,
+      int page_per_block) {
     // 전체 페이지 수: (double)1/10 -> 0.1 -> 1 페이지, (double)12/10 -> 1.2 페이지 -> 2 페이지
     int total_page = (int) (Math.ceil((double) search_count / record_per_page));
     // 전체 그룹 수: (double)1/10 -> 0.1 -> 1 그룹, (double)12/10 -> 1.2 그룹-> 2 그룹
@@ -78,8 +79,8 @@ public class SurveyProc implements SurveyProcInter {
     // 현재 3그룹일 경우: (3 - 1) * 10 = 2그룹의 마지막 페이지 20
     int _now_page = (now_grp - 1) * page_per_block;
     if (now_grp >= 2) { // 현재 그룹번호가 2이상이면 페이지수가 11페이지 이상임으로 이전 그룹으로 갈수 있는 링크 생성
-      str.append("<span class='span_box_1'><A href='" + list_file + "?word=" + word
-          + "&now_page=" + _now_page + "'>이전</A></span>");
+      str.append("<span class='span_box_1'><A href='" + list_file + "?word=" + word + "&now_page=" + _now_page
+          + "'>이전</A></span>");
     }
 
     // 중앙의 페이지 목록
@@ -92,8 +93,8 @@ public class SurveyProc implements SurveyProcInter {
         str.append("<span class='span_box_2'>" + i + "</span>"); // 현재 페이지, 강조
       } else {
         // 현재 페이지가 아닌 페이지는 이동이 가능하도록 링크를 설정
-        str.append("<span class='span_box_1'><A href='" + list_file + "?word=" + word
-            + "&now_page=" + i + "'>" + i + "</A></span>");
+        str.append("<span class='span_box_1'><A href='" + list_file + "?word=" + word + "&now_page=" + i + "'>" + i
+            + "</A></span>");
       }
     }
 
@@ -104,19 +105,40 @@ public class SurveyProc implements SurveyProcInter {
     // 현재 페이지 25일경우 -> 현재 3그룹: (3 * 10) + 1 = 4그룹의 시작페이지 31
     _now_page = (now_grp * page_per_block) + 1; // 최대 페이지수 + 1
     if (now_grp < total_grp) {
-      str.append("<span class='span_box_1'><A href='" + list_file + "?word=" + word
-          + "&now_page=" + _now_page + "'>다음</A></span>");
+      str.append("<span class='span_box_1'><A href='" + list_file + "?word=" + word + "&now_page=" + _now_page
+          + "'>다음</A></span>");
     }
     str.append("</DIV>");
 
     return str.toString();
   }
 
-//  @Override
-//  public int list_by_classifyno_search_count(HashMap<String, Object> hashMap) {
-//    int cnt = this.surveyDAO.list_by_classifyno_search_paging(hashMap);
-//    return cnt;
-//  }
+  @Override
+  public ArrayList<SurveyVO> list_search_paging(String word, int now_page, int record_per_page) {
+    /*
+     * 페이지당 10개의 레코드 출력 1 page : WHERE r BETWEEN 1 AND 10 2 page : WHERE r BETWEEN
+     * 11 AND 20 3 page : WHERE r BETWEEN 21 AND 30
+     * 
+     * now_page 1 start_num = 1, end_num = 10 int start_num = end_num-9 int end_num
+     * = now_page * 10
+     * 
+     * int start_num = (now_page) * record_per_page; int end_num = start_num =10;
+     */
+    int end_num = now_page * record_per_page;
+    int start_num = end_num - record_per_page + 1;
+    System.out.println("WHERE r BETWEEN " + start_num + " AND " + end_num);
+
+    Map<String, Object> map = new HashMap<String, Object>();
+    map.put("word", word);
+    map.put("start_num", start_num);
+    map.put("end_num", end_num);
+
+    ArrayList<SurveyVO> list = this.surveyDAO.list_search_paging(map);
+
+    System.out.println(" ->  " + list.size());
+    return list;
+//    return null;
+  }
 
   @Override
   public ArrayList<SurveyVO> list_by_classifyno_search_paging(HashMap<String, Object> map) {
@@ -182,7 +204,45 @@ public class SurveyProc implements SurveyProcInter {
     return list;
   }
 
+  @Override
+  public int update_pick_surveyitem(int surveyno) {
+    return this.surveyDAO.update_pick_surveyitem(surveyno);
   }
 
-  
-  
+  @Override
+  public int create_item(SurveyVO surveyVO) {
+    int cnt = this.surveyDAO.create_item(surveyVO);
+    return cnt;
+  }
+
+  @Override
+  public int update(SurveyVO surveyVO) {
+    int cnt = this.surveyDAO.update(surveyVO);
+    return cnt;
+  }
+
+  @Override
+  public int delete(SurveyVO surveyVO) {
+    int cnt = this.surveyDAO.delete(surveyVO);
+    return cnt;
+  }
+
+  @Override
+  public int update_item(SurveyVO surveyVO) {
+    int cnt = this.surveyDAO.update_item(surveyVO);
+    return cnt;
+  }
+
+  @Override
+  public int delete_item(SurveyVO surveyVO) {
+    int cnt = this.surveyDAO.delete_item(surveyVO);
+    return cnt;
+  }
+
+  @Override
+  public Integer list_search_count(String word) {
+    int cnt = this.surveyDAO.list_search_count(word);
+    return cnt;
+  }
+
+}
