@@ -1,36 +1,86 @@
 <!DOCTYPE html> 
-
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
+   <script>
+    window.onload = function(){
+      // <img src="/contents/images/heart_add.png" style="width: 22px" title="추천">
+      // <img src="/contents/images/heart_delete.png" style="width: 22px" title="비추천">
+      // 현재 로그인한 사용자의 추천 여부 반영
+      let heartCnt =  '[[${heartCnt}]]'; //  javascript -> Thymeleaf -> session
+      let tag='';
+      
+      if (heartCnt == 1) {
+        tag = '<a href="javascript:recom([[${newsVO.newsno}]])"><img src="/news/images/heart_add.png" style="width: 22px" title="추천"></a>';
+        document.querySelector('#heart_panel').innerHTML = tag; 
+      } else {
+        tag = '<a href="javascript:recom([[${newsVO.newsno}]])"><img src="/news/images/heart_delete.png" style="width: 22px" title="비추천"></a>';
+        document.querySelector('#heart_panel').innerHTML = tag; 
+      }
+      
+      document.querySelector('#recom_panel').innerHTML = '([[${newsVO.recom}]])';
+    }
+    
+    function recom(newsno){
+      console.log('-> newsno: ' + newsno);
+      
+      fetch("http://192.168.12.162:9093/news/recom", {
+          "method": "post",
+          "headers": {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({newsno}) // {"newsno":newsno}, JSON 형식으로 전송
+        })
+        .then((response) => response.json()) // 응답 문자열 추출
+        .then((data) => {
+          console.log('-> data.isMember: ' + data.isMember);
+          if (data.isMember == 1){ //회원 
+            
+            let heartCnt =  data.heartCnt; //  javascript -> Thymeleaf -> session
+            let tag='';
+            
+            if (heartCnt == 1) {
+              tag = '<a href="javascript:recom([[${newsVO.newsno}]])"><img src="/news/images/heart_add.png" style="width: 22px" title="추천"></a>';
+              document.querySelector('#heart_panel').innerHTML = tag; 
+            } else {
+              tag = '<a href="javascript:recom([[${newsVO.newsno}]])"><img src="/news/images/heart_delete.png" style="width: 22px" title="비추천"></a>';
+              document.querySelector('#heart_panel').innerHTML = tag; 
+            }
+            
+            document.querySelector('#recom_panel').innerHTML = '(' + data.recom +')';
+            
+          } else { // 비회원
+            alert("로그인해야 추천할 수 있습니다.");
+            location.href='/member/login_cookie_need';
+          }
+          
+        }
+      );
+    }
+  </script>  
   <div class='title_line'>
     <span th:text="${classifyVO.bigcla}" class="title_line_text"></span > 
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
     > 원문 조회
   </div>
   
-
-  
-  <aside class="aside_right" th:if="${session.grade == 'admin'}">
-    <a href="javascript:location.reload();">새로고침</a>
+  <aside class="aside_right">
+    <a href="javascript:location.reload();" >새로고침</a>
     <span class='menu_divide' >│</span>    
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
     <span class='menu_divide' >│</span>
-    <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
-    <span class='menu_divide' >│</span>
-    
-    <span th:if="${classifyVO.classifyno == 70}">
+    <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
+   
+    <span th:if="${classifyVO.seqno > 1000}">
+      <span class='menu_divide' >│</span>
       <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
       <span class='menu_divide' >│</span>
       <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>
-    </span>
-    
- </aside> 
-
-
+      <span class='menu_divide' >│</span>
+      <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>
+    </span>    
+  </aside> 
  
   <div class='menu_line'></div>
 
@@ -38,15 +88,13 @@
     <ul>
       <li class="li_none">
         <div style="width: 100%; word-break: break-all;">
-        
           <div th:if="${newsVO.file1.endsWith('jpg') or newsVO.file1.endsWith('png')  or newsVO.file1.endsWith('gif')}">
             <img th:src="@{|/news/storage/${newsVO.file1saved}|}" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'>
           </div>
 
-          <span style="font-size: 1.5em; font-weight: bold;" th:text="${newsVO.title}"></span>
+          <span id="title" style="font-size: 1.5em; font-weight: bold;" th:text="${newsVO.title}"></span>
           <span style="font-size: 1em;" th:text="${newsVO.rdate }"></span><br><br>
-          <div style="white-space: pre-wrap;"><span th:text="${newsVO.content}"></span></div>
-          
+          <div id="content" style="white-space: pre-wrap;"><span th:text="${newsVO.content}"></span></div>
         </div>
       </li>   
       
@@ -55,17 +103,32 @@
           첨부 파일: <a th:href='@{|/download?dir=news/storage&filename=${newsVO.file1saved}&downname=${newsVO.file1}|}'
                              th:text='|${newsVO.file1}|'></a> <span th:text="|(${newsVO.size1_label})|"></span>  
                          <a th:href='@{|/download?dir=news/storage&filename=${newsVO.file1saved}&downname=${newsVO.file1}|}'><img src="/news/images/download.png"></a>
+        <span id="heart_panel"></span>
+        <span id="recom_panel" style="font-size: 1em;"></span>
         </div>
       </li>  
     </ul>
-    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:36%; font-size: 1.3em;">번역 및 요약 이동</a>
-    <span th:if="${classifyVO.classifyno != 70}">
-      <a th:href="${newsVO.content2}" target="_blank" style="margin-left:10%; font-size: 1.3em;">해당 기사 이동</a>
-    </span>
+    
   </fieldset>
-  
+
+  <span th:if="${classifyVO.seqno > 1000}">
+    <select id="news" style="margin-left:36%; font-size: 1.3em;">
+      <option value="0">모드를 선택하세요.</option>
+      <option value="1">원문</option>
+      <option value="2">번역 및 요약</option>       
+      <option th:each="newsVO, ststus: ${news}" th:value="${newsVO.newsno}" th:text="${newsVO.mod}" data-modno="${newsVO.newsno}"></option> 
+    </select> 
+    <span id="progress" style="display: none;"></span>
+    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:10%; font-size: 1.3em;">번역 및 요약 이동</a>
+  </span>
+
+  <span th:if="${classifyVO.seqno < 1000}">
+    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:36%; font-size: 1.3em;">번역 및 요약 이동</a>
+    <a th:href="${newsVO.content2}" target="_blank" style="margin-left:10%; font-size: 1.3em;">해당 기사 이동</a>
+  </span>
 
 </div>
 
 </html>
+
 

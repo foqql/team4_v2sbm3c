@@ -10,7 +10,7 @@
   </div>
 
   <aside class="aside_right">
-    <span th:if="${session.grade == 'admin'}">
+    <span th:if="${classifyVO.seqno > 1000}">
       <a th:href="@{|/news/create?classifyno=${classifyVO.classifyno}|}">등록</a>
       <span class="menu_devide">│</span>    
     </span>

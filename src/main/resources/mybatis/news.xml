@@ -6,14 +6,14 @@
   <!-- 등록한 레코드 갯수 1 리턴, #{memberno}: public int getAdminno() 호출됨 -->
   <insert id="create" parameterType="dev.mvc.news.NewsVO">
     INSERT ALL
-        INTO newscrawling(newscrawlingno, title, content, rdate)
-        VALUES(newscrawling_seq.nextval, #{title}, #{content}, sysdate)
+        INTO newscrawling(newscrawlingno, title, content, rdate, source)
+        VALUES(newscrawling_seq.nextval, #{title}, #{content}, sysdate, '개인')
         
-        INTO translate(translateno)
-        VALUES(translate_seq.nextval)
+        INTO translate(translateno, rdate, genre)
+        VALUES(translate_seq.nextval, sysdate, '개인')
         
-        INTO summary(summaryno)
-        VALUES(summary_seq.nextval)
+        INTO summary(summaryno, rdate, genre)
+        VALUES(summary_seq.nextval, sysdate, '개인')
         
         INTO news(newsno, memberno, classifyno, newscrawlingno, translateno, summaryno, title, content, passwd, file1, file1saved, thumb1, size1, rdate)
         VALUES(news_seq.nextval, #{memberno}, #{classifyno}, newscrawling_seq.currval, translate_seq.currval, summary_seq.currval, 
@@ -242,4 +242,17 @@
                   
   </select>                    
   
+    <!-- 추천 수 증가 -->
+   <update id="increaseRecom" parameterType="int">
+     UPDATE news
+     SET recom = recom + 1
+     WHERE newsno = #{newsno}
+   </update>
+   
+   <!-- 추천 수 감소 -->
+   <update id="decreaseRecom" parameterType="int">
+     UPDATE news
+     SET recom = recom - 1
+     WHERE newsno = #{newsno}
+   </update>
 </mapper> 
