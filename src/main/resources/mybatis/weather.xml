@@ -5,22 +5,54 @@
   
 
     <insert id="create" parameterType="dev.mvc.weather.WeatherVO">
-        INSERT INTO area (areano, continent, country, city)
-        VALUES (area_SEQ.NEXTVAL, #{continent}, #{country}, #{city})    
+        INSERT ALL
+    
+        INTO area (areano, continent, country, city, rdate)
+        VALUES (area_SEQ.NEXTVAL, #{continent}, #{country}, #{city}, sysdate)    
+        
+        INTO weather(weatherno, memberno, classifyno, areano, rdate, file1, file1saved, thumb1, size1)
+        VALUES(weather_seq.nextval, #{memberno}, #{classifyno}, area_seq.currval, sysdate, #{file1}, #{file1saved}, #{thumb1}, #{size1})
+        
+         SELECT * FROM dual
     </insert>
    
-   
-   
-    <select id="arealist" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
+      <!-- <select id="arealist" resultType="dev.mvc.weather.WeatherVO">
          SELECT areano, continent, country, city
-         FROM area;
-    </select>
+         FROM area
+    </select>-->
+    
+  <select id="arealist" resultType="dev.mvc.weather.WeatherVO">
+    SELECT areano, continent, country, city
+    FROM (
+      SELECT areano, continent, country, city,
+             ROW_NUMBER() OVER (PARTITION BY city ORDER BY areano DESC) AS rn
+      FROM area
+    )
+    WHERE rn = 1
+  </select>
+
+
+
+            <!-- 도시 수정 
+  <update id="update_area" parameterType="dev.mvc.weather.WeatherVO">
+    UPDATE area
+    SET  
+      
+      continent = #{continent}, 
+      country = #{country}, 
+      city = #{country}, 
+    WHERE areano = #{areano}
+  </update>-->
+  
+  
+  
+  
 
   
     <!-- 일반적인 조회 
     <select id="read" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
       SELECT weatherno, memberno, classifyno, weather, rdate, temp, windchill, 
-                mintemp, maxtemp, humidity, rainfall, pop, speed, direction, udate,
+                mintemp, maxtemp, humidity, speed, direction, udate,
                 file1, file1saved, thumb1, size1, map, youtube
       FROM weather
       WHERE weatherno = #{weatherno}
@@ -29,16 +61,16 @@
   
     <!-- 일반적인 조회 (조인)-->
     <select id="read" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-      SELECT w.weatherno, w.memberno, w.classifyno, 
-             w.weather, w.rdate, w.temp, w.windchill, 
-             w.mintemp, w.maxtemp, w.humidity, w.rainfall, w.pop, 
-             w.speed, w.direction, w.udate, 
-             w.file1, w.file1saved, w.thumb1, w.size1, 
-             w.map, w.youtube,
-             a.areano, a.continent, a.country, a.city
-      FROM weather w
-      INNER JOIN area a ON w.areano = a.areano
-      WHERE w.weatherno = #{weatherno}
+      SELECT w.weatherno, w.memberno, w.classifyno,
+               w.weather, w.rdate, w.temp, w.windchill,
+               w.mintemp, w.maxtemp, w.humidity,
+               w.speed, w.direction, w.udate,
+               w.file1, w.file1saved, w.thumb1, w.size1,
+               w.map, w.youtube, w.passwd, w.recom,
+               a.areano, a.continent, a.country, a.city
+        FROM weather w
+        INNER JOIN area a ON w.areano = a.areano
+  WHERE w.weatherno = #{weatherno}
     </select>
     
     
@@ -69,7 +101,7 @@
     <!-- 특정 카테고리의 등록된 글목록 
     <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
       SELECT weatherno, memberno, classifynoy, weather, rdate, temp, windchill, 
-                mintemp, maxtemp, humidity, rainfall, pop, speed, direction, udate,
+                mintemp, maxtemp, humidity, speed, direction, udate,
                 LOWER(file1) as file1, file1saved, thumb1, size1
       FROM weather 
       WHERE classifyno = #{classifyno}
@@ -94,7 +126,7 @@
   <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
        SELECT w.weatherno, w.memberno, w.classifyno, 
            w.weather, w.rdate, w.temp, w.windchill, 
-           w.mintemp, w.maxtemp, w.humidity, w.rainfall, w.pop, 
+           w.mintemp, w.maxtemp, w.humidity,
            w.speed, w.direction, w.udate, 
            LOWER(w.file1) as file1, w.file1saved, w.thumb1, w.size1,
            a.areano, a.continent, a.country, a.city
@@ -127,7 +159,7 @@
     <!-- 카테고리별 검색 목록 -->
     <select id="list_by_classifyno_search" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
       SELECT weatherno, memberno, classifyno, continent, country, city, weather, rdate, temp, windchill, 
-                mintemp, maxtemp, humidity, rainfall, pop, speed, direction, udate,
+                mintemp, maxtemp, humidity, speed, direction, udate,
               file1, file1saved, thumb1, size1, map, youtube
       FROM weather
       <choose>
@@ -142,8 +174,6 @@
                                                     OR UPPER(mintemp) LIKE '%' || UPPER(#{word}) || '%'
                                                     OR UPPER(maxtemp) LIKE '%' || UPPER(#{word}) || '%'
                                                     OR UPPER(humidity) LIKE '%' || UPPER(#{word}) || '%'
-                                                    OR UPPER(rainfall) LIKE '%' || UPPER(#{word}) || '%'
-                                                    OR UPPER(pop) LIKE '%' || UPPER(#{word}) || '%'
                                                     OR UPPER(speed) LIKE '%' || UPPER(#{word}) || '%'
                                                     OR UPPER(direction) LIKE '%' || UPPER(#{word}) || '%'
                                                     OR UPPER(udate) LIKE '%' || UPPER(#{word}) || '%'
@@ -177,14 +207,14 @@
   
   
   
-    <!-- 카테고리별 검색 + 페이징 목록 (area 테이블 조인) -->
- <select id="list_by_classifyno_search_paging" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
+<!-- 카테고리별 검색 + 페이징 목록 (area 테이블 조인) -->
+<select id="list_by_classifyno_search_paging" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
     SELECT w.weatherno, w.memberno, w.classifyno, w.weather, w.rdate, w.temp, w.windchill, w.mintemp, w.maxtemp, 
-           w.humidity, w.rainfall, w.pop, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
+           w.humidity, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
            w.map, w.youtube, areano, continent, country, city, r
     FROM (
         SELECT w.weatherno, w.memberno, w.classifyno, w.weather, w.rdate, w.temp, w.windchill, w.mintemp, w.maxtemp, 
-               w.humidity, w.rainfall, w.pop, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
+               w.humidity, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
                w.map, w.youtube, a.areano AS areano, a.continent AS continent, a.country AS country, a.city AS city, 
                ROW_NUMBER() OVER (ORDER BY w.weatherno DESC) AS r
         FROM weather w
@@ -201,10 +231,10 @@
             </when>
             <otherwise>
                 WHERE w.classifyno = #{classifyno} AND (
-                    UPPER(w.weather) LIKE CONCAT('%', UPPER(#{word}), '%')
-                    OR UPPER(a.continent) LIKE CONCAT('%', UPPER(#{word}), '%')
-                    OR UPPER(a.country) LIKE CONCAT('%', UPPER(#{word}), '%')
-                    OR UPPER(a.city) LIKE CONCAT('%', UPPER(#{word}), '%')
+                    UPPER(w.weather) LIKE '%' || UPPER(#{word}) || '%'
+                    OR UPPER(a.continent) LIKE '%' || UPPER(#{word}) || '%'
+                    OR UPPER(a.country) LIKE '%' || UPPER(#{word}) || '%'
+                    OR UPPER(a.city) LIKE '%' || UPPER(#{word}) || '%'
                 ) AND w.udate IN (
                     SELECT MAX(w2.udate) 
                     FROM weather w2
@@ -219,9 +249,6 @@
 </select>
 
 
-
-  
-    
     <!-- 패스워드 검사 -->
     <select id="password_check" resultType="int" parameterType="HashMap">
       SELECT COUNT(*) as cnt 
@@ -229,23 +256,32 @@
       WHERE weatherno = #{weatherno} AND passwd=#{passwd}
     </select>
     
-    <!-- 글 수정 -->
+    
+        <!-- 날씨 수정 
     <update id="update_text" parameterType="dev.mvc.weather.WeatherVO">
       UPDATE weather
-      SET  
-      weather=#{weather},
-      rdate=#{rdate},
-      temp=#{temp},
-      windchill=#{windchill},
-      mintemp=#{mintemp},
-      maxtemp=#{maxtemp},
-      humidity=#{humidity},
-      rainfall=#{rainfall},
-      pop=#{pop},
-      speed=#{speed},
+      SET  weather=#{weather}, rdate=#{rdate}, temp=#{temp}, windchill=#{windchill},
+      mintemp=#{mintemp}, maxtemp=#{maxtemp}, humidity=#{humidity}, speed=#{speed},
       direction=#{direction}
       WHERE weatherno = #{weatherno}
-    </update>
+    </update>-->
+    
+            <!-- 날씨 수정 -->
+  <update id="update_text" parameterType="dev.mvc.weather.WeatherVO">
+    UPDATE weather 
+    SET  
+      weather = #{weather}, 
+      rdate = #{rdate}, 
+      temp = #{temp}, 
+      windchill = #{windchill}, 
+      mintemp = #{mintemp}, 
+      maxtemp = #{maxtemp}, 
+      humidity = #{humidity}, 
+      speed = #{speed},
+      direction = #{direction}
+    WHERE weatherno = #{weatherno}
+  </update>
+
   
     <!-- 파일 수정 -->
     <update id="update_file" parameterType="dev.mvc.weather.WeatherVO">
@@ -259,6 +295,10 @@
       DELETE FROM weather
       WHERE weatherno=#{weatherno}
     </delete>
+    
+
+  
+
     
     <!-- FK classifyno 컬럼에 대응하는 필수 SQL -->
     <!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
@@ -288,5 +328,19 @@
       WHERE memberno=#{memberno}
     </delete>
   
-                      
+      <!-- 추천수 증가 -->
+  <update id="increaseRecom" parameterType="int">
+      UPDATE weather
+      SET recom = recom + 1
+      WHERE weatherno =#{weatherno}
+  </update>
+  
+      <!-- 추천수 감소 -->
+  <update id="decreaseRecom" parameterType="int">
+      UPDATE weather
+      SET recom = recom - 1
+      WHERE weatherno =#{weatherno}
+  </update>
+  
+  
   </mapper> 

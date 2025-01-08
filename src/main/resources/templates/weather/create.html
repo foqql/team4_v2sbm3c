@@ -27,6 +27,9 @@
     <select id="continent" name="continent" class="form-control">
       <option value="대륙선택" selected="selected">대륙선택</option>
 
+
+     <!-- <option value="1">아시아</option>-->
+      <!-- <option value="2">유럽</option> -->
       <option value="4">북아메리카</option>
 
     </select>
@@ -61,12 +64,12 @@
     var countryDiv = document.getElementById("country_div");
     var cityDiv = document.getElementById("city_div");
 
-    // 대륙 선택에 따라 국가 선택을 표시
-    if (continent === "4") {  // 북아메리카 선택
-      countryDiv.style.display = "block"; // 국가 선택 보이기
+
+    if (continent === "4") {  
+      countryDiv.style.display = "block"; 
     } else {
-      countryDiv.style.display = "none"; // 국가 선택 숨기기
-      cityDiv.style.display = "none";    // 도시 선택 숨기기
+      countryDiv.style.display = "none";
+      cityDiv.style.display = "none";   
     }
   });
 
@@ -74,11 +77,11 @@
     var country = this.value;
     var cityDiv = document.getElementById("city_div");
 
-    // 국가 선택에 따라 도시 선택을 표시
-    if (country === "1") {  // 미국 선택
-      cityDiv.style.display = "block"; // 도시 선택 보이기
+   
+    if (country === "1") {  
+      cityDiv.style.display = "block"; 
     } else {
-      cityDiv.style.display = "none";  // 도시 선택 숨기기
+      cityDiv.style.display = "none";  
     }
   });
 </script>

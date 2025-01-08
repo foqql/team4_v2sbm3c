@@ -258,11 +258,7 @@ public class WeatherProc implements WeatherProcInter {
   }
 
   @Override
-  public int password_check(HashMap<String, Object> map) {
-    String passwd = (String)map.get("passwd");
-    passwd = this.security.aesEncode(passwd);
-    map.put("passwd", passwd);
-    
+  public int password_check(HashMap<String, Object> map) {    
     int cnt = this.weatherDAO.password_check(map);
     return cnt;
   }
@@ -321,10 +317,31 @@ public class WeatherProc implements WeatherProcInter {
     return count;
   }
 
+  
   @Override
   public ArrayList<WeatherVO> arealist() {
-    return null;
+    ArrayList<WeatherVO> list = this.weatherDAO.arealist();
+    System.out.println(list);
+    return list;
+  }
+
+  @Override
+  public int increaseRecom(int weatherno) {
+    int cnt = this.weatherDAO.increaseRecom(weatherno);
+    return cnt;
+  }
+
+  @Override
+  public int decreaseRecom(int weatherno) {
+    int cnt = this.weatherDAO.decreaseRecom(weatherno);
+    return cnt;
   }
   
+  @Override
+  public int good(int weatherno) {
+
+    return 0;
+  }
+
   
 }

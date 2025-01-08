@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}">
+<!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class="title_line">
+    <img src="/images/pepe good.gif" style="width:50px; height: 50px;"> 등록
+  </div>
+
+  <aside class="aside_right">
+    <a href="javascript:location.reload();">새로고침</a>
+  </aside>
+<!--  <div th:replace="~{survey/list_search_com::list_search_fragment}"></div>-->
+  <div class="menu_line"></div>
+
+  <div style="width : 60%; margin: 0px auto;">
+    <form name="frm" method="post" action="/survey/create" th:object="${surveyVO}">
+    <input type="hidden" name="enddate" th:value="${surveyVO.surveyno}" />
+
+        <div>
+          <label> topic </label>
+          <input type="text" name="topic" value="Y" class="form-control fom-control-sm" style="width: 50%;"
+            th:field="*{topic}">
+          <div th:if="${#fields.hasErrors('topic')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+            <div th:each="err: ${#lists.sort(#fields.errors('topic'))}" th:text="${err}"></div>
+          </div>
+        </div>
+
+<p>현재 시간 확인(삭제 예정): <span th:text="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+   <input type="hidden" name="startdate" 
+           th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />
+
+
+    
+    
+    
+        
+        
+        <div class="content_body_bottom">
+          <button type="submit" class="btn btn-secondary btn-sm">등록</button>
+          <button type="button" onclick="location.href='/survey/list_search'"
+            class="btn btn-secondary btn-sm">목록</button>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+</html>

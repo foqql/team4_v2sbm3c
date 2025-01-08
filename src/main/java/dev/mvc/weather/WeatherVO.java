@@ -41,12 +41,6 @@ public class WeatherVO {
     /** 습도 */
     private String humidity = "";
 
-    /** 강수량 */
-    private String rainfall = "";
-
-    /** 강수확률 */
-    private String pop = "";
-
     /** 풍속 */
     private String speed = "";
 
@@ -64,8 +58,12 @@ public class WeatherVO {
 
     /** 패스워드 */
     private String passwd = "";
+    
+    /** 추천 */
+    private int recom;
 
     // 지역VO
+    
     /** 지역 번호 */
     private int areano;
 
@@ -77,6 +75,7 @@ public class WeatherVO {
 
     /** 도시 */
     private String city = "";
+    
 
     // 대륙 코드로 대륙 이름 설정
     public void setContinentName(String continentCode) {
