@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+
+<head>
+
+</head>
+
+<body>
+    <div layout:fragment="content">
+
+        <div class='menu_line'></div>
+
+        <fieldset class="fieldset_basic">
+    <form name="frm" method="post" action="/survey/update" th:object="${surveyVO}">
+      <input type="hidden" name="surveyno" th:value="${surveyVO.surveyno}">
+     <!-- <input type="hidden" name="seqno" th:value="${classifyVO.seqno}">-->
+      <input type="hidden" name="word" th:value="${word}">
+      <input type="hidden" name="now_page" th:value="${now_page}">
+
+      
+        <label> 설문조사 주제변경  </label>
+        <input type="text" name="topic" class="form-control" style="width: 100%;" th:field="*{topic}">
+        <div th:if="${#fields.hasErrors('topic')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+        </div>
+      <div class="content_body_bottom">
+        <button type="submit" class="btn btn-secondary btn-sm">저장</button>
+        <button type="button" onclick="location.href='/survey/list_by_survey'"
+          class="btn btn-secondary btn-sm">목록</button>
+      </div>
+
+
+    </form>
+        </fieldset>
+    </div>
+</body>
+
+</html>

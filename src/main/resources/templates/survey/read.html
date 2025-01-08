@@ -19,8 +19,15 @@
                         <div style="white-space: pre-wrap;"><span th:text="${surveyVO.enddate}"></span></div>
                     </div>
                 </li>
+                
+                <li class="li_none">
+                      <div th:each="surveyitem, i : ${surveyitemVO}">
+                        <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyitem.item}"></span>
+<div style="white-space: pre-wrap;"><span th:text="${surveyitem.pick}"></span></div>
+      </div>
+                </li>
+                
                 <li class="li_none" th:text="|결과 출력: ${surveyVO.topic}|"></li>
-
 
         <div >
 </div>
