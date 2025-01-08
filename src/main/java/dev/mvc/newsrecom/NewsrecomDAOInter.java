@@ -30,4 +30,24 @@ public interface NewsrecomDAOInter {
    * @return 
    */
   public int heartCnt(HashMap<String, Object> map);
+  
+  /**
+   * 조회
+   * @param calendarno
+   * @return
+   */
+  public NewsrecomVO read(int newsrecomno);
+  
+  /**
+   * newsno, memberno 조회
+   * @param calendarno
+   * @return
+   */
+  public NewsrecomVO readByNewsnoMemberno(HashMap<String, Object> map);
+  
+  /**
+   * 전체 목록 join 3개
+   * @return
+   */
+  public ArrayList<NewsNewsrecomMemberVO> list_all_join();
 }

@@ -380,5 +380,9 @@ public class NewsProc implements NewsProcInter {
     int cnt = this.newsDAO.decreaseRecom(newsrecomno);
     return cnt;
   }
-  
+  @Override
+  public int recom(int newsno) {
+    
+    return 0;
+  }
 }

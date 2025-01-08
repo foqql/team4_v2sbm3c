@@ -198,5 +198,7 @@ public interface NewsProcInter {
    * @return
    */  
   public int decreaseRecom(int newsrecomno);
+  
+  public int recom(int newsno);
 }
 

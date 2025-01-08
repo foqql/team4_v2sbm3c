@@ -18,8 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,6 +32,7 @@ import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.newsrecom.NewsrecomProcInter;
+import dev.mvc.newsrecom.NewsrecomVO;
 import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 import jakarta.servlet.http.HttpServletRequest;
@@ -475,7 +478,6 @@ public class NewsCont {
       HttpSession session,
       Model model, 
       @RequestParam(name="newsno", defaultValue = "0") int newsno,
-      @RequestParam(name="newscrawlingno", defaultValue = "0") int newscrawlingno,
       @RequestParam(name="word", defaultValue = "") String word, 
       @RequestParam(name="now_page", defaultValue = "1") int now_page,
       @RequestParam(name="modno", defaultValue="0") int modno) {
@@ -1039,5 +1041,73 @@ public class NewsCont {
 
   } 
 
+  /**
+   * 추천 처리 http://localhost:9093/news/recom
+   * 
+   * @return
+   */
+  @PostMapping(value = "/recom")
+  @ResponseBody
+  public String recom(
+      HttpSession session, 
+      Model model,
+      RedirectAttributes ra,
+      @RequestBody String json_src) {
+         
+      System.out.println("-> json_src: " + json_src); // json_src: {"current_passwd":"1234"}
+      
+      JSONObject src = new JSONObject(json_src); // String -> JSON
+      int newsno = (int)src.get("newsno"); // 값 가져오기
+      System.out.println("-> newsno: " + newsno);
+      
+      if (this.memberProc.isMember(session)) {
+        // 추천을 한 상태인지 확인
+        int memberno = (int)session.getAttribute("memberno");
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("newsno", newsno);
+        map.put("memberno", memberno);
+        
+        int recom_cnt = this.newsrecomProc.heartCnt(map);
+        System.out.println("-> recom_cnt: " + recom_cnt);
+        
+        if(recom_cnt == 1) {
+          // 추천 해제
+          System.out.println("-> 추천해제: " + newsno + ' ' + memberno);
+          
+          NewsrecomVO newsrecomVO = this.newsrecomProc.readByNewsnoMemberno(map);
+          
+          this.newsrecomProc.delete(newsrecomVO.getNewsrecomno()); // 추천 삭제
+          this.newsProc.decreaseRecom(newsno); // 카운트 감소
+          
+        } else {
+          // 추천
+          System.out.println("-> 추천: " + newsno + ' ' + memberno);
+          
+          NewsrecomVO newsrecomVO_new = new NewsrecomVO();
+          newsrecomVO_new.setNewsno(newsno);
+          newsrecomVO_new.setMemberno(memberno);
+          
+          this.newsrecomProc.create(newsrecomVO_new);
+          this.newsProc.increaseRecom(newsno); // 카운트 증가
+        }        
+        
+        int heartCnt = this.newsrecomProc.heartCnt(map);
+        int recom = this.newsProc.read(newsno).getRecom();
+        
+        JSONObject result = new JSONObject();
+        result.put("isMember", 1); // 로그인 1 , 비회원 0
+        result.put("heartCnt", heartCnt);
+        result.put("recom", recom);
+        
+        return result.toString();
+        
+    } else {
+      JSONObject result = new JSONObject();
+      result.put("isMember", 0); // 비회원 0 로그인 1
+      
+      return result.toString(); // GeyMapping(value = "/msg")
+    }
+
+  }
   
 }

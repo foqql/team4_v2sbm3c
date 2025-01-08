@@ -83,26 +83,26 @@ public class NewsrecomCont {
     
   }
   
-  /**
-   * 목록
-   * 
-   * @param model
-   * @return
-   */
-  // http://localhost:9091/newsrecom/list_all
-  @GetMapping(value = "/list_all")
-  public String list_all(Model model) {
-    ArrayList<NewsrecomVO> list = this.newsrecomProc.list_all();
-    model.addAttribute("list", list);
-    
-    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-    model.addAttribute("menu", menu);
-    
-    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
-    model.addAttribute("menu1", menu1);
-
-    return "/newsrecom/list_all"; // /templates/calendar/list_all.html
-  }
+//  /**
+//   * 목록
+//   * 
+//   * @param model
+//   * @return
+//   */
+//  // http://localhost:9091/newsrecom/list_all
+//  @GetMapping(value = "/list_all")
+//  public String list_all(Model model) {
+//    ArrayList<NewsrecomVO> list = this.newsrecomProc.list_all();
+//    model.addAttribute("list", list);
+//    
+//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+//    model.addAttribute("menu", menu);
+//    
+//    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+//    model.addAttribute("menu1", menu1);
+//
+//    return "/newsrecom/list_all"; // /templates/calendar/list_all.html
+//  }
   
   /**
    * 삭제 처리 http://localhost:9091/calendar/delete?calendarno=1
@@ -125,5 +125,26 @@ public class NewsrecomCont {
       return "redirect:/newsrecom/post2get"; // @GetMapping(value = "/msg")
     }
 
+  }
+  
+  /**
+   * 목록
+   * 
+   * @param model
+   * @return
+   */
+  // http://localhost:9091/newsrecom/list_all
+  @GetMapping(value = "/list_all")
+  public String list_all(Model model) {
+    ArrayList<NewsNewsrecomMemberVO> list = this.newsrecomProc.list_all_join();
+    model.addAttribute("list", list);
+    
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
+
+    return "/newsrecom/list_all"; // /templates/calendar/list_all.html
   }
 }

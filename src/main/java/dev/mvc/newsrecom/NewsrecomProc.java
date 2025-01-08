@@ -34,4 +34,22 @@ public class NewsrecomProc implements NewsrecomProcInter {
     int cnt = this.newsrecomDAO.heartCnt(map);
     return cnt;
   }
+  
+  @Override
+  public NewsrecomVO read(int newsrecomno) {
+    NewsrecomVO newsrecomVO = this.newsrecomDAO.read(newsrecomno);
+    return newsrecomVO;
+  }
+
+  @Override
+  public NewsrecomVO readByNewsnoMemberno(HashMap<String, Object> map) {
+    NewsrecomVO newsrecomVO = this.newsrecomDAO.readByNewsnoMemberno(map);
+    return newsrecomVO;
+  }
+
+  @Override
+  public ArrayList<NewsNewsrecomMemberVO> list_all_join() {
+    ArrayList<NewsNewsrecomMemberVO> list = this.newsrecomDAO.list_all_join();
+    return list;
+  }
 }

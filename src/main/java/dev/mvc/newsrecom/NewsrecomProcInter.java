@@ -6,7 +6,7 @@ import java.util.HashMap;
 public interface NewsrecomProcInter {
   /**
    * 등록, 추상 메소드
-   * @param contentsgoodVO
+   * @param NewsrecomVO
    * @return
    */
   public int create(NewsrecomVO newsrecomVO);
@@ -19,7 +19,7 @@ public interface NewsrecomProcInter {
   
   /**
    * 삭제
-   * @param calendarno
+   * @param newsrecomno
    * @return 삭제된 레코드 갯수
    */
   public int delete(int newsrecomno);
@@ -30,4 +30,24 @@ public interface NewsrecomProcInter {
    * @return 
    */
   public int heartCnt(HashMap<String, Object> map);
+  
+  /**
+   * 조회
+   * @param newsrecomno
+   * @return
+   */
+  public NewsrecomVO read(int newsrecomno);
+  
+  /**
+   * newsno, memberno 조회
+   * @param calendarno
+   * @return
+   */
+  public NewsrecomVO readByNewsnoMemberno(HashMap<String, Object> map);
+  
+  /**
+   * 전체 목록 join 3개
+   * @return
+   */
+  public ArrayList<NewsNewsrecomMemberVO> list_all_join();
 }

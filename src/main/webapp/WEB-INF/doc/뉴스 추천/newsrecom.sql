@@ -49,13 +49,17 @@ ORDER BY newsrecomno DESC;
 1	2025-01-07 11:26:03	1	1
 
 
--- 조회
+-- PK조회
 SELECT newsrecomno, rdate, newsno, memberno
 FROM newsrecom
 WHERE newsrecomno = 1;
 
 1	2025-01-07 10:53:01	2	1
 
+-- newsno, memberno 로 조회
+SELECT newsrecomno, rdate, newsno, memberno
+FROM newsrecom
+WHERE newsrecomno=7 and memberno=6;
 
 -- 삭제
 DELETE FROM newsrecom
@@ -74,3 +78,28 @@ WHERE newsrecomno=2 and memberno=1;
 SELECT COUNT(*) as cnt 
 FROM newsrecom
 WHERE newsrecomno=5 and memberno=9;
+
+select * from news;
+select * from member;
+select * from newsrecom;
+
+INSERT INTO NEWSRECOM(newsrecomno, rdate, newsno, memberno)
+VALUES (NEWSRECOM_SEQ.nextval, sysdate, 23, 6);
+commit;
+
+select COUNT(*) as cnt
+from newsrecom
+where newsno = 23;
+
+-- join 어느 설문을 누가 추천했는가?
+-- 테이블 2개 join
+SELECT c.newsrecomno, c.rdate, c.newsno, n.title, c.memberno
+FROM news n, newsrecom c
+WHERE n.newsno = c.newsno 
+ORDER BY newsrecomno DESC;
+
+-- 테이블 3개 join, as 사용 시 컬럼명 변경 가능 n.title as n_title
+SELECT c.newsrecomno, c.rdate, c.newsno, n.title as n_title, c.memberno, m.id, m.mname
+FROM news n, newsrecom c, member m
+WHERE n.newsno = c.newsno and c.memberno = m.memberno
+ORDER BY newsrecomno DESC;

@@ -27,4 +27,26 @@
     FROM newsrecom
     WHERE newsno=#{newsno} AND memberno=#{memberno}
   </select>
+  
+    <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.newsrecom.NewsrecomVO" parameterType="int">
+    SELECT newsrecomno, rdate, newsno, memberno
+    FROM newsrecom
+    WHERE newsrecomno = #{newsrecomno}
+  </select>
+  
+  <!-- newsno, memberno 로 조회 -->
+  <select id="readByNewsnoMemberno" resultType="dev.mvc.newsrecom.NewsrecomVO" parameterType="HashMap">
+    SELECT newsrecomno, rdate, newsno, memberno
+    FROM newsrecom
+    WHERE newsno=#{newsno} AND memberno=#{memberno}
+  </select>
+  
+  <!-- 전체 목록, 테이블 3개 join -->
+  <select id="list_all_join" resultType="dev.mvc.newsrecom.NewsNewsrecomMemberVO">
+    SELECT c.newsrecomno, c.rdate, c.newsno, n.title as n_title, c.memberno, m.id, m.mname
+    FROM news n, newsrecom c, member m
+    WHERE n.newsno = c.newsno and c.memberno = m.memberno
+    ORDER BY newsrecomno DESC
+  </select>
 </mapper>
