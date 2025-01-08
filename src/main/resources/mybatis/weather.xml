@@ -13,7 +13,7 @@
         INTO weather(weatherno, memberno, classifyno, areano, rdate, file1, file1saved, thumb1, size1)
         VALUES(weather_seq.nextval, #{memberno}, #{classifyno}, area_seq.currval, sysdate, #{file1}, #{file1saved}, #{thumb1}, #{size1})
         
-         SELECT * FROM dual
+        SELECT * FROM dual
     </insert>
    
       <!-- <select id="arealist" resultType="dev.mvc.weather.WeatherVO">

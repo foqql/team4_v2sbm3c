@@ -3,26 +3,11 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
 
- <!--  <div class='title_line'>
-    <span th:text="${classifyVO.bigcla}" class="title_line_text"></span >
-    > <span th:text="${classifyVO.classify}" class="title_line_text"></span >
-    전체 글<span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
-  </div>
- 
-
-  <aside class="aside_right">
-
-   <span th:if="${session.grade == 'admin'}">
-      <a th:href="@{|/survey/create?classifyno=${classifyVO.classifyno}|}">등록</a>
-      <span class="menu_devide">│</span>    
-    </span>
-    <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
-    
-  </aside> -->
+        <aside class="aside_right">
+    <a href="javascript:location.reload();">새로고침</a><span class="menu_devide">│</span>   
+          <a th:href="@{|/survey/create|}" th:if="${session.grade == 'admin'}"> 등록</a>
+          
+  </aside>
 
   <!-- /survey/list_search_com.html 파일의 list_search_fragment import -->
   <div th:replace="~{survey/list_search_com::list_search_fragment}"></div>
@@ -37,7 +22,9 @@
   <tr>
     <th class='th_bs'>파일</th>
     <th class='th_bs'>제목</th>
-    <th class='th_bs'>기타</th>
+    <th class='th_bs'>결과 보기</th>
+    <th th:if="${session.grade == 'admin'}" class='th_bs'>수정</th>
+    <th th:if="${session.grade == 'admin'}" class='th_bs'>삭제</th>
   </tr>
 
   <!-- 리스트가 비어 있지 않을 때 반복문 실행 -->
@@ -65,8 +52,8 @@
     <td class='td_left' 
         th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
       <span th:text="${surveyVO.topic}" style="font-weight: bold;"></span>
-      <span th:text="| ${surveyVO.startdate.substring(0, 10)}|"></span><br>
-
+  <!--      <span th:text="| ${surveyVO.startdate.substring(0, 10)}|"></span><br>-->
+    <span th:text="| ${surveyVO.startdate}|"></span><br>
       <!-- 제목 길이에 따라 다르게 표시 -->
       <span th:if="${surveyVO.topic.length() > 160}" th:text="|${surveyVO.topic.substring(0, 160)}...|"></span>
       <span th:if="${surveyVO.topic.length() <= 160}" th:text="|${surveyVO.topic}|"></span>
@@ -77,11 +64,25 @@
         style="cursor: pointer; vertical-align: middle; text-align: center;">
       <button class="btn btn-info">Read</button>
     </td>
+    
+    <!-- 4번째 칸: 'update'로 이동 -->
+    <td th:if="${session.grade == 'admin'}" th:attr="onclick=|location.href='/survey/update/${surveyVO.surveyno}'|"
+        style="cursor: pointer; vertical-align: middle; text-align: center;">
+      <button class="btn btn-info">update</button>
+    </td>
+    
+    <!-- 5번째 칸: 'delete'로 이동 -->
+    <td th:if="${session.grade == 'admin'}" th:attr="onclick=|location.href='/survey/delete/${surveyVO.surveyno}'|"
+        style="cursor: pointer; vertical-align: middle; text-align: center;">
+      <button class="btn btn-info">delete</button>
+    </td>
+    
+    
   </tr>
 
   <!-- 리스트가 비어 있을 경우 -->
   <tr th:if="${list.size() == 0}">
-    <td colspan="3" style="text-align: center;">관련 글이 등록되지 않았습니다.</td>
+    <td colspan="4" style="text-align: center;">관련 글이 등록되지 않았습니다.</td>
   </tr>
 </table>
 
