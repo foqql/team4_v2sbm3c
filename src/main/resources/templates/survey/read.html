@@ -45,10 +45,9 @@
                 </li>
                 <li class="li_none">
                     <div th:each="surveyitem, i : ${surveyitemVO}">
-                        <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyitem.item}"></span>
-                        <div style="white-space: pre-wrap;">
-                            <span th:text="${surveyitem.itemcnt}"></span>
-                        </div>
+<span style="font-size: 1.5em; font-weight: bold; display: inline-block; margin-right: 10px;" th:text="${surveyitem.item}"></span>
+<div style="display: inline-block; white-space: pre-wrap;" th:text="${surveyitem.itemcnt}"></div>
+
                         <!-- HTML -->
                         <div class="progress-bar">           
                             <div class="progress" 
