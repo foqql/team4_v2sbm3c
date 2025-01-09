@@ -140,15 +140,15 @@ where c.weatherno = r.weatherno
 ORDER BY areagoodno DESC;
 
 
--- 테이블 3개 join
+-- 테이블 3개 join, as 사용시 컬럼명 변경 가능
 SELECT r.areagoodno, r.rdate as r_rdate, r.weatherno, c.weather, r.memberno, m.id, m.mname
 FROM weather c, areagood r, member m
 where c.weatherno = r.weatherno AND r.memberno = m.memberno
 ORDER BY areagoodno DESC;
 
 
-
-
+select * from member;
+select * from weather;
 
 
 
