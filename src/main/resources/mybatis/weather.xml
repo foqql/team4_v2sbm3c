@@ -32,22 +32,6 @@
   </select>
 
 
-
-            <!-- 도시 수정 
-  <update id="update_area" parameterType="dev.mvc.weather.WeatherVO">
-    UPDATE area
-    SET  
-      
-      continent = #{continent}, 
-      country = #{country}, 
-      city = #{country}, 
-    WHERE areano = #{areano}
-  </update>-->
-  
-  
-  
-  
-
   
     <!-- 일반적인 조회 
     <select id="read" resultType="dev.mvc.weather.WeatherVO" parameterType="int">

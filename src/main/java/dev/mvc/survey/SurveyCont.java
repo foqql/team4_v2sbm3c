@@ -69,6 +69,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 생성 겟
+   * 
    * @param model
    * @param session
    * @return
@@ -90,6 +91,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 생성 포스트
+   * 
    * @param request
    * @param session
    * @param model
@@ -174,6 +176,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 전체 리스트 조회
+   * 
    * @param session
    * @param model
    * @param word
@@ -242,29 +245,15 @@ public class SurveyCont {
     model.addAttribute("surveyVO", surveyVO);
     List<SurveyVO> surveyitemVO = this.surveyProc.read_item_list(surveyno); // 여러 설문 항목을 리스트로 받아오기
     model.addAttribute("surveyitemVO", surveyitemVO);
-
-//    String title = surveyVO.getTitle();
-//    String content = surveyVO.getContent();
-//    
-//    title = Tool.convertChar(title);  // 특수 문자 처리
-//    content = Tool.convertChar(content); 
-//    
-//    surveyVO.setTitle(title);
-//    surveyVO.setContent(content);  
-
-//    long size1 = surveyVO.getPostersize();
-//    String size1_label = Tool.unit(size1);
-//    surveyVO.setSize1_label(size1_label);
-
-//    SurveyVO surveyVO = this.surveyProc.read(surveyVO.getSurveyno());
-
-    // 조회에서 화면 하단에 출력
-    // ArrayList<ReplyVO> reply_list =
-    // this.replyProc.list_survey(surveyno);
-    // mav.addObject("reply_list", reply_list);
-
+    int cntsum =surveyitemVO.stream().mapToInt(SurveyVO::getItemcnt) // 각 SurveyVO 객체의 itemcnt 값을 int로 추출
+        .sum(); // 전체 합을 구함
+    System.out.println("cntsum : "+ cntsum);
+//    for(int i : surveyitemVO) {
+//      
+//    }
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
+    model.addAttribute("cntsum", cntsum);
 
     return "survey/read";
   }
@@ -319,6 +308,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 완료
+   * 
    * @param session
    * @param model
    * @param surveyno
@@ -384,6 +374,7 @@ public class SurveyCont {
 
   /**
    * 설문 항목 추가 겟
+   * 
    * @param model
    * @param session
    * @param surveyno
@@ -408,6 +399,7 @@ public class SurveyCont {
 
   /**
    * 설문 항목 추가 포스트
+   * 
    * @param model
    * @param surveyVO
    * @param bindingResult
@@ -442,6 +434,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 수정 겟
+   * 
    * @param model
    * @param surveyno
    * @param word
@@ -473,6 +466,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 수정 포스트
+   * 
    * @param model         Controller -> Thymeleaf HTML로 데이터 전송
    * @param cateVO        Form 태그 값 -> 검증 -> cateVO 자동저장, request.getParameter()
    *                      자동 실행
@@ -515,6 +509,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 삭제 (25.01.08 이후 사용 안함)
+   * 
    * @param model
    * @param surveyno
    * @param word
@@ -546,6 +541,7 @@ public class SurveyCont {
 
   /**
    * 설문조사 삭제
+   * 
    * @param model         Controller -> Thymeleaf HTML로 데이터 전송
    * @param cateVO        Form 태그 값 -> 검증 -> cateVO 자동저장, request.getParameter()
    *                      자동 실행
@@ -858,7 +854,7 @@ public class SurveyCont {
 //    model.addAttribute("list", list);
     ArrayList<SurveyVO> list = this.surveyProc.list_all();
     model.addAttribute("list", list);
-    System.out.println("list : "+ list);
+    System.out.println("list : " + list);
 
     return "/survey/list_all"; // /templates/surveygood/list_all.html
   }

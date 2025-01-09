@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 import dev.mvc.exchange.Exchange;
+import dev.mvc.gallery.Gallery;
 import dev.mvc.news.News;
 import dev.mvc.survey.Survey;
 import dev.mvc.weather.Weather;
@@ -25,6 +25,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     registry.addResourceHandler("/exchange/storage/**").addResourceLocations("file:///" + Exchange.getUploadDir());
     registry.addResourceHandler("/weather/storage/**").addResourceLocations("file:///" + Weather.getUploadDir());
     registry.addResourceHandler("/survey/storage/**").addResourceLocations("file:///" + Survey.getUploadDir());
+
+    registry.addResourceHandler("/gallery/storage/**").addResourceLocations("file:///" + Gallery.getUploadDir());
+
     registry.addResourceHandler("/uploads/**") .addResourceLocations("file:///C:/uploads/");
 
     // JSP 인식되는 경로: http://localhost:9091/food/storage";

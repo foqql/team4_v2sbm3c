@@ -72,13 +72,14 @@
             </ul>
         </li>
     </ul>
-        <!-- 개인 기사 카테고리 -->
-    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '개인 기사'}">
-        <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla ==genreVOMenu.genre}">
+    
+        <!-- 지역사진 카테고리 -->
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '지역사진'}">
+        <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == genreVOMenu.genre}">
             <ul>
                 <li th:each="classifyVO : ${classifyVOMenu.list_name}">
                     <a class="dropdown-item"
-                       th:href="@{|/exchange/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
+                       th:href="@{|/gallery/list_by_classifyno_grid?classifyno=${classifyVO.classifyno}|}" 
                        th:text="${classifyVO.classify}">
                     </a>
                 </li>
