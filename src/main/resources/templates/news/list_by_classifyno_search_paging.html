@@ -8,16 +8,10 @@
     > <span th:text="${classifyVO.classify}" class="title_line_text"></span >
     전체 글<span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
   </div>
- 
-<!--  <aside class="aside_left">-->
-<!--    <a th:href="@{|/news/newsgenre?newsgenre=메인홈|}">메인홈</a>-->
-<!--    / <a th:href="@{|/news/newsgenre?newsgenre=스포츠|}">스포츠</a>-->
-<!--    / <a th:href="@{|/news/newsgenre?newsgenre=사업|}">사업</a>-->
-<!--  </aside> -->
 
   <aside class="aside_right">
 
-    <span th:if="${session.grade == 'admin' and classifyVO.classifyno == 70}">
+    <span th:if="${classifyVO.seqno >1000 }">
       <a th:href="@{|/news/create?classifyno=${classifyVO.classifyno}|}">등록</a>
       <span class="menu_devide">│</span>    
     </span>

@@ -43,6 +43,8 @@ public class NewsVO {
   private String content = "";
   /** 요약된 내용 */
   private String content2 = "";
+  private String content3 = "";
+  private String content4 = "";
   /** 추천수 */
   private int recom;
   /** 조회수 */
@@ -61,6 +63,16 @@ public class NewsVO {
   private String mp3 = "";
   /** 뉴스 분류 */
   private String newsgenre = "";
+  
+//  private int modno;
+//  private String mod;
+//  
+//  public NewsVO() {}
+//  
+//  public NewsVO(int modno, String mod) {
+//    this.modno = modno;
+//    this.mod = mod;
+//  }
   
   // 파일 업로드 관련
   // -----------------------------------------------------------------------------------
@@ -81,7 +93,5 @@ public class NewsVO {
   /** 메인 이미지 크기 */
   private long size1 = 0;
   
-
-
-
 }
+

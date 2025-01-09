@@ -55,7 +55,7 @@
         <span th:if="${weatherVO.rdate.length() > 25 }" 
                   th:text="|${weatherVO.rdate.substring(0, 25) }...|"></span>
         <span th:if="${weatherVO.rdate.length() <= 25 }" 
-                  th:text="|${weatherVO.continrdateent}|"></span>
+                  th:text="|${weatherVO.rdate}|"></span>
                   
         <span th:if="${weatherVO.temp.length() > 25 }" 
                   th:text="|${weatherVO.temp.substring(0, 25) }...|"></span>

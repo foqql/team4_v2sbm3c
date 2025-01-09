@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import dev.mvc.classify.ClassifyVO;
-import dev.mvc.survey_good.SSdMVO;
-import dev.mvc.survey_good.Survey_goodVO;
-
 /**
  * Spring Boot가 자동 구현
  * 
