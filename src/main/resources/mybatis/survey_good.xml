@@ -10,4 +10,43 @@ VALUES (survey_good_seq.nextval, sysdate,#{surveyno}, #{memberno})
 </insert>
 
                     
+                    <!-- 전체 목록 -->
+  <select id="list_all" resultType="dev.mvc.survey_good.Survey_goodVO">
+    SELECT surveygoodno, rdate, surveyno, memberno
+    FROM survey_good
+    ORDER BY surveygoodno DESC
+  </select>
+  
+    <delete id="delete" parameterType="int">
+DELETE FROM survey_good
+WHERE surveygoodno = #{surveygoodno}
+  </delete>
+  
+<select id="hartCnt" parameterType="map" resultType="int">
+  SELECT COUNT(*) as cnt
+  FROM survey_good
+  WHERE surveyno = #{surveyno}
+    AND memberno = #{memberno}
+</select>
+
+  <select id="read" resultType="dev.mvc.survey_good.Survey_goodVO" parameterType="int">
+SELECT surveygoodno, rdate, surveyno, memberno
+FROM survey_good
+WHERE surveygoodno = #{surveygoodno}
+  </select>
+  
+    <select id="read_fk" resultType="dev.mvc.survey_good.Survey_goodVO" parameterType="HashMap">
+SELECT surveygoodno, rdate, surveyno, memberno
+FROM survey_good
+WHERE surveyno = #{surveyno} and memberno = #{memberno}
+  </select>
+  
+  
+    <select id="list_all_join" resultType="dev.mvc.survey_good.SSdMVO">
+select sd.surveygoodno, sd.rdate, sd.surveyno, s.topic as stopic, sd.memberno ,m.id,  m.mname
+from survey s, survey_good sd, member m
+where s.surveyno = sd.surveyno and sd.memberno = m.memberno
+order by sd.surveyno desc
+  </select>
+  
 </mapper> 

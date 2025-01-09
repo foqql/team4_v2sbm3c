@@ -13,6 +13,11 @@
         <fieldset class="fieldset_basic">
             <ul>
                 <li class="li_none">
+                <div
+                        th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
+                        <img th:src="@{|/survey/storage/${surveyVO.postersaved}|}"
+                            style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%; background-color : white;'>
+                    </div>
                     <div style="width: 100%; word-break: break-all;">
                         <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br>
                         <span style="font-size: 1em;" th:text="${surveyVO.startdate}"></span><br><br>
@@ -23,11 +28,9 @@
                 <li class="li_none">
                       <div th:each="surveyitem, i : ${surveyitemVO}">
                         <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyitem.item}"></span>
-<div style="white-space: pre-wrap;"><span th:text="${surveyitem.pick}"></span></div>
+<div style="white-space: pre-wrap;"><span th:text="${surveyitem.itemcnt}"></span></div>
       </div>
                 </li>
-                
-                <li class="li_none" th:text="|결과 출력: ${surveyVO.topic}|"></li>
 
         <div >
 </div>
