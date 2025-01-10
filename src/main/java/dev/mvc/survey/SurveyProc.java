@@ -205,8 +205,13 @@ public class SurveyProc implements SurveyProcInter {
   }
 
   @Override
-  public int update_pick_surveyitem(int surveyno) {
-    return this.surveyDAO.update_pick_surveyitem(surveyno);
+  public int update_pick_surveyitem(int surveyitemno) {
+    return this.surveyDAO.update_pick_surveyitem(surveyitemno);
+  }
+
+  @Override
+  public int update_unpick_surveyitem(int surveyitemno) {
+    return this.surveyDAO.update_unpick_surveyitem(surveyitemno);
   }
 
   @Override
@@ -234,8 +239,8 @@ public class SurveyProc implements SurveyProcInter {
   }
 
   @Override
-  public int delete_item(SurveyVO surveyVO) {
-    int cnt = this.surveyDAO.delete_item(surveyVO);
+  public int delete_item(int surveyitemno) {
+    int cnt = this.surveyDAO.delete_item(surveyitemno);
     return cnt;
   }
 
@@ -243,6 +248,57 @@ public class SurveyProc implements SurveyProcInter {
   public Integer list_search_count(String word) {
     int cnt = this.surveyDAO.list_search_count(word);
     return cnt;
+  }
+
+  @Override
+  public int increaseRecom(int surveyno) {
+    int cnt = this.surveyDAO.increaseRecom(surveyno);
+    return cnt;
+  }
+
+  @Override
+  public int decreaseRecom(int surveyno) {
+    int cnt = this.surveyDAO.decreaseRecom(surveyno);
+    return cnt;
+  }
+
+  @Override
+  public int good(int surveyno) {
+    return 1;
+  }
+
+  @Override
+  public int update_file(SurveyVO surveyVO) {
+    int cnt = this.surveyDAO.update_file(surveyVO);
+    return cnt;
+  }
+
+  @Override
+  public int cnt_sm(HashMap<String, Object> map) {
+    int cnt = this.surveyDAO.cnt_sm(map);
+    return cnt;
+  }
+
+  @Override
+  public ArrayList<SurveyVO> list_all() {
+    ArrayList<SurveyVO> list = this.surveyDAO.list_all();
+    return list;
+  }
+
+  @Override
+  public int create_sm(HashMap<String, Object> map) {
+    return this.surveyDAO.create_sm(map);
+  }
+
+  @Override
+  public int delete_sm(int surveyno) {
+    return this.surveyDAO.delete_sm(surveyno);
+  }
+
+  @Override
+  public SurveyVO read_sm(HashMap<String, Object> map) {
+    SurveyVO surveyVO = this.surveyDAO.read_sm(map);
+    return surveyVO;
   }
 
 }

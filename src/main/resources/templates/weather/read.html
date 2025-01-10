@@ -1,102 +1,137 @@
-   <!DOCTYPE html> 
-  
-  <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
-  <div layout:fragment="content">
-    <div class='title_line'>
-      <span th:text="날씨" class="title_line_text"></span > 
-      > <span th:text="${classifyVO.classify}" class="title_line_text"></span > 
-      > <span th:text="${weatherVO.city}" class="title_line_text"></span > 
-    </div>
+<!DOCTYPE html> 
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <script>
+    window.onload = function() {
+      // <img src="/weather/images/arrow-up.png" style="width: 22px" title="추천">          
+      // <img src="/weather/images/arrow-down.png" style="width: 22px" title="비추천">   
+      // 현재 로그인한 사용자의 추천 여부 반영
+
+      let hartCnt = '[[${hartCnt}]]'; //  javascript -> Thymeleaf -> session
+      let tag='';
+      
+      if (hartCnt == 1) {
+        tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-up.png" style="width: 22px" title="추천"></a>';
+        document.querySelector('#hart_panel').innerHTML = tag; 
+      } else {
+        tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-down.png" style="width: 22px" title="비추천"></a>';
+        document.querySelector('#hart_panel').innerHTML = tag; 
+      }    
+      
+      document.querySelector('#recom_panel').innerHTML = '([[${weatherVO.recom}]])';
+    }
     
-    <aside class="aside_right" th:if="${session.grade == 'admin'}">
-      <a href="javascript:location.reload();">새로고침</a>
-      <span class='menu_divide' >│</span>    
-      <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|./update_file?weatherno=${weatherVO.weatherno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|/weather/map?classifyno=${weatherVO.classifyno }&weatherno=${weatherVO.weatherno}|}">지도</a>
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|/weather/youtube?classifyno=${weatherVO.classifyno }&weatherno=${weatherVO.weatherno}&word=${word}&now_page=${now_page}|}">Youtube</a>
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|./delete?weatherno=${weatherVO.weatherno}&word=${word}&now_page=${now_page}&classifyno=${weatherVO.classifyno}|}">삭제</a>  
-   </aside> 
-  
-    <aside class="aside_right" th:if="${session.grade != 'admin'}">
-       <a href="javascript:location.reload();">새로고침</a>
-      <span class='menu_divide' >│</span>    
-      <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
-      <span class='menu_divide' >│</span>
-      <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
-    </aside> 
-   
-    <div class='menu_line'></div>
-  
-    <fieldset class="fieldset_basic">
-      <ul>
-        <li class="li_none">
-          <div style="width: 100%; word-break: break-all;">
+    
+
+    function good(weatherno) {
+      console.log('-> weatherno: ' + weatherno);
+
+      fetch("/weather/good", {
+          "method": "post",
+          "headers": {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({weatherno}) // {"weatherno":weatherno}, JSON 형식으로 전송
+        })
+        .then((response) => response.json()) // 응답 문자열 추출
+        .then((data) => {
+          console.log('-> data.isMember: ' + data.isMember);
+
+          if (data.isMember == 1) { // 회원
+            let hartCnt =data.hartCnt; //  javascript -> Thymeleaf -> session
+            let tag='';
+            
+            if (hartCnt == 1) {
+              tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-up.png" style="width: 22px" title="추천"></a>';
+              document.querySelector('#hart_panel').innerHTML = tag; 
+            } else {
+              tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-down.png" style="width: 22px" title="비추천"></a>';
+              document.querySelector('#hart_panel').innerHTML = tag; 
+            }    
+            
+            document.querySelector('#recom_panel').innerHTML = '(' + data.recom + ')';
           
-            <div th:if="${weatherVO.file1.endsWith('jpg') or weatherVO.file1.endsWith('png')  or weatherVO.file1.endsWith('gif')}">
-              <img th:src="@{|/weather/storage/${weatherVO.file1saved}|}" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'>
-            </div>
+          } else { // 비회원
+            alert("로그인해야 추천 할 수 있습니다.");
+            location.href='/member/login_cookie_need';  
+
+          }
+        }
+      );
+    }
+  </script>
+
+  <div class='title_line'>
+    <span th:text="날씨" class="title_line_text"></span> 
+    > <span th:text="${classifyVO.classify}" class="title_line_text"></span> 
+    > <span th:text="${weatherVO.city}" class="title_line_text"></span> 
+  </div>
+
+  <aside class="aside_right" th:if="${session.grade == 'admin'}">
+    <a href="javascript:location.reload();">새로고침</a>
+    <span class='menu_divide' >│</span>   
+    <a th:href="@{|/weather/update_text?weatherno=${weatherVO.weatherno}&now_page=${now_page}&word=${word }|}">날씨 수정</a>
+    <span class='menu_divide' >│</span>    
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./update_file?weatherno=${weatherVO.weatherno}&word=${word}&now_page=${now_page}|}">파일 업로드</a>  
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|/weather/map?classifyno=${weatherVO.classifyno }&weatherno=${weatherVO.weatherno}|}">지도</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|/weather/youtube?classifyno=${weatherVO.classifyno }&weatherno=${weatherVO.weatherno}&word=${word}&now_page=${now_page}|}">Youtube</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./delete?weatherno=${weatherVO.weatherno}&word=${word}&now_page=${now_page}&classifyno=${weatherVO.classifyno}|}">삭제</a>  
+  </aside>
+
+  <aside class="aside_right" th:if="${session.grade != 'admin'}">
+    <a href="javascript:location.reload();">새로고침</a>
+    <span class='menu_divide' >│</span>    
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+  </aside>
+
+  <div class='menu_line'></div>
+
+  <fieldset class="fieldset_basic">
+    <ul>
+      <li class="li_none">
+        <div style="width: 100%; word-break: break-all;">
+          <div th:if="${weatherVO.file1.endsWith('jpg') or weatherVO.file1.endsWith('png')  or weatherVO.file1.endsWith('gif')}">
+            <img th:src="@{|/weather/storage/${weatherVO.file1saved}|}" style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%;'>
+          </div>
   
-            <span style="font-size: 1.5em; font-weight: bold;" th:text="${weatherVO.city}"></span>
-            <span style="font-size: 1em;" th:text="${weatherVO.rdate }"></span><br><br>
-            
-            
-            
-            <!-- 12/23일 월 -->
-            
-<div style="white-space: pre-wrap; padding: 0px; margin: -30px 0; background-color: #f0f8ff; border-radius: 6px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
-    <div style="font-size: 14px; color: #333; flex: 1; margin-right: 8px; line-height: 1.5;">
-        <span>대륙: </span><span th:text="${weatherVO.continent}"></span>&nbsp;/&nbsp;<span>국가: </span><span th:text="${weatherVO.country}"></span>&nbsp;/&nbsp;<span>도시: </span><span th:text="${weatherVO.city}"></span><br>
-        <span>날씨: </span><span th:text="${weatherVO.weather}"></span><br>
-        <span>날짜: </span><span th:text="${weatherVO.rdate}"></span><br>
-        <span>기온: </span><span th:text="${weatherVO.temp}"></span><br>
-        <span>체감온도: </span><span th:text="${weatherVO.windchill}"></span>&nbsp;/&nbsp;<span>최저기온: </span><span th:text="${weatherVO.mintemp}"></span>&nbsp;/&nbsp;<span>최고기온: </span><span th:text="${weatherVO.maxtemp}"></span><br>
-        <span>습도: </span><span th:text="${weatherVO.humidity}"></span><br>
-        <span>강수량: </span><span th:text="${weatherVO.rainfall}"></span>&nbsp;/&nbsp;<span>강수확률: </span><span th:text="${weatherVO.pop}"></span><br>
-        <span>풍속: </span><span th:text="${weatherVO.speed}"></span>&nbsp;/&nbsp;<span>풍향: </span><span th:text="${weatherVO.direction}"></span>
-    </div>
+          <span style="font-size: 1.5em; font-weight: bold;" th:text="${{weatherVO.city}}"></span>
+          <span style="font-size: 1em;" th:text="${weatherVO.rdate }"></span><br><br>
+
+          <div style="white-space: pre-wrap; padding: 0px; margin: -10px 0; background-color: #f0f8ff; border-radius: 6px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 14px; color: #333; flex: 1; margin-right: 8px; line-height: 1.5;">
+                <span>대륙: </span><span th:text="${weatherVO.continent}"></span>&nbsp;/&nbsp;<span>국가: </span><span th:text="${weatherVO.country}"></span>&nbsp;/&nbsp;<span>도시: </span><span th:text="${weatherVO.city}"></span><br>
+                <span>날씨: </span><span th:text="${weatherVO.weather}"></span><br>
+                <span>날짜: </span><span th:text="${weatherVO.rdate}"></span><br>
+                <span>기온: </span><span th:text="${weatherVO.temp}"></span><br>
+                <span th:text="${weatherVO.windchill}"></span>&nbsp;/&nbsp;<span>최저기온: </span><span th:text="${weatherVO.mintemp}"></span>&nbsp;/&nbsp;<span>최고기온: </span><span th:text="${weatherVO.maxtemp}"></span><br>
+                <span>습도: </span><span th:text="${weatherVO.humidity}"></span><br>
+                <span>풍속: </span><span th:text="${weatherVO.speed}"></span>&nbsp;/&nbsp;<span>풍향: </span><span th:text="${weatherVO.direction}"></span>
+            </div>
+          </div>
+          <!-- <span>강수량: </span><span th:text="${weatherVO.rainfall}"></span>&nbsp;/&nbsp;<span>강수확률: </span><span th:text="${weatherVO.pop}"></span><br> -->
+          <li class="li_none" th:if="${weatherVO.size1 > 0}">
+            <div >
+              첨부 파일: <a th:href='@{|/download?dir=weather/storage&filename=${weatherVO.file1saved}&downname=${weatherVO.file1}|}'
+                              th:text='|${weatherVO.file1}|'></a> <span th:text="|(${weatherVO.size1_label})|"></span>  
+                           <a th:href='@{|/download?dir=weather/storage&filename=${weatherVO.file1saved}&downname=${weatherVO.file1}|}'><img src="/weather/images/download.png"></a>
+             <span id="hart_panel"></span><span id="recom_panel"></span>                         
+            </div>
+          </li>   
+        </div>
+      </li>
+    </ul>
+  </fieldset>
+
 </div>
 
-  
- 
-  
-        <li class="li_none" style="clear: both; padding-top: 10px; padding-bottom: 25px;" 
-             th:if="${weatherVO.map.length() > 0}">
-          <div style='text-align: center; width:640px; margin: 0px auto;'
-                  th:utext = "${weatherVO.map }">
-          </div>
-        </li>
-  
-        <li class="li_none" style="clear: both; padding-top: 10px; padding-bottom: 25px;" 
-            th:if="${weatherVO.youtube.length() > 0}">
-          <div style='text-align: center; width:640px; margin: 0px auto;'
-             th:utext = "${weatherVO.youtube }">
-          </div>
-        </li>
-  
-  
-  <!--
-        <li class="li_none" th:text="|검색어(키워드): ${weatherVO.word }|">
-        </li>
-   -->
-   
-        <li class="li_none" th:if="${weatherVO.size1 > 0}">
-          <div >
-            첨부 파일: <a th:href='@{|/download?dir=weather/storage&filename=${weatherVO.file1saved}&downname=${weatherVO.file1}|}'
-                               th:text='|${weatherVO.file1}|'></a> <span th:text="|(${weatherVO.size1_label})|"></span>  
-                           <a th:href='@{|/download?dir=weather/storage&filename=${weatherVO.file1saved}&downname=${weatherVO.file1}|}'><img src="/weather/images/download.png"></a>
-          </div>
-        </li>   
-      </ul>
-    </fieldset>
-  
-  </div>
-  
-  </html>
-  
+</html>

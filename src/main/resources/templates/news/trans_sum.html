@@ -8,7 +8,7 @@
     > 번역 및 요약 조회
   </div>
   
-  <aside class="aside_right" th:if="${session.grade == 'admin'}">
+  <aside class="aside_right">
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
     <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
@@ -16,10 +16,14 @@
     <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
     <span class='menu_divide' >│</span>
     <a th:href="@{|./update_file?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}|}">파일 수정</a>
-<!--    <span class='menu_divide' >│</span>-->
-<!--    <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>-->
-<!--    <span class='menu_divide' >│</span>-->
-<!--    <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>-->
+    <span class='menu_divide' >│</span>
+    
+    <span th:if="${classifyVO.seqno > 1000}">
+      <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
+      <span class='menu_divide' >│</span>
+      <a th:href="@{|/news/update_text?newsno=${newsVO.newsno}&now_page=${now_page}&word=${word }|}">글 수정</a>
+    </span>
+    
     <span class='menu_divide' >│</span>
     <a th:href="@{|./delete?newsno=${newsVO.newsno}&word=${word}&now_page=${now_page}&classifyno=${newsVO.classifyno}|}">삭제</a>  
  </aside> 

@@ -6,6 +6,9 @@ import java.util.List;
 
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.exchange.ExchangeVO;
+import dev.mvc.survey.SurveyVO;
+
+
 
 /**
  * Spring Boot가 자동 구현
@@ -145,5 +148,28 @@ public interface WeatherDAOInter {
    * @return
    */   
   public int decreaseReplycnt(int weatherno);
+  
+  
+  public ArrayList<WeatherVO> arealist();
+
+  
+  /**
+   * 추천 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseRecom(int weatherno);
+ 
+  /**
+   * 추천 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseRecom(int weatherno);
+  
+  
+  
+  
+
 }
 

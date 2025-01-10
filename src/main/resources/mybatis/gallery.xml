@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+   
+  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="dev.mvc.gallery.GalleryDAOInter">
+  
+  
+  <!-- 글 등록 -->
+  <insert id="create" parameterType="dev.mvc.gallery.GalleryVO">
+    INSERT INTO gallery(galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1)
+    VALUES(gallery_seq.nextval, #{memberno}, #{classifyno}, #{title}, sysdate, #{file1}, #{file1saved}, #{thumb1}, #{size1})
+  </insert>
+  
+    <!-- 모든 카테고리의 등록된 글목록 -->
+  <select id="list_all" resultType="dev.mvc.gallery.GalleryVO">
+    SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
+    FROM  gallery
+    ORDER BY galleryno DESC
+  </select>
+  
+    <!-- 특정 카테고리의 등록된 글목록 -->
+  <select id="list_by_classifyno" resultType="dev.mvc.gallery.GalleryVO" parameterType="int">
+    SELECT galleryno, memberno, classifyno, title, rdate, LOWER(file1) as file1, file1saved, thumb1, size1
+    FROM gallery 
+    WHERE classifyno = #{classifyno}
+    ORDER BY galleryno DESC
+  </select> 
+  
+    <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.gallery.GalleryVO" parameterType="int">
+    SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
+    FROM gallery
+    WHERE galleryno = #{galleryno}
+  </select>
+  
+  
+    <!-- 카테고리별 검색 목록 -->
+  <select id="list_by_classifyno_search" resultType="dev.mvc.gallery.GalleryVO" parameterType="HashMap">
+    SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
+    FROM gallery
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+        WHERE classifyno=#{classifyno}
+      </when>
+      <otherwise> <!-- 검색하는 경우 -->
+        WHERE classifyno=#{classifyno} AND (
+        UPPER(title) LIKE '%' || UPPER(#{word}) || '%'
+        )
+      </otherwise>
+    </choose>
+    ORDER BY galleryno DESC   
+  </select>
+  
+  
+    <!-- 카테고리별 검색 레코드 갯수 -->
+  <select id="list_by_classifyno_search_count" resultType="int" parameterType="HashMap">
+    SELECT COUNT(*) as cnt
+    FROM gallery
+    <choose>
+      <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
+        WHERE classifyno=#{classifyno}
+      </when>
+      <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
+        WHERE classifyno=#{classifyno} AND (
+        UPPER(title) LIKE '%' || UPPER(#{word}) || '%'
+        )
+      </otherwise>
+    </choose>
+  </select>   
+  
+  
+    <!-- 카테고리별 검색 + 페이징 목록 -->
+  <select id="list_by_classifyno_search_paging" resultType="dev.mvc.gallery.GalleryVO" parameterType="HashMap">
+   SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1, r
+   FROM (
+              SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1, rownum as r
+              FROM (
+                        SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
+                        FROM gallery
+                        <choose>
+                          <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
+                            WHERE classifyno=#{classifyno}
+                          </when>
+                          <otherwise>
+                            WHERE classifyno=#{classifyno} AND (
+                            UPPER(title) LIKE '%' || UPPER(#{word}) || '%'
+                            )
+                          </otherwise>
+                        </choose>
+                        ORDER BY galleryno DESC
+               )
+    )
+    WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
+  </select>
+  
+  
+    <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.gallery.GalleryVO">
+    UPDATE gallery
+    SET title=#{title} 
+    WHERE galleryno = #{galleryno}
+  </update>
+  
+  
+    <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.gallery.GalleryVO">
+    UPDATE gallery
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE galleryno = #{galleryno}
+  </update>  
+  
+  
+    <!-- 글 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM gallery
+    WHERE galleryno=#{galleryno}
+  </delete>
+  
+    <!-- FK cateno 컬럼에 대응하는 필수 SQL -->
+  <!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
+  <select id="count_by_classifyno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt 
+    FROM gallery 
+    WHERE classifyno=#{classifyno}
+  </select>
+  
+  
+    <!-- FK memberno 컬럼에 대응하는 필수 SQL -->
+  <!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
+  <select id="count_by_memberno" resultType="int" parameterType="int">
+    SELECT COUNT(*) as cnt 
+    FROM gallery 
+    WHERE memberno=#{memberno}
+  </select>
+  
+  
+  </mapper> 

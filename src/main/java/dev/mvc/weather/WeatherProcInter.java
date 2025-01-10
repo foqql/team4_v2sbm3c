@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import dev.mvc.exchange.ExchangeVO;
+import dev.mvc.survey.SurveyVO;
 
 /**
  * 개발자가 구현합니다.
@@ -160,6 +161,34 @@ public interface WeatherProcInter {
    * @return
    */   
   public int decreaseReplycnt(int weatherno);
+
   
+
+  public ArrayList<WeatherVO> arealist();
+
+
+  /**
+   * 추천 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseRecom(int weatherno);
+ 
+  /**
+   * 추천 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseRecom(int weatherno);
+  
+  
+  /**
+   * 추천
+   * @param weatherno
+   * @return
+   */
+  public int good(int weatherno);
+
 }
+
 

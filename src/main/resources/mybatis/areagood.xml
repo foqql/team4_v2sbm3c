@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.areagood.AreagoodDAOInter">
+
+
+
+ <insert id="create" parameterType="dev.mvc.areagood.AreagoodVO">
+    INSERT INTO areagood(areagoodno, rdate, weatherno, memberno)
+    VALUES (areagood_seq.nextval, sysdate, #{weatherno}, #{memberno})
+  </insert>        
+  
+    <!-- 전체 목록 -->
+  <select id="list_all" resultType="dev.mvc.areagood.AreagoodVO">
+    SELECT areagoodno, rdate, weatherno, memberno
+    FROM areagood
+    ORDER BY areagoodno DESC
+  </select>
+  
+  
+    <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM areagood
+    WHERE areagoodno = #{areagoodno}
+  </delete>
+  
+  
+    <!-- 특정 컨텐츠의 특정 회원 추천 갯수 산출 -->
+  <select id="hartCnt" resultType="int" parameterType='HashMap'>
+    SELECT COUNT(*) as cnt
+    FROM areagood
+    WHERE weatherno=#{weatherno} AND memberno=#{memberno}
+  </select>
+  
+  <!-- 일반적인 조회 -->
+   <select id="read" resultType="dev.mvc.areagood.AreagoodVO">
+    SELECT areagoodno, rdate, weatherno, memberno
+    FROM areagood
+    WHERE areagoodno =#{areagoodno}
+  </select>
+    
+    
+    <!-- weatherno, memberno로 조회 -->
+    <select id="readByWeathernoMemberno" resultType="dev.mvc.areagood.AreagoodVO" parameterType="HashMap">
+      SELECT areagoodno, rdate, weatherno, memberno
+      FROM areagood
+      WHERE weatherno=#{weatherno} AND memberno=#{memberno}
+    </select>  
+    
+        <!-- 전체 목록, 테이블 3개 join -->
+  <select id="list_all_join" resultType="dev.mvc.areagood.WeatherAreagoodMemberVO">
+    SELECT r.areagoodno, r.rdate as r_rdate, r.weatherno, c.weather, r.memberno, m.id, m.mname
+    FROM weather c, areagood r, member m
+    where c.weatherno = r.weatherno AND r.memberno = m.memberno
+    ORDER BY areagoodno DESC
+  </select>
+    
+  
+</mapper>
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class='title_line'>
+    <span th:text="${weatherVO.country}" class="title_line_text"></span > 
+    > <span th:text="${weatherVO.city}" class="title_line_text"></span > 
+    > 날씨 수정
+  </div>
+  
+  <aside class="aside_right">
+    <a th:href="@{|./create?weatherno=${weatherVO.weatherno }|}">등록</a>
+    <span class='menu_divide' >│</span>
+    <a href="javascript:location.reload();">새로고침</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_weatherno_search_paging?weatherno=${weatherVO.weatherno }|}">기본 목록형</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_weatherno_grid?weatherno=${weatherVO.weatherno }|}">갤러리형</a>
+  </aside>
+  
+  <div class='menu_line'></div>
+  
+  <form name='frm' method='post' th:object="${weatherVO}" action='./update_text'>
+    <input type="hidden" name="weatherno" th:value="${weatherVO.weatherno }">
+    <input type="hidden" name="weatherno" th:value="${weatherVO.weatherno }">
+    <input type="hidden" name="now_page" th:value="${now_page}">
+    <input type="hidden" name="search_word" th:value="${word}">
+
+    <!-- 수평으로 나열되도록 수정 -->
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <!--
+    <div style="display: flex; align-items: center; width: 30%;">
+       <label style="width: 80px;">대륙</label>
+       <input type='text' name='continent' th:value='${weatherVO.continent}' required="required" 
+              class="form-control" style='flex-grow: 1;'>
+   </div>
+
+
+   <div style="display: flex; align-items: center; width: 30%;">
+       <label style="width: 80px;">국가</label>
+       <input type='text' name='country' th:value='${weatherVO.country}' required="required" 
+              class="form-control" style='flex-grow: 1;'>
+   </div>
+
+
+   <div style="display: flex; align-items: center; width: 30%;">
+       <label style="width: 80px;">도시</label>
+       <input type='text' name='city' th:value='${weatherVO.city}' required="required" 
+              class="form-control" style='flex-grow: 1;'>
+   </div> -->
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">날씨</label>
+           <input type='text' name='weather' th:value='${weatherVO.weather}' required="required" 
+                  autofocus="autofocus" class="form-control" style='flex-grow: 1;'>
+       </div>
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">날짜</label>
+           <input type="date" name="rdate" th:value="${weatherVO.rdate}" required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>   
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">기온</label>
+           <input type='text' name='temp' th:value='${weatherVO.temp}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>   
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">체감온도</label>
+           <input type='text' name='windchill' th:value='${weatherVO.windchill}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>   
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">최저온도</label>
+           <input type='text' name='mintemp' th:value='${weatherVO.mintemp}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>   
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">최고온도</label>
+           <input type='text' name='maxtemp' th:value='${weatherVO.maxtemp}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">습도</label>
+           <input type='text' name='humidity' th:value='${weatherVO.humidity}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>   
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">풍속</label>
+           <input type='text' name='speed' th:value='${weatherVO.speed}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>   
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">풍향</label>
+           <input type='text' name='direction' th:value='${weatherVO.direction}' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>  
+
+       <div style="display: flex; align-items: center; width: 30%;">
+           <label style="width: 80px;">패스워드</label>
+           <input type='password' name='passwd' th:value='1234' required="required" 
+                  class="form-control" style='flex-grow: 1;'>
+       </div>
+       
+    </div>
+
+    <div class="content_body_bottom">
+      <button type="submit" class="btn btn-secondary btn-sm">저장</button>
+      <button type="button" th:attr="onclick=|location.href='./list_by_weatherno_search_paging?weatherno=${weatherno}'|" class="btn btn-secondary btn-sm">목록</button>
+    </div>
+  </form>
+
+</div>
+</html>
