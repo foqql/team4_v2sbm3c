@@ -298,16 +298,19 @@ public class GalleryCont {
     word = Tool.checkNull(word).trim();
 
     HashMap<String, Object> map = new HashMap<>();
+    System.out.println("classifyno->" + classifyno);
     map.put("classifyno", classifyno);
     map.put("word", word);
     map.put("now_page", now_page);
 
+    
     ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
+    System.out.println("-> list:" + list);
 
     // System.out.println("-> size: " + list.size());
     model.addAttribute("word", word);
-
+    
     int search_count = this.galleryProc.list_by_classifyno_search_count(map);
     String paging = this.galleryProc.pagingBox(classifyno, now_page, word, "/gallery/list_by_classifyno", search_count,
         Gallery.RECORD_PER_PAGE, Gallery.PAGE_PER_BLOCK);
@@ -719,7 +722,7 @@ public class GalleryCont {
     ra.addAttribute("word", word);
     ra.addAttribute("now_page", now_page);
     
-    return "redirect:/gallery/list_by_classifyno";    
+    return "redirect:/gallery/list_by_classifyno_grid";    
     
   }   
    

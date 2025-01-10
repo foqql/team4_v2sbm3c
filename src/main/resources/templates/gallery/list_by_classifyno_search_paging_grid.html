@@ -23,14 +23,14 @@
   </aside> 
 
   <!-- /gallery/list_search_com.html 파일의 list_search_fragment import -->
-  <div th:replace="~{gallery/list_search_com::list_search_fragment}"></div>
+  <div th:replace="~{gallery/list_search_com_grid::list_search_fragment}"></div>
      
   <div class='menu_line'></div>
        
   <div style='width: 100%;'> <!-- 갤러리 Layout  시작 -->
     <div th:if="${list.size() > 0}"  th:each="galleryVO, status:${list}" 
          th:attr="onclick=|location.href='/gallery/read?galleryno=${galleryVO.galleryno}&word=${word}&now_page=${now_page}'|"
-         style='width: 19.0%; height: 260px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
+         style='width: 19.0%; height: 270px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
 
       <div th:if="${galleryVO.file1.endsWith('jpg') or galleryVO.file1.endsWith('png')  or galleryVO.file1.endsWith('gif')}"
              style="width: 100%; height: 200px;">
@@ -51,12 +51,10 @@
         <span th:if="${galleryVO.title.length() <= 16 }" 
                   th:text="|${galleryVO.title}|" style="font-weight: bold;"></span>
         <br>
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
         <span th:text="| ${galleryVO.rdate.substring(0, 10)}|"></span>
-        
-
+        <span style="text-align: right; font-size: 1.5em;">♡</span>
       </div>
-      
-      <div style="width: 100%; text-align: right;">♡</div>
       
     </div>
     
