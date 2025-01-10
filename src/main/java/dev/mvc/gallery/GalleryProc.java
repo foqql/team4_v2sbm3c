@@ -87,7 +87,9 @@ public class GalleryProc implements GalleryProcInter {
 
     map.put("start_num", start_num);
     map.put("end_num", end_num);
-
+    
+    System.out.println(map);
+    
     ArrayList<GalleryVO> list = this.galleryDAO.list_by_classifyno_search_paging(map);
 
     return list;

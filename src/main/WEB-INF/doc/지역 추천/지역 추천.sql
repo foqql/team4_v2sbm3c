@@ -153,7 +153,8 @@ select * from weather;
 
 
 
-
+http://192.168.12.145:9093/gallery/list_by_classifyno_grid?classifyno=91
+http://192.168.12.145:9093/gallery/list_by_classifyno_grid?classify=91&word=%E3%85%87
 
 
 
