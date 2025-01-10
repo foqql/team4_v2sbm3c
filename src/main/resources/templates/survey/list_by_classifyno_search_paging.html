@@ -28,25 +28,26 @@
   </tr>
 
   <!-- 리스트가 비어 있지 않을 때 반복문 실행 -->
-  <tr th:each="surveyVO, status : ${list}">
-<td class='td_basic' style="vertical-align: middle; text-align: center; cursor: pointer; height: 90px;"
-    th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
+  <tr th:if="${list.size() > 0}"  th:each="surveyVO, status : ${list}"style="cursor: pointer; height: 90px;">
+<td class='td_basic' style="vertical-align: middle; text-align: center; cursor: pointer; height: 90px;" 
+th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
+
 
       <!-- 이미지 파일일 경우 -->
-      <div th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
-        <!-- 이미지 처리 로직 -->
-        <img th:src="@{|/survey/storage/${surveyVO.thumb1}|}" style="width: 120px; height: 90px;">
+      <div th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|"
+       th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
+        <!-- 이미지 처리 로직-->
+        <img th:src="@{|/survey/storage/${surveyVO.posterthumb}|}" style="width: 120px; height: 90px;">
       </div>
 
       <!-- 이미지가 아닌 파일은 파일명만 출력 -->
       <div th:if="${surveyVO.poster != null and ((surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif')) == false) and (surveyVO.postersize > 0)}">
         <span th:text="${surveyVO.poster}"></span>
       </div>
-
-      <!-- 파일이 없으면 기본 이미지 출력 -->
-      <div th:if="${surveyVO.postersize == 0}">
-        <img src="/survey/images/none1.png" style="width: 120px; height: 90px;">
-      </div>
+      <!--% 파일이 없는경우 기본 이미지 출력 %-->
+        <div th:if="${surveyVO.postersize == 0}">
+          <img src="/news/images/none1.png" style="width: 120px; height: 90px;">
+        </div>
     </td>
 
     <td class='td_left' 
@@ -72,12 +73,23 @@
     </td>
     
     <!-- 5번째 칸: 'delete'로 이동 -->
-    <td th:if="${session.grade == 'admin'}" th:attr="onclick=|location.href='/survey/delete/${surveyVO.surveyno}'|"
+    <td th:if="${session.grade == 'admin'}" 
         style="cursor: pointer; vertical-align: middle; text-align: center;">
-      <button class="btn btn-info">delete</button>
+      <button href="#" th:onclick="'delete_s(event, ' + ${surveyVO.surveyno}+');'" class="btn btn-info">delete</button>
     </td>
+      <script>
+  function delete_s(e, surveyno){
+    let sw = confirm(surveyno+'번을 삭제 하시겠습니까?\n삭제하면 복구할 수 없습니다.')
+    if(sw == true){
+      document.querySelector('#surveyno').value = surveyno;
+      document.querySelector('#frm').submit();
+    }
     
-    
+  }
+  </script>
+<form name='frm' id='frm' method = 'post' action='/survey/delete_s'>
+  <input type='hidden' name='surveyno' id ='surveyno'>
+  </form>
   </tr>
 
   <!-- 리스트가 비어 있을 경우 -->

@@ -62,9 +62,6 @@ public class GenreCont {
       System.out.println(" -> Error 에러 발생  [ genre/msg ]");
       return "/genre/create";
     }
-//    System.out.println("영양제 이름 : " + genreVO.getName());
-//    System.out.println("영양제 가격 : " + genreVO.getPrice());
-//    System.out.println("영양제 개봉일 : " + genreVO.getRdate());
 
     int cnt = this.genreProc.create(genreVO);
     System.out.println(" -> cnt [genreCont]: " + cnt);
@@ -154,10 +151,6 @@ public class GenreCont {
       System.out.println(" -> Error 에러 발생  [ genre/update ]");
       return "/genre/update";
     }
-//    System.out.println("영양제 이름 : " + genreVO.getName());
-//    System.out.println("영양제 가격 : " + genreVO.getPrice());
-//    System.out.println("영양제 개봉일 : " + genreVO.getRdate());
-
     int cnt = this.genreProc.update(genreVO);
     System.out.println(" -> cnt [genreCont]: " + cnt);
 

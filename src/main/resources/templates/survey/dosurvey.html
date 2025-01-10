@@ -1,93 +1,166 @@
-      <!DOCTYPE html>
-      <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
-      
-      <head>
-        <script>
-        
-    // 'request'라는 id를 가진 버튼 클릭 시 실행.
-    $("id 맞춰 넣기").click(function(){
- 
-            // json 형식으로 데이터 set
-            var params = {
-                      name      : $("#name").val()
-                    , sex       : $("#sex").val()
-                    , age       : $("#age").val()
-                    , tellPh    : $("#tellPh").val()
+<!DOCTYPE html>
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        window.onload = function () {
+            let tag = '<a href="javascript:good([[${surveyVO.surveyno}]])" style="width: 30px; display: inline-block;">♥</a>';
+            document.querySelector('#hart_panel').innerHTML = tag;
+
+            let hartCnt = '[[${hartCnt}]]';
+            console.log('hartCnt:', hartCnt);
+
+            if (hartCnt == 1) {
+                tag = '<a href="javascript:good([[${surveyVO.surveyno}]])" style="width: 30px; display: inline-block;">♥</a>';
+                document.querySelector('#hart_panel').innerHTML = tag;
+            } else {
+                tag = '<a href="javascript:good([[${surveyVO.surveyno}]])" style="width: 30px; display: inline-block;">♡</a>';
+                document.querySelector('#hart_panel').innerHTML = tag;
             }
-                
-            // ajax 통신
-            $.ajax({
-                type : "POST",            // HTTP method type(GET, POST) 형식이다.
-                url : "/test/ajax",      // 컨트롤러에서 대기중인 URL 주소이다.
-                data : params,            // Json 형식의 데이터이다.
-                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-                    // 응답코드 > 0000
-                    alert(res.code);
+            document.querySelector('#recom_panel').innerHTML = '([[${surveyVO.recom}]])';
+
+        }
+
+        function good(surveyno) {
+            let hartCnt = '[[${hartCnt}]]';
+            console.log('hartCnt:', hartCnt);
+            let tag = '';
+            console.log('-> surveyno : ' + surveyno);
+            //console.log('-> isMember : ' + data.isMemer);
+            fetch("/survey/good", {
+                "method": "post",
+                "headers": {
+                    "Content-Type": "application/json"
                 },
-                error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-                    alert("통신 실패.")
-                }
-            });
-        });
-            
-</script>
-      </head>
-      
-      <body>
-          <div layout:fragment="content">
+                body: JSON.stringify({ surveyno }) // {"sentence":sentence}, JSON 형식으로 전송
+            })
+                .then((response) => response.json()) // 응답 문자열 추출
+                .then((data) => {
+                    console.log('-> data : ' + data.hartCnt);
+                    console.log('-> data.isMember : ' + data.isMember);
+
+                    if (data.isMember === 1) { // 회원
+                        let hartCnt = data.hartCnt;
+                        console.log('hartCnt:', hartCnt);
+                        let tag = '';
+
+                        if (hartCnt == 1) {
+                            tag = '<a href="javascript:good([[${surveyVO.surveyno}]])" style="width: 30px; display: inline-block;">♥</a>';
+                            document.querySelector('#hart_panel').innerHTML = tag;
+                        } else {
+                            tag = '<a href="javascript:good([[${surveyVO.surveyno}]])" style="width: 30px; display: inline-block;">♡</a>';
+                            document.querySelector('#hart_panel').innerHTML = tag;
+                        }
+                        document.querySelector('#recom_panel').innerHTML = '(' + data.recom + ')';
+
+                    } else { // 비회원
+                        alert("로그인해야 추천할 수 있습니다.")
+                        location.href = '/member/login_cookie_need'
+                    }
+                });
+        }
+
+        function delete_item(e, surveyitemno, surveyno) {
+            let sw = confirm(surveyitemno + '번을 삭제 하시겠습니까?\n삭제하면 복구할 수 없습니다.');
+            if (sw == true) {
+                // 추가된 두 번째 값 (surveyno)을 hidden input에 저장
+                document.querySelector('#surveyitemno').value = surveyitemno;
+                document.querySelector('#surveyno').value = surveyno;  // 두 번째 값 처리
+
+                // 폼 전송
+                document.querySelector('#frm').submit();
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <div layout:fragment="content">
         <aside class="aside_right">
-    <a href="javascript:location.reload();">새로고침</a><span class="menu_devide">│</span>   
-       <span th:if="${session.grade == 'admin'}">
-      <a th:href="@{|/survey/create_item?surveyno=${surveyVO.surveyno}|}">등록</a>
-  </aside>
-              <div class='menu_line'></div>
-      
-              <fieldset class="fieldset_basic">
-                  <ul>
-                      <p>설문조사 제목: <span th:text="${surveyVO.topic}"></span></p>
-                      <li class="li_none">
-                          <div style="width: 100%; word-break: break-all;">
-                              <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br>
-                              <span style="font-size: 1em;" th:text="${surveyVO.startdate}"></span><br><br>
-                              <div style="white-space: pre-wrap;">
-                                  <span th:text="${surveyVO.enddate}"></span>
-                              </div>
-                          </div>
-                      </li>
-      
-                      <!-- 설문 항목 선택 -->
-                      <li class="li_none">
-  <form name="frm" method="post" action="/survey/dosurvey" th:object="${surveyitemVO}">
-      <!-- 설문 항목 반복 출력 -->
-<div th:each="surveyitem, i : ${surveyitemVO}">
-    <!-- 각 항목에 대해 고유한 radio button 생성 -->
-    <input type="radio" th:name="pick" th:value="${surveyitem.surveyitemno}" />
-    <input type="hidden" th:name="surveyitemno" th:value="${surveyitem.surveyitemno}" />
-    <input type="hidden" th:name="item" th:value="${surveyitem.item}" />
-    <a th:text="${surveyitem.item}"></a>
-<div style="display: flex; justify-content: flex-end; align-items: center;" th:if="${session.grade == 'admin'}">
-    <a th:href="@{|/survey/update_item/${surveyVO.surveyno}|}" > 수정</a>
-    <span class="menu_devide">│</span>
-    <a th:href="@{|/survey/delete_item/${surveyVO.surveyno}|}"> 삭제</a>
-</div>
+            <a href="javascript:location.reload();">새로고침</a>
+            <span th:if="${session.grade == 'admin'}">
+                <span class="menu_devide">│</span> <a
+                    th:href="@{|/survey/create_item?surveyno=${surveyVO.surveyno}|}">등록</a>
+                <span class="menu_devide">│</span> <a th:href="@{|/survey/update/${surveyVO.surveyno}|}">글 수정</a>
+                <span class="menu_devide">│</span> <a th:href="@{|/survey/update_file/${surveyVO.surveyno}|}">이미지 수정</a>
+        </aside>
+        <div class='menu_line'></div>
 
-</div>
+        <fieldset class="fieldset_basic">
+            <ul>
+                <p>설문조사 제목: <span th:text="${surveyVO.topic}"></span></p>
+                <li class="li_none">
+                    <div
+                        th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
+                        <img th:src="@{|/survey/storage/${surveyVO.postersaved}|}"
+                            style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%; background-color : white;'>
+                    </div>
+                    <div style="width: 100%; word-break: break-all;">
+                        <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br>
+                        <span style="font-size: 1em;" th:text="${surveyVO.startdate}"></span><br><br>
+                        <div style="white-space: pre-wrap;">
+                            <span th:text="${surveyVO.enddate}"></span>
+                        </div>
+                    </div>
+                </li>
 
-  
-      <div th:if="${#lists.isEmpty(surveyitemVO)}">
-          <p>설문 항목이 없습니다.</p>
-      </div>
-  
-      <div>
-          <button type="submit" class="btn btn-info">제출</button>
-      </div>
-  </form>
-  
-    
-                      </li>
-                  </ul>
-              </fieldset>
-          </div>
-      </body>
-      
-      </html>
+                <!-- 설문 항목 선택 -->
+                <li class="li_none">
+                    <form name="frm" method="post" action="/survey/dosurvey" th:object="${surveyitemVO}">
+                        <!-- 설문 항목 반복 출력 -->
+                        <div th:each="surveyitem, i : ${surveyitemVO}">
+                            <!-- 각 항목에 대해 고유한 radio button 생성 -->
+                            <input type="radio" th:name="pick" th:value="${surveyitem.surveyitemno}" />
+                            <input type="hidden" th:name="surveyno" th:value="${surveyitem.surveyno}" />
+                            <input type="hidden" th:name="item" th:value="${surveyitem.item}" />
+                            <input type="hidden" th:name="surveyitemno" th:value="${surveyitem.surveyitemno}" />
+                            <a th:text="${surveyitem.item}"></a>
+                            <div style="display: flex; justify-content: flex-end; align-items: center;"
+                                th:if="${session.grade == 'admin'}">
+                                <!--                                <a th:href="@{|/survey/update_item/${surveyVO.surveyno}|}"> 수정</a>  <span class="menu_devide">│</span>
+                                  확인용 <input type="text" th:name="surveyno" th:value="${surveyitem.surveyno}" />
+                                  surveyno <input type="text" th:name="surveyno" th:value="${surveyitem.surveyno}" />
+                                  surveyitemno <input type="text" th:name="surveyno" th:value="${surveyitem.surveyitemno}" />-->
+                                    <a href="#"
+                                        th:onclick="'delete_item(event, ' + ${surveyitem.surveyitemno} +','+ ${surveyitem.surveyno}+ ');'">
+                                        <img src="/survey_good/images/delete.png" class="icon" title="삭제">
+                                    </a>
+
+                            </div>
+
+                        </div>
+                        <div th:unless="${#lists.isEmpty(surveyitemVO)}">
+                            <button type="submit" class="btn btn-info">제출</button>
+                        </div>
+
+
+                        <div th:if="${#lists.isEmpty(surveyitemVO)}">
+                            <p>설문 항목이 없습니다.</p>
+                        </div>
+                    </form>
+
+                    <div>
+                        <span id="hart_panel"></span>
+                        <span id="recom_panel"></span>
+                    </div>
+
+                    <div>
+                        <form name="frm" id="frm" method="post" action="/survey/delete_item">
+                            <input type="hidden" name="surveyitemno" id="surveyitemno">
+                            <input type="hidden" name="surveyno" id="surveyno">
+                        </form>
+                    </div>
+
+                </li>
+            </ul>
+        </fieldset>
+    </div>
+
+
+
+
+</body>
+
+</html>
