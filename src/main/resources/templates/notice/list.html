@@ -15,15 +15,23 @@
         .notice-container a:hover { background-color: #45a049; }
         .notice-container .btn-container { text-align: center; margin-top: 20px; font-size: 12px; }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('tr.clickable-row').click(function() {
+                var notino = $(this).data('notino');
+                window.location.href = '/notice/read/' + notino;
+            });
+        });
+    </script>
 </head>
 <body>
 <div layout:fragment="content" class="notice-container" style="width: 100%;">
-    <h1>공지사항 목록</h1>
+
 
     <table>
-        <thead>
-            <tr>
-                <th>공지사항 번호</th>
+                <h1>공지사항 목록</h1>
+                <th>번호</th>
                 <th>제목</th>
                 <th>내용</th>
                 <th>등록 일시</th>
@@ -32,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="notice : ${list}" th:data-notino="${notice.notino}">
+            <tr th:each="notice : ${list}" class="clickable-row" th:data-notino="${notice.notino}">
                 <td th:text="${notice.notino}"></td>
                 <td th:text="${#strings.length(notice.title) > 7 ? #strings.substring(notice.title, 0, 7) + '...' : notice.title}"></td>
                 <td th:text="${#strings.length(notice.content) > 20 ? #strings.substring(notice.content, 0, 20) + '...' : notice.content}"></td>
@@ -46,7 +54,6 @@
     <div class="btn-container" th:if="${userGrade == 'admin'}">
         <a href="/notice/create">새 공지사항 작성</a>
     </div>
-
 </div>
 </body>
 </html>
