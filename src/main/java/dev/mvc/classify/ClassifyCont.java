@@ -424,7 +424,7 @@ public class ClassifyCont {
       classifyVO.setClassify(String.join("/", list_type));
 
       model.addAttribute("classifyVO", classifyVO);
-
+System.out.println("classifyVO : "+ classifyVO );
       word = Tool.checkNull(word);
 
       ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);

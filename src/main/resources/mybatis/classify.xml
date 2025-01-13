@@ -148,11 +148,11 @@ FROM
 
   <!-- Search result with paging -->
 <select id="list_search_paging" resultType="dev.mvc.classify.ClassifyVO" parameterType="Map">
-    SELECT classifyno, bigcla, classify, rdate, seqno, visible, r
+    SELECT classifyno, bigcla, classify, rdate, seqno, visible, r, cnt
     FROM (
-        SELECT classifyno, bigcla, classify, rdate, seqno, visible, rownum as r
+        SELECT classifyno, bigcla, classify, rdate, seqno, visible, rownum as r, cnt
         FROM (
-            SELECT c.classifyno, g.genre as bigcla, c.classify, c.rdate, c.seqno, c.visible
+            SELECT c.classifyno, g.genre as bigcla, c.classify, c.rdate, c.seqno, c.visible, cnt
             FROM classify c
             JOIN genre g ON c.genreno = g.genreno
             WHERE (UPPER(c.classify) LIKE '%' || UPPER(#{word}) || '%'
