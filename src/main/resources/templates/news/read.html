@@ -113,14 +113,14 @@
   </fieldset>
 
   <span th:if="${classifyVO.seqno > 1000}">
-    <select id="news" style="margin-left:36%; font-size: 1.3em;">
-      <option value="0">모드를 선택하세요.</option>
-      <option value="1">원문</option>
-      <option value="2">번역 및 요약</option>       
-      <option th:each="newsVO, ststus: ${news}" th:value="${newsVO.newsno}" th:text="${newsVO.mod}" data-modno="${newsVO.newsno}"></option> 
-    </select> 
-    <span id="progress" style="display: none;"></span>
-    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:10%; font-size: 1.3em;">번역 및 요약 이동</a>
+<!--    <select id="news" style="margin-left:36%; font-size: 1.3em;">-->
+<!--      <option value="0">모드를 선택하세요.</option>-->
+<!--      <option value="1">원문</option>-->
+<!--      <option value="2">번역 및 요약</option>       -->
+<!--      <option th:each="newsVO, ststus: ${news}" th:value="${newsVO.newsno}" th:text="${newsVO.mod}" data-modno="${newsVO.newsno}"></option> -->
+<!--    </select> -->
+<!--    <span id="progress" style="display: none;"></span>-->
+    <a th:href="@{|/news/trans_sum?newsno=${newsVO.newsno }&word=${word }&now_page=${now_page}|}" role="button" style="margin-left:46%; font-size: 1.3em;">번역 및 요약 이동</a>
   </span>
 
   <span th:if="${classifyVO.seqno < 1000}">
