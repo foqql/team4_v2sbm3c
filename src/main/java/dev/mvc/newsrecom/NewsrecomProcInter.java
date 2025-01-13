@@ -6,7 +6,7 @@ import java.util.HashMap;
 public interface NewsrecomProcInter {
   /**
    * 등록, 추상 메소드
-   * @param NewsrecomVO
+   * @param NewsscoreVO
    * @return
    */
   public int create(NewsrecomVO newsrecomVO);

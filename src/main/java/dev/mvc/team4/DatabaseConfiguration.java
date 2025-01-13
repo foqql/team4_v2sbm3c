@@ -33,6 +33,7 @@ import com.zaxxer.hikari.HikariDataSource;
                                             "dev.mvc.areagood",
                                             "dev.mvc.survey_good",
                                             "dev.mvc.log",
+                                            "dev.mvc.newsscore",
                                             "dev.mvc.notice",
                                             "dev.mvc.newsrecom",
                                             "dev.mvc.gallery"

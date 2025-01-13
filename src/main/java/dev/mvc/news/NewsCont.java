@@ -268,6 +268,9 @@ public class NewsCont {
     // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<NewsVO> list = this.newsProc.list_all(); // 모든 목록
@@ -287,7 +290,7 @@ public class NewsCont {
 //      }
 
       model.addAttribute("list", list);
-      return "/th/news/list_all";
+      return "/news/list_all";
 
     } else {
       return "redirect:/member/login_cookie_need";

@@ -44,7 +44,7 @@
   
   <!-- 전체 목록, 테이블 3개 join -->
   <select id="list_all_join" resultType="dev.mvc.newsrecom.NewsNewsrecomMemberVO">
-    SELECT c.newsrecomno, c.rdate, c.newsno, n.title as n_title, c.memberno, m.id, m.mname
+    SELECT c.newsrecomno, n.classifyno as classifyno, c.rdate, c.newsno, n.title as n_title, c.memberno, m.id, m.mname
     FROM news n, newsrecom c, member m
     WHERE n.newsno = c.newsno and c.memberno = m.memberno
     ORDER BY newsrecomno DESC

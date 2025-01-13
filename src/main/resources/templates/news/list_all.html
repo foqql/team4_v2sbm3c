@@ -14,9 +14,11 @@
   <table class="table table-striped" style='width: 100%;'>
     <colgroup>
       <col style='width: 10%;'/>
-      <col style='width: 90%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 80%;'/>
     </colgroup>
     <tr>
+      <th class='th_bs'>중분류</TH>
       <th class='th_bs'>파일</TH>
       <th class='th_bs'>제목</th>
     </tr>
@@ -25,7 +27,26 @@
     <tr th:each="newsVO, status:${list}" 
          th:attr="onclick=|location.href='/news/read?newsno=${newsVO.newsno}'|"
          style="cursor: pointer;">
-      <td class='td_basic' th:text="${newsVO.file1}"></td>
+      <td class='td_basic' style="vertical-align: middle; text-align: center;">
+         <span th:text="${newsVO.classifyno}" style="font-weight: bold;"></span>
+     </td>   
+         
+     <td class='td_basic' style="vertical-align: middle; text-align: center;">
+        <div th:if="${newsVO.file1.endsWith('jpg') or newsVO.file1.endsWith('png')  or newsVO.file1.endsWith('gif')}">
+          <img th:src="@{|/news/storage/${newsVO.thumb1}|}" style="width: 120px; height: 90px;">
+        </div>
+        
+        <!--% 이미지가 이닌 파일은 파일명만 출력 %-->
+        <div th:if="${((newsVO.file1.endsWith('jpg') or newsVO.file1.endsWith('png')  or newsVO.file1.endsWith('gif')) == false) and (newsVO.size1 > 0)}">
+          <span th:text="${newsVO.file1}"></span>
+        </div>
+
+        <!--% 파일이 없는 경우 기본 이미지 출력 %-->
+        <div th:if="${newsVO.size1 == 0}">
+          <img src="/news/images/none1.png" style="width: 120px; height: 90px;">
+        </div>
+        
+      </td>
       <td class='td_left'>
         <span th:text="${newsVO.title}" style="font-weight: bold;"></span><br>
         <span th:if="${newsVO.content.length() > 160 }" 
