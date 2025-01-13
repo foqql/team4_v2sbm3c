@@ -2,19 +2,24 @@
    
   <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="dev.mvc.weather.WeatherDAOInter">
-  
 
-    <insert id="create" parameterType="dev.mvc.weather.WeatherVO">
+
+    <insert id="create" parameterType="dev.mvc.weather.WeatherVO"> 
+        INSERT INTO area (areano, continent, country, city) 
+        VALUES (area_seq.NEXTVAL, #{continent}, #{country}, #{city}) 
+    </insert>  
+
+    <!--<insert id="create" parameterType="dev.mvc.weather.WeatherVO">
         INSERT ALL
     
-        INTO area (areano, continent, country, city, rdate)
-        VALUES (area_SEQ.NEXTVAL, #{continent}, #{country}, #{city}, sysdate)    
+        INTO area (areano, continent, country, city)
+        VALUES (area_SEQ.NEXTVAL, #{continent}, #{country}, #{city})    
         
         INTO weather(weatherno, memberno, classifyno, areano, rdate, file1, file1saved, thumb1, size1)
         VALUES(weather_seq.nextval, #{memberno}, #{classifyno}, area_seq.currval, sysdate, #{file1}, #{file1saved}, #{thumb1}, #{size1})
         
         SELECT * FROM dual
-    </insert>
+    </insert>-->
    
       <!-- <select id="arealist" resultType="dev.mvc.weather.WeatherVO">
          SELECT areano, continent, country, city
