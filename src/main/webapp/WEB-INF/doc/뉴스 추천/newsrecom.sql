@@ -103,3 +103,18 @@ SELECT c.newsrecomno, c.rdate, c.newsno, n.title as n_title, c.memberno, m.id, m
 FROM news n, newsrecom c, member m
 WHERE n.newsno = c.newsno and c.memberno = m.memberno
 ORDER BY newsrecomno DESC;
+
+DELETE FROM news
+WHERE newsno = 18;
+commit;
+
+
+-- integrity constraint (TEAM4.SYS_C0010027) violated - child record found
+-- newsrecom의 제약조건 SYS_C0010027에 delete rule - cascade 추가
+ALTER TABLE NEWSRECOM
+DROP CONSTRAINT SYS_C0010027; 
+
+ALTER TABLE NEWSRECOM
+ADD CONSTRAINT SYS_C0010027 FOREIGN KEY (newsno)
+REFERENCES news(newsno) 
+ON DELETE CASCADE;

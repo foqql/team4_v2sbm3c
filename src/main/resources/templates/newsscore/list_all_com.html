@@ -1,0 +1,55 @@
+<!--/* 
+<div th:replace="~{calendar/list_all_com::list_all_fragment}"></div> 
+'/calendar/list_all_com.html' 파일의 list_all_fragment를 가져다 사용
+*/-->
+<div th:fragment="list_all_fragment"> 
+  <table class="table table-hover" style="width: 100%;">
+    <colgroup>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 20%;'/>
+      <col style='width: 10%;'/>    
+      <col style='width: 20%;'/>
+      <col style='width: 20%;'/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">기사 번호</th>
+        <th class="th_bs">회원 번호</th>
+        <th class="th_bs">제목</th>
+        <th class="th_bs">평점</th>
+        <th class="th_bs">등록일</th>
+        <th class="th_bs">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="newsscoreVO, status:${list}">
+        <td class="td_bs" th:text="|${status.index+1}|"></td>
+        <td class="td_bs" th:text="${newsscoreVO.newsno}"></td>
+        <td class="td_bs" th:text="${newsscoreVO.memberno}"></td>
+        <td class="td_bs" th:text="${newsscoreVO.title}"></td>
+        <td class="td_bs" th:text="${newsscoreVO.jumsu}"></td>
+        <td class="td_bs" th:text="${newsscoreVO.rdate.substring(0, 10)}"></td>        
+        <td class="td_bs">
+          <a href="#" th:onclick="'delete_newsscore(event, ' + ${newsscoreVO.newsscoreno} + ');'"><img src="/newsscore/images/delete.png" class="icon" title="삭제"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <script>
+    function delete_newsscore(e, newsscoreno){
+      let sw = confirm(newsscoreno + '번 평점을 삭제를 하시겠습니까? \n 삭제하면 복구할 수 없습니다.');
+      if (sw == true){
+        document.querySelector('#newsscoreno').value = newsscoreno; 
+        document.querySelector('#frm').submit();
+      }
+    }
+  </script>  
+  
+    <form name='frm' id='frm' method='post' action='/newsscore/delete'>
+    <input type='hidden' name='newsscoreno' id='newsscoreno'>
+  </form>
+</div>

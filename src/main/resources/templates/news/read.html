@@ -23,7 +23,8 @@
     function recom(newsno){
       console.log('-> newsno: ' + newsno);
       
-      fetch("http://192.168.12.162:9093/news/recom", {
+      fetch(
+          "http://192.168.12.162:9093/news/recom", {
           "method": "post",
           "headers": {
               "Content-Type": "application/json"

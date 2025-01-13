@@ -19,5 +19,6 @@ public class NewsNewsrecomMemberVO {
     private String n_title; // 제목
     private String id; // 아이디
     private String mname; // 이름
+    private int classifyno;
    
 }

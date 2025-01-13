@@ -31,7 +31,8 @@ import com.zaxxer.hikari.HikariDataSource;
                                             "dev.mvc.survey",
                                             "dev.mvc.newsrecom",
                                             "dev.mvc.survey_good",
-                                            "dev.mvc.log"
+                                            "dev.mvc.log",
+                                            "dev.mvc.newsscore"
                                             
                                             }) // DAO interface를 찾는 위치
 

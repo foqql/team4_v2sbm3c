@@ -1,4 +1,4 @@
-package dev.mvc.newscrawling;
+package dev.mvc.news;
 
 import lombok.Getter;
 import lombok.Setter;
