@@ -19,13 +19,14 @@
   <div class="flex_div_center">
     <form class="list_form" name="frm" method="post" action="/classify/create" th:object="${classifyVO}">
       <div style="width: 20%;">
-        <select id="genreno" name="genreno" class="form-control">
-          <option value="대분류" selected="selected">대분류</option>
-          <option value="1">뉴스</option>
-          <option value="2">날씨</option>
-          <option value="3">환률</option>
-          <option value="5">지역사진</option>
-        </select>
+<select id="genreno" name="genreno" class="form-control">
+    <option value="" selected="selected">대분류</option>
+    <option th:each="genre : ${GenreVO}" 
+            th:value="${genre.genreno}" 
+            th:text="${genre.genre}">
+    </option>
+</select>
+
       </div>
 
       <div style="width: 30%;">

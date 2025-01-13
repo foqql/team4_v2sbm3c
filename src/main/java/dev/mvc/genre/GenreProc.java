@@ -57,7 +57,7 @@ public class GenreProc implements GenreProcInter {
     for (GenreVO genreVO : type) {
       GenreVOMenu genreVOMenu = new GenreVOMenu();
       genreVOMenu.setGenre(genreVO.getGenre());
-
+      genreVOMenu.setLink(genreVO.getLink());
       // 대분류에 해당하는 세부 항목 목록을 추출
 //        ArrayList<GenreVO> list_name = this.genreDAO.list_all_genre_y(genreVO.getGenre());
 //        genreVOMenu.setList_name(list_name);

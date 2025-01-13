@@ -17,6 +17,7 @@ public class GenreVO {
 //    @Size(max = 30, message = "장르는 30자를 넘을 수 없습니다.")
     private String genre; // 장르
     private String rdate; // 장르
+    private String link; // 장르
     
     private int cnt;  //관련 자료수
     private int seqno; //출력 순서

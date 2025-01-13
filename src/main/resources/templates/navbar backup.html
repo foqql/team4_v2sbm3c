@@ -22,24 +22,60 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown" th:each="genreVOMenu:${menu1}">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="${genreVOMenu.genre}"></a>
-                        
-                       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == genreVOMenu.genre}">
-                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == genreVOMenu.genre}">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '뉴스'}">
+                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '뉴스'}">
                                 <ul>
                                     <li th:each="classifyVO : ${classifyVOMenu.list_name}">
-                                       <a class="dropdown-item" 
-   th:href="@{|/${genreVOMenu.link}/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
-   th:text="${classifyVO.classify}"></a>
-
+                                        <a class="dropdown-item" th:href="@{|/news/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
                                     </li>
                                 </ul>
-                                
-                                
-                                
                             </li>
                         </ul>
-
-                        
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '환율'}">
+                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '환율'}">
+                                <ul>
+                                    <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                                        <a class="dropdown-item" th:href="@{|/exchange/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '날씨'}">
+                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '날씨'}">
+                                <ul>
+                                    <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                                        <a class="dropdown-item" th:href="@{|/weather/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '지역사진'}">
+                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '지역사진'}">
+                                <ul>
+                                    <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                                        <a class="dropdown-item" th:href="@{|/gallery/list_by_classifyno_grid?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '개인 기사'}">
+                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '개인 기사'}">
+                                <ul>
+                                    <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                                        <a class="dropdown-item" th:href="@{|/exchange/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" th:if="${genreVOMenu.genre == '설문조사'}">
+                            <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == '설문조사'}">
+                                <ul>
+                                    <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                                        <a class="dropdown-item" th:href="@{|/survey/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" th:text="${classifyVO.classify}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="회원"></a>
