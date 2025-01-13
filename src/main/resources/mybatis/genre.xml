@@ -7,8 +7,8 @@
   
 <!--  SQL -> Insert into genre table  -->
 <insert id="create" parameterType="dev.mvc.genre.GenreVO">
- INSERT INTO genre (genreno, genre, seqno, visible,rdate)
-  VALUES (genre_SEQ.NEXTVAL, #{genre}, #{seqno}, #{visible}, sysdate) </insert>
+ INSERT INTO genre (genreno, genre, seqno, visible,rdate, link)
+  VALUES (genre_SEQ.NEXTVAL, #{genre}, #{seqno}, #{visible}, sysdate, #{link}) </insert>
 <!--  SQL -> Select all records from genre table  -->
 
 <select id="list_all" resultType="dev.mvc.genre.GenreVO">

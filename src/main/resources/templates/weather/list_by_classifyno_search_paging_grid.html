@@ -1,4 +1,4 @@
-ㅋ<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
@@ -9,11 +9,11 @@
     <span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
   </div>
 
-  <!--<aside class="aside_right">
+  <aside class="aside_right">
     <span th:if="${session.grade == 'admin'}">
       <a th:href="@{|/weather/create?classifyno=${classifyVO.classifyno}|}">등록</a>
       <span class="menu_devide">│</span>    
-    </span>-->
+    </span>
     
     <a href="javascript:location.reload();">새로고침</a>
     <span class='menu_divide' >│</span>    
@@ -55,7 +55,7 @@
         <span th:if="${weatherVO.rdate.length() > 25 }" 
                   th:text="|${weatherVO.rdate.substring(0, 25) }...|"></span>
         <span th:if="${weatherVO.rdate.length() <= 25 }" 
-                  th:text="|${weatherVO.continrdateent}|"></span>
+                  th:text="|${weatherVO.rdate}|"></span>
                   
         <span th:if="${weatherVO.temp.length() > 25 }" 
                   th:text="|${weatherVO.temp.substring(0, 25) }...|"></span>

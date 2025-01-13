@@ -10,4 +10,5 @@ public class GenreVOMenu {
    *  종류(대분류)
    */
   private String genre;
+  private String link; // 장르
 }

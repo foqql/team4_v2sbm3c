@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class='title_line'>
+      <span th:text="${classifyVO.bigcla}" class="title_line_text"></span>
+      > <span th:text="${classifyVO.classify}" class="title_line_text"></span> 
+    > 글 조회
+  </div>
+  
+  <aside class="aside_right" th:if="${session.grade == 'admin'}">
+    <a href="javascript:location.reload();">새로고침</a>
+    <span class='menu_divide' >│</span>    
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+    <span class='menu_divide' >│</span>
+    <a href="./create?classifyno=${classifyno }">등록</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|/gallery/update_text?galleryno=${galleryVO.galleryno}&now_page=${now_page}&word=${word }|}">글 수정</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./update_file?galleryno=${galleryVO.galleryno}&word=${word}&now_page=${now_page}|}">파일 수정</a>  
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./delete?galleryno=${galleryVO.galleryno}&word=${word}&now_page=${now_page}&classifyno=${galleryVO.classifyno}|}">삭제</a>  
+ </aside> 
+
+  <aside class="aside_right" th:if="${session.grade != 'admin'}">
+     <a href="javascript:location.reload();">새로고침</a>
+    <span class='menu_divide' >│</span>    
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
+  </aside> 
+ 
+  <div class='menu_line'></div>
+
+  <fieldset class="fieldset_basic">
+    <ul>
+      <li class="li_none">
+
+        <!-- 제목 영역 -->
+        <div style="text-align: center; margin-bottom: 20px; padding-top: 20px;">
+          <span style="font-size: 1.5em; font-weight: bold;" th:text="${galleryVO.title}"></span>
+        </div>
+
+        <!-- 사진 영역 -->
+        <div style="width: 100%; text-align: center; margin-bottom: 20px;">
+          <div th:if="${galleryVO.file1.endsWith('jpg') or galleryVO.file1.endsWith('png')  or galleryVO.file1.endsWith('gif')}">
+            <img th:src="@{|/gallery/storage/${galleryVO.file1saved}|}" 
+                 style='width: 80%; max-height: 500px; object-fit: cover; margin: 0 auto;'>
+          </div>
+        </div>
+
+        <!-- rdate 및 첨부파일 다운로드 -->
+        <div style="text-align: right; margin-top: 10px;">
+          <!-- rdate -->
+          <div style="font-size: 0.9em; color: gray; margin-bottom: 10px;" th:text="${galleryVO.rdate}"></div>
+          
+          <!-- 첨부파일 -->
+          <div th:if="${galleryVO.size1 > 0}">
+            첨부 파일: 
+            <a th:href='@{|/download?dir=gallery/storage&filename=${galleryVO.file1saved}&downname=${galleryVO.file1}|}'
+               th:text='|${galleryVO.file1}|'></a> 
+            <span th:text="|(${galleryVO.size1_label})|"></span>  
+            <a th:href='@{|/download?dir=gallery/storage&filename=${galleryVO.file1saved}&downname=${galleryVO.file1}|}'>
+              <img src="/gallery/images/download.png" alt="Download" style="vertical-align: middle;">
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </fieldset>
+
+</div>
+
+</html>

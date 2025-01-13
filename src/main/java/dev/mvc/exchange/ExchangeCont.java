@@ -48,18 +48,14 @@ public class ExchangeCont {
 
   /**
    * 
-   * 최근 정보 열람
-   * http://localhost:9093/exchange/list_by_classifyno?classifyno=6
+   * 최근 정보 열람 http://localhost:9093/exchange/list_by_classifyno?classifyno=6
    * 
    * @return
    */
   @GetMapping(value = "/list_by_classifyno")
-  public String list_by_classifyno_search_paging(
-      HttpSession session, 
-      Model model, 
+  public String list_by_classifyno_search_paging(HttpSession session, Model model,
       @RequestParam(name = "classifyno", defaultValue = "1") int classifyno) {
 
-   
 //     System.out.println("-> classifyno: " + classifyno);
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
@@ -71,7 +67,7 @@ public class ExchangeCont {
     model.addAttribute("classifyVO", classifyVO);
     ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
     model.addAttribute("exchangeVO", exchangeVO);
-
+if (exchangeVO != null) {
     HashMap<String, Object> map = new HashMap<>();
     map.put("classifyno", classifyno);
 //    System.out.println("exchangeVO.getPrice() : " +exchangeVO.getPrice());
@@ -86,19 +82,21 @@ public class ExchangeCont {
     model.addAttribute("krw", formattedValue);
     // 1원당 가치 끝
     return "/exchange/read"; // /templates/exchange/list_by_classifyno_search_paging.html
+} else {
+  model.addAttribute("code", "exc_fail");
+  return "exchange/msg";
+}
+    
   }
 
-  
   /**
    * 맵 등록/수정/삭제 폼 http://localhost:9091/exchange/map?exchangeno=19
    * 
    * @return
    */
   @GetMapping(value = "/map")
-  public String map(Model model, 
-                            @RequestParam(name="exchangeno", defaultValue="0") int exchangeno,
-                            @RequestParam(name="classifyno", defaultValue="0") int classifyno
-                            ) {
+  public String map(Model model, @RequestParam(name = "exchangeno", defaultValue = "0") int exchangeno,
+      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
@@ -112,24 +110,22 @@ public class ExchangeCont {
     return "/exchange/map"; // //templates/exchange/map.html
   }
 
-
   /**
-   * MAP 등록/수정/삭제 처리 
+   * MAP 등록/수정/삭제 처리
    * 
    * @param exchangeVO
    * @return
    */
   @PostMapping(value = "/map")
-  public String map_update(Model model, 
-      @RequestParam(name="classifyno", defaultValue = "0") int classifyno, 
-      @RequestParam(name="exchangeno", defaultValue = "0") int exchangeno, 
-      @RequestParam(name="map", defaultValue = "") String map) {
-    
+  public String map_update(Model model, @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
+      @RequestParam(name = "exchangeno", defaultValue = "0") int exchangeno,
+      @RequestParam(name = "map", defaultValue = "") String map) {
+
     HashMap<String, Object> hashMap = new HashMap<String, Object>();
     hashMap.put("classifyno", classifyno);
     hashMap.put("exchangeno", exchangeno);
     hashMap.put("map", map);
-    
+
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
     ExchangeVO exchangeVO = this.exchangeProc.reading(classifyno);
@@ -137,15 +133,16 @@ public class ExchangeCont {
     this.exchangeProc.map(hashMap);
     return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
   }
-  
+
   /**
    * http://localhost:9093/exchange/crawling
+   * 
    * @return
    */
   @GetMapping(value = "/crawling")
   public String crawling() {
     System.out.println("-> python crawling created.");
-    //------------------------------------------------
+    // ------------------------------------------------
     System.out.println("파이썬 크롤링 시작 ");
     try {
       // Python 스크립트 실행
@@ -155,69 +152,62 @@ public class ExchangeCont {
 
       processBuilder.redirectErrorStream(true);
       Process process = processBuilder.start();
-      
+
       // Python 스크립트의 출력 결과를 읽기
       BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
       String line;
       while ((line = reader.readLine()) != null) {
-          System.out.println(line);
+        System.out.println(line);
       }
-      
+
       int exitCode = process.waitFor();
       System.out.println("Python script finished with exit code: " + exitCode);
-  } catch (IOException | InterruptedException e) {
+    } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-  }
+    }
     System.out.println("파이썬 크롤링 끝");
-    //------------------------------------------------
+    // ------------------------------------------------
     return "/exchange/read";
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  @GetMapping("/run-java")
-  public String runJava(@RequestParam(name="classifyno", defaultValue = "0") int classifyno) {
-      System.out.println("런투 자바");
-      System.out.println("-> python crawling created.");
-      //------------------------------------------------
-      System.out.println("파이썬 크롤링 시작 ");
-      try {
-          // Python 스크립트 실행
-          String pythonScriptPath = "src/main/python/exc.py";
-          System.out.println("Running Python script at: " + pythonScriptPath);
-          ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
 
-          processBuilder.redirectErrorStream(true);
-          Process process = processBuilder.start();
-          
-          // Python 스크립트의 출력 결과를 읽기
-          BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-          StringBuilder output = new StringBuilder();
-          String line;
-          while ((line = reader.readLine()) != null) {
-              System.out.println(line);
-              output.append(line).append("\n");
-          }
-          
-          int exitCode = process.waitFor();
-          System.out.println("Python script finished with exit code: " + exitCode);
-          
-          if (exitCode != 0) {
-              System.out.println("Python script execution failed:");
-              System.out.println(output.toString());
-          }
-      } catch (IOException | InterruptedException e) {
-          e.printStackTrace();
+  @GetMapping("/run-java")
+  public String runJava(@RequestParam(name = "classifyno", defaultValue = "0") int classifyno) {
+    System.out.println("런투 자바");
+    System.out.println("-> python crawling created.");
+    // ------------------------------------------------
+    System.out.println("파이썬 크롤링 시작 ");
+    try {
+      // Python 스크립트 실행
+      String pythonScriptPath = "src/main/python/exc.py";
+      System.out.println("Running Python script at: " + pythonScriptPath);
+      ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
+
+      processBuilder.redirectErrorStream(true);
+      Process process = processBuilder.start();
+
+      // Python 스크립트의 출력 결과를 읽기
+      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      StringBuilder output = new StringBuilder();
+      String line;
+      while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+        output.append(line).append("\n");
       }
-      System.out.println("파이썬 크롤링 끝");
-      //------------------------------------------------
-      System.out.println(classifyno);
-      return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
+
+      int exitCode = process.waitFor();
+      System.out.println("Python script finished with exit code: " + exitCode);
+
+      if (exitCode != 0) {
+        System.out.println("Python script execution failed:");
+        System.out.println(output.toString());
+      }
+    } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+    }
+    System.out.println("파이썬 크롤링 끝");
+    // ------------------------------------------------
+    System.out.println(classifyno);
+    return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
   }
- 
+
 }

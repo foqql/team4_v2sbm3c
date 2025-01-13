@@ -16,6 +16,15 @@
       </div>
       
       <div>
+        <label>대분류 연결 링크 [  ]</label>
+        <input type="text" name="link" value="" autofocus="autofocus" class="form-control fom-control-sm"
+          style="width: 50%;" th:field="*{link}">
+        <div th:if="${#fields.hasErrors('link')}" class="alert alert-danger" role="alert" style="margin-top: 5px;">
+          <div th:each="err: ${#lists.sort(#fields.errors('link'))}" th:text="${err}"></div>
+        </div>
+      </div>
+      
+      <div>
         <label>대분류 출력 순서 [  ]</label>
         <input type="number" name="seqno" value="1" min="1" max="1000000" step="1"
                class="form-control" style="width: 50%;" th:field="*{seqno}">        

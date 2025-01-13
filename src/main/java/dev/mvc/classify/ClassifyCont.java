@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVO;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
@@ -33,7 +34,7 @@ public class ClassifyCont {
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc")
   private GenreProcInter genreProc;
-  
+
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc;
@@ -427,9 +428,13 @@ public class ClassifyCont {
       word = Tool.checkNull(word);
 
       ArrayList<ClassifyVO> list = this.classifyProc.list_search_paging(word, now_page, this.record_per_page);
-//    ArrayList<ClassifyVO> list = this.classifyProc.list_all();
       model.addAttribute("list", list);
+//    ArrayList<ClassifyVO> list = this.classifyProc.list_all();
 //      System.out.println(list);
+
+      ArrayList<GenreVO> GenreVO = this.genreProc.list_all();
+      System.out.println(GenreVO);
+      model.addAttribute("GenreVO", GenreVO);
 
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
       model.addAttribute("menu", menu);

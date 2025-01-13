@@ -3,16 +3,14 @@
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class='title_line'>
-    <span th:text="${classifyVO.bigcla }" class="title_line_text"></span > 
-    > <span th:text="${classifyVO.classify }" class="title_line_text"></span > 
-    > 글 등록
+    <span th:text="${classifyVO.bigcla }" class="title_line_text"></span> 
+    > <span th:text="${classifyVO.classify }" class="title_line_text"></span> 
+    > 도시 등록
   </div>
   
   <aside class="aside_right">
-    <!-- <a th:href="@{|./create?classifyno=${classifyVO.classifyno }|}">등록</a>
-    <span class='menu_divide' >│</span> -->
     <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>
+    <span class='menu_divide' >│</span>   
     <a th:href="@{|./list_by_classifyno_search_paging?classifyno=${classifyVO.classifyno }|}">기본 목록형</a>    
     <span class='menu_divide' >│</span>
     <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }|}">갤러리형</a>
@@ -23,40 +21,86 @@
   <form name='frm' method='post' th:object="${weatherVO}" action='./create' enctype="multipart/form-data">
     <input type="hidden" name="classifyno" th:value="${param.classifyno }">
     
+<div class="flex_container">
+  <div class="flex_item">
+    <label for="continent">대륙 선택</label>
+    <select id="continent" name="continent" class="form-control">
+      <option value="대륙선택" selected="selected">대륙선택</option>
+
+
+     <!-- <option value="1">아시아</option>-->
+      <!-- <option value="2">유럽</option> -->
+      <option value="4">북아메리카</option>
+
+    </select>
+  </div>
+
+  <div class="flex_item" id="country_div" style="display: none;">
+    <label for="country">국가 선택</label>
+    <select id="country" name="country" class="form-control">
+      <option value="국가선택" selected="selected">국가선택</option>
+      <option value="1">미국</option>
+
+    </select>
+  </div>
+
+  <div class="flex_item" id="city_div" style="display: none;">
+    <label for="city">도시 선택</label>
+    <select id="city" name="city" class="form-control">
+      <option value="도시선택" selected="selected">도시선택</option>
+      <option value="1">뉴욕</option>
+      <option value="2">댈러스</option>
+      <option value="3">덴버</option>
+      <option value="4">라스베이거스</option>
+      <option value="5">로스앤젤레스</option>
+      <option value="6">마이애미</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  document.getElementById("continent").addEventListener("change", function() {
+    var continent = this.value;
+    var countryDiv = document.getElementById("country_div");
+    var cityDiv = document.getElementById("city_div");
+
+
+    if (continent === "4") {  
+      countryDiv.style.display = "block"; 
+    } else {
+      countryDiv.style.display = "none";
+      cityDiv.style.display = "none";   
+    }
+  });
+
+  document.getElementById("country").addEventListener("change", function() {
+    var country = this.value;
+    var cityDiv = document.getElementById("city_div");
+
+   
+    if (country === "1") {  
+      cityDiv.style.display = "block"; 
+    } else {
+      cityDiv.style.display = "none";  
+    }
+  });
+</script>
+
+
     <div>
-       <label>날씨</label>
-       <input type='text' name='title' value='맑음' required="required" 
-                 autofocus="autofocus" class="form-control" style='width: 5%;'>
+      <label>이미지</label>
+      <input type="file" class="form-control" name="file1MF" id="file1MF" value="" placeholder="파일 선택">
     </div>
+
     <div>
-       <label>기온</label>
-       <textarea name='content' required="required" class="form-control" rows="1" style='width: 5%;'>3.7℃</textarea>
+      <label>패스워드</label>
+      <input type="password" name="passwd" value="1234" required="required" class="form-control" style="width: 50%;">
     </div>
-        <div>
-       <label>풍향</label>
-       <textarea name='wind' required="required" class="form-control" rows="1" style='width: 5.5%;'>남동풍</textarea>
-    </div>
-    <div>
-       <label>검색어</label>
-       <input type='text' name='word' value='날씨, 온도' required="required" 
-                 class="form-control" style='width: 100%;'>
-    </div>   
-    <div>
-       <label>이미지</label>
-       <input type='file' class="form-control" name='file1MF' id='file1MF' value='' placeholder="파일 선택">
-    </div>   
-    <div>
-       <label>패스워드</label>
-       <input type='password' name='passwd' value='1234' required="required" 
-                 class="form-control" style='width: 50%;'>
-    </div>   
+
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-secondary btn-sm">등록</button>
       <button type="button" th:attr="onclick=|location.href='./list_by_classifyno_search_paging?classifyno=${classifyno}'|" class="btn btn-secondary btn-sm">목록</button>
     </div>
   
   </form>
-
 </div>
-
-  

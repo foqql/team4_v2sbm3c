@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <title>공지사항 상세</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .content {
+            margin-top: 20px;
+            width: 70%; /* 가로폭 설정 */
+            margin: 0 auto; /* 가운데 정렬 */
+        }
+        .content.centered {
+            text-align: center; /* 중앙 정렬 */
+        }
+        .content label {
+            font-weight: bold;
+            display: block; /* 블록 요소로 설정하여 아래 여백 추가 */
+            margin-bottom: 10px; /* 아래 여백 설정 */
+        }
+        .content p {
+            margin: 10px 0 30px; /* 아래 여백 설정 */
+        }
+        .center-link {
+            text-align: center; /* 중앙 정렬 */
+            margin-top: 20px;
+        }
+        .center-link a {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 0;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .center-link a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div layout:fragment="content" class="notice-container">
+        <h1>공지사항 상세</h1>
+        <div class="content centered">
+            <label>제목:</label>
+            <p th:text="${noticeVO.title}"></p>
+        </div>
+        <div class="content">
+            <label>내용:</label>
+            <p th:text="${noticeVO.content}"></p>
+        </div>
+        <div class="content centered">
+            <label>등록일시:</label>
+            <p th:text="${#dates.format(noticeVO.nodate, 'yyyy-MM-dd HH:mm:ss')}"></p>
+        </div>
+        <div class="center-link">
+            <a href="/notice/list">목록으로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>

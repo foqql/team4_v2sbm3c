@@ -2,14 +2,11 @@ package dev.mvc.weather;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.mvc.exchange.ExchangeVO;
 import dev.mvc.tool.Security;
-import dev.mvc.tool.Tool;
 
 @Component("dev.mvc.weather.WeatherProc")
 public class WeatherProc implements WeatherProcInter {
@@ -261,11 +258,7 @@ public class WeatherProc implements WeatherProcInter {
   }
 
   @Override
-  public int password_check(HashMap<String, Object> map) {
-    String passwd = (String)map.get("passwd");
-    passwd = this.security.aesEncode(passwd);
-    map.put("passwd", passwd);
-    
+  public int password_check(HashMap<String, Object> map) {    
     int cnt = this.weatherDAO.password_check(map);
     return cnt;
   }
@@ -323,6 +316,32 @@ public class WeatherProc implements WeatherProcInter {
     int count = weatherDAO.decreaseReplycnt(weatherno);
     return count;
   }
+
   
+  @Override
+  public ArrayList<WeatherVO> arealist() {
+    ArrayList<WeatherVO> list = this.weatherDAO.arealist();
+    System.out.println(list);
+    return list;
+  }
+
+  @Override
+  public int increaseRecom(int weatherno) {
+    int cnt = this.weatherDAO.increaseRecom(weatherno);
+    return cnt;
+  }
+
+  @Override
+  public int decreaseRecom(int weatherno) {
+    int cnt = this.weatherDAO.decreaseRecom(weatherno);
+    return cnt;
+  }
+  
+  @Override
+  public int good(int weatherno) {
+
+    return 0;
+  }
+
   
 }

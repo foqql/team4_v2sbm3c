@@ -1,0 +1,58 @@
+<!--/* 
+<div th:replace="~{calendar/list_all_com::list_all_fragment}"></div> 
+'/calendar/list_all_com.html' 파일의 list_all_fragment를 가져다 사용
+*/-->
+<div th:fragment="list_all_fragment"> 
+  <table class="table table-hover" style="width: 100%;">
+    <colgroup>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 30%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+      <col style='width: 10%;'/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="th_bs">순서</th>
+        <th class="th_bs">등록일(추천일)</th>
+        <th class="th_bs">날씨번호</th>
+        <th class="th_bs">날씨</th>
+        <th class="th_bs">회원번호</th>
+        <th class="th_bs">아이디(이메일)</th>
+        <th class="th_bs">성명</th>
+        <th class="th_bs">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="weatherAreagoodMemberVO, status:${list}">
+        <td class="td_bs" th:text="|${status.index+1}|"></td>
+        <td class="td_bs" th:text="${weatherAreagoodMemberVO.r_rdate.substring(0, 10)}"></td>
+        <td class="td_bs" th:text="${weatherAreagoodMemberVO.weatherno}"></td>
+        <td class="td_bs" th:text="${weatherAreagoodMemberVO.weather}"></td>
+        <td class="td_bs" th:text="${weatherAreagoodMemberVO.memberno}"></td>
+        <td class="td_bs" th:text="${weatherAreagoodMemberVO.id}"></td>
+        <td class="td_bs" th:text="${weatherAreagoodMemberVO.mname}"></td>
+        <td class="td_bs">
+        <a href="#" th:onclick="'delete_good(event, ' + ${weatherAreagoodMemberVO.areagoodno} + ');'"><img src="/areagood/images/delete.png" class="icon" title="삭제"></a> <!--/* /static 기준 */-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+<script>
+    function delete_good(e, areagoodno) {
+      let sw = confirm(areagoodno + '번 글 삭제를 하시겠습니까?\n삭제하면 복구 할 수 없습니다.');
+      if (sw == true) {
+        document.querySelector('#areagoodno').value = areagoodno;
+        document.querySelector('#frm').submit();
+      }
+    }
+  </script>  
+  <form name='frm' id='frm' method='post' action='/areagood/delete'>
+    <input type='hidden' name='areagoodno' id='areagoodno'>
+  </form>
+</div>
+

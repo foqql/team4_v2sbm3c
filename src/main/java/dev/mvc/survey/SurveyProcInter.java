@@ -26,7 +26,9 @@ public interface SurveyProcInter {
 
   public ArrayList<SurveyVO> list_search_paging(String word, int now_page, int record_per_page);
 
-  public int update_pick_surveyitem(int surveyno);
+  public int update_pick_surveyitem(int surveyitemno);
+
+  public int update_unpick_surveyitem(int surveyitemno);
 
   public int create_item(SurveyVO surveyVO);
 
@@ -36,6 +38,23 @@ public interface SurveyProcInter {
 
   public int update_item(SurveyVO surveyVO);
 
-  public int delete_item(SurveyVO surveyVO);
+  public int delete_item(int surveyitemno);
 
+  public int increaseRecom(int surveyno);
+
+  public int decreaseRecom(int surveyno);
+
+  public int good(int surveyno);
+
+  public int update_file(SurveyVO surveyVO);
+
+  public int cnt_sm(HashMap<String, Object> map);
+
+  public ArrayList<SurveyVO> list_all();
+
+  public int create_sm(HashMap<String, Object> map);
+
+  public int delete_sm(int surveyno);
+
+  public SurveyVO read_sm(HashMap<String, Object> map);
 }

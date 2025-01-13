@@ -14,7 +14,7 @@
   <div class="menu_line"></div>
 
   <div style="width : 60%; margin: 0px auto;">
-    <form name="frm" method="post" action="/survey/create" th:object="${surveyVO}">
+    <form name="frm" method="post" action="/survey/create" th:object="${surveyVO}" enctype="multipart/form-data">
     <input type="hidden" name="enddate" th:value="${surveyVO.surveyno}" />
 
         <div>
@@ -30,17 +30,19 @@
    <input type="hidden" name="startdate" 
            th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />
 
-
+    <div>
+      <label>이미지</label>
+      <input type='file' class="form-control" name='file1MF' id='file1MF' value='' placeholder="파일 선택">
+    </div>
     
     
     
         
-  
+        
         <div class="content_body_bottom">
           <button type="submit" class="btn btn-secondary btn-sm">등록</button>
-           <button type="button" onclick="window.location.href='/survey/list_by_survey'"
-        class="btn btn-secondary btn-sm">목록</button>
-
+          <button type="button" onclick="location.href='/survey/list_search'"
+            class="btn btn-secondary btn-sm">목록</button>
         </div>
 
     </form>

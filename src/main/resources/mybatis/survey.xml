@@ -6,19 +6,19 @@
 <mapper namespace="dev.mvc.survey.SurveyDAOInter">
   <insert id="create" parameterType="dev.mvc.survey.SurveyVO">
 INSERT INTO survey (
-    surveyno, topic, startdate, enddate, cnt, continueyn
-) VALUES (
-    survey_seq.nextval, #{topic}, #{startdate}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 0, 'Y')
+    surveyno, topic, startdate, enddate, cnt, continueyn, poster, postersaved, posterthumb, postersize)
+ VALUES (
+    survey_seq.nextval, #{topic}, #{startdate}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 0, 'Y', #{poster}, #{postersaved}, #{posterthumb}, #{postersize})
 </insert>
 
 
 <!-- 카테고리별 검색 + 페이징 목록 -->
   <select id="list_by_classifyno_search_paging" resultType="dev.mvc.survey.SurveyVO" parameterType="HashMap">
-    SELECT  surveyno, topic, startdate, enddate, cnt, continueyn,  r
+    SELECT  surveyno, topic, startdate, enddate, cnt, continueyn, postersaved, posterthumb, postersize, r
     FROM (
-        SELECT  surveyno, topic, startdate, enddate, cnt, continueyn, rownum as r
+        SELECT  surveyno, topic, startdate, enddate, cnt, continueyn,  postersaved, posterthumb, postersize, rownum as r
         FROM (
-            SELECT  surveyno, topic, startdate, enddate, cnt, continueyn
+            SELECT  surveyno, topic, startdate, enddate, cnt, continueyn ,postersaved, posterthumb, postersize
             FROM Survey
             <choose>
                 <otherwise>
@@ -33,11 +33,11 @@ INSERT INTO survey (
 </select>
 
 <select id="list_search_paging" resultType="dev.mvc.survey.SurveyVO" parameterType="HashMap">
-  SELECT surveyno, topic, startdate, enddate, cnt, continueyn, r
+  SELECT surveyno, topic, startdate, enddate, cnt, continueyn, poster, postersaved, posterthumb, postersize, r
   FROM (
-    SELECT surveyno, topic, startdate, enddate, cnt, continueyn, rownum as r
+    SELECT surveyno, topic, startdate, enddate, cnt, continueyn, poster, postersaved, posterthumb, postersize, rownum as r
     FROM (
-      SELECT surveyno, topic, startdate, enddate, cnt, continueyn
+      SELECT surveyno, topic, startdate, enddate, cnt, continueyn, poster, postersaved, posterthumb, postersize
       FROM Survey
       <choose>
         <when test="word != null and word != ''">
@@ -79,7 +79,7 @@ INSERT INTO survey (
 
   <select id="read" resultType="dev.mvc.survey.SurveyVO">
     SELECT *
-    FROM Survey
+    FROM survey
     where surveyno = #{surveyno}
   </select>
   
@@ -87,14 +87,20 @@ INSERT INTO survey (
     <!-- 모든 카테고리의 등록된 글목록 -->
   <select id="read_item_list" resultType="dev.mvc.survey.SurveyVO">
     SELECT *
-    FROM Surveyitem
+    FROM surveyitem
     where surveyno = #{surveyno}
+      ORDER BY itemseq ASC
   </select>
   
   
 <update id="update_pick_surveyitem" parameterType="int">
-    UPDATE Surveyitem SET pick = pick + 1
-    WHERE Surveyitemno = #{Surveyitemno}
+    UPDATE surveyitem SET itemcnt = itemcnt + 1
+    WHERE surveyitemno = #{surveyitemno}
+</update>
+
+<update id="update_unpick_surveyitem" parameterType="int">
+    UPDATE surveyitem SET itemcnt = itemcnt - 1
+    WHERE surveyitemno = #{surveyitemno}
 </update>
 
     <insert id="create_item" parameterType="dev.mvc.survey.SurveyVO">
@@ -106,7 +112,7 @@ ITEMCNT,
 surveyno,
 pick
 ) VALUES (
-    surveyitem_seq.nextval, #{itemseq},#{item}, 1,#{surveyno}, 0)
+    surveyitem_seq.nextval, #{itemseq},#{item}, 0,#{surveyno}, 0)
 </insert>
 
     <update id="update" parameterType="dev.mvc.survey.SurveyVO">
@@ -131,4 +137,55 @@ pick
       DELETE FROM surveyitem WHERE surveyitemno = #{surveyitemno}
   </delete>
 
+<update id="increaseRecom" parameterType="int">
+    UPDATE Survey SET recom = recom + 1
+    WHERE Surveyno = #{Surveyno}
+</update>
+<update id="decreaseRecom" parameterType="int">
+    UPDATE Survey SET recom = recom - 1
+    WHERE Surveyno = #{Surveyno}
+</update>
+
+<update id="update_file" parameterType="dev.mvc.survey.SurveyVO">
+    UPDATE survey
+    SET poster=#{poster}, postersaved=#{postersaved}, posterthumb=#{posterthumb}, postersize=#{postersize}
+    WHERE surveyno = #{surveyno}
+  </update>  
+  
+  
+<select id="cnt_sm" parameterType="map" resultType="int">
+SELECT count(*) cnt
+FROM surveymember
+WHERE surveyno = #{surveyno} 
+     and memberno = #{memberno}
+  </select>
+  
+  
+  
+    <select id="list_all" resultType="dev.mvc.survey.SurveyVO">
+    SELECT sm.surveymemberno, sm.rdate, sm.surveyno, sm.memberno, s.topic as topic, m.mname as name
+    FROM survey s ,surveymember sm, member m
+    where s.surveyno = sm.surveyno
+    AND sm.memberno = m.memberno
+    ORDER BY sm.surveymemberno DESC
+  </select>
+  
+  
+      <insert id="create_sm" parameterType="map">
+  INSERT INTO surveymember (surveymemberno, rdate, memberno, surveyno, surveyitemno)
+VALUES (surveymember_seq.nextval, SYSDATE, #{memberno}, #{surveyno}, #{surveyitemno})
+</insert>
+
+    <delete id="delete_sm" parameterType="int">
+DELETE FROM surveymember
+WHERE surveymemberno = #{surveymemberno}
+  </delete>
+  
+    <select id="read_sm" resultType="dev.mvc.survey.SurveyVO" parameterType="map">
+select * 
+from surveymember
+where surveyno = #{surveyno}
+and memberno = #{memberno}
+  </select>
+  
 </mapper>
