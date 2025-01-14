@@ -36,12 +36,7 @@ public class NoticeDAO implements NoticeDAOInter {
     @Override
     public int delete(int notino) {
         String sql = "DELETE FROM notice WHERE notino = ?";
-        int rowsAffected = jdbcTemplate.update(sql, notino);
-
-        if (rowsAffected > 0) {
-            renumberNotices();  // 번호 재매기기
-        }
-        return rowsAffected;
+        return jdbcTemplate.update(sql, notino); // 데이터베이스에서 해당 레코드 삭제
     }
 
     @Override

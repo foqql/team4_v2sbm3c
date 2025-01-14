@@ -11,5 +11,7 @@ public interface NoticeProcInter {
   public void deleteAll();  // 추가
   public void resetSequence();  // 추가
   public void renumberNotices();  // 추가
+  public int updateGood(int notino, int memberno);  
+  
 }
 

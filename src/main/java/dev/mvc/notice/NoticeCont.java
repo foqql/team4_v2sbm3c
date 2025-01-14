@@ -1,14 +1,10 @@
 package dev.mvc.notice;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.servlet.http.HttpSession;
-
-import org.springframework.http.ResponseEntity;
 
 @Controller
 @RequestMapping("/notice")
@@ -64,7 +60,7 @@ public class NoticeCont {
     public String update(NoticeVO noticeVO) {
         // noticeVO를 DB에 업데이트합니다.
         int result = noticeProc.update(noticeVO);
-        
+
         // 성공적으로 수정된 후 목록 페이지로 리다이렉트
         return "redirect:/notice/list";
     }
@@ -72,27 +68,7 @@ public class NoticeCont {
     // 공지사항 삭제
     @GetMapping("/delete/{notino}")
     public String delete(@PathVariable("notino") int notino) {
-        noticeProc.delete(notino);
-        return "redirect:/notice/list";
-    }
-
-    // Ajax: 공지사항 목록 가져오기
-    @GetMapping("/list/json")
-    @ResponseBody
-    public ResponseEntity<List<NoticeVO>> getNotices() {
-        List<NoticeVO> list = noticeProc.list();
-        return ResponseEntity.ok(list);
-    }
-
-    // Ajax: 공지사항 삭제
-    @DeleteMapping("/delete/json/{notino}")
-    @ResponseBody
-    public ResponseEntity<String> deleteNotice(@PathVariable int notino) {
-        int result = noticeProc.delete(notino);
-        if (result > 0) {
-            return ResponseEntity.ok("삭제 완료");
-        } else {
-            return ResponseEntity.status(400).body("삭제 실패");
-        }
+        noticeProc.delete(notino);  // delete() 메서드 호출
+        return "redirect:/notice/list";  // 목록으로 리다이렉트
     }
 }

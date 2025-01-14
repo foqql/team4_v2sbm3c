@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항 작성</title>
     <style>
-        body {
+        .notice-container {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f9f9f9;
+            width: 100%;  /* notice-container 전체 크기 설정 */
         }
-        h1 {
+        .notice-container h1 {
             text-align: center;
             margin-top: 20px;
+            cursor: default; /* 클릭 방지 */
         }
-        .form-container {
+        .notice-container form {
             width: 60%;
             margin: 20px auto;
             background-color: #fff;
@@ -23,13 +21,13 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        label {
+        .notice-container label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
         }
-        input[type="text"],
-        textarea {
+        .notice-container input[type="text"],
+        .notice-container textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -37,7 +35,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        button {
+        .notice-container button {
             width: 100%;
             padding: 10px;
             background-color: #4CAF50;
@@ -46,14 +44,10 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        button:hover {
+        .notice-container button:hover {
             background-color: #45a049;
         }
-        .center-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .center-link a {
+        .notice-container a {
             display: block;
             width: 200px;
             margin: 20px auto;
@@ -64,26 +58,22 @@
             text-decoration: none;
             border-radius: 4px;
         }
-        .center-link a:hover {
+        .notice-container a:hover {
             background-color: #444;
         }
     </style>
 </head>
 <body>
-    <div layout:fragment="content">
-        <h1>공지사항 작성</h1>
-        <div class="form-container">
-            <form action="/notice/create" method="post">
-                <label>제목:</label>
-                <input type="text" name="title"><br>
-                <label>내용:</label>
-                <textarea name="content"></textarea><br>
-                <button type="submit">작성</button>
-            </form>
-        </div>
-        <div class="center-link">
-            <a href="/notice/list">목록으로 돌아가기</a>
-        </div>
-    </div>
+<div layout:fragment="content" class="notice-container">
+    <h1>공지사항 작성</h1>
+    <form action="/notice/create" method="post">
+        <label>제목:</label>
+        <input type="text" name="title"><br>
+        <label>내용:</label>
+        <textarea name="content"></textarea><br>
+        <button type="submit">작성</button>
+    </form>
+    <a href="/notice/list">목록으로 돌아가기</a>
+</div>
 </body>
 </html>
