@@ -91,19 +91,20 @@
 
         <fieldset class="fieldset_basic">
             <ul>
-                <p>설문조사 제목: <span th:text="${surveyVO.topic}"></span></p>
-                <li class="li_none">
+<!--                <p>설문조사 제목: <span th:text="${surveyVO.topic}"></span></p>-->
+               <li class="li_none">
                     <div
                         th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
                         <img th:src="@{|/survey/storage/${surveyVO.postersaved}|}"
                             style='width: 50%; float: left; margin-top: 0.5%; margin-right: 1%; background-color : white;'>
                     </div>
                     <div style="width: 100%; word-break: break-all;">
-                        <span style="font-size: 1.5em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br>
-                        <span style="font-size: 1em;" th:text="${surveyVO.startdate}"></span><br><br>
-                        <div style="white-space: pre-wrap;">
-                            <span th:text="${surveyVO.enddate}"></span>
-                        </div>
+                        <div style="text-align: center;">
+    <span style="font-size: 2em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br><br><br>
+</div>
+
+                        생성일 : <span style="font-size: 1em;" th:text="${surveyVO.startdate}"></span> ~ <br>
+<!--                            <span th:text="${surveyVO.enddate}"></span>-->
                     </div>
                 </li>
 

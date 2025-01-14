@@ -174,4 +174,17 @@ if (exchangeVO != null) {
     return "redirect:/exchange/list_by_classifyno?classifyno=" + classifyno;
   }
 
+  
+  /** 맵 등록/수정/삭제 폼 http://localhost:9091/exchange/map?exchangeno=19
+    * 
+    * @return
+    */
+   @GetMapping(value = "/tr")
+   public String map1(Model model) {
+     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+     model.addAttribute("menu", menu);
+
+     return "/exchange/translator"; // //templates/exchange/map.html
+   }
+  
 }
