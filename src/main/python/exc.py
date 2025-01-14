@@ -68,7 +68,7 @@ def getbs(): # BeautifulSoup으로 태그 검색
         return bs # 정상 처리  
 
 def getConnection():
-    conn = cx_Oracle.connect('team4/69017000@15.165.30.221:1521/XE')
+    conn = cx_Oracle.connect('team44/69017000@43.200.57.156:1521/XE')
     cursor = conn.cursor()
     
     return conn, cursor
@@ -271,7 +271,7 @@ def usd_input():
 
     map = '''<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243306.59702663144!2d-77.28381806605537!3d38.8828153767403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7c6de5af6e45b%3A0xc2524522d4885d2a!2z66-46rWtIOybjOyLse2EtCBEQyDsm4zsi7HthLQgRC5DLg!5e0!3m2!1sko!2skr!4v1735538050502!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'''
    # exchange_crawling_input(currency, source, value)
-    exchange_input(source, yday, value, currency, 34, map)
+    exchange_input(source, yday, value, currency, 1, map)
     save_chart_to_db(conn, currency)
 
 
@@ -298,7 +298,7 @@ def jpy_input():
 
     map = '''<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d73349.01503932607!2d139.7830676004459!3d35.662247212932286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x605d1b87f02e57e7%3A0x2e01618b22571b89!2z7J2867O4IOuPhOy_hOuPhA!5e0!3m2!1sko!2skr!4v1735538125368!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'''
   #  exchange_crawling_input(currency, source, value)
-    exchange_input(source, yday, value, currency, 65, map)
+    exchange_input(source, yday, value, currency, 12, map)
     save_chart_to_db(conn, currency)
     
 
@@ -322,7 +322,7 @@ def gbp_input():
 
     map = '''<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.58518354257!2d-0.26640247157192015!3d51.528526204716215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z7JiB6rWtIOufsOuNmA!5e0!3m2!1sko!2skr!4v1735538150375!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'''
   #  exchange_crawling_input(currency, source, value)
-    exchange_input(source, yday, value, currency, 45, map)
+    exchange_input(source, yday, value, currency, 11, map)
     save_chart_to_db(conn, currency)
 
 
