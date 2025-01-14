@@ -1,16 +1,22 @@
 /* ver 2.4 2024_0426 */
   
-  /* 폰트 선언 */
-  @font-face {
-      font-family: 'TTHakgyoansimMonggeulmonggeulR';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimMonggeulmonggeulR.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-  }
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'STUNNING';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-2@1.0/STUNNING-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
   /* 모든 태그에 적용 */
   *{
-     font-family: TTHakgyoansimMonggeulmonggeulR; 
+     font-family: STUNNING; 
      font-size: 16px; 
      margin: 0px;  /* top right bottom left */
      padding: 0px;
