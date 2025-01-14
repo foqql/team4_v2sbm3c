@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout}"> <!-- layout.html 상속-->
+<div layout:fragment="content">
+  <div class='title_line'>
+    <span th:text="${classifyVO.bigcla }" class="title_line_text"></span > 
+    > <span th:text="${classifyVO.classify }" class="title_line_text"></span > 
+    > 글 등록
+  </div>
+  
+  <aside class="aside_right">
+    <a href="javascript:location.reload();">새로고침1111111111</a>
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }|}">목록형</a>    
+    <span class='menu_divide' >│</span>
+    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }|}">갤러리형</a>
+  </aside>
+  
+  <div class='menu_line'></div>
+  
+  <form name='frm' method='post' th:object="${newsVO}" action='./create' enctype="multipart/form-data">
+    <input type="hidden" name="classifyno" th:value="${param.classifyno }">
+    
+    <div>
+       <label>제목</label>
+       <input type='text' name='title' value='기사 제목' required="required" 
+                 autofocus="autofocus" class="form-control" style='width: 100%;'>
+    </div>
+    <div>
+       <label>내용</label>
+       <textarea name='content' required="required" class="form-control" 
+                      rows="12" style='width: 100%;'>해외 뉴스 기사 내용을 복사하여 이곳에 붙여넣어 주세요.</textarea>
+    </div>  
+    <div>
+       <label>이미지</label>
+       <input type='file' class="form-control" name='file1MF' id='file1MF' value='' placeholder="파일 선택">
+    </div>   
+    <div>
+       <label>패스워드</label>
+       <input type='password' name='passwd' value='1234' required="required" 
+                 class="form-control" style='width: 50%;'>
+    </div>   
+    <div class="content_body_bottom">
+      <button type="submit"  class="btn btn-secondary btn-sm">등록</button>
+      <button type="button" onclick="history.back();" class="btn btn-secondary btn-sm">취소</button>
+    </div>                                                                      
+  
+  </form>
+
+</div>
+
+  
