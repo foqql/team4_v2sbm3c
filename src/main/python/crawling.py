@@ -1,7 +1,10 @@
 import re
 import warnings
 warnings.filterwarnings(action='ignore')
+import sys
 import os    # 폴더등 처리
+import logging
+logging.basicConfig(filename='app.log', level=logging.INFO, encoding='utf-8')
 import time  # sleep 지연
 
 import pandas as pd # Excel과 비슷한 구조를 지원하는 데이터 분석 패키지
@@ -27,6 +30,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 # Flask 애플리케이션 생성
 app = Flask(__name__)
 #####
+
 
 # 웹페이지 로딩을 완료시까지 기다림. 기본값: 0.5초
 def load(url, second=0.5): # Selenium으로 태그 검색
@@ -80,7 +84,7 @@ conn, cursor = getConnection()
 # Options 클래스의 인스턴스를 생성합니다.
 options = Options()
 # 브라우저 창이 보이지 않도록 헤드리스 모드 활성화
-options.add_argument('--headless')
+# options.add_argument('--headless')
 # Chrome 브라우저 창이 즉시 닫히는 것을 방지합니다.
 options.add_experimental_option('detach', True)
 # 불필요한 콘솔 메시지를 제거합니다.
@@ -94,15 +98,15 @@ driver = webdriver.Chrome(service=Service(executable_path=correct_driver_path), 
 
 driver.set_window_size(900, 900) # width, height
 
+
 #######
 # 주기적인 작업 함수
 def crawl_and_insert_data():
-#######    
-
+#######  
     ####################### 크롤링 ##########################
-    
-    load('https://www.bbc.com//', 1)
 
+    load('https://www.bbc.com//', 1)
+    
     
     # 두 가지 CSS 선택자 중 하나가 존재하면 클릭하기
     try:
@@ -115,7 +119,7 @@ def crawl_and_insert_data():
                 driver.find_element(By.CSS_SELECTOR, '#main-content > article > section:nth-child(2) > div > div.sc-e70150c3-0.fbvxoY > div.sc-93223220-0.bOZIBp > div:nth-child(3) > div > div > div > a > div > div.sc-6781995d-5.bmQwDh > div.sc-8ea7699c-1.hxRodh > div > h2').click()                                           
             except:
                 print("세 가지 선택자 모두 찾을 수 없습니다.")
-
+    
                 
     # 더 보기
     #s_attraction > div.more_view > a
@@ -176,6 +180,8 @@ def crawl_and_insert_data():
             
                     # 조건을 만족하지 않으면 텍스트 출력
                     print(p_tag.text.strip())
+    
+            content_text = '\n'.join([item.text.strip() for item in content])
         
         else:
             bs=getbs()
@@ -215,6 +221,8 @@ def crawl_and_insert_data():
                     # 조건을 만족하지 않으면 텍스트 출력
                     print(p_tag.text.strip())
     
+            content_text = '\n'.join([item.text.strip() for item in content])
+    
     else:
         bs=getbs()
     
@@ -253,13 +261,14 @@ def crawl_and_insert_data():
                 # 조건을 만족하지 않으면 텍스트 출력
                 print(p_tag.text.strip())
     
+        content_text = '\n'.join([item.text.strip() for item in content])
     ########################## 크롤링 데베 추가 ############################
     
     # content 리스트 처리
     # content_text = '\n'.join([item.text.strip().replace("'", "\\'") for item in content])
-    content_text = '\n'.join([item.text.strip() for item in content])
-    if not content_text:  # content_text가 비어 있으면 기본값 설정
-        content_text = 'Default content'
+    # content_text = '\n'.join([item.text.strip() for item in content])
+    # if not content_text:  # content_text가 비어 있으면 기본값 설정
+    #     content_text = 'Default content'
     
     # INSERT 쿼리 실행
     cursor.execute("""
@@ -386,8 +395,6 @@ def crawl_and_insert_data():
     # 번역 제목: trans_title
     # 번역 내용: trans_content
     # 요약 내용: sum_content
-
-
 
 #########
 # APScheduler로 주기적인 작업 설정

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.boot.ApplicationArguments;
+
 
 /**
  * 개발자가 구현합니다.
@@ -11,6 +13,7 @@ import java.util.List;
  *
  */
 public interface NewsProcInter {
+  
   /**
    * 등록
    * @param newsVO
