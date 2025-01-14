@@ -6,7 +6,7 @@ import pandas as pd
 from openai import OpenAI # 1.x~
 
 def getConnection():
-    conn = cx_Oracle.connect('team4/69017000@15.165.30.221:1521/XE')
+    conn = cx_Oracle.connect('team44/69017000@43.200.57.156:1521/XE')
     cursor = conn.cursor()
     
     return conn, cursor

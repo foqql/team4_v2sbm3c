@@ -250,7 +250,7 @@ public class NewsCont {
         // return "redirect:/news/list_by_classifyno?classifyno=" + newsVO.getClassifyno();
         // // /templates/news/list_by_classifyno.html
       } else {
-        return "redirect:/news/list_by_classifyno?classifyno=70"; // Post -> Get - param...
+        return "redirect:/news/list_by_classifyno?classifyno=5"; // Post -> Get - param...
       }
     } else {
       ra.addAttribute("url", "/member/login_cookie_need"); 
