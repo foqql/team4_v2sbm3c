@@ -82,8 +82,8 @@
         <aside class="aside_right">
             <a href="javascript:location.reload();">새로고침</a>
             <span th:if="${session.grade == 'admin'}">
-                <span class="menu_devide">│</span> <a
-                    th:href="@{|/survey/create_item?surveyno=${surveyVO.surveyno}|}">등록</a>
+                <span class="menu_devide">│</span> <a href="/survey/list_by_survey" role="button">목록</a>
+                <span class="menu_devide">│</span> <a th:href="@{|/survey/create_item?surveyno=${surveyVO.surveyno}|}">항목 등록</a>
                 <span class="menu_devide">│</span> <a th:href="@{|/survey/update/${surveyVO.surveyno}|}">글 수정</a>
                 <span class="menu_devide">│</span> <a th:href="@{|/survey/update_file/${surveyVO.surveyno}|}">이미지 수정</a>
         </aside>
@@ -100,10 +100,12 @@
                     </div>
                     <div style="width: 100%; word-break: break-all;">
                         <div style="text-align: center;">
-    <span style="font-size: 2em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br><br><br>
+    <span style="font-size: 2em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br>
 </div>
 
-                        생성일 : <span style="font-size: 1em;" th:text="${surveyVO.startdate}"></span> ~ <br>
+                     <span style="font-size: 0.7em;" th:text="'생성일 : ' + ${surveyVO.startdate} + '~'"></span>  <br><br><br>
+
+
 <!--                            <span th:text="${surveyVO.enddate}"></span>-->
                     </div>
                 </li>
@@ -111,28 +113,32 @@
                 <!-- 설문 항목 선택 -->
                 <li class="li_none">
                     <form name="frm" method="post" action="/survey/dosurvey" th:object="${surveyitemVO}">
+                    
                         <!-- 설문 항목 반복 출력 -->
-                        <div th:each="surveyitem, i : ${surveyitemVO}">
-                            <!-- 각 항목에 대해 고유한 radio button 생성 -->
-                            <input type="radio" th:name="pick" th:value="${surveyitem.surveyitemno}" />
-                            <input type="hidden" th:name="surveyno" th:value="${surveyitem.surveyno}" />
-                            <input type="hidden" th:name="item" th:value="${surveyitem.item}" />
-                            <input type="hidden" th:name="surveyitemno" th:value="${surveyitem.surveyitemno}" />
-                            <a th:text="${surveyitem.item}"></a>
-                            <div style="display: flex; justify-content: flex-end; align-items: center;"
-                                th:if="${session.grade == 'admin'}">
-                                <!--                                <a th:href="@{|/survey/update_item/${surveyVO.surveyno}|}"> 수정</a>  <span class="menu_devide">│</span>
-                                  확인용 <input type="text" th:name="surveyno" th:value="${surveyitem.surveyno}" />
-                                  surveyno <input type="text" th:name="surveyno" th:value="${surveyitem.surveyno}" />
-                                  surveyitemno <input type="text" th:name="surveyno" th:value="${surveyitem.surveyitemno}" />-->
-                                    <a href="#"
-                                        th:onclick="'delete_item(event, ' + ${surveyitem.surveyitemno} +','+ ${surveyitem.surveyno}+ ');'">
-                                        <img src="/survey_good/images/delete.png" class="icon" title="삭제">
-                                    </a>
+<div th:each="surveyitem, i : ${surveyitemVO}">
+    <!-- 각 항목에 대해 고유한 radio button 생성 -->
+    <input type="radio" th:name="pick" th:value="${surveyitem.surveyitemno}"
+           th:id="'surveyitem-' + ${surveyitem.surveyitemno}"
+           th:checked="${i.index == 0}" /> <!-- 첫 번째 항목에 checked 속성 추가 -->
+    <input type="hidden" th:name="surveyno" th:value="${surveyitem.surveyno}" />
+    <input type="hidden" th:name="item" th:value="${surveyitem.item}" />
+    <input type="hidden" th:name="surveyitemno" th:value="${surveyitem.surveyitemno}" />
 
-                            </div>
+    <!-- 항목 텍스트를 label로 감싸서 클릭 시 라디오 버튼 선택 -->
+    <label th:for="'surveyitem-' + ${surveyitem.surveyitemno}" th:text="${surveyitem.item}"></label>
 
-                        </div>
+    <div style="display: flex; justify-content: flex-end; align-items: center;" th:if="${session.grade == 'admin'}">
+        <a href="#" th:onclick="'delete_item(event, ' + ${surveyitem.surveyitemno} +','+ ${surveyitem.surveyno}+ ');'">
+            <img src="/survey_good/images/delete.png" class="icon" title="삭제">
+        </a>
+    </div>
+</div>
+
+
+
+
+
+                        
                         <div th:unless="${#lists.isEmpty(surveyitemVO)}">
                             <button type="submit" class="btn btn-info">제출</button>
                         </div>

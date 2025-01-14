@@ -1,109 +1,180 @@
 <!DOCTYPE html>
-
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
 
-        <aside class="aside_right">
-    <a href="javascript:location.reload();">새로고침</a><span class="menu_devide">│</span>   
-          <a th:href="@{|/survey/create|}" th:if="${session.grade == 'admin'}"> 등록</a>
-          
-  </aside>
+    <aside class="aside_right">
+        <a href="javascript:location.reload();" class="btn-refresh">새로고침</a>
+        <span class="menu_devide">│</span>
+        <a th:href="@{|/survey/create|}" th:if="${session.grade == 'admin'}" class="btn-create">등록</a>
+    </aside>
 
-  <!-- /survey/list_search_com.html 파일의 list_search_fragment import -->
-  <div th:replace="~{survey/list_search_com::list_search_fragment}"></div>
-     
-  <div class='menu_line'></div>
-<table class="table table-striped" style='width: 100%;'>
-  <colgroup>
-    <col style='width: 10%;'/>
-    <col style='width: 40%;'/>
-    <col style='width: 40%;'/>
-  </colgroup>
-  <tr>
-    <th class='th_bs'>파일</th>
-    <th class='th_bs'>제목</th>
-    <th class='th_bs'>결과 보기</th>
-    <th th:if="${session.grade == 'admin'}" class='th_bs'>수정</th>
-    <th th:if="${session.grade == 'admin'}" class='th_bs'>삭제</th>
-  </tr>
+    <!-- /survey/list_search_com.html 파일의 list_search_fragment import -->
+    <div th:replace="~{survey/list_search_com::list_search_fragment}"></div>
 
-  <!-- 리스트가 비어 있지 않을 때 반복문 실행 -->
-  <tr th:if="${list.size() > 0}"  th:each="surveyVO, status : ${list}"style="cursor: pointer; height: 90px;">
-<td class='td_basic' style="vertical-align: middle; text-align: center; cursor: pointer; height: 90px;" 
-th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
+    <div class='menu_line'></div>
+    <table class="table table-striped" style='width: 100%;'>
+        <colgroup>
+            <col style='width: 10%;'/>
+            <col style='width: 40%;'/>
+            <col style='width: 10%;'/>
+            <col th:if="${session.grade == 'admin'}" style='width: 10%;'/>
+            <col th:if="${session.grade == 'admin'}" style='width: 10%;'/>
+        </colgroup>
+        <tr>
+            <th class='th_bs'>파일</th>
+            <th class='th_bs'>제목</th>
+            <th class='th_bs'>결과 보기</th>
+            <th th:if="${session.grade == 'admin'}" class='th_bs'>수정</th>
+            <th th:if="${session.grade == 'admin'}" class='th_bs'>삭제</th>
+        </tr>
 
+        <!-- 리스트가 비어 있지 않을 때 반복문 실행 -->
+        <tr th:if="${list.size() > 0}"  th:each="surveyVO, status : ${list}" style="cursor: pointer; height: 90px;">
+            <td class='td_basic' style="vertical-align: middle; text-align: center; cursor: pointer; height: 90px;"
+                th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
+                
+                <!-- 이미지 파일일 경우 -->
+                <div th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
+                    <!-- 이미지 처리 로직-->
+                    <img th:src="@{|/survey/storage/${surveyVO.posterthumb}|}" style="width: 120px; height: 90px;">
+                </div>
 
-      <!-- 이미지 파일일 경우 -->
-      <div th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|"
-       th:if="${surveyVO.poster != null and (surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif'))}">
-        <!-- 이미지 처리 로직-->
-        <img th:src="@{|/survey/storage/${surveyVO.posterthumb}|}" style="width: 120px; height: 90px;">
-      </div>
+                <!-- 이미지가 아닌 파일은 파일명만 출력 -->
+                <div th:if="${surveyVO.poster != null and ((surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif')) == false) and (surveyVO.postersize > 0)}">
+                    <span th:text="${surveyVO.poster}"></span>
+                </div>
+                <!--% 파일이 없는경우 기본 이미지 출력 %-->
+                <div th:if="${surveyVO.postersize == 0}">
+                    <img src="/news/images/none1.png" style="width: 120px; height: 90px;">
+                </div>
+            </td>
 
-      <!-- 이미지가 아닌 파일은 파일명만 출력 -->
-      <div th:if="${surveyVO.poster != null and ((surveyVO.poster.endsWith('jpg') or surveyVO.poster.endsWith('png') or surveyVO.poster.endsWith('gif')) == false) and (surveyVO.postersize > 0)}">
-        <span th:text="${surveyVO.poster}"></span>
-      </div>
-      <!--% 파일이 없는경우 기본 이미지 출력 %-->
-        <div th:if="${surveyVO.postersize == 0}">
-          <img src="/news/images/none1.png" style="width: 120px; height: 90px;">
-        </div>
-    </td>
+            <td class='td_left' th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
+                <span th:text="${surveyVO.topic}" style="font-size: 1.4em; font-weight: bold;"></span><br>
+                <span th:text="| ${surveyVO.startdate}|" style="font-size: 0.7em; font-weight: bold;"></span>
+                <span th:if="${surveyVO.topic.length() > 160}" th:text="|${surveyVO.topic.substring(0, 160)}...|"></span>
+<!--                <span th:if="${surveyVO.topic.length() <= 160}" th:text="|${surveyVO.topic}|"></span>-->
+           </td>
 
-    <td class='td_left' 
-        th:attr="onclick=|location.href='/survey/dosurvey?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|">
-      <span th:text="${surveyVO.topic}" style="font-weight: bold;"></span>
-  <!--      <span th:text="| ${surveyVO.startdate.substring(0, 10)}|"></span><br>-->
-    <span th:text="| ${surveyVO.startdate}|"></span><br>
-      <!-- 제목 길이에 따라 다르게 표시 -->
-      <span th:if="${surveyVO.topic.length() > 160}" th:text="|${surveyVO.topic.substring(0, 160)}...|"></span>
-      <span th:if="${surveyVO.topic.length() <= 160}" th:text="|${surveyVO.topic}|"></span>
-    </td>
+            <!-- 3번째 칸: '결과 조회'로 변경 -->
+            <td  style="cursor: pointer; vertical-align: middle; text-align: center;">
+                <button th:attr="onclick=|location.href='/survey/read?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|" class="btn btn-success">결과 조회</button>
+            </td>
 
-    <!-- 3번째 칸: 'read'로 이동 -->
-    <td th:attr="onclick=|location.href='/survey/read?surveyno=${surveyVO.surveyno}&word=${word}&now_page=${now_page}'|"
-        style="cursor: pointer; vertical-align: middle; text-align: center;">
-      <button class="btn btn-info">Read</button>
-    </td>
-    
-    <!-- 4번째 칸: 'update'로 이동 -->
-    <td th:if="${session.grade == 'admin'}" th:attr="onclick=|location.href='/survey/update/${surveyVO.surveyno}'|"
-        style="cursor: pointer; vertical-align: middle; text-align: center;">
-      <button class="btn btn-info">update</button>
-    </td>
-    
-    <!-- 5번째 칸: 'delete'로 이동 -->
-    <td th:if="${session.grade == 'admin'}" 
-        style="cursor: pointer; vertical-align: middle; text-align: center;">
-      <button href="#" th:onclick="'delete_s(event, ' + ${surveyVO.surveyno}+');'" class="btn btn-info">delete</button>
-    </td>
-      <script>
-  function delete_s(e, surveyno){
-    let sw = confirm(surveyno+'번을 삭제 하시겠습니까?\n삭제하면 복구할 수 없습니다.')
-    if(sw == true){
-      document.querySelector('#surveyno').value = surveyno;
-      document.querySelector('#frm').submit();
-    }
-    
-  }
-  </script>
-<form name='frm' id='frm' method = 'post' action='/survey/delete_s'>
-  <input type='hidden' name='surveyno' id ='surveyno'>
-  </form>
-  </tr>
+            <!-- 4번째 칸: 'update'로 이동 -->
+            <td th:if="${session.grade == 'admin'}"
+                style="cursor: pointer; vertical-align: middle; text-align: center;">
+                <button  th:attr="onclick=|location.href='/survey/update/${surveyVO.surveyno}'|" class="btn btn-primary">수정</button>
+            </td>
 
-  <!-- 리스트가 비어 있을 경우 -->
-  <tr th:if="${list.size() == 0}">
-    <td colspan="4" style="text-align: center;">관련 글이 등록되지 않았습니다.</td>
-  </tr>
-</table>
+            <!-- 5번째 칸: 'delete'로 이동 -->
+            <td th:if="${session.grade == 'admin'}" style="cursor: pointer; vertical-align: middle; text-align: center;">
+                <button class="btn btn-danger" th:onclick="'delete_s(event, ' + ${surveyVO.surveyno}+');'">삭제</button>
+            </td>
+            <script>
+                function delete_s(e, surveyno){
+                    let sw = confirm(surveyno+'번을 삭제 하시겠습니까?\n삭제하면 복구할 수 없습니다.')
+                    if(sw == true){
+                        document.querySelector('#surveyno').value = surveyno;
+                        document.querySelector('#frm').submit();
+                    }
+                }
+            </script>
+            <form name='frm' id='frm' method='post' action='/survey/delete_s'>
+                <input type='hidden' name='surveyno' id='surveyno'>
+            </form>
+        </tr>
 
+        <!-- 리스트가 비어 있을 경우 -->
+        <tr th:if="${list.size() == 0}">
+            <td colspan="4" style="text-align: center;">관련 글이 등록되지 않았습니다.</td>
+        </tr>
+    </table>
 
-   
-  <!-- 페이지 버튼 목록 출력 시작 -->
-  <div class="bottom_menu" th:utext="${paging}"></div>
-  <!-- 페이지 버튼 목록 출력 종료 --> 
+    <!-- 페이지 버튼 목록 출력 시작 -->
+    <div class="bottom_menu" th:utext="${paging}"></div>
+    <!-- 페이지 버튼 목록 출력 종료 --> 
 
 </div>
+
+<!-- 스타일 개선 -->
+<style>
+    .btn-info, .btn-create, .btn-primary, .btn-danger, .btn-success {
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .btn-info:hover {
+        background-color: #138496;
+        transform: scale(1.05);
+    }
+
+    .btn-create {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-create:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        transform: scale(1.05);
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+
+    .btn-refresh {
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #f1f1f1;
+        text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn-refresh:hover {
+        background-color: #e0e0e0;
+    }
+
+    .menu_devide {
+        margin: 0 10px;
+    }
+</style>
+
 </html>
- 
