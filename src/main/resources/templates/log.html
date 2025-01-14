@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{layout}">
 <head>
     <title>로그 기록</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
             margin: 0;
             padding: 20px;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #4CAF50; /* 글자 색상 초록색 */
         }
 
         table {
@@ -27,20 +26,21 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            color: #388e3c; /* 텍스트 색상 초록색 */
         }
 
         th {
-            background-color: #f2f2f2;
-            color: #333;
+            background-color: #dcedc8; /* 헤더 배경색 초록색 */
+            color: #4CAF50; /* 헤더 텍스트 색상 초록색 */
         }
 
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #c8e6c9; /* 행 하이라이트 색상 초록색 */
         }
 
         .btn {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #4CAF50; /* 버튼 배경색 초록색 */
             color: white;
             border: none;
             border-radius: 5px;
@@ -52,7 +52,7 @@
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #388e3c; /* 버튼 호버 배경색 진한 초록색 */
         }
     </style>
 
@@ -92,6 +92,7 @@
     </script>
 </head>
 <body>
+<div layout:fragment="content">
     <h1>로그 기록</h1>
     <table>
         <thead>
@@ -108,5 +109,6 @@
         </tbody>
     </table>
     <a href="/" class="btn">메인화면으로 돌아가기</a> <!-- 홈 페이지로 돌아가는 링크 -->
+</div>
 </body>
 </html>

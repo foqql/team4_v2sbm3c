@@ -36,7 +36,14 @@ public class NoticeDAO implements NoticeDAOInter {
     @Override
     public int delete(int notino) {
         String sql = "DELETE FROM notice WHERE notino = ?";
-        return jdbcTemplate.update(sql, notino); // 데이터베이스에서 해당 레코드 삭제
+        int result = jdbcTemplate.update(sql, notino);
+        
+        // 번호 재정렬
+        if (result > 0) {
+            renumberNotices();
+        }
+        
+        return result;
     }
 
     @Override
@@ -54,16 +61,15 @@ public class NoticeDAO implements NoticeDAOInter {
     }
 
     public void renumberNotices() {
-        String sql = "DECLARE "
-                   + "CURSOR c IS SELECT rowid, ROWNUM AS new_no FROM notice ORDER BY notino; "
-                   + "BEGIN "
-                   + "FOR r IN c LOOP "
+        // Oracle SQL 문법에 맞게 번호 재정렬
+        String sql = "BEGIN "
+                   + "FOR r IN (SELECT rowid, ROWNUM AS new_no FROM notice ORDER BY notino) LOOP "
                    + "UPDATE notice SET notino = r.new_no WHERE rowid = r.rowid; "
                    + "END LOOP; "
                    + "END;";
         jdbcTemplate.execute(sql);
 
-        resetSequenceToMax();  // 최대 값으로 시퀀스를 리셋
+        resetSequenceToMax();
     }
 
     public void resetSequenceToMax() {
@@ -88,9 +94,8 @@ public class NoticeDAO implements NoticeDAOInter {
             noticeVO.setNotino(rs.getInt("notino"));
             noticeVO.setTitle(rs.getString("title"));
             noticeVO.setContent(rs.getString("content"));
-            noticeVO.setNodate(rs.getTimestamp("nodate"));  // `getTimestamp` 메서드로 수정
+            noticeVO.setNodate(rs.getTimestamp("nodate"));
             return noticeVO;
         }
     }
 }
-
