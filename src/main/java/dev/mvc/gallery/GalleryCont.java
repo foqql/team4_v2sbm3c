@@ -212,64 +212,7 @@ public class GalleryCont {
 
   }
 
-//  /**
-//   * 유형 1
-//   * 카테고리별 목록
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=6 
-//   * @return
-//   */
-//  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno(HttpSession session, Model model, 
-//      @RequestParam(name="classifyno", defaultValue = "") int classifyno) {
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//    
-//     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//     model.addAttribute("classifyVO", classifyVO);
-//    
-//    ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno(classifyno);
-//    model.addAttribute("list", list);
-//    
-//    // System.out.println("-> size: " + list.size());
-//
-//    return "/gallery/list_by_classifyno";
-//  }
 
-//  /**
-//   * 유형 2
-//   * 카테고리별 목록 + 검색
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=6 
-//   * @return
-//   */
-//  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno_search(HttpSession session, Model model, 
-//                                                   @RequestParam(name="classifyno", defaultValue = "0" ) int classifyno, 
-//                                                   @RequestParam(name="word", defaultValue = "") String word) {
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//    
-//     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//     model.addAttribute("classifyVO", classifyVO);
-//    
-//     word = Tool.checkNull(word).trim(); // 검색어 공백 삭제
-//     
-//     HashMap<String, Object> map = new HashMap<>();
-//     map.put("classifyno", classifyno);
-//     map.put("word", word);
-//     
-//    ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno_search(map);
-//    model.addAttribute("list", list);
-//    
-//    // System.out.println("-> size: " + list.size());
-//    model.addAttribute("word", word);
-//    
-//    int search_count = this.galleryProc.list_by_classifyno_search_count(map);
-//    model.addAttribute("search_count", search_count);
-//    
-//    return "/gallery/list_by_classifyno_search"; // /templates/gallery/list_by_classifyno_search.html
-//  }
 
   /**
    * 유형 3
@@ -278,7 +221,7 @@ public class GalleryCont {
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno")
+  @GetMapping(value = "/list_by_classifyno_gird")
   public String list_by_classifyno_search_paging(HttpSession session, Model model, 
       @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
@@ -333,7 +276,7 @@ public class GalleryCont {
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno_grid")
+  @GetMapping(value = "/list_by_classifyno")
   public String list_by_classifyno_search_paging_grid(HttpSession session, Model model, 
       @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
