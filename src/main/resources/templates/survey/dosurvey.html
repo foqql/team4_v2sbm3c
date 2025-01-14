@@ -37,6 +37,7 @@
             })
                 .then((response) => response.json()) // 응답 문자열 추출
                 .then((data) => {
+                    console.log('-> data : ' + data);
                     console.log('-> data : ' + data.hartCnt);
                     console.log('-> data.isMember : ' + data.isMember);
 
@@ -45,7 +46,7 @@
                         console.log('hartCnt:', hartCnt);
                         let tag = '';
 
-                        if (hartCnt == 1) {
+                        if (hartCnt === 1) {
                             tag = '<a href="javascript:good([[${surveyVO.surveyno}]])" style="width: 30px; display: inline-block;">♥</a>';
                             document.querySelector('#hart_panel').innerHTML = tag;
                         } else {

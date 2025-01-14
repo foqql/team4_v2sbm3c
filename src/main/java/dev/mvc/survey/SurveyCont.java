@@ -291,9 +291,11 @@ public class SurveyCont {
     int hartCnt = 0;
     if (session.getAttribute("memberno") != null) { // 로그인 상태일 때
       int memberno = (int) session.getAttribute("memberno");
+      model.addAttribute("memberno", memberno); // 모델에 추가
       map.put("memberno", memberno);
-      System.out.println("memberno" + memberno);
+      System.out.println("memberno : " + memberno);
       hartCnt = this.survey_goodProc.hartCnt(map);
+      System.out.println("hartCnt : "+ hartCnt);
     }
 //    System.out.println("surveyVO.getRecom() : " + surveyVO.getRecom());
     model.addAttribute("hartCnt", hartCnt); // 모델에 추가
