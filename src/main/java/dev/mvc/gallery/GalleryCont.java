@@ -77,6 +77,9 @@ public class GalleryCont {
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
@@ -186,6 +189,9 @@ public class GalleryCont {
     // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<GalleryVO> list = this.galleryProc.list_all(); // 모든 목록
@@ -339,6 +345,9 @@ public class GalleryCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     GalleryVO galleryVO = this.galleryProc.read(galleryno);
 
@@ -397,6 +406,9 @@ public class GalleryCont {
                             @RequestParam(name="galleryno", defaultValue="0") int galleryno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     GalleryVO galleryVO = this.galleryProc.read(galleryno); // map 정보 읽어 오기
     model.addAttribute("galleryVO", galleryVO); // request.setAttribute("galleryVO", galleryVO);
@@ -422,6 +434,9 @@ public class GalleryCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -487,6 +502,9 @@ public class GalleryCont {
                                      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
     
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
