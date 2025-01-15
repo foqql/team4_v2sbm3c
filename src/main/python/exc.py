@@ -374,6 +374,8 @@ def crawl_and_insert_data():
 
 
     # 크롬 열기
+    options = Options()
+    options.add_argument('--headless')
     driver = webdriver.Chrome()
     driver.set_window_size(1600, 900) # width, height
     # 환율 크롤링 페이지로 접속
