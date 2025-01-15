@@ -162,14 +162,29 @@ WHERE surveyno = #{surveyno}
   
   
   
-    <select id="list_all" resultType="dev.mvc.survey.SurveyVO">
-    SELECT sm.surveymemberno, sm.rdate, sm.surveyno, sm.memberno, s.topic as topic, m.mname as name
+
+    <select id="list_all" resultType="dev.mvc.survey.SurveyVO" parameterType="HashMap">
+select surveymemberno, rdate, surveyno, memberno, topic, name
+from (
+select surveymemberno, rdate, surveyno, memberno, topic, name
+from (SELECT sm.surveymemberno as surveymemberno, sm.rdate as rdate, sm.surveyno as surveyno, sm.memberno as memberno, s.topic as topic, m.mname as name
     FROM survey s ,surveymember sm, member m
     where s.surveyno = sm.surveyno
     AND sm.memberno = m.memberno
+      <choose>
+        <when test="word != null and word != ''">
+         AND UPPER(topic) LIKE '%' || UPPER(#{word}) || '%'
+        </when>
+        <otherwise>
+          WHERE 1=1
+        </otherwise>
+      </choose>
     ORDER BY sm.surveymemberno DESC
+
+)
+)
+WHERE <![CDATA[ r >= #{start_num} AND r <= #{end_num} ]]>
      </select>
-  
   
       <insert id="create_sm" parameterType="map">
   INSERT INTO surveymember (surveymemberno, rdate, memberno, surveyno, surveyitemno)

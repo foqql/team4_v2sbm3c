@@ -245,7 +245,7 @@ public class SurveyCont {
     model.addAttribute("surveyVO", surveyVO);
     List<SurveyVO> surveyitemVO = this.surveyProc.read_item_list(surveyno); // 여러 설문 항목을 리스트로 받아오기
     model.addAttribute("surveyitemVO", surveyitemVO);
-    int cntsum =surveyitemVO.stream().mapToInt(SurveyVO::getItemcnt) // 각 SurveyVO 객체의 itemcnt 값을 int로 추출
+    int cntsum = surveyitemVO.stream().mapToInt(SurveyVO::getItemcnt) // 각 SurveyVO 객체의 itemcnt 값을 int로 추출
         .sum(); // 전체 합을 구함
 //    System.out.println("cntsum : "+ cntsum);
 //    for(int i : surveyitemVO) {
@@ -295,7 +295,7 @@ public class SurveyCont {
       map.put("memberno", memberno);
       System.out.println("memberno : " + memberno);
       hartCnt = this.survey_goodProc.hartCnt(map);
-      System.out.println("hartCnt : "+ hartCnt);
+      System.out.println("hartCnt : " + hartCnt);
     }
 //    System.out.println("surveyVO.getRecom() : " + surveyVO.getRecom());
     model.addAttribute("hartCnt", hartCnt); // 모델에 추가
@@ -844,18 +844,36 @@ public class SurveyCont {
    * @return
    */
   @GetMapping(value = "/list_all")
-  public String list_all(Model model) {
+  public String list_all(Model model, @RequestParam(name = "word", defaultValue = "") String word,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
     ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
 
+    HashMap<String, Object> map = new HashMap<>();
+//  map.put("classifyno", classifyno);
+    map.put("word", word);
+    map.put("now_page", now_page);
 //    ArrayList<Survey_goodVO> list = this.survey_goodProc.list_all();
 //    model.addAttribute("list", list);
-    ArrayList<SurveyVO> list = this.surveyProc.list_all();
+    ArrayList<SurveyVO> list = this.surveyProc.list_all(map);
     model.addAttribute("list", list);
     System.out.println("list : " + list);
 
+    
+    
+ // 프로젝트 목록 번호 생성
+    String list_file_name = "/survey/list_all";
+    int search_count = this.classifyProc.list_search_count(word);
+    String paging = this.classifyProc.pagingBox(now_page, word, list_file_name, search_count, Survey.RECORD_PER_PAGE,
+        Survey.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
+    model.addAttribute("now_page", now_page);
+    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+    int no = search_count - ((now_page - 1) * Survey.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
+    
     return "/survey/list_all"; // /templates/surveygood/list_all.html
   }
 

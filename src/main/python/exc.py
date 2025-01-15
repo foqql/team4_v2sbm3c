@@ -386,6 +386,7 @@ def crawl_and_insert_data():
     usd_input()
     jpy_input()
     gbp_input()
+    driver.quit()
 
 #########
 # APScheduler로 주기적인 작업 설정
