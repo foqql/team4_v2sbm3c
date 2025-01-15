@@ -1,9 +1,13 @@
 package dev.mvc.notice;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import dev.mvc.noticegood.NoticegoodProcInter;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -12,7 +16,12 @@ public class NoticeCont {
 
     @Autowired
     private NoticeProcInter noticeProc;
-
+    
+    @Autowired
+    @Qualifier("dev.mvc.noticegood.NoticegoodProc")
+    private NoticegoodProcInter noticegoodProc;
+    
+    
     // 공지사항 목록 조회
     @GetMapping("/list")
     public String list(Model model, HttpSession session) {
@@ -41,9 +50,18 @@ public class NoticeCont {
 
     // 공지사항 읽기
     @GetMapping("/read/{notino}")
-    public String read(@PathVariable("notino") int notino, Model model) {
+    public String read(@PathVariable("notino") int notino, Model model, HttpSession session) {
         NoticeVO noticeVO = noticeProc.read(notino);  // DB에서 데이터 조회
         model.addAttribute("noticeVO", noticeVO);  // 모델에 noticeVO 객체 추가
+        int cnt = this.noticegoodProc.count_likes(notino);
+        model.addAttribute("recom_cnt", cnt);
+        
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("check", "check");
+        map.put("notino", notino);
+        map.put("memberno", (int)session.getAttribute("memberno"));
+        int state = this.noticegoodProc.noticeCheck(map);
+        model.addAttribute("state", state);
         return "notice/read";  // Thymeleaf 템플릿
     }
 

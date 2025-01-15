@@ -24,6 +24,12 @@ public class GalleryVO {
   /** 등록 날짜 */
   private String rdate = "";
   
+  /** 추천 */
+  private int recom = 0;
+  
+  /** 추천 */
+  private int hartCnt;
+  
   
 
   

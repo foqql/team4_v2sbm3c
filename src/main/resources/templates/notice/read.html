@@ -22,22 +22,22 @@
         }
         .content {
             margin-top: 20px;
-            width: 70%; /* 가로폭 설정 */
-            margin: 0 auto; /* 가운데 정렬 */
+            width: 70%;
+            margin: 0 auto;
         }
         .content.centered {
-            text-align: center; /* 중앙 정렬 */
+            text-align: center;
         }
         .content label {
             font-weight: bold;
-            display: block; /* 블록 요소로 설정하여 아래 여백 추가 */
-            margin-bottom: 10px; /* 아래 여백 설정 */
+            display: block;
+            margin-bottom: 10px;
         }
         .content p {
-            margin: 10px 0 30px; /* 아래 여백 설정 */
+            margin: 10px 0 30px;
         }
         .center-link {
-            text-align: center; /* 중앙 정렬 */
+            text-align: center;
             margin-top: 20px;
         }
         .center-link a {
@@ -58,26 +58,20 @@
             text-align: center;
             margin-top: 20px;
         }
+        .centered-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .icon {
+            width: 22px;
+        }
     </style>
     <script>
-        window.onload = function() {
-            let hartCnt = '[[${hartCnt}]]'; // Thymeleaf로부터 추천 상태를 받음
-            let tag = '';
-            
-            // 추천 상태에 따라 추천 버튼 설정
-            if (hartCnt == 1) {
-                tag = '<a href="javascript:good([[${noticeVO.notino}]])"><img src="/contents/images/hart_on_50.png" style="width: 22px" title="추천"></a>';
-            } else {
-                tag = '<a href="javascript:good([[${noticeVO.notino}]])"><img src="/contents/images/hart_off_50.png" style="width: 22px" title="추천"></a>';
-            }
-            document.querySelector('#hart_panel').innerHTML = tag;
-            document.querySelector('#recom_panel').innerHTML = '([[${recom}]])';  // 수정된 부분
-        }
 
-        function good(notino) {
+        function noticegood(notino) {
             console.log('-> notino: ' + notino);
-
-            fetch("/notice/good", {
+            
+            fetch("/noticegood/ngood", {
                 "method": "post",
                 "headers": {
                     "Content-Type": "application/json"
@@ -86,23 +80,39 @@
             })
             .then((response) => response.json())
             .then((data) => {
-                if (data.isMember == 1) { // 회원인 경우
-                    let hartCnt = data.hartCnt; // 추천 상태
-                    let tag = '';
-                    
-                    // 추천 상태에 따라 버튼 이미지 변경
-                    if (hartCnt == 1) {
-                        tag = '<a href="javascript:good([[${noticeVO.notino}]])"><img src="/contents/images/hart_on_50.png" style="width: 22px" title="추천"></a>';
-                    } else {
-                        tag = '<a href="javascript:good([[${noticeVO.notino}]])"><img src="/contents/images/hart_off_50.png" style="width: 22px" title="추천"></a>';
-                    }
-                    document.querySelector('#hart_panel').innerHTML = tag;
-                    document.querySelector('#recom_panel').innerHTML = '(' + data.recom + ')';
-                } else { // 비회원인 경우
-                    alert("로그인해야 추천할 수 있습니다.");
-                    location.href = '/member/login_cookie_need';  // 로그인 페이지로 이동
-                }
+              if(data.url){
+                alert("로그인해야 추천할 수 있습니다.");
+                location.href = data.url;  // 로그인 페이지로 이동
+              }
+              
+              const recomcnt = document.getElementById("recom_panel");
+              const recomimg = document.getElementById("recom_img");
+              console.log(data.cnt);
+              if(data.state === 1){
+                console.log('개추 증가');
+                // 이너 html에 <span> + data.개추 +</span>
+                // <span id="recom_panel">()</span>
+                recomcnt.innerText = data.cnt; 
+                recomimg.src = "/member/images/admin.png";
+              } else if(data.state === 0){
+                console.log('개추 감소');
+                // 이너 html에 <span> + data.개추 +</span>
+                // <span id="recom_panel">()</span>
+                recomcnt.innerText = '';
+                recomcnt.innerText = data.cnt; 
+                recomimg.src = "/member/images/lock.png";
+              } else{
+                console.log('오류');
+                
+              }
+              
+
             });
+        }
+
+        function noticegood_admi() {
+            console.log('추천 버튼 클릭됨');
+            // 추천 관련 상태 처리 로직 추가
         }
     </script>
 </head>
@@ -125,13 +135,29 @@
         <!-- 추천 버튼과 추천 수 표시 -->
         <div class="content centered">
             <label>추천:</label>
-            <span id="hart_panel"></span>
-            <span id="recom_panel"></span>
+            <span id="hart_panel">
+              <a th:href="|javascript:noticegood('${noticeVO.notino}')|">
+                <img id="recom_img"  style="width: 22px" title="추천"
+                th:src="@{'/member/images/' + (${state} == 1 ? 'admin' : 'lock') + '.png'}"  >
+              </a>
+            </span>
+            <span id="recom_panel" th:text="${recom_cnt}"></span>
+        </div>
+
+        <!-- 추천 버튼 -->
+        <div class="centered-container">
+            <button id="noticegoodbtn" name="noticegoodbtn" onclick="noticegood_admi()">
+                <span id="noticegoodImage"></span>
+            </button>
         </div>
 
         <div class="center-link">
             <a href="/notice/list">목록으로 돌아가기</a>
         </div>
     </div>
+
+    <!-- 관련 스크립트와 스타일 -->
+    <script src="/js/noticegood.js" type="text/javascript"></script>
+    <link href="/css/noticegood.css" rel="stylesheet" type="text/css">
 </body>
 </html>

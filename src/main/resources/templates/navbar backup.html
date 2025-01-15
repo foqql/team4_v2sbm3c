@@ -1,8 +1,4 @@
 <style>
-*{
-  margin :0;
-}
-
     .dropdown-menu ul {
         list-style: none; /* 점 제거 */
         padding: 0;       /* 여백 제거 */
@@ -32,16 +28,19 @@
                             <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == genreVOMenu.genre}">
                                 <ul>
                                     <li th:each="classifyVO : ${classifyVOMenu.list_name}">
-                                    
                                        <a class="dropdown-item" 
    th:href="@{|/${genreVOMenu.link}/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
    th:text="${classifyVO.classify}"></a>
-   
+
                                     </li>
                                 </ul>
-
+                                
+                                
+                                
                             </li>
                         </ul>
+
+                        
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="회원"></a>
@@ -57,9 +56,6 @@
                     <li class="nav-item dropdown" th:if="${session.grade == 'admin'}">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자"></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{|/genre/list_all|}">대분류 목록</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{|/classify/list_search|}">카테고리 목록</a>
                             </li>
@@ -79,22 +75,16 @@
                                 <a class="nav-link" th:href="@{|/newsscore/list_all|}">뉴스 평점 전체 글 목록</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" th:href="@{|/exchange/list_all|}">환율 전체 글 목록</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" th:href="@{|/weather/list_all|}">날씨 전체 글 목록</a>
                             </li>
                              <li class="nav-item">
                                 <a class="nav-link" th:href="@{|/areagood/list_all|}">날씨 추천 글 목록</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{|/survey/list_all|}">설문 참여자 목록</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{|/survey_good/list_all|}">설문 추천 목록</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" th:href="@{|/notice/list|}">공지사항 관리</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="/chat/history">채팅 내역 보기</a>
                             </li>
                         </ul>
                     </li>
@@ -108,9 +98,24 @@
                     </li>
                 </ul>
             </div>
-<!--            오른쪽 메뉴-->
-            <a href="/survey/list_by_survey" role="button">설문조사</a> <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a href="/chat/list">채팅창</a><span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a href="/gallery/list_by_classifyno_search_paging_grid" role="button">갤러리</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a href="/survey/list_by_survey" role="button">설문조사</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <!--<a href="/survey/create_item" role="button">설문 항목 제작</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a href="/classify/create" role="button">생성</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a th:href="@{|/genre/create|}" role="button">대분류 생성</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>-->
+            <a th:href="@{|/classify/list_search|}" role="button">중분류 리스트 조회</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a th:href="@{|/genre/list_all|}" role="button">대분류 조회</a><br>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a href="/chat/list">채팅창</a>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a href="/sms/form">msm보내기</a>
+            <span class="menu_divide">&nbsp;|&nbsp;</span>
             <a href="/notice/list">공지사항</a>
         </div>
     </nav>
@@ -131,11 +136,32 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li class="nav-item">
-                <a class="nav-link" th:href="@{|/member/create|}">회원 가입</a>
+                <a class="nav-link" th:href="@{|/member/create|}">회원 가입1</a>
               </li>
               <li class="nav-item" th:if="${session.memberno != null}">
                 <a class="nav-link" th:href="@{|/member/passwd_update|}">비밀번호 변경</a>
               </li>
+            </ul>
+          </li>
+
+          <!-- 관리자 메뉴 (admin 계정만) -->
+          <li class="nav-item dropdown" th:if="${session.grade == 'admin'}">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" 
+               data-bs-toggle="dropdown" aria-expanded="false" th:text="관리자">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li class="nav-item"><a class="nav-link" th:href="@{|/classify/list_search|}">카테고리 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/member/list|}">회원 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/log/list|}">로그인 기록    
+              <li class="nav-item"><a class="nav-link" th:href="@{|/news/list_all|}">뉴스 전체 글 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/newsrecom/list_all|}">뉴스 추천 전체 글 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/newsscore/list_all|}">뉴스 평점 전체 글 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/exchange/list_all|}">환율 전체 글 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/weather/list_all|}">날씨 전체 글 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/survey_good/list_all|}">설문조사 추천 목록</a></li>
+              <li class="nav-item"><a class="nav-link" th:href="@{|/survey/list_all|}">설문조사 참여 목록</a></li>
+              <!--<li class="nav-item"><a class="nav-link" th:href="@{|/weather/list_all|}">날씨 전체 글 목록</a></li>-->
+              <li class="nav-item"><a class="nav-link" th:href="@{|/areagood/list_all|}">지역 추천 글 목록</a></li>
             </ul>
           </li>
 
@@ -152,14 +178,12 @@
       </div>
       <!-- 메뉴 종료 -->
 
-
       <!-- 관리 및 생성 메뉴 (관리자에게만 보임) -->
-      <a href="/gallery/list_by_classifyno_search_paging_grid" role="button">갤러리</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>
       <a href="/survey/list_by_survey" role="button">설문조사</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>    
       <a th:href="@{|/classify/list_search|}" role="button">리스트 조회</a><br>        <span class="menu_divide">&nbsp;|&nbsp;</span>
       <a th:href="@{|/genre/create|}" role="button">대분류 생성</a><br>               <span class="menu_divide">&nbsp;|&nbsp;</span>
       <a th:href="@{|/genre/list_all|}" role="button">대분류 조회</a><br>                <span class="menu_divide">&nbsp;|&nbsp;</span>
-      <a href="/chat/list">채팅창</a>                                                              <span class="menu_divide">&nbsp;|&nbsp;</span>
+      <a href="/chat/list">채팅창</a>                                                                  <span class="menu_divide">&nbsp;|&nbsp;</span>
       <a href="/sms/form">msm보내기</a>
       
     </div>

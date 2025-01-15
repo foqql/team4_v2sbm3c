@@ -27,6 +27,8 @@ import dev.mvc.areagood.AreagoodVO;
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.gallery.GalleryProcInter;
+import dev.mvc.gallery.GalleryVO;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
@@ -57,6 +59,10 @@ public class WeatherCont {
   @Autowired
   @Qualifier("dev.mvc.areagood.AreagoodProc") // @Component("dev.mvc.weather.WeatherProc")
   private AreagoodProcInter areagoodProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.gallery.GalleryProc") // @Component("dev.mvc.weather.WeatherProc")
+  private GalleryProcInter galleryProc;
 
   public WeatherCont() {
     System.out.println("-> WeatherCont created.");
@@ -86,6 +92,9 @@ public class WeatherCont {
       @RequestParam(name = "classifyno", defaultValue = "0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
@@ -162,7 +171,7 @@ public class WeatherCont {
       int memberno = (int) session.getAttribute("memberno"); // memberno FK
       weatherVO.setMemberno(memberno);
       int cnt = this.weatherProc.create(weatherVO);
-      
+
       weatherVO.getAreano();
 
       // ------------------------------------------------------------------------------
@@ -222,6 +231,9 @@ public class WeatherCont {
     // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<WeatherVO> list = this.weatherProc.list_all(); // 모든 목록
@@ -234,11 +246,24 @@ public class WeatherCont {
 
     }
 
-    
-    
-    
-    
   }
+  
+  
+//  /**
+//   * 날씨 목록에 사진 http://localhost:9091/gallery/list_all
+//   * 
+//   * @return
+//   */
+//  @GetMapping(value = "/photos")
+//  public String photos(HttpSession session, Model model) {
+//    
+//      ArrayList<GalleryVO> list = this.galleryProc.photos(); // 모든 목록
+//      model.addAttribute("list", list);
+//      
+//      return "/gallery/list_by_classifyno_search_paging";
+//    
+//  }
+  
 
   /**
    * 유형 3 카테고리별 목록 + 검색 + 페이징
@@ -256,14 +281,22 @@ public class WeatherCont {
     // 메뉴 데이터 추가
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
     ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
+    
+    ArrayList<GalleryVO> photolist = this.galleryProc.photolist(); // 모든 목록
+    model.addAttribute("photolist", photolist);
+    
+   // System.out.println("-> photolist: " + photolist);
 
-    // classifyno가 90일 경우에만 arealist를 추가
-    if (classifyno == 90) {
+    // classifyno가 9일 경우에만 arealist를 추가
+    if (classifyno == 9) {
       List<WeatherVO> arealist = this.weatherProc.arealist();
       model.addAttribute("arealist", arealist);
     }
+    
+   
 
     // 분류 정보 가져오기
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
@@ -279,7 +312,8 @@ public class WeatherCont {
     ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
 
-    // System.out.println("-> size: " + list.size());
+    // System.out.println("-> list: " + list);
+    
     model.addAttribute("word", word);
 
     int search_count = this.weatherProc.list_by_classifyno_search_count(map);
@@ -314,6 +348,9 @@ public class WeatherCont {
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
@@ -390,8 +427,7 @@ public class WeatherCont {
       map.put("memberno", memberno);
 
       System.out.println("->recom: " + weatherVO.getRecom());
-      System.out.println("->weatherno: " + weatherno);
-      System.out.println("->memberno: " + memberno);
+
 
       hartCnt = this.areagoodProc.hartCnt(map);
 
@@ -411,6 +447,9 @@ public class WeatherCont {
   public String map(Model model, @RequestParam(name = "weatherno", defaultValue = "0") int weatherno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     WeatherVO weatherVO = this.weatherProc.read(weatherno); // map 정보 읽어 오기
     model.addAttribute("weatherVO", weatherVO); // request.setAttribute("weatherVO", weatherVO);
@@ -450,6 +489,9 @@ public class WeatherCont {
       @RequestParam(name = "now_page", defaultValue = "0") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     WeatherVO weatherVO = this.weatherProc.read(weatherno); // map 정보 읽어 오기
     model.addAttribute("weatherVO", weatherVO); // request.setAttribute("weatherVO", weatherVO);
@@ -506,6 +548,9 @@ public class WeatherCont {
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -587,6 +632,9 @@ public class WeatherCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -697,6 +745,9 @@ public class WeatherCont {
 
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
       model.addAttribute("menu", menu);
+      
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
 
       WeatherVO weatherVO = this.weatherProc.read(weatherno);
       model.addAttribute("weatherVO", weatherVO);
@@ -775,59 +826,58 @@ public class WeatherCont {
    */
   @PostMapping(value = "/good")
   @ResponseBody
-  public String good(HttpSession session, Model model, @RequestBody String json_src){ 
+  public String good(HttpSession session, Model model, @RequestBody String json_src) {
     System.out.println("-> json_src: " + json_src); // json_src: {"weatherno":"5"}
-    
+
     JSONObject src = new JSONObject(json_src); // String -> JSON
-    int weatherno = (int)src.get("weatherno"); // 값 가져오기
+    int weatherno = (int) src.get("weatherno"); // 값 가져오기
     System.out.println("-> weatherno: " + weatherno);
-    
-    
+
     if (this.memberProc.isMember(session)) { // 회원 로그인 확인
       // 추천을 한 상태인지 확인
-      int memberno = (int)session.getAttribute("memberno");
-      
+      int memberno = (int) session.getAttribute("memberno");
+
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("weatherno", weatherno);
       map.put("memberno", memberno);
-      
+
       int good_cnt = this.areagoodProc.hartCnt(map);
       System.out.println("-> good_cnt: " + good_cnt);
-      
+
       if (good_cnt == 1) {
         System.out.println("-> 추천 해제: " + weatherno + ' ' + memberno);
-        
+
         AreagoodVO areagoodVO = this.areagoodProc.readByWeathernoMemberno(map);
-        
+
         this.areagoodProc.delete(areagoodVO.getAreagoodno()); // 추천 삭제
         this.weatherProc.decreaseRecom(weatherno); // 카운트 감소
       } else {
         System.out.println("-> 추천: " + weatherno + ' ' + memberno);
-        
+
         AreagoodVO areagoodVO_new = new AreagoodVO();
         areagoodVO_new.setWeatherno(weatherno);
         areagoodVO_new.setMemberno(memberno);
-        
+
         this.areagoodProc.create(areagoodVO_new);
         this.weatherProc.increaseRecom(weatherno); // 카운트 증가
       }
-      
+
       // 추천 여부가 변경되어 다시 새로운 값을 읽어옴.
       int hartCnt = this.areagoodProc.hartCnt(map);
       int recom = this.weatherProc.read(weatherno).getRecom();
-            
+
       JSONObject result = new JSONObject();
       result.put("isMember", 1); // 로그인: 1, 비회원: 0
       result.put("hartCnt", hartCnt); // 추천 여부, 추천:1, 비추천: 0
-      result.put("recom", recom);   // 추천인수
-      
+      result.put("recom", recom); // 추천인수
+
       System.out.println("-> result.toString(): " + result.toString());
       return result.toString();
-      
+
     } else { // 정상적인 로그인이 아닌 경우 로그인 유도
       JSONObject result = new JSONObject();
       result.put("isMember", 0); // 로그인: 1, 비회원: 0
-      
+
       System.out.println("-> result.toString(): " + result.toString());
       return result.toString();
     }

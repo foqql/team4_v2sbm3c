@@ -343,5 +343,4 @@ public class WeatherProc implements WeatherProcInter {
     return 0;
   }
 
-  
 }
