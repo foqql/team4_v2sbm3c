@@ -168,7 +168,7 @@ WHERE surveyno = #{surveyno}
     where s.surveyno = sm.surveyno
     AND sm.memberno = m.memberno
     ORDER BY sm.surveymemberno DESC
-  </select>
+     </select>
   
   
       <insert id="create_sm" parameterType="map">

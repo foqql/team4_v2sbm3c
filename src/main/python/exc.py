@@ -43,6 +43,9 @@ font_path = 'C:/Windows/Fonts/malgun.ttf'  # 윈도우에서의 폰트 경로
 font_name = font_manager.FontProperties(fname=font_path).get_name()
 rc('font', family=font_name)
 
+options = Options()
+options.add_argument('--headless')
+
 def crawl_and_insert_data():
     # 웹페이지 로딩을 완료시까지 기다림. 기본값: 0.5초
     def load(url, second=0.0): # Selenium으로 태그 검색
@@ -374,8 +377,6 @@ def crawl_and_insert_data():
 
 
     # 크롬 열기
-    options = Options()
-    options.add_argument('--headless')
     driver = webdriver.Chrome()
     driver.set_window_size(1600, 900) # width, height
     # 환율 크롤링 페이지로 접속

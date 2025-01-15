@@ -142,7 +142,7 @@ if (exchangeVO != null) {
     System.out.println("파이썬 크롤링 시작 ");
     try {
       // Python 스크립트 실행
-      String pythonScriptPath = "src/main/python/exc.py";
+      String pythonScriptPath = "src/main/python/exc_2.py";
       System.out.println("Running Python script at: " + pythonScriptPath);
       ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
 

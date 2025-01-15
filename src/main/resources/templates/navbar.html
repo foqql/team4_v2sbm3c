@@ -38,9 +38,7 @@
 
                                     </li>
                                 </ul>
-                                
-                                
-                                
+
                             </li>
                         </ul>
 
@@ -108,22 +106,9 @@
                     </li>
                 </ul>
             </div>
-            <a href="/survey/list_by_survey" role="button">설문조사</a><br>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <!--<a href="/survey/create_item" role="button">설문 항목 제작</a><br>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a href="/classify/create" role="button">생성</a><br>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a th:href="@{|/genre/create|}" role="button">대분류 생성</a><br>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>-->
-            <a th:href="@{|/classify/list_search|}" role="button">중분류 리스트 조회</a><br>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a th:href="@{|/genre/list_all|}" role="button">대분류 조회</a><br>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a href="/chat/list">채팅창</a>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a href="/sms/form">msm보내기</a>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
+<!--            오른쪽 메뉴-->
+            <a href="/survey/list_by_survey" role="button">설문조사</a> <span class="menu_divide">&nbsp;|&nbsp;</span>
+            <a href="/chat/list">채팅창</a><span class="menu_divide">&nbsp;|&nbsp;</span>
             <a href="/notice/list">공지사항</a>
         </div>
     </nav>
@@ -144,7 +129,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li class="nav-item">
-                <a class="nav-link" th:href="@{|/member/create|}">회원 가입1</a>
+                <a class="nav-link" th:href="@{|/member/create|}">회원 가입</a>
               </li>
               <li class="nav-item" th:if="${session.memberno != null}">
                 <a class="nav-link" th:href="@{|/member/passwd_update|}">비밀번호 변경</a>
@@ -164,12 +149,6 @@
         </ul>
       </div>
       <!-- 메뉴 종료 -->
-
-      <!-- 관리 및 생성 메뉴 (관리자에게만 보임) -->
-      <a href="/survey/list_by_survey" role="button">설문조사</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>    
-      <a href="/chat/list">채팅창</a>                                                                  <span class="menu_divide">&nbsp;|&nbsp;</span>
-      <a href="/sms/form">msm보내기</a>
-      
     </div>
   </nav>
 </div>
