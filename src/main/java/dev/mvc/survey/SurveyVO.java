@@ -47,7 +47,7 @@ public class SurveyVO {
   
   
   
-  private String name = "";
+  private String mname = "";
   public SurveyVO() {
   }
 }
