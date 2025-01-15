@@ -280,8 +280,8 @@ public class SurveyProc implements SurveyProcInter {
   }
 
   @Override
-  public ArrayList<SurveyVO> list_all() {
-    ArrayList<SurveyVO> list = this.surveyDAO.list_all();
+  public ArrayList<SurveyVO> list_all(HashMap<String, Object> map) {
+    ArrayList<SurveyVO> list = this.surveyDAO.list_all(map);
     return list;
   }
 
@@ -301,4 +301,6 @@ public class SurveyProc implements SurveyProcInter {
     return surveyVO;
   }
 
+  
+  
 }

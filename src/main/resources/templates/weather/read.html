@@ -12,10 +12,10 @@
       let tag='';
       
       if (hartCnt == 1) {
-        tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-up.png" style="width: 22px" title="추천"></a>';
+        tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/yes.png" style="width: 22px" title="추천"></a>';
         document.querySelector('#hart_panel').innerHTML = tag; 
       } else {
-        tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-down.png" style="width: 22px" title="비추천"></a>';
+        tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/no.png" style="width: 22px" title="비추천"></a>';
         document.querySelector('#hart_panel').innerHTML = tag; 
       }    
       
@@ -43,10 +43,10 @@
             let tag='';
             
             if (hartCnt == 1) {
-              tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-up.png" style="width: 22px" title="추천"></a>';
+              tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/yes.png" style="width: 22px" title="추천"></a>';
               document.querySelector('#hart_panel').innerHTML = tag; 
             } else {
-              tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/arrow-down.png" style="width: 22px" title="비추천"></a>';
+              tag = '<a href="javascript:good([[${weatherVO.weatherno}]])"><img src="/weather/images/no.png" style="width: 22px" title="비추천"></a>';
               document.querySelector('#hart_panel').innerHTML = tag; 
             }    
             

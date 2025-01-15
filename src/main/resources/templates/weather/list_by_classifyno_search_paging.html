@@ -17,9 +17,25 @@
       <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>
       <span class="menu_divide">│</span>
       <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>
-    </aside>
+    </aside>  
+    
+    <!-- list_search_com fragment를 불러오기, arealist가 있을 경우에만 -->
+    
 
-    <div th:replace="~{weather/list_search_com::list_search_fragment}"></div>
+    <!-- gallery에 있는 thumb1 사진 10개 불러와서 수평으로 띄우기, arealist가 없을 경우만 -->
+  <div class="photo-gallery" th:if="${#lists.isEmpty(arealist)}">
+    <h4>최근 사진들</h4><div th:replace="~{weather/list_search_com::list_search_fragment}"></div>
+    <div class="gallery-images" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+      <!-- gallery 테이블에서 thumb1 이미지를 불러오기 -->
+      <div th:each="galleryVO : ${photolist}" style="text-align: center;">
+        <img th:src="@{|/gallery/storage/${galleryVO.thumb1}|}" style="width: 130px; height: 100px;" />
+        <br />
+        <span th:text="${galleryVO.title}"></span>
+      </div>
+    </div>
+  </div>
+
+
     <div class="menu_line"></div>
 
     <!-- list 데이터 테이블 -->
@@ -47,7 +63,7 @@
             <span th:text="${weatherVO.file1}"></span>
           </div>
           <div th:if="${weatherVO.size1 == 0}">
-            <img src="/weather/images/none1.png" style="width: 120px; height: 90px;" />
+            <img src="/weather/images/USA.jpg" style="width: 120px; height: 90px;" />
           </div>
         </td>
         <td class="td_left">

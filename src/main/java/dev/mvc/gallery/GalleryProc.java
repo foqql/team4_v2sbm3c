@@ -40,6 +40,15 @@ public class GalleryProc implements GalleryProcInter {
     GalleryVO galleryVO = this.galleryDAO.read(galleryno);
     return galleryVO;
   }
+  
+  /**
+   * 사진 띄우기
+   */
+  @Override
+  public ArrayList<GalleryVO> photolist() {
+    ArrayList<GalleryVO> photolist = this.galleryDAO.photolist();
+    return photolist;
+  }
 
 
   @Override
@@ -265,6 +274,8 @@ public class GalleryProc implements GalleryProcInter {
     int cnt = this.galleryDAO.count_by_memberno(memberno);
     return cnt;
   }
+  
+
   
 }
 

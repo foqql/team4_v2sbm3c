@@ -168,10 +168,34 @@ FROM
 
 
 
-  <!-- Update classify cnt based on related news -->
-  <update id="update_classify_cnt">
-    UPDATE classify SET cnt = (SELECT COUNT(*) FROM news WHERE news.classifyno = classify.classifyno)
-  </update>
+      <!-- cnt 업데이트   -->
+<update id="update_classify_cnt" parameterType="String">
+  UPDATE classify c
+  SET c.cnt = (
+    SELECT COUNT(*)
+    FROM ${link}  <!-- 동적 테이블 이름 삽입 -->
+    WHERE ${link}.classifyno = c.classifyno
+  )
+  WHERE EXISTS (
+    SELECT 1
+    FROM ${link}
+    WHERE ${link}.classifyno = c.classifyno
+  )
+</update>
+
+
+
+
+
+
+      <!-- 테이블 확인   -->
+<select id="checkTable" resultType="int">
+    SELECT COUNT(*)
+    FROM all_tables
+    WHERE table_name = UPPER(#{link})
+</select>
+
+
 
   <!-- Update classify genre cnt -->
   <update id="update_classify_genre_cnt">

@@ -17,7 +17,7 @@ public class ClassifyProc implements ClassifyProcInter {
 
   @Autowired
   private NewsDAOInter newsDAO;
-  
+
   @Override
   public int create(ClassifyVO classifyVO) {
     int cnt = this.classifyDAO.create(classifyVO);
@@ -45,12 +45,12 @@ public class ClassifyProc implements ClassifyProcInter {
   @Override
   public int delete(int classifyno) {
     Integer[] newsno = this.classifyDAO.select_newsno(classifyno);
-    for(int i : newsno) {
-    System.out.println("  ++++ " + i);
-    // -------------------------------------------------------------------
-    // 파일 삭제 시작
-    // -------------------------------------------------------------------
-    // 삭제할 파일 정보를 읽어옴.
+    for (int i : newsno) {
+      System.out.println("  ++++ " + i);
+      // -------------------------------------------------------------------
+      // 파일 삭제 시작
+      // -------------------------------------------------------------------
+      // 삭제할 파일 정보를 읽어옴.
 //    SupplementsVO newsVO_read = this.newsDAO.read(i);
 //
 //    String file1saved = newsVO_read.getFile1saved();
@@ -59,9 +59,9 @@ public class ClassifyProc implements ClassifyProcInter {
 //    String uploadDir = Supplements.getUploadDir();
 //    Tool.deleteFile(uploadDir, file1saved); // 실제 저장된 파일삭제
 //    Tool.deleteFile(uploadDir, thumb1); // preview 이미지 삭제
-    // -------------------------------------------------------------------
-    // 파일 삭제 종료
-    // -------------------------------------------------------------------
+      // -------------------------------------------------------------------
+      // 파일 삭제 종료
+      // -------------------------------------------------------------------
     }
     int cnt = this.classifyDAO.delete(classifyno);
     return cnt;
@@ -272,19 +272,21 @@ public class ClassifyProc implements ClassifyProcInter {
   }
 
   @Override
-  public int update_classify_cnt() {
-    int cnt = this.classifyDAO.update_classify_cnt();
-  //  System.out.println("프록 업데이트 카테 씨엔티  실행 됨?");
+  public int update_classify_cnt(String link) {
+    int cnt = this.classifyDAO.update_classify_cnt(link);
     return cnt;
   }
 
   @Override
   public int update_classify_genre_cnt() {
     int cnt = this.classifyDAO.update_classify_genre_cnt();
-  //  System.out.println("프록 업데이트 카테 씨엔티  실행 됨?");
     return cnt;
   }
 
-  
+  @Override
+  public int checkTable(String link) {
+    int cnt = this.classifyDAO.checkTable(link);
+    return cnt;
+  }
 
 }
