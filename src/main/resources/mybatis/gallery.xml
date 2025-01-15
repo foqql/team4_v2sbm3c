@@ -149,19 +149,5 @@
     </select>
     
     
-          <!-- 추천수 증가 -->
-  <update id="increaseRecom" parameterType="int">
-      UPDATE gallery
-      SET recom = recom + 1
-      WHERE galleryno =#{galleryno}
-  </update>
-  
-      <!-- 추천수 감소 -->
-  <update id="decreaseRecom" parameterType="int">
-      UPDATE gallery
-      SET recom = recom - 1
-      WHERE galleryno =#{galleryno}
-  </update>
-    
     
     </mapper> 

@@ -17,33 +17,34 @@
       <col style='width: 90%;'/>
     </colgroup>
     <tr>
-      <th class='th_bs'>파일</TH>
+      <th class='th_bs'>파일</th>
       <th class='th_bs'>제목</th>
     </tr>
-   
 
     <tr th:each="weatherVO, status:${list}" 
          th:attr="onclick=|location.href='/weather/read?weatherno=${weatherVO.weatherno}'|"
          style="cursor: pointer;">
-      <td class='td_basic' th:text="${weatherVO.file1}"></td>
-      <td class='td_left'>
-      
-        <span th:text="${weatherVO.weather}" style="font-weight: bold;"></span><br>
-        
-        <span th:if="${areaVO.continent.length() > 160 }" 
-                  th:text="|${areaVO.continent.substring(0, 160) }...|"></span>
-        <span th:if="${areaVO.continent.length() <= 160 }" 
-                  th:text="|${areaVO.continent}|"></span>
-                  
-        <span th:if="${areaVO.country.length() > 160 }" 
-                  th:text="|${areaVO.country.substring(0, 160) }...|"></span>
-        <span th:if="${areaVO.country.length() <= 160 }" 
-                  th:text="|${areaVO.country}|"></span
-
-
-
+      <!-- thumb1을 이미지로 출력, 비어 있으면 기본 이미지로 대체 -->
+      <td class='td_basic'>
+        <img th:src="@{${weatherVO.thumb1} != '' ? '/weather/storage/' + ${weatherVO.thumb1} : '/weather/images/USA.jpg'}" 
+             style="width: 120px; height: 90px;" alt="썸네일"/>
       </td>
-    </tr>
+      
+      <td class='td_left'>
+          <span th:text="${weatherVO.city}" style="font-weight: bold;"></span>
+          <span th:text="| ${weatherVO.rdate.substring(0, 10)}|" /><br />
+          날씨:
+          <span
+            th:if="${weatherVO.weather.length() > 160}"
+            th:text="|${weatherVO.weather.substring(0, 160)}...|"
+          ></span>
+          <span th:if="${weatherVO.weather.length() <= 160}" th:text="|${weatherVO.weather}|"></span>
+          <span>/</span>
+          기온:
+          <span th:if="${weatherVO.temp.length() > 160}" th:text="|${weatherVO.temp.substring(0, 160)}...|"></span>
+          <span th:if="${weatherVO.temp.length() <= 160}" th:text="|${weatherVO.temp}|"></span>
+        </td>
+      </tr>
   </table>
    
   <div class='bottom_menu'>
