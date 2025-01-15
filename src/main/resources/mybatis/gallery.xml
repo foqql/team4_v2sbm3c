@@ -6,8 +6,8 @@
     
     <!-- 글 등록 -->
     <insert id="create" parameterType="dev.mvc.gallery.GalleryVO">
-      INSERT INTO gallery(galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1)
-      VALUES(gallery_seq.nextval, #{memberno}, #{classifyno}, #{title}, sysdate, #{file1}, #{file1saved}, #{thumb1}, #{size1})
+      INSERT INTO gallery(galleryno, memberno, classifyno, title, recom, rdate, file1, file1saved, thumb1, size1)
+      VALUES(gallery_seq.nextval, #{memberno}, #{classifyno}, #{title}, #{recom}, sysdate, #{file1}, #{file1saved}, #{thumb1}, #{size1})
     </insert>
     
       <!-- 모든 카테고리의 등록된 글목록 -->

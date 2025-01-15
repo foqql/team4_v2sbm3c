@@ -55,5 +55,11 @@ private GallerygoodDAOInter gallerygoodDAO;
     ArrayList<GalleryGallerygoodMemberVO> list = this.gallerygoodDAO.list_all_join();
     return list;
   }
+
+  @Override
+  public int getRecom(HashMap<String, Object> map2) {
+    int cnt = this.gallerygoodDAO.hartCnt(map2);
+    return cnt;
+  }
 }
 

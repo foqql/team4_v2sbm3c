@@ -56,7 +56,7 @@ public class GallerygoodCont {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
 
-    return url; // forward, /templates/...
+    return url; 
   }
 
   @PostMapping(value = "/create")
@@ -75,27 +75,6 @@ public class GallerygoodCont {
 
     return json.toString();
   }
-
-//  /**
-//   * 목록
-//   * 
-//   * @param model
-//   * @return
-//   */
-//  // http://localhost:9091/cate/list_all
-//  @GetMapping(value = "/list_all")
-//  public String list_all(Model model) {
-//    ArrayList<GallerygoodVO> list = this.gallerygoodProc.list_all();
-//    model.addAttribute("list", list);
-//
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
-//    model.addAttribute("menu", menu);
-//
-//    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
-//    model.addAttribute("menu1", menu1);
-//
-//    return "/gallerygood/list_all"; // /templates/calendar/list_all.html
-//  }
   
   /**
    * 목록 join
