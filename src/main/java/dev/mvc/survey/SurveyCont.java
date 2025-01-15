@@ -109,11 +109,11 @@ public class SurveyCont {
       bindingResult.getAllErrors().forEach(error -> System.out.println(error.toString()));
       return "/survey/create";
     }
-    System.out.println(" getSurveyno : " + surveyVO.getSurveyno());
-    System.out.println(" getTopic : " + surveyVO.getTopic());
-    System.out.println(" getStartdate : " + surveyVO.getStartdate());
-    System.out.println(" getEnddate : " + surveyVO.getEnddate());
-    System.out.println(" getContinueyn : " + surveyVO.getContinueyn());
+//    System.out.println(" getSurveyno : " + surveyVO.getSurveyno());
+//    System.out.println(" getTopic : " + surveyVO.getTopic());
+//    System.out.println(" getStartdate : " + surveyVO.getStartdate());
+//    System.out.println(" getEnddate : " + surveyVO.getEnddate());
+//    System.out.println(" getContinueyn : " + surveyVO.getContinueyn());
 
     if (memberProc.isMemberAdmin(session)) { // 관리자로 로그인한경우
       // 파일 전송 코드 시작
@@ -247,7 +247,7 @@ public class SurveyCont {
     model.addAttribute("surveyitemVO", surveyitemVO);
     int cntsum =surveyitemVO.stream().mapToInt(SurveyVO::getItemcnt) // 각 SurveyVO 객체의 itemcnt 값을 int로 추출
         .sum(); // 전체 합을 구함
-    System.out.println("cntsum : "+ cntsum);
+//    System.out.println("cntsum : "+ cntsum);
 //    for(int i : surveyitemVO) {
 //      
 //    }
@@ -801,9 +801,7 @@ public class SurveyCont {
       if (bindingResult.hasErrors()) {
         System.out.println(" -> Error 발생  [ surveyVO/del ]");
         model.addAttribute("surveyVO", surveyVO); // 에러 발생 시 데이터 유지
-        System.out.println("""
-            surveyVO.toString()
-            """ + surveyVO.toString());
+//        System.out.println(" surveyVO.toString() : " + surveyVO.toString());
         bindingResult.getAllErrors().forEach(error -> {
           System.out.println("Error: " + error.getDefaultMessage());
         });

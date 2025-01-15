@@ -8,7 +8,7 @@
 <div th:fragment="navbarFragment">
     <div class="top_menu_img">
         <div class="top_menu_label" style="text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;">
-            Team4_ver 1.0 해외뉴스
+            Team4_ver4.0 해외 정보 전달
         </div>
     </div>
 
@@ -112,8 +112,6 @@
             <span class="menu_divide">&nbsp;|&nbsp;</span>
             <a href="/chat/list">채팅창</a>
             <span class="menu_divide">&nbsp;|&nbsp;</span>
-            <a href="/sms/form">msm보내기</a>
-            <span class="menu_divide">&nbsp;|&nbsp;</span>
             <a href="/notice/list">공지사항</a>
         </div>
     </nav>
@@ -174,15 +172,7 @@
           </li>
         </ul>
       </div>
-      <!-- 메뉴 종료 -->
 
-      <!-- 관리 및 생성 메뉴 (관리자에게만 보임) -->
-      <a href="/survey/list_by_survey" role="button">설문조사</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>    
-      <a th:href="@{|/classify/list_search|}" role="button">리스트 조회</a><br>        <span class="menu_divide">&nbsp;|&nbsp;</span>
-      <a th:href="@{|/genre/create|}" role="button">대분류 생성</a><br>               <span class="menu_divide">&nbsp;|&nbsp;</span>
-      <a th:href="@{|/genre/list_all|}" role="button">대분류 조회</a><br>                <span class="menu_divide">&nbsp;|&nbsp;</span>
-      <a href="/chat/list">채팅창</a>                                                                  <span class="menu_divide">&nbsp;|&nbsp;</span>
-      <a href="/sms/form">msm보내기</a>
       
     </div>
   </nav>

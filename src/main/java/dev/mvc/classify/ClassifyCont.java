@@ -85,14 +85,6 @@ public class ClassifyCont {
       System.out.println(" -> Error 에러 발생  [ classify/msg ]");
       return "/classify/create";
     }
-    System.out.println(" 이름 : " + classifyVO.getClassifyno());
-    System.out.println(" 이름 : " + classifyVO.getClassify());
-    System.out.println(" 이름 : " + classifyVO.getGenreno());
-    System.out.println(" 이름 : " + classifyVO.getSeqno());
-    System.out.println(" 이름 : " + classifyVO.getVisible());
-//    System.out.println(" 가격 : " + classifyVO.getPrice());
-//    System.out.println(" 개봉일 : " + classifyVO.getRdate());
-
     int cnt = this.classifyProc.create(classifyVO);
     System.out.println(" 이름 : " + classifyVO.getClassify());
     System.out.println(" -> cnt [classifyCont]: " + cnt);

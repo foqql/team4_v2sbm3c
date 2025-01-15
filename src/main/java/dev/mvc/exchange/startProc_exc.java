@@ -1,4 +1,4 @@
-package dev.mvc.news;
+package dev.mvc.exchange;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +8,22 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import dev.mvc.tool.Tool;
-
 @Component
-public class startProc implements ApplicationRunner  {
+public class startProc_exc implements ApplicationRunner  {
   @Override
   public void run(ApplicationArguments args) throws Exception {
-
+      System.out.println("-> 환율 크롤링 시작");
       
-      // ------------------------------------------------------------------------------
+      
+   // ------------------------------------------------------------------------------
       // Python 스크립트 실행 (추가된 부분)
       // ------------------------------------------------------------------------------
       try {
-          String pythonScriptPath = "src/main/python/crawling.py"; // Python 스크립트 경로
+          String pythonScriptPath = "src/main/python/exc.py"; // Python 스크립트 경로
           ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath);
           processBuilder.redirectErrorStream(true);
           Process process = processBuilder.start();
+          System.out.println("-> 환율 크롤링 중");
           // Python 스크립트의 출력 결과를 읽기
           BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
           String line;
@@ -40,6 +40,8 @@ public class startProc implements ApplicationRunner  {
       } catch (IOException | InterruptedException e) {
           e.printStackTrace();
       }
-            
+      
+      System.out.println("-> 환율 크롤링 시작 끝");
+      
   }
 }
