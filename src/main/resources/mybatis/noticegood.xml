@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.noticegood.NoticegoodDAOInter">
+
+  <!-- 알림 존재 여부 확인 -->
+  <select id="notice_check" parameterType="dev.mvc.noticegood.NoticegoodVO">
+    SELECT count(*) AS cnt
+    FROM noticegood
+    WHERE notino=#{notino} AND memberno=#{memberno}
+  </select>
+  
+  <!-- 알람 갯수 -->
+  <select id="count_likes" parameterType="int" resultType="int">
+    SELECT count(*) AS cnt
+    FROM noticegood
+    WHERE notino=#{notino}
+  </select>
+
+
+  <!-- 알림 추가 -->
+  <insert id="noticegood_insert" parameterType="dev.mvc.noticegood.NoticegoodVO">
+    INSERT INTO noticegood(notino, memberno)
+    VALUES (#{notino}, #{memberno})
+  </insert>
+
+  <!-- 알림 취소 -->
+  <delete id="noticegood_delete" parameterType="dev.mvc.noticegood.NoticegoodVO">
+    DELETE FROM noticegood 
+    WHERE notino=#{notino} AND memberno=#{memberno}
+  </delete>
+  
+  
+
+</mapper>
