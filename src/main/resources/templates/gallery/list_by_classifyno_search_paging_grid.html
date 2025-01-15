@@ -1,133 +1,111 @@
 <!DOCTYPE html>
-
 <html layout:decorate="~{layout}"> <!-- layout.html 상속-->
 <div layout:fragment="content">
 
-  <div class='title_line'>
-      <span th:text="${classifyVO.bigcla}" class="title_line_text"></span>
-      > <span th:text="${classifyVO.classify}" class="title_line_text"></span>
-    <span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
-  </div>
-
-  <aside class="aside_right">
-    <span th:if="${session.grade == 'admin'}">
-      <a th:href="@{|/gallery/create?classifyno=${classifyVO.classifyno}|}">등록</a>
-      <span class="menu_devide">│</span>    
-    </span>
-    
-    <a href="javascript:location.reload();">새로고침</a>
-    <span class='menu_divide' >│</span>    
-    <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">목록형</a>    
-    <span class='menu_divide' >│</span>
-    <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno }&word=${word }&now_page=${now_page}|}">갤러리형</a>    
-  </aside> 
-
-  <!-- /gallery/list_search_com.html 파일의 list_search_fragment import -->
-  <div th:replace="~{gallery/list_search_com_grid::list_search_fragment}"></div>
-     
-  <div class='menu_line'></div>
-       
-  <div style='width: 100%;'> <!-- 갤러리 Layout  시작 -->
-    <div th:if="${list.size() > 0}"  th:each="galleryVO, status:${list}" 
-         th:attr="onclick=|location.href='/gallery/read?galleryno=${galleryVO.galleryno}&word=${word}&now_page=${now_page}'|"
-         style='width: 19.0%; height: 270px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;'>
-
-      <div th:if="${galleryVO.file1.endsWith('jpg') or galleryVO.file1.endsWith('png')  or galleryVO.file1.endsWith('gif')}"
-             style="width: 100%; height: 200px;">
-        <img th:src="@{|/gallery/storage/${galleryVO.thumb1}|}" style="width: 100%; height: 100%;">
-      </div>
-
-      <div th:if="${((galleryVO.file1.endsWith('jpg') or galleryVO.file1.endsWith('png')  or galleryVO.file1.endsWith('gif')) == false) and (galleryVO.size1 > 0)}"
-             style="width: 100%; height: 100px;">
-        <span th:text="${galleryVO.file1}"></span>
-      </div>
-
-      <div th:if="${galleryVO.size1 == 0}" style="width: 100%; height: 100px;">
-        <img src="/gallery/images/none1.png" style="width: 100%; height: 100%;">
-      </div>
-      <div>
-        <span th:if="${galleryVO.title.length() > 16 }" 
-                  th:text="|${galleryVO.title.substring(0, 16) }...|" style="font-weight: bold;"></span>
-        <span th:if="${galleryVO.title.length() <= 16 }" 
-                  th:text="|${galleryVO.title}|" style="font-weight: bold;"></span>
-        <br>
-        
-          <script>
-    window.onload = function() {
-      // <img src="/gallery/images/arrow-up.png" style="width: 22px" title="추천">          
-      // <img src="/gallery/images/arrow-down.png" style="width: 22px" title="비추천">   
-      // 현재 로그인한 사용자의 추천 여부 반영
-
-      let hartCnt = '[[${hartCnt}]]'; //  javascript -> Thymeleaf -> session
-      let tag='';
-      
-      if (hartCnt == 1) {
-        tag = '<a href="javascript:good([[${galleryVO.galleryno}]])"><img src="/gallery/images/yes.png" style="width: 22px" title="추천"></a>';
-        document.querySelector('#hart_panel').innerHTML = tag; 
-      } else {
-        tag = '<a href="javascript:good([[${galleryVO.galleryno}]])"><img src="/gallery/images/no.png" style="width: 22px" title="비추천"></a>';
-        document.querySelector('#hart_panel').innerHTML = tag; 
-      }    
-      
-      document.querySelector('#recom_panel').innerHTML = '([[${galleryVO.recom}]])';
-    }
-    
-    
-
-    function good(galleryno) {
-      console.log('-> galleryno: ' + galleryno);
-
-      fetch("/gallery/good", {
-          "method": "post",
-          "headers": {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify({galleryno}) // {"galleryno":galleryno}, JSON 형식으로 전송
-        })
-        .then((response) => response.json()) // 응답 문자열 추출
-        .then((data) => {
-          console.log('-> data.isMember: ' + data.isMember);
-
-          if (data.isMember == 1) { // 회원
-            let hartCnt =data.hartCnt; //  javascript -> Thymeleaf -> session
-            let tag='';
-            
-            if (hartCnt == 1) {
-              tag = '<a href="javascript:good([[${galleryVO.galleryno}]])"><img src="/gallery/images/yes.png" style="width: 22px" title="추천"></a>';
-              document.querySelector('#hart_panel').innerHTML = tag; 
-            } else {
-              tag = '<a href="javascript:good([[${galleryVO.galleryno}]])"><img src="/gallery/images/no.png" style="width: 22px" title="비추천"></a>';
-              document.querySelector('#hart_panel').innerHTML = tag; 
-            }    
-            
-            document.querySelector('#recom_panel').innerHTML = '(' + data.recom + ')';
-          
-          } else { // 비회원
-            alert("로그인해야 추천 할 수 있습니다.");
-            location.href='/member/login_cookie_need';  
-
-          }
-        }
-      );
-    }
-  </script>
-  
-  
-      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-        <span th:text="| ${galleryVO.rdate.substring(0, 10)}|"></span>
-        <span style="text-align: right; font-size: 1.5em;">♡</span>
-      </div>
+    <!-- 제목 라인 -->
+    <div class='title_line'>
+        <span th:text="${classifyVO.bigcla}" class="title_line_text"></span>
+        > <span th:text="${classifyVO.classify}" class="title_line_text"></span>
+        <span th:if="${word != ''}" th:text="|> ${word} (${search_count} 건)|" class="title_line_text"></span>
     </div>
-    
-    <div th:if="${list.size() == 0}" style="text-align: center; padding: 50px 0px;">
-      <span>관련 글이 등록되지 않았습니다.</span>
-    </div> 
-  </div>  <!-- 갤러리 Layout  종료 -->
-   
-  <!-- 페이지 버튼 목록 출력 시작 -->
-  <div class="bottom_menu" th:utext="${paging}"></div>
-  <!-- 페이지 버튼 목록 출력 종료 --> 
 
+    <aside class="aside_right">
+        <span th:if="${session.grade == 'admin'}">
+            <a th:href="@{|/gallery/create?classifyno=${classifyVO.classifyno}|}">등록</a>
+            <span class="menu_devide">│</span>    
+        </span>
+
+        <a href="javascript:location.reload();">새로고침</a>
+        <span class='menu_divide'>│</span>    
+        <a th:href="@{|./list_by_classifyno?classifyno=${classifyVO.classifyno}&word=${word}&now_page=${now_page}|}">목록형</a>    
+        <span class='menu_divide'>│</span>
+        <a th:href="@{|./list_by_classifyno_grid?classifyno=${classifyVO.classifyno}&word=${word}&now_page=${now_page}|}">갤러리형</a>    
+    </aside> 
+
+    <!-- 갤러리 Layout 시작 -->
+    <div style="width: 100%;">
+        <div th:if="${list.size() > 0}" th:each="galleryVO, status:${list}" 
+             style="width: 19.0%; height: 270px; float: left; margin: 0.5%; padding: 0.5%; background-color: #EEEFFF; text-align: left; cursor: pointer;"
+             th:attr="onclick=|location.href='/gallery/read?galleryno=${galleryVO.galleryno}&word=${word}&now_page=${now_page}'|">
+
+            <!-- 썸네일 이미지 -->
+            <div th:if="${galleryVO.file1.endsWith('jpg') or galleryVO.file1.endsWith('png') or galleryVO.file1.endsWith('gif')}"
+                 style="width: 100%; height: 200px;">
+                <img th:src="@{|/gallery/storage/${galleryVO.thumb1}|}" style="width: 100%; height: 100%;">
+            </div>
+
+            <!-- 파일명 표시 -->
+            <div th:if="${((galleryVO.file1.endsWith('jpg') or galleryVO.file1.endsWith('png') or galleryVO.file1.endsWith('gif')) == false) and (galleryVO.size1 > 0)}"
+                 style="width: 100%; height: 100px;">
+                <span th:text="${galleryVO.file1}"></span>
+            </div>
+
+            <!-- 기본 이미지 -->
+            <div th:if="${galleryVO.size1 == 0}" style="width: 100%; height: 100px;">
+                <img src="/gallery/images/none1.png" style="width: 100%; height: 100%;">
+            </div>
+
+            <!-- 제목 -->
+            <div>
+                <span th:if="${galleryVO.title.length() > 16}" 
+                      th:text="|${galleryVO.title.substring(0, 16)}...|" style="font-weight: bold;"></span>
+                <span th:if="${galleryVO.title.length() <= 16}" 
+                      th:text="|${galleryVO.title}|" style="font-weight: bold;"></span>
+            </div>
+
+            <!-- 하트 패널 -->
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                <span th:text="|${galleryVO.rdate.substring(0, 10)}|"></span>
+                <span id="hart_panel" onclick="event.stopPropagation();">
+                    <!-- 수정된 부분: galleryVO.galleryno를 문자열로 감싸서 전달 -->
+                    <a href="javascript:good(${galleryVO.galleryno})">
+                        <img th:src="@{|/gallery/images/${galleryVO.hartCnt == 1 ? 'yes' : 'no'}.png|}" style="width: 22px;" title="추천">
+                    </a>
+                </span>
+                <span id="recom_panel">( <span th:text="${galleryVO.recom}"></span> )</span>
+            </div>
+        </div>
+
+        <div th:if="${list.size() == 0}" style="text-align: center; padding: 50px 0px;">
+            <span>관련 글이 등록되지 않았습니다.</span>
+        </div>
+    </div> <!-- 갤러리 Layout 종료 -->
+
+    <!-- 페이징 -->
+    <div class="bottom_menu" th:utext="${paging}"></div>
+
+    <!-- 하트 패널 관련 스크립트 -->
+    <script>
+        function good(galleryno) {
+            console.log('-> galleryno: ' + galleryno);
+
+            fetch("/gallery/good", {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ galleryno }) // JSON 형식으로 전송
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.isMember === 1) { // 회원
+                    updateHartPanel(data.hartCnt, galleryno);
+                    setRecomPanel(data.recom);
+                } else { // 비회원
+                    alert("로그인해야 추천 할 수 있습니다.");
+                    location.href = '/member/login_cookie_need';
+                }
+            });
+        }
+
+        function updateHartPanel(hartCnt, galleryno) {
+            const tag = hartCnt === 1
+                ? '<a href="javascript:good(' + galleryno + ')"><img src="/gallery/images/yes.png" style="width: 22px;" title="추천"></a>'
+                : '<a href="javascript:good(' + galleryno + ')"><img src="/gallery/images/no.png" style="width: 22px;" title="비추천"></a>';
+            document.querySelector('#hart_panel').innerHTML = tag;
+        }
+
+        function setRecomPanel(recom) {
+            document.querySelector('#recom_panel').textContent = '(' + recom + ')';
+        }
+    </script>
 </div>
 </html>
-

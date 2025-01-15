@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.boot.ApplicationArguments;
+
 import dev.mvc.classify.ClassifyVO;
 
 /**
@@ -13,6 +15,7 @@ import dev.mvc.classify.ClassifyVO;
  *
  */
 public interface NewsDAOInter {
+  
   /**
    * 등록, 추상 메소드
    * @param newsVO

@@ -29,6 +29,7 @@
             padding: 10px;
             background-color: #f9f9f9;
             border-radius: 10px;
+            width: 100%;  /* 전체 너비를 100%로 설정 */
         }
 
         .content-image {
@@ -52,16 +53,20 @@
             border: 1px solid #dedede;
             border-radius: 8px;
             background-color: #fff;
+            justify-content: space-between; /* 왼쪽은 아이템, 오른쪽은 프로그래스 바 */
         }
 
         .progress-item .progress-bar-wrapper {
-            flex-grow: 1;
+            width: 55%;    /* 너비를 70%로 설정 (조정 가능) */
             margin-left: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* 수평으로 아이템과 프로그래스 바를 배치 */
         }
 
         .progress-item span {
             flex-shrink: 0;
-            width: 120px;
+
             font-size: 1.2em;
             font-weight: bold;
             color: #333;
@@ -70,7 +75,7 @@
         .progress-item span.count {
             font-size: 1.1em;
             color: #555;
-            margin-left: 10px;
+            margin-right: 25px; /* 오른쪽 여백 추가 */
         }
 
         .content-info span {
@@ -109,7 +114,8 @@
                             <!-- 텍스트 -->
                             <div>
                                <div style="text-align: center;">
-                                  <span style="font-size: 2em; font-weight: bold;" th:text="${surveyVO.topic}"></span><br><br><br>
+                                  <span style="font-size: 2em; font-weight: bold;
+                                              width: 120px; margin-left : 5px;" th:text="${surveyVO.topic}"></span><br><br><br>
                               </div>
                             </div>
 
@@ -120,13 +126,14 @@
 
                             <!-- 프로그래스 바 -->
                             <div th:each="surveyitem, i : ${surveyitemVO}" class="progress-item">
-                                <span th:text="${surveyitem.item}"></span>
-                                <span th:text="${surveyitem.itemcnt + '표'}" class="count"></span>
+                                <span style="font-size: 1em;" th:text="${surveyitem.item}"></span>
+                                
                                 <div class="progress-bar-wrapper">
+                                    <span style="font-size: 0.8em;" th:text="${surveyitem.itemcnt + '표'}" class="count"></span>
+                                    
                                     <div class="progress-bar">
-                                        <div class="progress" 
-                                             th:if="${cntsum > 0}"
-                                             th:style="'width: ' + (${surveyitem.itemcnt} / ${cntsum}) * 100 + '%'">
+<!--                                        <div class="progress" th:if="${cntsum > 0}" th:style="'width: ' + (${surveyitem.itemcnt} / ${cntsum}) * 100 + '%'">-->                                        <div class="progress" th:if="${cntsum > 0}" th:style="'width: ' + (${surveyitem.itemcnt} * 10) + 'px'">
+                                              
                                             <!-- Progress Bar Width -->
                                         </div>
                                         <div class="progress"

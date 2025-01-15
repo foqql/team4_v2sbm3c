@@ -25,7 +25,10 @@ public class GalleryVO {
   private String rdate = "";
   
   /** 추천 */
-  private int recom;
+  private int recom = 0;
+  
+  /** 추천 */
+  private int hartCnt;
   
   
 

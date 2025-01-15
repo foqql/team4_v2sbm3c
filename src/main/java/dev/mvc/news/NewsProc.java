@@ -9,8 +9,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+
 import dev.mvc.tool.Security;
 import dev.mvc.tool.Tool;
+
+
 
 @Component("dev.mvc.news.NewsProc")
 public class NewsProc implements NewsProcInter {
@@ -20,6 +26,8 @@ public class NewsProc implements NewsProcInter {
   @Autowired // NewsDAOInter interface를 구현한 클래스의 객체를 만들어 자동으로 할당해라.
   private NewsDAOInter newsDAO;
 
+
+  
   @Override // 추상 메소드를 구현했음.
   public int create(NewsVO newsVO) {
     // -------------------------------------------------------------------

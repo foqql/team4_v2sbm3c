@@ -275,6 +275,24 @@ public class GalleryProc implements GalleryProcInter {
     return cnt;
   }
   
+  @Override
+  public int increaseRecom(int galleryno) {
+    int cnt = this.galleryDAO.increaseRecom(galleryno);
+    return cnt;
+  }
+
+  @Override
+  public int decreaseRecom(int galleryno) {
+    int cnt = this.galleryDAO.decreaseRecom(galleryno);
+    return cnt;
+  }
+  
+  @Override
+  public int good(int galleryno) {
+
+    return 0;
+  }
+  
 }
 
 

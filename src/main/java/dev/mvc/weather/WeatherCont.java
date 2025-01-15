@@ -417,8 +417,7 @@ public class WeatherCont {
       map.put("memberno", memberno);
 
       System.out.println("->recom: " + weatherVO.getRecom());
-      System.out.println("->weatherno: " + weatherno);
-      System.out.println("->memberno: " + memberno);
+
 
       hartCnt = this.areagoodProc.hartCnt(map);
 

@@ -97,4 +97,18 @@ public interface GalleryDAOInter {
    * @return
    */
   public int count_by_memberno(int memberno);
+  
+  /**
+   * 추천 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseRecom(int galleryno);
+ 
+  /**
+   * 추천 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseRecom(int galleryno);
 }

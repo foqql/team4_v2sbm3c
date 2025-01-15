@@ -10,7 +10,7 @@ import lombok.ToString;
 public class GallerygoodVO {
 
     /** 사진 추천 번호 */
-    private int areagoodno;
+    private int gallerygoodno;
 
     /** 등록일 */
     private String rdate;
