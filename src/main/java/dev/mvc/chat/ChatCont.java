@@ -20,6 +20,7 @@ public class ChatCont {
     private ChatProcInter chatProc;
 
     private static final String UPLOAD_DIR = "C:/uploads"; // 이미지 업로드 디렉토리
+    private static final String DEFAULT_IMAGE_PATH = "/static/css/images/s1234.jpg"; // 기본 이미지 경로
 
     @GetMapping("/list")
     public String list(Model model, HttpSession session) {
@@ -37,6 +38,14 @@ public class ChatCont {
         return "chat";
     }
 
+    @GetMapping("/history")
+    public String history(Model model, HttpSession session) {
+        List<ChatVO> list = chatProc.list();
+        model.addAttribute("chatList", list);
+        model.addAttribute("loggedInUserGrade", session.getAttribute("grade")); // 로그인된 계정의 등급 추가
+        return "chatHistory"; // HTML 파일 이름
+    }
+
     @PostMapping("/create")
     public String create(@ModelAttribute ChatVO chatVO, @RequestParam("image") MultipartFile imageFile, HttpSession session) {
         if (session.getAttribute("memberno") == null) {
@@ -52,7 +61,7 @@ public class ChatCont {
             String imageUrl = saveImageFile(imageFile);
             chatVO.setImageUrl(imageUrl);
         } else {
-            chatVO.setImageUrl(""); // 이미지가 없는 경우 빈 문자열로 설정
+            chatVO.setImageUrl(DEFAULT_IMAGE_PATH); // 이미지가 없는 경우 기본 이미지 경로로 설정
         }
 
         chatProc.create(chatVO);
@@ -75,14 +84,13 @@ public class ChatCont {
         return "/uploads/" + fileName;
     }
 
-
     @PostMapping("/delete/{chatno}")
     public String delete(@PathVariable("chatno") int chatno, HttpSession session) {
         String grade = (String) session.getAttribute("grade");
         if (grade != null && grade.equals("admin")) {
             chatProc.delete(chatno);
         }
-        return "redirect:/chat/list";
+        return "redirect:/chat/history"; // 채팅 히스토리 페이지로 리디렉션
     }
 
     // 이미지 파일을 지정된 폴더에 저장하고 URL을 반환
@@ -96,3 +104,5 @@ public class ChatCont {
         return "/uploads/" + originalFilename; // 이미지 URL 경로 반환
     }
 }
+
+
