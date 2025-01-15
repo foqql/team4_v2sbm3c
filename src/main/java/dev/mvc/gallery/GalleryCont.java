@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.gallerygood.GallerygoodProcInter;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
@@ -40,6 +41,10 @@ public class GalleryCont {
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
   private GenreProcInter genreProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.gallerygood.GallerygoodProc") // @Component("dev.mvc.weather.WeatherProc")
+  private GallerygoodProcInter gallerygoodProc;
 
   @Autowired
   @Qualifier("dev.mvc.gallery.GalleryProc") // @Component("dev.mvc.gallery.GalleryProc")
@@ -48,7 +53,8 @@ public class GalleryCont {
   public GalleryCont() {
     System.out.println("-> GalleryCont created.");
   }
-
+  
+  
   /**
    * POST 요청시 새로고침 방지, POST 요청 처리 완료 → redirect → url → GET → forward -> html 데이터
    * 전송
@@ -212,8 +218,6 @@ public class GalleryCont {
 
   }
 
-
-
   /**
    * 유형 3
    * 카테고리별 목록 + 검색 + 페이징 http://localhost:9091/gallery/list_by_classifyno?classifyno=5
@@ -221,7 +225,7 @@ public class GalleryCont {
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno_gird")
+  @GetMapping(value = "/list_by_classifyno")
   public String list_by_classifyno_search_paging(HttpSession session, Model model, 
       @RequestParam(name = "classifyno", defaultValue = "1") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
@@ -276,8 +280,9 @@ public class GalleryCont {
    * 
    * @return
    */
-  @GetMapping(value = "/list_by_classifyno")
+  @GetMapping(value = "/list_by_classifyno_grid")
   public String list_by_classifyno_search_paging_grid(HttpSession session, Model model, 
+      @RequestParam(name = "galleryno", defaultValue = "0") int galleryno,
       @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
@@ -292,6 +297,12 @@ public class GalleryCont {
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
+
+    
+    GalleryVO galleryVO = this.galleryProc.read(galleryno);
+    model.addAttribute("galleryVO", galleryVO);
+    
+
 
     word = Tool.checkNull(word).trim();
 
@@ -318,7 +329,28 @@ public class GalleryCont {
     int no = search_count - ((now_page - 1) * Gallery.RECORD_PER_PAGE);
     model.addAttribute("no", no);
 
-    // /templates/gallery/list_by_classifyno_search_paging_grid.html
+    
+    // -------------------------------------------------------------------------------------------
+    // 추천 관련
+    // -------------------------------------------------------------------------------------------
+    HashMap<String, Object> map2 = new HashMap<String, Object>();
+    map2.put("galleryno", galleryno);
+
+    int hartCnt = 0;
+    if (session.getAttribute("memberno") != null) { // 회원인 경우만 카운트 처리
+      int memberno = (int) session.getAttribute("memberno");
+      map2.put("memberno", memberno);
+
+      System.out.println("->recom: " + galleryVO.getRecom());
+      System.out.println("->galleryno: " + galleryno);
+      System.out.println("->memberno: " + memberno);
+
+      hartCnt = this.gallerygoodProc.hartCnt(map2);
+
+    }
+    model.addAttribute("hartCnt", hartCnt);
+    // ---------------------------------------------------------------
+    
     return "/gallery/list_by_classifyno_search_paging_grid";
   }
 

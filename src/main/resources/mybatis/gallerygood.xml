@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.gallerygood.GallerygoodDAOInter">
+
+
+
+ <insert id="create" parameterType="dev.mvc.gallerygood.GallerygoodVO">
+    INSERT INTO gallerygood(gallerygoodno, rdate, galleryno, memberno)
+    VALUES (gallerygood_seq.nextval, sysdate, #{galleryno}, #{memberno})
+  </insert>        
+  
+    <!-- 전체 목록 -->
+  <select id="list_all" resultType="dev.mvc.gallerygood.GallerygoodVO">
+    SELECT gallerygoodno, rdate, galleryno, memberno
+    FROM gallerygood
+    ORDER BY gallerygoodno DESC
+  </select>
+  
+  
+    <!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM gallerygood
+    WHERE gallerygoodno = #{gallerygoodno}
+  </delete>
+  
+  
+    <!-- 특정 컨텐츠의 특정 회원 추천 갯수 산출 -->
+  <select id="hartCnt" resultType="int" parameterType='HashMap'>
+    SELECT COUNT(*) as cnt
+    FROM gallerygood
+    WHERE galleryno=#{galleryno} AND memberno=#{memberno}
+  </select>
+  
+  <!-- 일반적인 조회 -->
+   <select id="read" resultType="dev.mvc.gallerygood.GallerygoodVO">
+    SELECT gallerygoodno, rdate, galleryno, memberno
+    FROM gallerygood
+    WHERE gallerygoodno =#{gallerygoodno}
+  </select>
+    
+    
+    <!-- galleryno, memberno로 조회 -->
+    <select id="readByGallerynoMemberno" resultType="dev.mvc.gallerygood.GallerygoodVO" parameterType="HashMap">
+      SELECT gallerygoodno, rdate, galleryno, memberno
+      FROM gallerygood
+      WHERE galleryno=#{galleryno} AND memberno=#{memberno}
+    </select>  
+    
+        <!-- 전체 목록, 테이블 3개 join -->
+  <select id="list_all_join" resultType="dev.mvc.gallerygood.GalleryGallerygoodMemberVO">
+    SELECT r.gallerygoodno, r.rdate as r_rdate, r.galleryno, c.gallery, r.memberno, m.id, m.mname
+    FROM gallery c, gallerygood r, member m
+    where c.galleryno = r.galleryno AND r.memberno = m.memberno
+    ORDER BY gallerygoodno DESC
+  </select>
+    
+  
+</mapper>
+

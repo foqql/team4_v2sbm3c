@@ -33,6 +33,14 @@ public interface GalleryProcInter {
    */
   public GalleryVO read(int galleryno);
   
+  
+  /**
+   * 사진 띄우기
+   * @return
+   */
+  public ArrayList<GalleryVO> photolist();
+  
+  
   /**
    * 카테고리별 검색 목록
    * @param map

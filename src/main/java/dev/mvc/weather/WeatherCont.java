@@ -27,6 +27,8 @@ import dev.mvc.areagood.AreagoodVO;
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.gallery.GalleryProcInter;
+import dev.mvc.gallery.GalleryVO;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
@@ -57,6 +59,10 @@ public class WeatherCont {
   @Autowired
   @Qualifier("dev.mvc.areagood.AreagoodProc") // @Component("dev.mvc.weather.WeatherProc")
   private AreagoodProcInter areagoodProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.gallery.GalleryProc") // @Component("dev.mvc.weather.WeatherProc")
+  private GalleryProcInter galleryProc;
 
   public WeatherCont() {
     System.out.println("-> WeatherCont created.");
@@ -235,6 +241,23 @@ public class WeatherCont {
     }
 
   }
+  
+  
+//  /**
+//   * 날씨 목록에 사진 http://localhost:9091/gallery/list_all
+//   * 
+//   * @return
+//   */
+//  @GetMapping(value = "/photos")
+//  public String photos(HttpSession session, Model model) {
+//    
+//      ArrayList<GalleryVO> list = this.galleryProc.photos(); // 모든 목록
+//      model.addAttribute("list", list);
+//      
+//      return "/gallery/list_by_classifyno_search_paging";
+//    
+//  }
+  
 
   /**
    * 유형 3 카테고리별 목록 + 검색 + 페이징
@@ -254,12 +277,19 @@ public class WeatherCont {
     model.addAttribute("menu", menu);
     ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
+    
+    ArrayList<GalleryVO> photolist = this.galleryProc.photolist(); // 모든 목록
+    model.addAttribute("photolist", photolist);
+    
+   // System.out.println("-> photolist: " + photolist);
 
     // classifyno가 9일 경우에만 arealist를 추가
     if (classifyno == 9) {
       List<WeatherVO> arealist = this.weatherProc.arealist();
       model.addAttribute("arealist", arealist);
     }
+    
+   
 
     // 분류 정보 가져오기
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
@@ -275,7 +305,7 @@ public class WeatherCont {
     ArrayList<WeatherVO> list = this.weatherProc.list_by_classifyno_search_paging(map);
     model.addAttribute("list", list);
 
-    System.out.println("-> list: " + list);
+    // System.out.println("-> list: " + list);
     
     model.addAttribute("word", word);
 
