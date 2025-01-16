@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅 내역</title>
+    <style>
+        .chat-box { 
+            width: 80%; 
+            margin: 0 auto; 
+            border: 2px solid #4CAF50; 
+            padding: 20px; 
+            background-color: #e8f5e9; 
+        }
+        .chat-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .chat-table th, .chat-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .chat-table th {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+        }
+        .chat-table td {
+            text-align: center;
+        }
+        .admin-username {
+            color: blue; 
+        }
+        .member-username {
+            color: black; 
+        }
+        h2 {
+            text-align: center; 
+            color: #4CAF50; 
+        }
+        .scrollable { 
+            height: 500px; 
+            overflow-y: scroll; 
+        }
+        img {
+            max-width: 100px; 
+            max-height: 100px; 
+        }
+        .delete-btn { 
+            background-color: red; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            cursor: pointer; 
+        }
+        .delete-btn:hover { 
+            background-color: darkred; 
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" class="chat-box">
+    <h2>채팅 내역</h2>
+    <div id="chat-content" class="scrollable">
+        <table class="chat-table">
+            <thead>
+                <tr>
+                    <th>이용자명</th>
+                    <th>글 작성 내용</th>
+                    <th>올린 사진</th>
+                    <th>작성 날짜</th>
+                    <th th:if="${loggedInUserGrade == 'admin'}">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="chat : ${chatList}">
+                    <tr>
+                        <td th:class="${chat.grade} <= 10 ? 'admin-username' : 'member-username'" th:text="${chat.id}">아이디</td>
+                        <td th:text="${chat.message}">메시지</td>
+                        <td>
+                            <img th:src="${chat.imageUrl != '' ? chat.imageUrl : '/static/css/images/s1234.jpg'}" alt="올린 이미지 없음"/>
+                        </td>
+                        <td th:text="${#dates.format(chat.rdate, 'yyyy-MM-dd HH:mm:ss')}">시간</td>
+                        <td th:if="${loggedInUserGrade == 'admin'}">
+                            <form th:action="@{'/chat/delete/' + ${chat.chatno}}" method="post" style="display:inline;">
+                                <button type="submit" class="delete-btn">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

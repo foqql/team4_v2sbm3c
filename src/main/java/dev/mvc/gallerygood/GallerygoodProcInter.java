@@ -53,6 +53,5 @@ public interface GallerygoodProcInter {
    */
   public ArrayList<GalleryGallerygoodMemberVO> list_all_join();
 
-  public int getRecom(HashMap<String, Object> map2);
 
 }

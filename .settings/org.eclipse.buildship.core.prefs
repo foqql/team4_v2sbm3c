@@ -1,21 +1,2 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=562737c7e9669251cec8e55cda142d7a962c1d5f
-arguments=
-auto.sync=false
-build.scans.enabled=false
-connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
 connection.project.dir=
 eclipse.preferences.version=1
-gradle.user.home=
-java.home=
-jvm.arguments=
-offline.mode=false
-override.workspace.settings=false
-<<<<<<< HEAD
-show.console.view=false
-show.executions.view=false
-=======
-show.console.view=true
-show.executions.view=true
->>>>>>> cb2310f3bee046139db11768f0f3368147cd6d10

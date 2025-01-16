@@ -4,8 +4,6 @@
  
 <mapper namespace="dev.mvc.gallerygood.GallerygoodDAOInter">
 
-
-
  <insert id="create" parameterType="dev.mvc.gallerygood.GallerygoodVO">
     INSERT INTO gallerygood(gallerygoodno, rdate, galleryno, memberno)
     VALUES (gallerygood_seq.nextval, sysdate, #{galleryno}, #{memberno})

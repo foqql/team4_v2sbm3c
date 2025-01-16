@@ -49,16 +49,20 @@ public interface ClassifyDAOInter {
   public Integer list_search_count(String word);
 
   /**
-   * 검색 + 페이징 <select id="list_search_paging" resultClassify="dev.mvc.classify.ClassifyVO"
+   * 검색 + 페이징
+   * <select id="list_search_paging" resultClassify="dev.mvc.classify.ClassifyVO"
    * parameterClassify="Map">
    * 
    * @param map
    * @return
    */
   public ArrayList<ClassifyVO> list_search_paging(Map<String, Object> map);
-  
-  public int update_classify_cnt();
+
+  public int update_classify_cnt(String link);
+
   public int update_classify_genre_cnt();
-  
+
   public Integer[] select_newsno(int classifyno);
+
+  public int checkTable(String link);
 }

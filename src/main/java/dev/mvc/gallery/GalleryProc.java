@@ -275,6 +275,7 @@ public class GalleryProc implements GalleryProcInter {
     return cnt;
   }
   
+
   @Override
   public int increaseRecom(int galleryno) {
     int cnt = this.galleryDAO.increaseRecom(galleryno);
@@ -292,6 +293,7 @@ public class GalleryProc implements GalleryProcInter {
 
     return 0;
   }
+
   
 }
 

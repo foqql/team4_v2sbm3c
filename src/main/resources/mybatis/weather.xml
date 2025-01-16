@@ -38,12 +38,19 @@
 
 
 
-    <!-- 모든 카테고리의 등록된 글목록 수정
-  <select id="list_all" resultType="ev.mvc.weather.WeatherVO">
-    SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
-    FROM  weather
-    ORDER BY weatherno DESC
-  </select>-->
+      <!-- 모든 카테고리의 등록된 글목록-->
+   <select id="list_all" resultType="dev.mvc.weather.WeatherVO">
+      SELECT
+        w.weatherno,
+        w.file1,
+        w.thumb1,  
+        a.city,  
+        w.rdate,    
+        w.weather, 
+        w.temp 
+      FROM weather w
+      JOIN area a ON w.areano = a.areano  -- weather와 area 테이블을 areano 컬럼으로 조인
+    </select>
 
   
   

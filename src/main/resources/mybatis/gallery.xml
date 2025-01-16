@@ -26,11 +26,11 @@
     </select> 
     
       <!-- 일반적인 조회 -->
-    <select id="read" resultType="dev.mvc.gallery.GalleryVO" parameterType="int">
-      SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
-      FROM gallery
-      WHERE galleryno = #{galleryno}
-    </select>
+      <select id="read" resultType="dev.mvc.gallery.GalleryVO" parameterType="int">
+        SELECT galleryno, memberno, classifyno, title, recom, rdate, file1, file1saved, thumb1, size1
+        FROM gallery
+        WHERE galleryno = #{galleryno}
+      </select>
     
       <!-- 날씨 목록에 사진 띄우기 -->
     <select id="photolist" resultType="dev.mvc.gallery.GalleryVO">
@@ -86,11 +86,11 @@
     
       <!-- 카테고리별 검색 + 페이징 목록 -->
     <select id="list_by_classifyno_search_paging" resultType="dev.mvc.gallery.GalleryVO" parameterType="HashMap">
-     SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1, r
+     SELECT galleryno, memberno, classifyno, title, recom, rdate, file1, file1saved, thumb1, size1, r
      FROM (
-                SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1, rownum as r
+                SELECT galleryno, memberno, classifyno, title, recom, rdate, file1, file1saved, thumb1, size1, rownum as r
                 FROM (
-                          SELECT galleryno, memberno, classifyno, title, rdate, file1, file1saved, thumb1, size1
+                          SELECT galleryno, memberno, classifyno, title, recom, rdate, file1, file1saved, thumb1, size1
                           FROM gallery
                           <choose>
                             <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
@@ -162,6 +162,7 @@
       SET recom = recom - 1
       WHERE galleryno =#{galleryno}
   </update>
+    
     
     
     </mapper> 

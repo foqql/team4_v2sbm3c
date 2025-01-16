@@ -114,7 +114,7 @@ public class GallerygoodCont {
 
     } else { // 정상적인 로그인이 아닌 경우 로그인 유도
       ra.addAttribute("url", "/member/login_cookie_need"); // /templates/member/login_cookie_need.html
-      return "redirect:/contentsgood/post2get"; // @GetMapping(value = "/msg")
+      return "redirect:/gallerygood/post2get"; // @GetMapping(value = "/msg")
     }
 
   }

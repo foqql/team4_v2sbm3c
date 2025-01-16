@@ -102,7 +102,7 @@
                         <button type="submit" class="delete-btn">삭제</button>
                     </form>
                     <!-- 이미지 출력 추가 -->
-                    <img th:if="${chat.imageUrl != ''}" th:src="${chat.imageUrl}" alt="Uploaded Image" style="max-width: 100px; max-height: 100px;"/>
+                    <img th:if="${chat.imageUrl != ''}" th:src="${chat.imageUrl}" alt="" style="max-width: 100px; max-height: 100px;"/>
                 </li>
             </th:block>
         </ul>
@@ -111,10 +111,11 @@
     <form th:action="@{/chat/create}" method="post" enctype="multipart/form-data">
         <textarea class="chat-textarea" name="message" rows="4" placeholder="메시지를 입력하세요..."></textarea>
         <br>
+        
         <input type="file" name="image"/>
         <button type="submit" class="submit-btn">메시지 전송</button>
     </form>
 </div>
-<a class="back-btn" href="/">메인으로 돌아가기</a>
+<a class="back-btn" href="/chat/history">채팅 내역 보기</a>
 </body>
 </html>

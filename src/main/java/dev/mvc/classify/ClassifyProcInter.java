@@ -112,7 +112,8 @@ public interface ClassifyProcInter {
   public Integer list_search_count(String word);
 
   /**
-   * 검색 + 페이징 <select id="list_search_paging" resultClassify="dev.mvc.classify.ClassifyVO"
+   * 검색 + 페이징
+   * <select id="list_search_paging" resultClassify="dev.mvc.classify.ClassifyVO"
    * parameterClassify="Map">
    * 
    * @param word            검색어
@@ -136,9 +137,11 @@ public interface ClassifyProcInter {
    */
   String pagingBox(int now_page, String word, String list_file_name, int search_count, int record_per_page,
       int page_per_block);
-  
-  public int update_classify_cnt();
+
+  public int update_classify_cnt(String link);
+
   public int update_classify_genre_cnt();
 
-  
+  public int checkTable(String link);
+
 }

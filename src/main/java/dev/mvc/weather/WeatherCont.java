@@ -92,6 +92,9 @@ public class WeatherCont {
       @RequestParam(name = "classifyno", defaultValue = "0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
@@ -176,7 +179,7 @@ public class WeatherCont {
       // ------------------------------------------------------------------------------
       try {
 
-        String pythonScriptPath = "C:/kd/ws_python/team4/wea.py";
+        String pythonScriptPath = "src/main/python/wea.py";
         System.out.println("Running Python script at: " + pythonScriptPath);
 
         ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath, continent, country, city);
@@ -228,6 +231,9 @@ public class WeatherCont {
     // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<WeatherVO> list = this.weatherProc.list_all(); // 모든 목록
@@ -275,6 +281,7 @@ public class WeatherCont {
     // 메뉴 데이터 추가
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
     ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
     
@@ -341,6 +348,9 @@ public class WeatherCont {
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
@@ -437,6 +447,9 @@ public class WeatherCont {
   public String map(Model model, @RequestParam(name = "weatherno", defaultValue = "0") int weatherno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     WeatherVO weatherVO = this.weatherProc.read(weatherno); // map 정보 읽어 오기
     model.addAttribute("weatherVO", weatherVO); // request.setAttribute("weatherVO", weatherVO);
@@ -476,6 +489,9 @@ public class WeatherCont {
       @RequestParam(name = "now_page", defaultValue = "0") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     WeatherVO weatherVO = this.weatherProc.read(weatherno); // map 정보 읽어 오기
     model.addAttribute("weatherVO", weatherVO); // request.setAttribute("weatherVO", weatherVO);
@@ -532,6 +548,9 @@ public class WeatherCont {
 
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -613,6 +632,9 @@ public class WeatherCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -723,6 +745,9 @@ public class WeatherCont {
 
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
       model.addAttribute("menu", menu);
+      
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
 
       WeatherVO weatherVO = this.weatherProc.read(weatherno);
       model.addAttribute("weatherVO", weatherVO);

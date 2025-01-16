@@ -408,7 +408,7 @@ public class ClassifyCont {
       @RequestParam(name = "now_page", defaultValue = "1") int now_page, HttpSession session) {
     if (this.memberProc.isMemberAdmin(session)) {
       ClassifyVO classifyVO = new ClassifyVO();
-      this.classifyProc.update_classify_cnt();
+//      this.classifyProc.update_classify_cnt();
       this.classifyProc.update_classify_genre_cnt();
 
       // 카테고리 그룹 목록
@@ -427,7 +427,22 @@ System.out.println("classifyVO : "+ classifyVO );
       ArrayList<GenreVO> GenreVO = this.genreProc.list_all();
       System.out.println(GenreVO);
       model.addAttribute("GenreVO", GenreVO);
+// -------------------- cnt 업데이트 시작
+      for (GenreVO i : GenreVO) {
+        
+          int check = this.classifyProc.checkTable(i.getLink()); // 테이블 여부 확인
+          System.out.println("check : " + check);
 
+          if (check == 1) { // 테이블이 있으면 실행
+              System.out.println("cnt 업데이트 실행");
+              System.out.println("link : " + i.getLink());
+              this.classifyProc.update_classify_cnt(i.getLink()); // genre테이블의 link컬럼의 데이터로 쿼리 진행
+              System.out.println("cnt 업데이트 끝");
+          }
+      }
+      
+      
+// -------------------- cnt 업데이트 끝
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
       model.addAttribute("menu", menu);
       ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
@@ -454,5 +469,11 @@ System.out.println("classifyVO : "+ classifyVO );
     }
 
   }
+
+ 
+
+
+
+  
 
 }

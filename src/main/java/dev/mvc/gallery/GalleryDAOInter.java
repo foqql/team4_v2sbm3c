@@ -111,4 +111,5 @@ public interface GalleryDAOInter {
    * @return
    */   
   public int decreaseRecom(int galleryno);
+
 }

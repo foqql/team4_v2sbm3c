@@ -9,7 +9,7 @@ public interface GallerygoodDAOInter {
    * @param calendarVO
    * @return
    */
-  public int create(GallerygoodVO areagoodVO);
+  public int create(GallerygoodVO gallerygoodVO);
   
   
   /**
@@ -23,7 +23,7 @@ public interface GallerygoodDAOInter {
    * @param calendarno
    * @return 삭제된 레코드 갯수
    */
-  public int delete(int areagoodno);
+  public int delete(int gallerygoodno);
   
   /**
    * 특정 컨텐츠의 특정 회원 추천 갯수 산출
@@ -36,16 +36,16 @@ public interface GallerygoodDAOInter {
   
   /**
    * 조회
-   * @param areagoodno
+   * @param gallerygoodno
    * @return
    */
-  public GallerygoodVO read(int areagoodno);
+  public GallerygoodVO read(int gallerygoodno);
   
   
   
   /**
    * weatherno, memberno로 조회
-   * @param areagoodno
+   * @param gallerygoodno
    * @return
    */
   public GallerygoodVO readByGallerynoMemberno( HashMap<String, Object> map);

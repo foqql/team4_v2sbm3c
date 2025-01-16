@@ -47,12 +47,12 @@ public class GalleryCont {
   private GenreProcInter genreProc;
   
   @Autowired
-  @Qualifier("dev.mvc.gallerygood.GallerygoodProc") // @Component("dev.mvc.weather.WeatherProc")
-  private GallerygoodProcInter gallerygoodProc;
-
-  @Autowired
   @Qualifier("dev.mvc.gallery.GalleryProc") // @Component("dev.mvc.gallery.GalleryProc")
   private GalleryProcInter galleryProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.gallerygood.GallerygoodProc") // @Component("dev.mvc.gallery.WeatherProc")
+  private GallerygoodProcInter gallerygoodProc;
 
   public GalleryCont() {
     System.out.println("-> GalleryCont created.");
@@ -85,6 +85,9 @@ public class GalleryCont {
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
@@ -194,6 +197,9 @@ public class GalleryCont {
     // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<GalleryVO> list = this.galleryProc.list_all(); // 모든 목록
@@ -286,78 +292,78 @@ public class GalleryCont {
    */
   @GetMapping(value = "/list_by_classifyno_grid")
   public String list_by_classifyno_search_paging_grid(HttpSession session, Model model, 
-          @RequestParam(name = "galleryno", defaultValue = "0") int galleryno,
-          @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
-          @RequestParam(name = "word", defaultValue = "") String word,
-          @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
+      @RequestParam(name = "galleryno", defaultValue = "0") int galleryno,
+      @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
+      @RequestParam(name = "word", defaultValue = "") String word,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
 
-      // 메뉴 정보 추가
-      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-      model.addAttribute("menu", menu);
+    // System.out.println("-> classifyno: " + classifyno);
 
-      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu();
-      model.addAttribute("menu1", menu1);
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
-      // 분류 정보 읽기
-      ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-      model.addAttribute("classifyVO", classifyVO);
+    ClassifyVO classifyVO = this.classifyProc.read(classifyno);
+    model.addAttribute("classifyVO", classifyVO);
+    
+    
+    word = Tool.checkNull(word).trim();
 
-      // 검색어 처리
-      word = Tool.checkNull(word).trim();
-      model.addAttribute("word", word);
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("classifyno", classifyno);
+    map.put("word", word);
+    map.put("now_page", now_page);
 
-      // 페이징 및 검색을 위한 파라미터 설정
-      HashMap<String, Object> map = new HashMap<>();
-      map.put("classifyno", classifyno);
-      map.put("word", word);
-      map.put("now_page", now_page);
+    ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno_search_paging(map);
+    model.addAttribute("list", list);
 
-      // 갤러리 목록 조회
-      ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno_search_paging(map);
-      
-      // 각 갤러리 항목에 대해 추천 및 하트 카운트 추가
-      if (session.getAttribute("memberno") != null) {
-          int memberno = (int) session.getAttribute("memberno");
+    // System.out.println("-> size: " + list.size());
+    model.addAttribute("word", word);
 
-          for (GalleryVO galleryVO : list) {
-              HashMap<String, Object> map2 = new HashMap<>();
-              map2.put("galleryno", galleryVO.getGalleryno());
-              map2.put("memberno", memberno);
+    int search_count = this.galleryProc.list_by_classifyno_search_count(map);
+    String paging = this.galleryProc.pagingBox(classifyno, now_page, word, "/gallery/list_by_classifyno_grid", search_count,
+    Gallery.RECORD_PER_PAGE, Gallery.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
+    model.addAttribute("now_page", now_page);
 
-              // 하트 카운트 가져오기
-              int hartCnt = this.gallerygoodProc.hartCnt(map2);
-              galleryVO.setHartCnt(hartCnt);
-              
-              // 추천 수 가져오기
-              int recom = this.gallerygoodProc.getRecom(map2);
-              galleryVO.setRecom(recom);
-          }
-      }
+    model.addAttribute("search_count", search_count);
 
-      model.addAttribute("list", list);
+    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+    int no = search_count - ((now_page - 1) * Gallery.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
+    
+    GalleryVO galleryVO = this.galleryProc.read(galleryno);
+    model.addAttribute("galleryVO", galleryVO);
+    
 
-      // 검색된 레코드 수
-      int search_count = this.galleryProc.list_by_classifyno_search_count(map);
-      model.addAttribute("search_count", search_count);
+    
+    // ---------------------------------------------------------------------- ---------------------
+    // 추천 관련
+    // -------------------------------------------------------------------------------------------
+    HashMap<String, Object> map2 = new HashMap<String, Object>();
+    map2.put("galleryno", galleryno);
 
-      // 페이징 박스 생성
-      String paging = this.galleryProc.pagingBox(
-          classifyno, 
-          now_page, 
-          word, 
-          "/gallery/list_by_classifyno_grid", 
-          search_count, 
-          Gallery.RECORD_PER_PAGE, 
-          Gallery.PAGE_PER_BLOCK
-      );
-      model.addAttribute("paging", paging);
-      model.addAttribute("now_page", now_page);
+    // System.out.println("->galleryno: " + galleryno);
+    
+    int hartCnt = 0;
+    if (session.getAttribute("memberno") != null) { // 회원인 경우만 카운트 처리
+      int memberno = (int) session.getAttribute("memberno");
+      map2.put("memberno", memberno);
 
-      // 일련번호 계산
-      int no = search_count - ((now_page - 1) * Gallery.RECORD_PER_PAGE);
-      model.addAttribute("no", no);
+     //System.out.println("->recom: " + galleryVO.getRecom());
 
-      return "/gallery/list_by_classifyno_search_paging_grid";
+
+      hartCnt = this.gallerygoodProc.hartCnt(map2);
+
+    }
+    model.addAttribute("hartCnt", hartCnt);
+    
+    
+    // ------------------------------------------------------------------------
+    
+    return "/gallery/list_by_classifyno_search_paging_grid";
   }
 
 
@@ -377,6 +383,9 @@ public class GalleryCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     GalleryVO galleryVO = this.galleryProc.read(galleryno);
 
@@ -435,6 +444,9 @@ public class GalleryCont {
                             @RequestParam(name="galleryno", defaultValue="0") int galleryno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     GalleryVO galleryVO = this.galleryProc.read(galleryno); // map 정보 읽어 오기
     model.addAttribute("galleryVO", galleryVO); // request.setAttribute("galleryVO", galleryVO);
@@ -460,6 +472,9 @@ public class GalleryCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -525,6 +540,9 @@ public class GalleryCont {
                                      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
     
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -711,6 +729,7 @@ public class GalleryCont {
     
   }   
    
+
   /**
    * 추천 처리 http://localhost:9091/gallery/good
    * 
@@ -775,6 +794,7 @@ public class GalleryCont {
     }
 
   }
+
 
 }
 

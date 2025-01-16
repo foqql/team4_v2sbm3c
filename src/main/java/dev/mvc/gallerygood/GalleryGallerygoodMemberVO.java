@@ -15,14 +15,14 @@ public class GalleryGallerygoodMemberVO {
     /** 등록일 */
     private String r_rdate;
 
-    /** 사진번호 */
-    private int galleryno;
+    /** 사진 번호 */
+    private int galleryrno;
     
     /** 회원 번호 */
     private int memberno;
     
-    /** 사진 */
-    private String thumb1 = "";
+    /** 날씨 */
+    private String title = "";
     
     /** 아이디(이메일) */
     private String id = "";

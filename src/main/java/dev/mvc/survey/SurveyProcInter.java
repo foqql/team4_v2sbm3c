@@ -50,7 +50,7 @@ public interface SurveyProcInter {
 
   public int cnt_sm(HashMap<String, Object> map);
 
-  public ArrayList<SurveyVO> list_all();
+  public ArrayList<SurveyVO> list_all(HashMap<String, Object> map);
 
   public int create_sm(HashMap<String, Object> map);
 

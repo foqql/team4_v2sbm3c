@@ -115,7 +115,6 @@ public interface GalleryProcInter {
   public int count_by_memberno(int memberno);
   
   
-  
   /**
    * 추천 수 증가
    * @param 
@@ -137,4 +136,5 @@ public interface GalleryProcInter {
    * @return
    */
   public int good(int galleryrno);
+
 }
