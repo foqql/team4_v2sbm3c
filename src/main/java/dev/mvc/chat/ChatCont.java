@@ -2,20 +2,35 @@ package dev.mvc.chat;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import dev.mvc.classify.ClassifyProcInter;
+import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/chat")
 public class ChatCont {
+  
+  @Autowired
+  @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
+  private GenreProcInter genreProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.classify.ClassifyProc") // @Component("dev.mvc.classify.ClassifyProc")
+  private ClassifyProcInter classifyProc;
+  
     @Autowired
     private ChatProcInter chatProc;
 
@@ -26,6 +41,12 @@ public class ChatCont {
     public String list(Model model, HttpSession session) {
         List<ChatVO> list = chatProc.list();
         model.addAttribute("chatList", list);
+        
+        ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+        model.addAttribute("menu", menu);
+        
+        ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+        model.addAttribute("menu1", menu1);
         
         // 세션에서 사용자 정보 추가
         model.addAttribute("memberno", session.getAttribute("memberno"));
@@ -41,6 +62,13 @@ public class ChatCont {
     @GetMapping("/history")
     public String history(Model model, HttpSession session) {
         List<ChatVO> list = chatProc.list();
+        
+        ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+        model.addAttribute("menu", menu);
+        
+        ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+        model.addAttribute("menu1", menu1);
+        
         model.addAttribute("chatList", list);
         model.addAttribute("loggedInUserGrade", session.getAttribute("grade")); // 로그인된 계정의 등급 추가
         return "chatHistory"; // HTML 파일 이름
@@ -98,6 +126,8 @@ public class ChatCont {
         String originalFilename = image.getOriginalFilename();
         String targetLocation = UPLOAD_DIR + File.separator + originalFilename;
         File targetFile = new File(targetLocation);
+        
+        
 
         image.transferTo(targetFile); // 이미지를 디스크에 저장
 
