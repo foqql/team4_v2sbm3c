@@ -46,19 +46,19 @@
         <img src="/news/images/none1.png" style="width: 100%; height: 100%;">
       </div>
       <div>
-        <span th:if="${newsVO.title.length() > 16 }" 
-                  th:text="|${newsVO.title.substring(0, 16) }...|" style="font-weight: bold;"></span>
-        <span th:if="${newsVO.title.length() <= 16 }" 
+        <span th:if="${newsVO.title.length() > 10 }" 
+                  th:text="|${newsVO.title.substring(0, 10) }...|" style="font-weight: bold;"></span>
+        <span th:if="${newsVO.title.length() <= 10 }" 
                   th:text="|${newsVO.title}|" style="font-weight: bold;"></span>
-        <br>
+        <br><br>
         
-        <span th:if="${newsVO.content.length() > 25 }" 
-                  th:text="|${newsVO.content.substring(0, 25) }...|"></span>
-        <span th:if="${newsVO.content.length() <= 25 }" 
+        <span th:if="${newsVO.content.length() > 20 }" 
+                  th:text="|${newsVO.content.substring(0, 20) }...|"></span>
+        <span th:if="${newsVO.content.length() <= 20 }" 
                   th:text="|${newsVO.content}|"></span>
       </div>
       
-      <div style="width: 100%; text-align: right;">♡</div>
+<!--      <div style="width: 100%; text-align: right;">♡</div>-->
       
     </div>
     

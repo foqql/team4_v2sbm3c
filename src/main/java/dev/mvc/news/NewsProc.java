@@ -62,18 +62,6 @@ public class NewsProc implements NewsProcInter {
   }
 
   @Override
-  public int map(HashMap<String, Object> map) {
-    int cnt = this.newsDAO.map(map);
-    return cnt;
-  }
-
-  @Override
-  public int youtube(HashMap<String, Object> map) {
-    int cnt = this.newsDAO.youtube(map);
-    return cnt;
-  }
-
-  @Override
   public ArrayList<NewsVO> list_by_classifyno_search(HashMap<String, Object> hashMap) {
     ArrayList<NewsVO> list = this.newsDAO.list_by_classifyno_search(hashMap);
     return list;

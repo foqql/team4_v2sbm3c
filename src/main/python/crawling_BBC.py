@@ -98,7 +98,7 @@ driver = webdriver.Chrome(service=Service(executable_path=correct_driver_path), 
 driver.set_window_size(900, 900) # width, height
 
 # 주기적인 작업 함수
-def crawl_and_insert_data():
+def crawling_BBC():
 
     ####################### 크롤링 ##########################
 
@@ -443,7 +443,7 @@ def crawl_and_insert_data():
 # APScheduler로 주기적인 작업 설정
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(crawl_and_insert_data, 'interval', seconds=60)  # 1분마다 작업 실행
+    scheduler.add_job(crawling_BBC, 'interval', seconds=60)  # 1분마다 작업 실행
     scheduler.start()
     
 # Flask 라우트 예시

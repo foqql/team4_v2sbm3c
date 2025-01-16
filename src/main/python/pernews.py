@@ -125,7 +125,7 @@ cursor.execute("""
     UPDATE news
     SET title = :title, content = :content, content2 = :content2, content3 = :content3, content4 = :content4, newsgenre = :newsgenre  
     WHERE rdate = (SELECT MAX(rdate) FROM newscrawling)
-""", {'title': title, 'content': content_text, 'content2': trans_title, 'content3': trans_content, 'content4': sum_content, 'newsgenre': '개인'})
+""", {'title': trans_title, 'content': trans_content, 'content2': title, 'content3': content_text, 'content4': sum_content, 'newsgenre': '개인'})
 
 conn.commit()
 
