@@ -6539,3 +6539,36 @@ INFO:numexpr.utils:NumExpr defaulting to 4 threads.
 INFO:numexpr.utils:NumExpr defaulting to 4 threads.
 INFO:numexpr.utils:NumExpr defaulting to 4 threads.
 INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:WebDriver version 131.0.6778.264 selected
+INFO:WDM:Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.264/win32/chromedriver-win32.zip
+INFO:WDM:About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.264/win32/chromedriver-win32.zip
+INFO:WDM:Driver downloading response is 200
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver has been saved in cache [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264]
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:46:56 KST)" (scheduled at 2025-01-16 09:46:56.398922+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:47:03 KST)" (scheduled at 2025-01-16 09:47:03.503588+09:00)
+INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:47:56 KST)" executed successfully
+INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:48:03 KST)" executed successfully
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:48:56 KST)" (scheduled at 2025-01-16 09:47:56.398922+09:00)
