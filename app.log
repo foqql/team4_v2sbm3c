@@ -8383,3 +8383,2523 @@ INFO:werkzeug: * Debugger PIN: 569-178-434
 >>>>>>> 5d76b10881f91ca0642cbb910c314941850318f1
 INFO:numexpr.utils:NumExpr defaulting to 4 threads.
 >>>>>>> e4a3bb73634b33b8c8e529ff3d0b22b9f44556ca
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 16:58:43 KST)" (scheduled at 2025-01-16 16:58:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 16:59:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 16:58:48 KST)" (scheduled at 2025-01-16 16:58:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 16:59:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:00:43 KST)" (scheduled at 2025-01-16 16:59:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:00:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 16:59:48 KST)" (scheduled at 2025-01-16 16:59:48.014593+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:00:48 KST)" (scheduled at 2025-01-16 16:59:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:00:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 16:59:53 KST)" (scheduled at 2025-01-16 16:59:53.060586+09:00)
+INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:00:48 KST)" executed successfully
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:00:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 126, in crawl_and_insert_data
+    url = driver.current_url.strip()
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 437, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:43 KST)" (scheduled at 2025-01-16 17:00:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:48 KST)" (scheduled at 2025-01-16 17:00:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:48 KST)" (scheduled at 2025-01-16 17:00:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:53 KST)" (scheduled at 2025-01-16 17:00:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:43 KST)" (scheduled at 2025-01-16 17:01:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:01:48 KST)" (scheduled at 2025-01-16 17:01:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:48 KST)" (scheduled at 2025-01-16 17:01:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:53 KST)" (scheduled at 2025-01-16 17:01:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:43 KST)" (scheduled at 2025-01-16 17:02:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:46 KST)" (scheduled at 2025-01-16 17:02:46.624698+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:46 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:48 KST)" (scheduled at 2025-01-16 17:02:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:48 KST)" (scheduled at 2025-01-16 17:02:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:53 KST)" (scheduled at 2025-01-16 17:02:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:54 KST)" (scheduled at 2025-01-16 17:02:54.146682+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:02:57 KST)" (scheduled at 2025-01-16 17:02:57.954681+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:03 KST)" (scheduled at 2025-01-16 17:03:03.476262+09:00)
+INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:03 KST)" executed successfully
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:57 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 126, in crawl_and_insert_data
+    url = driver.current_url.strip()
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 437, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:03:54 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 126, in crawl_and_insert_data
+    url = driver.current_url.strip()
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 437, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:43 KST)" (scheduled at 2025-01-16 17:03:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:46 KST)" (scheduled at 2025-01-16 17:03:46.624698+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:46 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:48 KST)" (scheduled at 2025-01-16 17:03:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:48 KST)" (scheduled at 2025-01-16 17:03:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:53 KST)" (scheduled at 2025-01-16 17:03:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:54 KST)" (scheduled at 2025-01-16 17:03:54.146682+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:54 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:57 KST)" (scheduled at 2025-01-16 17:03:57.954681+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:04:57 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:03 KST)" (scheduled at 2025-01-16 17:04:03.476262+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:43 KST)" (scheduled at 2025-01-16 17:04:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:46 KST)" (scheduled at 2025-01-16 17:04:46.624698+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:46 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:48 KST)" (scheduled at 2025-01-16 17:04:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:48 KST)" (scheduled at 2025-01-16 17:04:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:53 KST)" (scheduled at 2025-01-16 17:04:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:54 KST)" (scheduled at 2025-01-16 17:04:54.146682+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:54 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:57 KST)" (scheduled at 2025-01-16 17:04:57.954681+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:57 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:03 KST)" (scheduled at 2025-01-16 17:05:03.476262+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:18 KST)" (scheduled at 2025-01-16 17:05:18.427025+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:18 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:05:23 KST)" (scheduled at 2025-01-16 17:05:23.706019+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:43 KST)" (scheduled at 2025-01-16 17:05:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:46 KST)" (scheduled at 2025-01-16 17:05:46.624698+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:46 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:48 KST)" (scheduled at 2025-01-16 17:05:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:48 KST)" (scheduled at 2025-01-16 17:05:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:53 KST)" (scheduled at 2025-01-16 17:05:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:54 KST)" (scheduled at 2025-01-16 17:05:54.146682+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:54 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:57 KST)" (scheduled at 2025-01-16 17:05:57.954681+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:06:57 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:03 KST)" (scheduled at 2025-01-16 17:06:03.476262+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:18 KST)" (scheduled at 2025-01-16 17:06:18.427025+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:18 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:23 KST)" (scheduled at 2025-01-16 17:06:23.706019+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:43 KST)" (scheduled at 2025-01-16 17:06:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:46 KST)" (scheduled at 2025-01-16 17:06:46.624698+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:46 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:48 KST)" (scheduled at 2025-01-16 17:06:48.014593+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:48 KST)" (scheduled at 2025-01-16 17:06:48.547344+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:53 KST)" (scheduled at 2025-01-16 17:06:53.060586+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:53 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0099C408]
+	(No symbol) [0x0099C329]
+	(No symbol) [0x009AE2E0]
+	(No symbol) [0x00A2AD69]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:54 KST)" (scheduled at 2025-01-16 17:06:54.146682+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:54 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:57 KST)" (scheduled at 2025-01-16 17:06:57.954681+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:07:57 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:03 KST)" (scheduled at 2025-01-16 17:07:03.476262+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:18 KST)" (scheduled at 2025-01-16 17:07:18.427025+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:18 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:23 KST)" (scheduled at 2025-01-16 17:07:23.706019+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:43 KST)" (scheduled at 2025-01-16 17:07:43.292697+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 17:08:43 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B4FD53+23747]
+	(No symbol) [0x00AD7D54]
+	(No symbol) [0x009ABE53]
+	(No symbol) [0x0098D91B]
+	(No symbol) [0x00A17EFF]
+	(No symbol) [0x00A2AD49]
+	(No symbol) [0x00A11B96]
+	(No symbol) [0x009E3F3C]
+	(No symbol) [0x009E4EBD]
+	GetHandleVerifier [0x00E2AC73+3017699]
+	GetHandleVerifier [0x00E3B93B+3086507]
+	GetHandleVerifier [0x00E340F2+3055714]
+	GetHandleVerifier [0x00BE5AF0+637536]
+	(No symbol) [0x00AE0A5D]
+	(No symbol) [0x00ADDA28]
+	(No symbol) [0x00ADDBC5]
+	(No symbol) [0x00AD07F0]
+	BaseThreadInitThunk [0x771BFCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x77DD809E+286]
+	RtlGetAppContainerNamedObjectPath [0x77DD806E+238]
+

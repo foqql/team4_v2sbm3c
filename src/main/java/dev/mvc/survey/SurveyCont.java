@@ -207,16 +207,15 @@ public class SurveyCont {
     model.addAttribute("word", word);
 
     int search_count = this.surveyProc.list_by_classifyno_search_count(map);
-//    String paging = this.surveyProc.pagingBox(now_page, word, "/survey/list_by_surveyno", search_count,
-//        Survey.RECORD_PER_PAGE, Survey.PAGE_PER_BLOCK);
-//    model.addAttribute("paging", paging);
+    String paging = this.surveyProc.pagingBox(now_page, word, "/survey/list_by_survey", search_count,
+        Survey.RECORD_PER_PAGE, Survey.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
-
     model.addAttribute("search_count", search_count);
 
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-//    int no = search_count - ((now_page - 1) * Survey.RECORD_PER_PAGE);
-//    model.addAttribute("no", no);
+    int no = search_count - ((now_page - 1) * Survey.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
 
     int search_cnt = this.surveyProc.list_search_count(word);
 
