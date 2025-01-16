@@ -1,6 +1,7 @@
 package dev.mvc.survey_good;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import dev.mvc.classify.ClassifyVOMenu;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.survey.Survey;
+import dev.mvc.survey.SurveyProcInter;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping(value = "/survey_good")
@@ -36,6 +39,11 @@ public class Survey_goodCont {
   @Autowired
   @Qualifier("dev.mvc.survey_good.Survey_goodProc") // @Component("dev.mvc.survey_good.Survey_goodProc")
   private Survey_goodProcInter survey_goodProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.survey.SurveyProc") // @Component("dev.mvc.survey_good.Survey_goodProc")
+  private SurveyProcInter surveyProc;
+
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.survey_good.Survey_goodProc")
   private GenreProcInter genreProc;
@@ -78,16 +86,36 @@ public class Survey_goodCont {
   }
 
   @GetMapping(value = "/list_all")
-  public String list_all(Model model) {
+  public String list_all(Model model, @RequestParam(name = "word", defaultValue = "") String word,
+      @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
     model.addAttribute("menu", menu);
     ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
     model.addAttribute("menu1", menu1);
 
+    HashMap<String, Object> map = new HashMap<>();
+//  map.put("classifyno", classifyno);
+    map.put("word", word);
+    map.put("now_page", now_page);
+
 //    ArrayList<Survey_goodVO> list = this.survey_goodProc.list_all();
 //    model.addAttribute("list", list);
-    ArrayList<SSdMVO> list = this.survey_goodProc.list_all_join();
+    ArrayList<SSdMVO> list = this.survey_goodProc.list_all_join(map);
     model.addAttribute("list", list);
+    model.addAttribute("word", word);
+
+//  프로젝트 목록 번호 생성
+    String list_file_name = "/survey_good/list_all";
+    int search_count = this.survey_goodProc.list_search_count(word);
+    String paging = this.surveyProc.pagingBox(now_page, word, list_file_name, search_count, Survey.RECORD_PER_PAGE,
+        Survey.PAGE_PER_BLOCK);
+    System.out.println("search_count : " + search_count);
+    System.out.println("word : " + word);
+    model.addAttribute("paging", paging);
+    model.addAttribute("now_page", now_page);
+    // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
+    int no = search_count - ((now_page) * Survey.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
 
     return "/survey_good/list_all"; // /templates/surveygood/list_all.html
   }

@@ -2,9 +2,6 @@ package dev.mvc.survey;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
-import jakarta.validation.Valid;
 
 public interface SurveyProcInter {
   public int create(SurveyVO surveyVO);

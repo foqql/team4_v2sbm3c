@@ -42,11 +42,58 @@ WHERE surveyno = #{surveyno} and memberno = #{memberno}
   </select>
   
   
-    <select id="list_all_join" resultType="dev.mvc.survey_good.SSdMVO">
+    <!--<select id="list_all_join" resultType="dev.mvc.survey_good.SSdMVO">
 select sd.surveygoodno, sd.rdate, sd.surveyno, s.topic as stopic, sd.memberno ,m.id,  m.mname
 from survey s, survey_good sd, member m
 where s.surveyno = sd.surveyno and sd.memberno = m.memberno
 order by sd.surveyno desc
-  </select>
+  </select>-->
   
+  
+<select id="list_all_join" resultType="dev.mvc.survey_good.SSdMVO" parameterType="HashMap">
+  SELECT surveygoodno, rdate, surveyno, stopic, memberno, id, mname, r
+  FROM (
+    SELECT surveygoodno, rdate, surveyno, stopic, memberno, id, mname, ROWNUM AS r
+    FROM (
+      SELECT 
+        sd.surveygoodno AS surveygoodno,
+        sd.rdate AS rdate,
+        sd.surveyno AS surveyno,
+        s.topic AS stopic,
+        sd.memberno AS memberno,
+        m.id AS id,
+        m.mname AS mname
+      FROM survey s
+      JOIN survey_good sd ON s.surveyno = sd.surveyno
+      JOIN member m ON sd.memberno = m.memberno
+      <choose>
+        <when test="word != null and word != ''">
+          AND (
+            UPPER(s.topic) LIKE '%' || UPPER(#{word}) || '%'
+            OR UPPER(m.mname) LIKE '%' || UPPER(#{word}) || '%'
+          )
+        </when>
+      </choose>
+      ORDER BY sd.surveyno DESC
+    )
+    <![CDATA[ WHERE ROWNUM <= #{end_num} ]]>
+  )
+  <![CDATA[ WHERE r >= #{start_num} ]]>
+</select>
+
+
+
+
+  <select id="list_search_count" resultType="Integer" parameterType="String">
+  SELECT count(*) 
+      FROM survey s
+      JOIN survey_good sd ON s.surveyno = sd.surveyno
+      JOIN member m ON sd.memberno = m.memberno
+  <if test="word != null and word != ''">
+    WHERE UPPER(topic) LIKE '%' || UPPER(#{word}) || '%'
+    OR UPPER(mname) LIKE '%' || UPPER(#{word}) || '%'
+  </if>
+  ORDER BY surveygoodno ASC
+</select>
+
 </mapper> 
