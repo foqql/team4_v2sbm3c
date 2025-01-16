@@ -2,15 +2,25 @@ package dev.mvc.chat;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import dev.mvc.classify.ClassifyProc;
+import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.genre.GenreProc;
+import dev.mvc.genre.GenreVOMenu;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -18,6 +28,10 @@ import jakarta.servlet.http.HttpSession;
 public class ChatCont {
     @Autowired
     private ChatProcInter chatProc;
+    @Autowired
+    private ClassifyProc classifyProc;
+    @Autowired
+    private GenreProc genreProc;
 
     private static final String UPLOAD_DIR = "C:/uploads"; // 이미지 업로드 디렉토리
     private static final String DEFAULT_IMAGE_PATH = "/static/css/images/s1234.jpg"; // 기본 이미지 경로
@@ -26,7 +40,10 @@ public class ChatCont {
     public String list(Model model, HttpSession session) {
         List<ChatVO> list = chatProc.list();
         model.addAttribute("chatList", list);
-        
+        ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu(); // 중분류
+        model.addAttribute("menu", menu);
+        ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+        model.addAttribute("menu1", menu1);
         // 세션에서 사용자 정보 추가
         model.addAttribute("memberno", session.getAttribute("memberno"));
         model.addAttribute("grade", session.getAttribute("grade"));

@@ -6572,3 +6572,1573 @@ INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: 
 INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:47:56 KST)" executed successfully
 INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:48:03 KST)" executed successfully
 INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 09:48:56 KST)" (scheduled at 2025-01-16 09:47:56.398922+09:00)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:31:03 KST)" (scheduled at 2025-01-16 10:31:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:32:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:31:11 KST)" (scheduled at 2025-01-16 10:31:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:32:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:31:16 KST)" (scheduled at 2025-01-16 10:31:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:32:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:31:23 KST)" (scheduled at 2025-01-16 10:31:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:32:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:03 KST)" (scheduled at 2025-01-16 10:32:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:11 KST)" (scheduled at 2025-01-16 10:32:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:16 KST)" (scheduled at 2025-01-16 10:32:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:23 KST)" (scheduled at 2025-01-16 10:32:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:33:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:03 KST)" (scheduled at 2025-01-16 10:33:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:11 KST)" (scheduled at 2025-01-16 10:33:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:16 KST)" (scheduled at 2025-01-16 10:33:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:23 KST)" (scheduled at 2025-01-16 10:33:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:34:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:03 KST)" (scheduled at 2025-01-16 10:34:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:11 KST)" (scheduled at 2025-01-16 10:34:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:16 KST)" (scheduled at 2025-01-16 10:34:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:23 KST)" (scheduled at 2025-01-16 10:34:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:35:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:03 KST)" (scheduled at 2025-01-16 10:35:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:11 KST)" (scheduled at 2025-01-16 10:35:11.931313+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:16 KST)" (scheduled at 2025-01-16 10:35:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:23 KST)" (scheduled at 2025-01-16 10:35:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:03 KST)" (scheduled at 2025-01-16 10:36:03.303167+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:07 KST)" (scheduled at 2025-01-16 10:36:07.688460+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:11 KST)" (scheduled at 2025-01-16 10:36:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:16 KST)" (scheduled at 2025-01-16 10:36:16.049018+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:16 KST)" (scheduled at 2025-01-16 10:36:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:23 KST)" (scheduled at 2025-01-16 10:36:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:39 KST)" (scheduled at 2025-01-16 10:36:39.743394+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:48 KST)" (scheduled at 2025-01-16 10:36:48.909065+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:36:56 KST)" (scheduled at 2025-01-16 10:36:56.783521+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:03 KST)" (scheduled at 2025-01-16 10:37:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:06 KST)" (scheduled at 2025-01-16 10:37:06.396757+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:07 KST)" (scheduled at 2025-01-16 10:37:07.688460+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:37:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:06 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:11 KST)" (scheduled at 2025-01-16 10:37:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:16 KST)" (scheduled at 2025-01-16 10:37:16.049018+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:16 KST)" (scheduled at 2025-01-16 10:37:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:23 KST)" (scheduled at 2025-01-16 10:37:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:39 KST)" (scheduled at 2025-01-16 10:37:39.743394+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:48 KST)" (scheduled at 2025-01-16 10:37:48.909065+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:56 KST)" (scheduled at 2025-01-16 10:37:56.783521+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:38:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:03 KST)" (scheduled at 2025-01-16 10:38:03.303167+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:06 KST)" (scheduled at 2025-01-16 10:38:06.396757+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:07 KST)" (scheduled at 2025-01-16 10:38:07.688460+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:06 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:11 KST)" (scheduled at 2025-01-16 10:38:11.931313+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:11 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:16 KST)" (scheduled at 2025-01-16 10:38:16.049018+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:16 KST)" (scheduled at 2025-01-16 10:38:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:23 KST)" (scheduled at 2025-01-16 10:38:23.139027+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:23 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:39 KST)" (scheduled at 2025-01-16 10:38:39.743394+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:48 KST)" (scheduled at 2025-01-16 10:38:48.909065+09:00)
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:56 KST)" (scheduled at 2025-01-16 10:38:56.783521+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:03 KST)" (scheduled at 2025-01-16 10:39:03.303167+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:07 KST)" (scheduled at 2025-01-16 10:39:07.688460+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:48 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:39:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:16 KST)" (scheduled at 2025-01-16 10:39:16.229134+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:====== WebDriver manager ======
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:39 KST)" (scheduled at 2025-01-16 10:39:39.743394+09:00)
+INFO:werkzeug: * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\pyparsing\\core.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\site-packages\\pyparsing\\core.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:56 KST)" (scheduled at 2025-01-16 10:39:56.783521+09:00)
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:03 KST)" (scheduled at 2025-01-16 10:40:03.303167+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:07 KST)" (scheduled at 2025-01-16 10:40:07.688460+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:16 KST)" (scheduled at 2025-01-16 10:40:16.229134+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:39 KST)" (scheduled at 2025-01-16 10:40:39.743394+09:00)
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:56 KST)" (scheduled at 2025-01-16 10:40:56.783521+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:40:58 KST)" (scheduled at 2025-01-16 10:40:58.559293+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:03 KST)" (scheduled at 2025-01-16 10:41:03.303167+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:07 KST)" (scheduled at 2025-01-16 10:41:07.688460+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:16 KST)" (scheduled at 2025-01-16 10:41:16.229134+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:39 KST)" (scheduled at 2025-01-16 10:41:39.743394+09:00)
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:58 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:41:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:56 KST)" (scheduled at 2025-01-16 10:41:56.783521+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:58 KST)" (scheduled at 2025-01-16 10:41:58.559293+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:03 KST)" (scheduled at 2025-01-16 10:42:03.303167+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:07 KST)" (scheduled at 2025-01-16 10:42:07.688460+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:16 KST)" (scheduled at 2025-01-16 10:42:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:58 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:31 KST)" (scheduled at 2025-01-16 10:42:31.878719+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:32 KST)" (scheduled at 2025-01-16 10:42:32.049722+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:32 KST)" (scheduled at 2025-01-16 10:42:32.297718+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:39 KST)" (scheduled at 2025-01-16 10:42:39.743394+09:00)
+WARNING:apscheduler.executors.default:Run time of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:38 KST)" was missed by 0:00:01.007003
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:42 KST)" (scheduled at 2025-01-16 10:42:42.583727+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:42:42 KST)" (scheduled at 2025-01-16 10:42:42.597720+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\crawling.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\crawling.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\crawling.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\crawling.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\crawling.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\crawling.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py', reloading
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:32 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 126, in crawl_and_insert_data
+    url = driver.current_url.strip()
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 437, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x00B3FD53+23747]
+	(No symbol) [0x00AC7D54]
+	(No symbol) [0x0099BCCD]
+	(No symbol) [0x009D32CB]
+	(No symbol) [0x00A01C6A]
+	(No symbol) [0x009FD764]
+	(No symbol) [0x009FCD01]
+	(No symbol) [0x00973A3D]
+	(No symbol) [0x00973F8E]
+	(No symbol) [0x0097455D]
+	GetHandleVerifier [0x00E1AC73+3017699]
+	GetHandleVerifier [0x00E2B93B+3086507]
+	GetHandleVerifier [0x00E240F2+3055714]
+	GetHandleVerifier [0x00BD5AF0+637536]
+	(No symbol) [0x00AD0A5D]
+	(No symbol) [0x009736F8]
+	(No symbol) [0x00972E62]
+	GetHandleVerifier [0x00E7E41C+3425164]
+	BaseThreadInitThunk [0x7572FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x778A809E+286]
+	RtlGetAppContainerNamedObjectPath [0x778A806E+238]
+
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py', reloading
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:56 KST)" (scheduled at 2025-01-16 10:42:56.783521+09:00)
+INFO:werkzeug: * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\subprocess.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\subprocess.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\ProgramData\\Anaconda3\\Lib\\subprocess.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:58 KST)" (scheduled at 2025-01-16 10:42:58.559293+09:00)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:03 KST)" (scheduled at 2025-01-16 10:43:03.303167+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:07 KST)" (scheduled at 2025-01-16 10:43:07.688460+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:16 KST)" (scheduled at 2025-01-16 10:43:16.229134+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:31 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:32 KST)" skipped: maximum number of running instances reached (1)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:42 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:====== WebDriver manager ======
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:42 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:32 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 126, in crawl_and_insert_data
+    url = driver.current_url.strip()
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 437, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: disconnected: not connected to DevTools
+  (failed to check if window was closed: disconnected: not connected to DevTools)
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B3FD53+23747]
+	(No symbol) [0x00AC7D54]
+	(No symbol) [0x0099BE53]
+	(No symbol) [0x0098C408]
+	(No symbol) [0x0098C329]
+	(No symbol) [0x0099E2E0]
+	(No symbol) [0x00A1AD69]
+	(No symbol) [0x00A01B96]
+	(No symbol) [0x009D3F3C]
+	(No symbol) [0x009D4EBD]
+	GetHandleVerifier [0x00E1AC73+3017699]
+	GetHandleVerifier [0x00E2B93B+3086507]
+	GetHandleVerifier [0x00E240F2+3055714]
+	GetHandleVerifier [0x00BD5AF0+637536]
+	(No symbol) [0x00AD0A5D]
+	(No symbol) [0x00ACDA28]
+	(No symbol) [0x00ACDBC5]
+	(No symbol) [0x00AC07F0]
+	BaseThreadInitThunk [0x7572FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x778A809E+286]
+	RtlGetAppContainerNamedObjectPath [0x778A806E+238]
+
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:39 KST)" (scheduled at 2025-01-16 10:43:39.743394+09:00)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:WDM:====== WebDriver manager ======
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:56 KST)" skipped: maximum number of running instances reached (1)
+INFO:WDM:====== WebDriver manager ======
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:43:58 KST)" skipped: maximum number of running instances reached (1)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:03 KST)" (scheduled at 2025-01-16 10:44:03.303167+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:07 KST)" (scheduled at 2025-01-16 10:44:07.688460+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:16 KST)" (scheduled at 2025-01-16 10:44:16.229134+09:00)
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:58 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:24 KST)" (scheduled at 2025-01-16 10:44:24.697726+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:24 KST)" (scheduled at 2025-01-16 10:44:24.733724+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:44:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\apscheduler\\executors\\base.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\apscheduler\\executors\\base.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\apscheduler\\executors\\base.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\apscheduler\\executors\\base.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\apscheduler\\executors\\base.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\i\\AppData\\Roaming\\Python\\Python310\\site-packages\\apscheduler\\executors\\base.py', reloading
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:24 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:39 KST)" (scheduled at 2025-01-16 10:44:39.743394+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:24 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:56 KST)" (scheduled at 2025-01-16 10:44:56.783521+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:58 KST)" (scheduled at 2025-01-16 10:44:58.559293+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:03 KST)" (scheduled at 2025-01-16 10:45:03.303167+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:07 KST)" (scheduled at 2025-01-16 10:45:07.688460+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:16 KST)" (scheduled at 2025-01-16 10:45:16.229134+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:39 KST)" skipped: maximum number of running instances reached (1)
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:58 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:45:56 KST)" skipped: maximum number of running instances reached (1)
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:58 KST)" (scheduled at 2025-01-16 10:45:58.559293+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:03 KST)" (scheduled at 2025-01-16 10:46:03.303167+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:07 KST)" (scheduled at 2025-01-16 10:46:07.688460+09:00)
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:16 KST)" skipped: maximum number of running instances reached (1)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:39 KST)" (scheduled at 2025-01-16 10:46:39.743394+09:00)
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:56 KST)" (scheduled at 2025-01-16 10:46:56.783521+09:00)
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:46:58 KST)" skipped: maximum number of running instances reached (1)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:58 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:03 KST)" (scheduled at 2025-01-16 10:47:03.303167+09:00)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:07 KST)" (scheduled at 2025-01-16 10:47:07.688460+09:00)
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:16 KST)" (scheduled at 2025-01-16 10:47:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:07 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:56 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:39 KST)" (scheduled at 2025-01-16 10:47:39.743394+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:45 KST)" (scheduled at 2025-01-16 10:47:45.578230+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:45 KST)" (scheduled at 2025-01-16 10:47:45.595232+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:46 KST)" (scheduled at 2025-01-16 10:47:46.053228+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:47:46 KST)" (scheduled at 2025-01-16 10:47:46.069229+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:58 KST)" (scheduled at 2025-01-16 10:47:58.559293+09:00)
+WARNING:apscheduler.executors.default:Run time of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:00 KST)" was missed by 0:00:01.596010
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:03 KST)" (scheduled at 2025-01-16 10:48:03.303167+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:16 KST)" (scheduled at 2025-01-16 10:48:16.229134+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:58 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:03 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:27 KST)" (scheduled at 2025-01-16 10:48:27.510052+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:45 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:39 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:39 KST)" (scheduled at 2025-01-16 10:48:39.743394+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:45 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 126, in crawl_and_insert_data
+    url = driver.current_url.strip()
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 437, in current_url
+    return self.execute(Command.GET_CURRENT_URL)["value"]
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x00B3FD53+23747]
+	(No symbol) [0x00AC7D54]
+	(No symbol) [0x0099BCCD]
+	(No symbol) [0x009D32CB]
+	(No symbol) [0x00A01C6A]
+	(No symbol) [0x009FD764]
+	(No symbol) [0x009FCD01]
+	(No symbol) [0x00973A3D]
+	(No symbol) [0x00973F8E]
+	(No symbol) [0x0097455D]
+	GetHandleVerifier [0x00E1AC73+3017699]
+	GetHandleVerifier [0x00E2B93B+3086507]
+	GetHandleVerifier [0x00E240F2+3055714]
+	GetHandleVerifier [0x00BD5AF0+637536]
+	(No symbol) [0x00AD0A5D]
+	(No symbol) [0x009736F8]
+	(No symbol) [0x00972E62]
+	GetHandleVerifier [0x00E7E41C+3425164]
+	BaseThreadInitThunk [0x7572FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x778A809E+286]
+	RtlGetAppContainerNamedObjectPath [0x778A806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:45 KST)" (scheduled at 2025-01-16 10:48:45.578230+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:45 KST)" (scheduled at 2025-01-16 10:48:45.595232+09:00)
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:46 KST)" skipped: maximum number of running instances reached (1)
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:48:46 KST)" skipped: maximum number of running instances reached (1)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:45 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSessionIdException: Message: invalid session id
+Stacktrace:
+	GetHandleVerifier [0x00B3FD53+23747]
+	(No symbol) [0x00AC7D54]
+	(No symbol) [0x0099BCCD]
+	(No symbol) [0x009D32CB]
+	(No symbol) [0x00A01C6A]
+	(No symbol) [0x009FD764]
+	(No symbol) [0x009FCD01]
+	(No symbol) [0x00973A3D]
+	(No symbol) [0x00973F8E]
+	(No symbol) [0x0097455D]
+	GetHandleVerifier [0x00E1AC73+3017699]
+	GetHandleVerifier [0x00E2B93B+3086507]
+	GetHandleVerifier [0x00E240F2+3055714]
+	GetHandleVerifier [0x00BD5AF0+637536]
+	(No symbol) [0x00AD0A5D]
+	(No symbol) [0x009736F8]
+	(No symbol) [0x00972E62]
+	GetHandleVerifier [0x00E7E41C+3425164]
+	BaseThreadInitThunk [0x7572FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x778A809E+286]
+	RtlGetAppContainerNamedObjectPath [0x778A806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:58 KST)" (scheduled at 2025-01-16 10:48:58.559293+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:50:00 KST)" (scheduled at 2025-01-16 10:49:00.109054+09:00)
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:50:03 KST)" (scheduled at 2025-01-16 10:49:03.303167+09:00)
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:16 KST)" skipped: maximum number of running instances reached (1)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:27 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:50:27 KST)" (scheduled at 2025-01-16 10:49:27.510052+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:50:16 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 269, in crawl_and_insert_data
+    title = bs.select('#main-content > article > div:nth-child(1) > h1')[0].text
+IndexError: list index out of range
+WARNING:apscheduler.scheduler:Execution of job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 10:49:39 KST)" skipped: maximum number of running instances reached (1)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 11:13:02 KST)" (scheduled at 2025-01-16 11:13:02.628076+09:00)
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 11:14:02 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 302, in crawl_and_insert_data
+    print(p_tag.text.strip())
+UnicodeEncodeError: 'cp949' codec can't encode character '\u2013' in position 185: illegal multibyte sequence
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\kd\\ws_java\\team4_v2sbm3c\\src\\main\\python\\exc_2.py', reloading
+INFO:werkzeug: * Restarting with watchdog (windowsapi)
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 569-178-434
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 11:15:02 KST)" (scheduled at 2025-01-16 11:14:02.628076+09:00)
+ERROR:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 11:15:02 KST)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\apscheduler\executors\base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 105, in crawl_and_insert_data
+    load('https://www.bbc.com//', 1)
+  File "C:\kd\ws_java\team4_v2sbm3c\src\main\python\crawling.py", line 37, in load
+    driver.get(url) # url 접속
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 356, in get
+    self.execute(Command.GET, {"url": url})
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\webdriver.py", line 347, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\i\AppData\Roaming\Python\Python310\site-packages\selenium\webdriver\remote\errorhandler.py", line 229, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=131.0.6778.265)
+Stacktrace:
+	GetHandleVerifier [0x00B3FD53+23747]
+	(No symbol) [0x00AC7D54]
+	(No symbol) [0x0099BE53]
+	(No symbol) [0x0097D91B]
+	(No symbol) [0x00A07EFF]
+	(No symbol) [0x00A1AD49]
+	(No symbol) [0x00A01B96]
+	(No symbol) [0x009D3F3C]
+	(No symbol) [0x009D4EBD]
+	GetHandleVerifier [0x00E1AC73+3017699]
+	GetHandleVerifier [0x00E2B93B+3086507]
+	GetHandleVerifier [0x00E240F2+3055714]
+	GetHandleVerifier [0x00BD5AF0+637536]
+	(No symbol) [0x00AD0A5D]
+	(No symbol) [0x00ACDA28]
+	(No symbol) [0x00ACDBC5]
+	(No symbol) [0x00AC07F0]
+	BaseThreadInitThunk [0x7572FCC9+25]
+	RtlGetAppContainerNamedObjectPath [0x778A809E+286]
+	RtlGetAppContainerNamedObjectPath [0x778A806E+238]
+
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 11:14:32 KST)" (scheduled at 2025-01-16 11:14:32.339041+09:00)
