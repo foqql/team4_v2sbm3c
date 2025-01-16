@@ -15,8 +15,8 @@
       <tr>
         <th class="th_bs">순서</th>
         <th class="th_bs">등록일(추천일)</th>
-        <th class="th_bs">컨텐츠 번호</th>
-        <th class="th_bs">회원 번호</th>
+        <th class="th_bs">설문 이름</th>
+        <th class="th_bs">회원 이름</th>
         <th class="th_bs">기타</th>
       </tr>
     </thead>
@@ -25,7 +25,7 @@
         <td class="td_bs" th:text="|${status.index+1}|"></td>
         <td class="td_bs" th:text="${surveyVO.rdate.substring(0, 10)}"></td>
         <td class="td_bs" th:text="${surveyVO.topic}"></td>
-        <td class="td_bs" th:text="${surveyVO.name}"></td>
+        <td class="td_bs" th:text="${surveyVO.mname}"></td>
         <td class="td_bs">
           <a href="#" th:onclick="'delete_sm(event, ' + ${surveyVO.surveymemberno}+');'"><img src="/survey_good/images/delete.png" class="icon" title="삭제"></a> <!--/* /static 기준 */-->
         </td>

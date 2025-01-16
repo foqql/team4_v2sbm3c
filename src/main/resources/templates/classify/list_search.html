@@ -4,8 +4,7 @@
 <!-- layout.html 상속-->
 <div layout:fragment="content">
   <div class="title_line">
-    <img src="/images/pepe list.gif" style="width:50px; height: 50px;">
-    서치 작업 완료<span th:if="${word != null and word != ''}" th:text="|  ${word} : ${search_cnt} 개  |"></span>
+    중분류(카테고리) 목록<span th:if="${word != null and word != ''}" th:text="|  ${word} : ${search_cnt} 개  |"></span>
   </div>
   
   <aside class="aside_right">
