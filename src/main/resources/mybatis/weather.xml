@@ -37,15 +37,21 @@
   </select>
 
 
-  
-    <!-- 일반적인 조회 
-    <select id="read" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-      SELECT weatherno, memberno, classifyno, weather, rdate, temp, windchill, 
-                mintemp, maxtemp, humidity, speed, direction, udate,
-                file1, file1saved, thumb1, size1, map, youtube
-      FROM weather
-      WHERE weatherno = #{weatherno}
-    </select>-->
+
+      <!-- 모든 카테고리의 등록된 글목록-->
+   <select id="list_all" resultType="dev.mvc.weather.WeatherVO">
+      SELECT
+        w.weatherno,
+        w.file1,
+        w.thumb1,  
+        a.city,  
+        w.rdate,    
+        w.weather, 
+        w.temp 
+      FROM weather w
+      JOIN area a ON w.areano = a.areano  -- weather와 area 테이블을 areano 컬럼으로 조인
+    </select>
+
   
   
     <!-- 일반적인 조회 (조인)-->
@@ -62,70 +68,7 @@
   WHERE w.weatherno = #{weatherno}
     </select>
     
-    
-    <!-- 새로고침 업데이트 (조인) 
-    <select id="reading" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-      SELECT * 
-      FROM (
-          SELECT w.*, a.areano AS a_areano, a.continent, a.country, a.city AS a_city
-          FROM (
-              SELECT w.*, ROW_NUMBER() OVER (PARTITION BY a.city ORDER BY w.udate DESC) AS rn
-              FROM weather w
-              JOIN area a ON w.areano = a.areano
-              WHERE w.classifyno =#{classifyno}
-          ) w
-          JOIN area a ON w.areano = a.areano
-          WHERE w.rn = 1
-      )
-      WHERE udate IN (
-          SELECT MAX(w2.udate)
-          FROM weather w2
-          JOIN area a2 ON w2.areano = a2.areano
-          WHERE a2.city = a_city
-      )
-      ORDER BY weatherno
-</select>-->
 
-
-    <!-- 특정 카테고리의 등록된 글목록 
-    <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-      SELECT weatherno, memberno, classifynoy, weather, rdate, temp, windchill, 
-                mintemp, maxtemp, humidity, speed, direction, udate,
-                LOWER(file1) as file1, file1saved, thumb1, size1
-      FROM weather 
-      WHERE classifyno = #{classifyno}
-      ORDER BY weatherno DESC
-    </select>-->
-  
- 
-    
-    
-    <!-- 특정 카테고리의 등록된 글목록 (조인)
-  <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-    select city
-    from weather, (
-    SELECT a.city as city
-    FROM weather w
-    INNER JOIN area a ON w.areano = a.areano
-      WHERE w.weatherno =#{weatherno}
-      ORDER BY w.weatherno DESC)
-  </select>  -->
-  
-    <!-- 카테고리별 검색 + 페이징 목록 
-  <select id="list_by_classifyno" resultType="dev.mvc.weather.WeatherVO" parameterType="int">
-       SELECT w.weatherno, w.memberno, w.classifyno, 
-           w.weather, w.rdate, w.temp, w.windchill, 
-           w.mintemp, w.maxtemp, w.humidity,
-           w.speed, w.direction, w.udate, 
-           LOWER(w.file1) as file1, w.file1saved, w.thumb1, w.size1,
-           a.areano, a.continent, a.country, a.city
-    FROM weather w
-    INNER JOIN area a ON w.areano = a.areano
-      WHERE w.classifyno = #{classifyno}
-      ORDER BY w.weatherno DESC
-    </select> -->
-  
-    
     
     <!-- map 등록, 수정, 삭제, 
            HashMap: VO 클래스는 변수가 너무 많아서 메모리 낭비가 발생함으로,
@@ -196,46 +139,50 @@
   
   
   
-<!-- 카테고리별 검색 + 페이징 목록 (area 테이블 조인) -->
-<select id="list_by_classifyno_search_paging" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
-    SELECT w.weatherno, w.memberno, w.classifyno, w.weather, w.rdate, w.temp, w.windchill, w.mintemp, w.maxtemp, 
-           w.humidity, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
-           w.map, w.youtube, areano, continent, country, city, r
-    FROM (
-        SELECT w.weatherno, w.memberno, w.classifyno, w.weather, w.rdate, w.temp, w.windchill, w.mintemp, w.maxtemp, 
-               w.humidity, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
-               w.map, w.youtube, a.areano AS areano, a.continent AS continent, a.country AS country, a.city AS city, 
-               ROW_NUMBER() OVER (ORDER BY w.weatherno DESC) AS r
-        FROM weather w
-        JOIN area a ON w.areano = a.areano
-        <choose>
-            <when test="word == null or word == ''">
-                WHERE w.classifyno = #{classifyno} AND w.udate IN (
-                    SELECT MAX(w2.udate) 
-                    FROM weather w2
-                    JOIN area a2 ON w2.areano = a2.areano
-                    WHERE a2.city = a.city
-                    GROUP BY a2.city
-                )
-            </when>
-            <otherwise>
-                WHERE w.classifyno = #{classifyno} AND (
-                    UPPER(w.weather) LIKE '%' || UPPER(#{word}) || '%'
-                    OR UPPER(a.continent) LIKE '%' || UPPER(#{word}) || '%'
-                    OR UPPER(a.country) LIKE '%' || UPPER(#{word}) || '%'
-                    OR UPPER(a.city) LIKE '%' || UPPER(#{word}) || '%'
-                ) AND w.udate IN (
-                    SELECT MAX(w2.udate) 
-                    FROM weather w2
-                    JOIN area a2 ON w2.areano = a2.areano
-                    WHERE a2.city = a.city
-                    GROUP BY a2.city
-                )
-            </otherwise>
-        </choose>
-    ) w
-    WHERE w.r BETWEEN #{start_num} AND #{end_num}
-</select>
+   <!-- 카테고리별 검색 + 페이징 목록 (area 테이블 조인) -->
+  <select id="list_by_classifyno_search_paging" resultType="dev.mvc.weather.WeatherVO" parameterType="HashMap">
+      SELECT w.weatherno, w.memberno, w.classifyno, w.weather, w.rdate, w.temp, w.windchill, w.mintemp, w.maxtemp, 
+             w.humidity, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
+             w.map, w.youtube, areano, continent, country, city, r
+      FROM (
+          SELECT w.weatherno, w.memberno, w.classifyno, w.weather, w.rdate, w.temp, w.windchill, w.mintemp, w.maxtemp, 
+                 w.humidity, w.speed, w.direction, w.udate, w.file1, w.file1saved, w.thumb1, w.size1, 
+                 w.map, w.youtube, a.areano AS areano, a.continent AS continent, a.country AS country, a.city AS city, 
+                 ROW_NUMBER() OVER (ORDER BY w.weatherno DESC) AS r
+          FROM weather w
+          JOIN area a ON w.areano = a.areano
+          <choose>
+              <when test="word == null or word == ''">
+                  WHERE w.classifyno = #{classifyno} AND w.rdate = (
+                      SELECT MAX(w2.rdate) 
+                      FROM weather w2
+                      JOIN area a2 ON w2.areano = a2.areano
+                      WHERE a2.city = a.city
+                      GROUP BY a2.city
+                  )
+              </when>
+              <otherwise>
+                  WHERE w.classifyno = #{classifyno} AND (
+                      UPPER(w.weather) LIKE '%' || UPPER(#{word}) || '%'
+                      OR UPPER(a.continent) LIKE '%' || UPPER(#{word}) || '%'
+                      OR UPPER(a.country) LIKE '%' || UPPER(#{word}) || '%'
+                      OR UPPER(a.city) LIKE '%' || UPPER(#{word}) || '%'
+                  ) AND w.udate IN (
+                      SELECT MAX(w2.udate) 
+                      FROM weather w2
+                      JOIN area a2 ON w2.areano = a2.areano
+                      WHERE a2.city = a.city
+                      GROUP BY a2.city
+                  )
+              </otherwise>
+          </choose>
+      ) w
+      WHERE w.r BETWEEN #{start_num} AND #{end_num}
+  </select>
+
+
+
+
 
 
     <!-- 패스워드 검사 -->
@@ -246,14 +193,6 @@
     </select>
     
     
-        <!-- 날씨 수정 
-    <update id="update_text" parameterType="dev.mvc.weather.WeatherVO">
-      UPDATE weather
-      SET  weather=#{weather}, rdate=#{rdate}, temp=#{temp}, windchill=#{windchill},
-      mintemp=#{mintemp}, maxtemp=#{maxtemp}, humidity=#{humidity}, speed=#{speed},
-      direction=#{direction}
-      WHERE weatherno = #{weatherno}
-    </update>-->
     
             <!-- 날씨 수정 -->
   <update id="update_text" parameterType="dev.mvc.weather.WeatherVO">

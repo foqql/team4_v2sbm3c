@@ -33,6 +33,14 @@ public interface GalleryDAOInter {
    */
   public GalleryVO read(int galleryno);
   
+  
+  /**
+   * 사진 띄우기
+   * @return
+   */
+  public ArrayList<GalleryVO> photolist();
+  
+  
   /**
    * 카테고리별 검색 목록
    * @param map
@@ -89,4 +97,19 @@ public interface GalleryDAOInter {
    * @return
    */
   public int count_by_memberno(int memberno);
+  
+  /**
+   * 추천 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseRecom(int galleryno);
+ 
+  /**
+   * 추천 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseRecom(int galleryno);
+
 }

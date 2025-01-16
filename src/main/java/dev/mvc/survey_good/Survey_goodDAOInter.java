@@ -23,5 +23,7 @@ public interface Survey_goodDAOInter {
 
   public Survey_goodVO read_fk(HashMap<String, Object> map);
 
-  public ArrayList<SSdMVO> list_all_join();
+  public ArrayList<SSdMVO> list_all_join(HashMap<String, Object> map);
+
+  public Integer list_search_count(String word);
 }

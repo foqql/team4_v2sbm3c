@@ -207,16 +207,15 @@ public class SurveyCont {
     model.addAttribute("word", word);
 
     int search_count = this.surveyProc.list_by_classifyno_search_count(map);
-//    String paging = this.surveyProc.pagingBox(now_page, word, "/survey/list_by_surveyno", search_count,
-//        Survey.RECORD_PER_PAGE, Survey.PAGE_PER_BLOCK);
-//    model.addAttribute("paging", paging);
+    String paging = this.surveyProc.pagingBox(now_page, word, "/survey/list_by_survey", search_count,
+        Survey.RECORD_PER_PAGE, Survey.PAGE_PER_BLOCK);
+    model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
-
     model.addAttribute("search_count", search_count);
 
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-//    int no = search_count - ((now_page - 1) * Survey.RECORD_PER_PAGE);
-//    model.addAttribute("no", no);
+    int no = search_count - ((now_page - 1) * Survey.RECORD_PER_PAGE);
+    model.addAttribute("no", no);
 
     int search_cnt = this.surveyProc.list_search_count(word);
 
@@ -859,21 +858,22 @@ public class SurveyCont {
 //    model.addAttribute("list", list);
     ArrayList<SurveyVO> list = this.surveyProc.list_all(map);
     model.addAttribute("list", list);
+    model.addAttribute("word", word);
     System.out.println("list : " + list);
 
-    
-    
- // 프로젝트 목록 번호 생성
+//  프로젝트 목록 번호 생성
     String list_file_name = "/survey/list_all";
-    int search_count = this.classifyProc.list_search_count(word);
-    String paging = this.classifyProc.pagingBox(now_page, word, list_file_name, search_count, Survey.RECORD_PER_PAGE,
+    int search_count = this.surveyProc.list_search_count(word);
+    String paging = this.surveyProc.pagingBox(now_page, word, list_file_name, search_count, Survey.RECORD_PER_PAGE,
         Survey.PAGE_PER_BLOCK);
+    System.out.println("search_count : " + search_count);
+    System.out.println("word : " + word);
     model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
-    int no = search_count - ((now_page - 1) * Survey.RECORD_PER_PAGE);
+    int no = search_count - ((now_page) * Survey.RECORD_PER_PAGE);
     model.addAttribute("no", no);
-    
+
     return "/survey/list_all"; // /templates/surveygood/list_all.html
   }
 

@@ -3,6 +3,7 @@ package dev.mvc.gallery;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,14 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVO;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.gallerygood.GallerygoodProcInter;
+import dev.mvc.gallerygood.GallerygoodVO;
 import dev.mvc.genre.GenreProcInter;
 import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.member.MemberProcInter;
@@ -40,15 +45,20 @@ public class GalleryCont {
   @Autowired
   @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
   private GenreProcInter genreProc;
-
+  
   @Autowired
   @Qualifier("dev.mvc.gallery.GalleryProc") // @Component("dev.mvc.gallery.GalleryProc")
   private GalleryProcInter galleryProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.gallerygood.GallerygoodProc") // @Component("dev.mvc.gallery.WeatherProc")
+  private GallerygoodProcInter gallerygoodProc;
 
   public GalleryCont() {
     System.out.println("-> GalleryCont created.");
   }
-
+  
+  
   /**
    * POST 요청시 새로고침 방지, POST 요청 처리 완료 → redirect → url → GET → forward -> html 데이터
    * 전송
@@ -75,6 +85,9 @@ public class GalleryCont {
       @RequestParam(name="classifyno", defaultValue="0") int classifyno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno); // 카테고리 정보를 출력하기위한 목적
     model.addAttribute("classifyVO", classifyVO);
@@ -184,6 +197,9 @@ public class GalleryCont {
     // System.out.println("-> list_all");
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     if (this.memberProc.isMemberAdmin(session)) { // 관리자만 조회 가능
       ArrayList<GalleryVO> list = this.galleryProc.list_all(); // 모든 목록
@@ -211,65 +227,6 @@ public class GalleryCont {
     }
 
   }
-
-//  /**
-//   * 유형 1
-//   * 카테고리별 목록
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=6 
-//   * @return
-//   */
-//  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno(HttpSession session, Model model, 
-//      @RequestParam(name="classifyno", defaultValue = "") int classifyno) {
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//    
-//     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//     model.addAttribute("classifyVO", classifyVO);
-//    
-//    ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno(classifyno);
-//    model.addAttribute("list", list);
-//    
-//    // System.out.println("-> size: " + list.size());
-//
-//    return "/gallery/list_by_classifyno";
-//  }
-
-//  /**
-//   * 유형 2
-//   * 카테고리별 목록 + 검색
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=5
-//   * http://localhost:9091/gallery/list_by_classifyno?classifyno=6 
-//   * @return
-//   */
-//  @GetMapping(value="/list_by_classifyno")
-//  public String list_by_classifyno_search(HttpSession session, Model model, 
-//                                                   @RequestParam(name="classifyno", defaultValue = "0" ) int classifyno, 
-//                                                   @RequestParam(name="word", defaultValue = "") String word) {
-//    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
-//    model.addAttribute("menu", menu);
-//    
-//     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
-//     model.addAttribute("classifyVO", classifyVO);
-//    
-//     word = Tool.checkNull(word).trim(); // 검색어 공백 삭제
-//     
-//     HashMap<String, Object> map = new HashMap<>();
-//     map.put("classifyno", classifyno);
-//     map.put("word", word);
-//     
-//    ArrayList<GalleryVO> list = this.galleryProc.list_by_classifyno_search(map);
-//    model.addAttribute("list", list);
-//    
-//    // System.out.println("-> size: " + list.size());
-//    model.addAttribute("word", word);
-//    
-//    int search_count = this.galleryProc.list_by_classifyno_search_count(map);
-//    model.addAttribute("search_count", search_count);
-//    
-//    return "/gallery/list_by_classifyno_search"; // /templates/gallery/list_by_classifyno_search.html
-//  }
 
   /**
    * 유형 3
@@ -335,6 +292,7 @@ public class GalleryCont {
    */
   @GetMapping(value = "/list_by_classifyno_grid")
   public String list_by_classifyno_search_paging_grid(HttpSession session, Model model, 
+      @RequestParam(name = "galleryno", defaultValue = "0") int galleryno,
       @RequestParam(name = "classifyno", defaultValue = "0") int classifyno,
       @RequestParam(name = "word", defaultValue = "") String word,
       @RequestParam(name = "now_page", defaultValue = "1") int now_page) {
@@ -349,7 +307,8 @@ public class GalleryCont {
 
     ClassifyVO classifyVO = this.classifyProc.read(classifyno);
     model.addAttribute("classifyVO", classifyVO);
-
+    
+    
     word = Tool.checkNull(word).trim();
 
     HashMap<String, Object> map = new HashMap<>();
@@ -365,7 +324,7 @@ public class GalleryCont {
 
     int search_count = this.galleryProc.list_by_classifyno_search_count(map);
     String paging = this.galleryProc.pagingBox(classifyno, now_page, word, "/gallery/list_by_classifyno_grid", search_count,
-        Gallery.RECORD_PER_PAGE, Gallery.PAGE_PER_BLOCK);
+    Gallery.RECORD_PER_PAGE, Gallery.PAGE_PER_BLOCK);
     model.addAttribute("paging", paging);
     model.addAttribute("now_page", now_page);
 
@@ -374,10 +333,42 @@ public class GalleryCont {
     // 일련 변호 생성: 레코드 갯수 - ((현재 페이지수 -1) * 페이지당 레코드 수)
     int no = search_count - ((now_page - 1) * Gallery.RECORD_PER_PAGE);
     model.addAttribute("no", no);
+    
+    GalleryVO galleryVO = this.galleryProc.read(galleryno);
+    model.addAttribute("galleryVO", galleryVO);
+    
 
-    // /templates/gallery/list_by_classifyno_search_paging_grid.html
+    
+    // ---------------------------------------------------------------------- ---------------------
+    // 추천 관련
+    // -------------------------------------------------------------------------------------------
+    HashMap<String, Object> map2 = new HashMap<String, Object>();
+    map2.put("galleryno", galleryno);
+
+    // System.out.println("->galleryno: " + galleryno);
+    
+    int hartCnt = 0;
+    if (session.getAttribute("memberno") != null) { // 회원인 경우만 카운트 처리
+      int memberno = (int) session.getAttribute("memberno");
+      map2.put("memberno", memberno);
+
+     //System.out.println("->recom: " + galleryVO.getRecom());
+
+
+      hartCnt = this.gallerygoodProc.hartCnt(map2);
+
+    }
+    model.addAttribute("hartCnt", hartCnt);
+    
+    
+    // ------------------------------------------------------------------------
+    
     return "/gallery/list_by_classifyno_search_paging_grid";
   }
+
+
+
+
 
   /**
    * 조회 http://localhost:9091/gallery/read?galleryno=17
@@ -392,6 +383,9 @@ public class GalleryCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     GalleryVO galleryVO = this.galleryProc.read(galleryno);
 
@@ -450,6 +444,9 @@ public class GalleryCont {
                             @RequestParam(name="galleryno", defaultValue="0") int galleryno) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     GalleryVO galleryVO = this.galleryProc.read(galleryno); // map 정보 읽어 오기
     model.addAttribute("galleryVO", galleryVO); // request.setAttribute("galleryVO", galleryVO);
@@ -475,6 +472,9 @@ public class GalleryCont {
     
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -540,6 +540,9 @@ public class GalleryCont {
                                      @RequestParam(name="now_page", defaultValue = "1") int now_page) {
     ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
     model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
     
     model.addAttribute("word", word);
     model.addAttribute("now_page", now_page);
@@ -726,70 +729,72 @@ public class GalleryCont {
     
   }   
    
-//  /**
-//   * 추천 처리 http://localhost:9091/gallery/good
-//   * 
-//   * @return
-//   */
-//  @PostMapping(value = "/good")
-//  @ResponseBody
-//  public String good(HttpSession session, Model model, @RequestBody String json_src){ 
-//    System.out.println("-> json_src: " + json_src); // json_src: {"galleryno":"5"}
-//    
-//    JSONObject src = new JSONObject(json_src); // String -> JSON
-//    int galleryno = (int)src.get("galleryno"); // 값 가져오기
-//    System.out.println("-> galleryno: " + galleryno);
-//        
-//    if (this.memberProc.isMember(session)) { // 회원 로그인 확인
-//      // 추천을 한 상태인지 확인
-//      int memberno = (int)session.getAttribute("memberno");
-//      
-//      HashMap<String, Object> map = new HashMap<String, Object>();
-//      map.put("galleryno", galleryno);
-//      map.put("memberno", memberno);
-//      
-//      int good_cnt = this.gallerygoodProc.hartCnt(map);
-//      System.out.println("-> good_cnt: " + good_cnt);
-//      
-//      if (good_cnt == 1) {
-//        System.out.println("-> 추천 해제: " + galleryno + ' ' + memberno);
-//        
-//        GallerygoodVO gallerygoodVO = this.gallerygoodProc.readByGallerynoMemberno(map);
-//        
-//        this.gallerygoodProc.delete(gallerygoodVO.getGallerygoodno()); // 추천 삭제
-//        this.galleryProc.decreaseRecom(galleryno); // 카운트 감소
-//      } else {
-//        System.out.println("-> 추천: " + galleryno + ' ' + memberno);
-//        
-//        GallerygoodVO gallerygoodVO_new = new GallerygoodVO();
-//        gallerygoodVO_new.setGalleryno(galleryno);
-//        gallerygoodVO_new.setMemberno(memberno);
-//        
-//        this.gallerygoodProc.create(gallerygoodVO_new);
-//        this.galleryProc.increaseRecom(galleryno); // 카운트 증가
-//      }
-//      
-//      // 추천 여부가 변경되어 다시 새로운 값을 읽어옴.
-//      int hartCnt = this.gallerygoodProc.hartCnt(map);
-//      int recom = this.galleryProc.read(galleryno).getRecom();
-//            
-//      JSONObject result = new JSONObject();
-//      result.put("isMember", 1); // 로그인: 1, 비회원: 0
-//      result.put("hartCnt", hartCnt); // 추천 여부, 추천:1, 비추천: 0
-//      result.put("recom", recom);   // 추천인수
-//      
-//      System.out.println("-> result.toString(): " + result.toString());
-//      return result.toString();
-//      
-//    } else { // 정상적인 로그인이 아닌 경우 로그인 유도
-//      JSONObject result = new JSONObject();
-//      result.put("isMember", 0); // 로그인: 1, 비회원: 0
-//      
-//      System.out.println("-> result.toString(): " + result.toString());
-//      return result.toString();
-//    }
 
-//  }
+  /**
+   * 추천 처리 http://localhost:9091/gallery/good
+   * 
+   * @return
+   */
+  @PostMapping(value = "/good")
+  @ResponseBody
+  public String good(HttpSession session, Model model, @RequestBody String json_src){ 
+    System.out.println("-> json_src: " + json_src); // json_src: {"galleryno":"5"}
+    
+    JSONObject src = new JSONObject(json_src); // String -> JSON
+    int galleryno = (int)src.get("galleryno"); // 값 가져오기
+    System.out.println("-> galleryno: " + galleryno);
+        
+    if (this.memberProc.isMember(session)) { // 회원 로그인 확인
+      // 추천을 한 상태인지 확인
+      int memberno = (int)session.getAttribute("memberno");
+      
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("galleryno", galleryno);
+      map.put("memberno", memberno);
+      
+      int good_cnt = this.gallerygoodProc.hartCnt(map);
+      System.out.println("-> good_cnt: " + good_cnt);
+      
+      if (good_cnt == 1) {
+        System.out.println("-> 추천 해제: " + galleryno + ' ' + memberno);
+        
+        GallerygoodVO gallerygoodVO = this.gallerygoodProc.readByGallerynoMemberno(map);
+        
+        this.gallerygoodProc.delete(gallerygoodVO.getGalleryno()); // 추천 삭제
+        this.galleryProc.decreaseRecom(galleryno); // 카운트 감소
+      } else {
+        System.out.println("-> 추천: " + galleryno + ' ' + memberno);
+        
+        GallerygoodVO gallerygoodVO_new = new GallerygoodVO();
+        gallerygoodVO_new.setGalleryno(galleryno);
+        gallerygoodVO_new.setMemberno(memberno);
+        
+        this.gallerygoodProc.create(gallerygoodVO_new);
+        this.galleryProc.increaseRecom(galleryno); // 카운트 증가
+      }
+      
+      // 추천 여부가 변경되어 다시 새로운 값을 읽어옴.
+      int hartCnt = this.gallerygoodProc.hartCnt(map);
+      int recom = this.galleryProc.read(galleryno).getRecom();
+            
+      JSONObject result = new JSONObject();
+      result.put("isMember", 1); // 로그인: 1, 비회원: 0
+      result.put("hartCnt", hartCnt); // 추천 여부, 추천:1, 비추천: 0
+      result.put("recom", recom);   // 추천인수
+      
+      System.out.println("-> result.toString(): " + result.toString());
+      return result.toString();
+      
+    } else { // 정상적인 로그인이 아닌 경우 로그인 유도
+      JSONObject result = new JSONObject();
+      result.put("isMember", 0); // 로그인: 1, 비회원: 0
+      
+      System.out.println("-> result.toString(): " + result.toString());
+      return result.toString();
+    }
+
+  }
+
 
 }
 

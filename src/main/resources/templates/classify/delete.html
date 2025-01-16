@@ -3,7 +3,7 @@
 <html layout:decorate="~{layout}">
 <!-- layout.html 상속-->
 <div layout:fragment="content">
-  <div class="title_line"><img src="/images/pepe del.gif" style="width:50px; height: 50px;"> 삭제</div>
+  <div class="title_line"> 삭제</div>
   <div style="width : 60%; margin: 0px auto;">
     <form name="frm" method="post" action="/classify/delete" th:object="${classifyVO}">
       <input type="hidden" name="classifyno" th:value="${classifyVO.classifyno}">

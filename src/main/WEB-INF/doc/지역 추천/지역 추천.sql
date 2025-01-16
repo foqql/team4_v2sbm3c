@@ -87,6 +87,37 @@ WHERE weatherno = 1;
 
 select * from areagood;
 
+--------------------------------------------------------------------------
+
+
+CREATE TABLE gallerygood (
+	gallerygoodno	NUMBER(10)	NOT NULL,
+	rdate	        DATE	            NOT NULL,
+	galleryno	NUMBER(10)	NOT NULL,
+	memberno	NUMBER(10)	NOT NULL,
+    FOREIGN KEY (galleryno) REFERENCES gallery (galleryno),
+    FOREIGN KEY (memberno) REFERENCES member (memberno)
+);
+
+-- ALTER TABLE areagood ADD CONSTRAINT PK_AREAGOOD PRIMARY KEY (areagoodno);
+
+DROP TABLE gallerygood;
+
+DROP SEQUENCE gallerygood_seq;
+
+CREATE SEQUENCE gallerygood_seq
+START WITH 1         -- 시작 번호
+INCREMENT BY 1       -- 증가값
+MAXVALUE 9999999999  -- 최대값: 9999999999 --> NUMBER(10) 대응
+CACHE 2              -- 2번은 메모리에서만 계산
+NOCYCLE;             -- 다시 1부터 생성되는 것을 방지
+
+
+-- 데이터 삽입
+INSERT INTO gallerygood(gallerygoodno, rdate, galleryno, memberno)
+VALUES (gallerygood_seq.nextval, '2025-01-11', 1, 1);
+
+
 
 
 

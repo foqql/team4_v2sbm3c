@@ -33,6 +33,14 @@ public interface GalleryProcInter {
    */
   public GalleryVO read(int galleryno);
   
+  
+  /**
+   * 사진 띄우기
+   * @return
+   */
+  public ArrayList<GalleryVO> photolist();
+  
+  
   /**
    * 카테고리별 검색 목록
    * @param map
@@ -105,4 +113,28 @@ public interface GalleryProcInter {
    * @return
    */
   public int count_by_memberno(int memberno);
+  
+  
+  /**
+   * 추천 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseRecom(int galleryrno);
+ 
+  /**
+   * 추천 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseRecom(int galleryrno);
+  
+  
+  /**
+   * 추천
+   * @param weatherno
+   * @return
+   */
+  public int good(int galleryrno);
+
 }

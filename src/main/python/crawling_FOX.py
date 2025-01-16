@@ -99,7 +99,7 @@ driver.set_window_size(900, 900) # width, height
 
 
 def crawling_FOX():
-  ####################### 크롤링 ##########################
+    ####################### 크롤링 ##########################
     
     load('https://www.foxnews.com/', 1)
     
@@ -289,13 +289,14 @@ def crawling_FOX():
         # 번역 제목: trans_title
         # 번역 내용: trans_content
         # 요약 내용: sum_content
+        driver.quit()
         
 
 #########
 # APScheduler로 주기적인 작업 설정
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(crawling_FOX, 'interval', seconds=100)  # 1분마다 작업 실행
+    scheduler.add_job(crawling_FOX, 'interval', seconds=60)  # 1분마다 작업 실행
     scheduler.start()
     
 # Flask 라우트 예시

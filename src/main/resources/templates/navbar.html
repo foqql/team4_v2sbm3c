@@ -12,7 +12,7 @@
 <div th:fragment="navbarFragment">
     <div class="top_menu_img">
         <div class="top_menu_label" style="text-shadow: 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;">
-            Team4_ver4.0 해외 정보 전달
+            Team4_해외 정보 전달
         </div>
     </div>
 
@@ -32,17 +32,16 @@
                             <li th:each="classifyVOMenu : ${menu}" th:if="${classifyVOMenu.bigcla == genreVOMenu.genre}">
                                 <ul>
                                     <li th:each="classifyVO : ${classifyVOMenu.list_name}">
+                                    
                                        <a class="dropdown-item" 
    th:href="@{|/${genreVOMenu.link}/list_by_classifyno?classifyno=${classifyVO.classifyno}|}" 
    th:text="${classifyVO.classify}"></a>
-
+   
                                     </li>
                                 </ul>
 
                             </li>
                         </ul>
-
-                        
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="회원"></a>
@@ -152,6 +151,17 @@
         </ul>
       </div>
       <!-- 메뉴 종료 -->
+
+
+      <!-- 관리 및 생성 메뉴 (관리자에게만 보임) -->
+      <a href="/gallery/list_by_classifyno_search_paging_grid" role="button">갤러리</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>
+      <a href="/survey/list_by_survey" role="button">설문조사</a><br> <span class="menu_divide">&nbsp;|&nbsp;</span>    
+      <a th:href="@{|/classify/list_search|}" role="button">리스트 조회</a><br>        <span class="menu_divide">&nbsp;|&nbsp;</span>
+      <a th:href="@{|/genre/create|}" role="button">대분류 생성</a><br>               <span class="menu_divide">&nbsp;|&nbsp;</span>
+      <a th:href="@{|/genre/list_all|}" role="button">대분류 조회</a><br>                <span class="menu_divide">&nbsp;|&nbsp;</span>
+      <a href="/chat/list">채팅창</a>                                                              <span class="menu_divide">&nbsp;|&nbsp;</span>
+      <a href="/sms/form">msm보내기</a>
+      
     </div>
   </nav>
 </div>

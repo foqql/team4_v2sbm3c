@@ -1,6 +1,6 @@
 <div th:fragment="list_search_fragment"> <!-- <div th:replace=... -->
   <div style="text-align: right; clear: both;">
-  <form name="frm_search" method="get" action="/survey/list_by_survey">
+  <form name="frm_search" method="get" action="/survey/list_all">
 <!--    <input type="hidden" name="classifyno" id="classifyno" th:value="${classifyVO.classifyno}" >-->
     
     <input type="text" name="word" id="word" th:value="${word}" >
@@ -10,7 +10,7 @@
     <span th:if="${word != null and word != ''}">
       <button type='button' class='btn btn-secondary btn-sm' 
                    style="padding: 2px 8px 3px 8px; margin: 0px 0px 2px 0px;"
-                   th:onclick="|location.href='/survey/list_by_survey'|">검색 취소</button>
+                   th:onclick="|location.href='/survey/list_all'|">검색 취소</button>
     </span>
                   
   </form>
