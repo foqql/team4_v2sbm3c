@@ -8096,6 +8096,152 @@ INFO:WDM:====== WebDriver manager ======
 INFO:WDM:Get LATEST chromedriver version for google-chrome
 INFO:WDM:Get LATEST chromedriver version for google-chrome
 INFO:WDM:Driver [C:\Users\i\.wdm\drivers\chromedriver\win64\131.0.6778.264\chromedriver-win32/THIRD_PARTY_NOTICES.chromedriver] found in cache
+<<<<<<< HEAD
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:====== WebDriver manager ======
+INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-15 17:11:48 KST)" (scheduled at 2025-01-15 17:10:48.987824+09:00)
+INFO:apscheduler.executors.default:Job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-15 17:11:07 KST)" executed successfully
+WARNING:urllib3.connectionpool:Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000179F82A3E80>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다')': /session/6052896cbb80a7be4e12ca11c240f513/element
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+=======
 INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
 INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "default"
 INFO:apscheduler.scheduler:Scheduler started
@@ -8142,6 +8288,7 @@ Stacktrace:
 	RtlGetAppContainerNamedObjectPath [0x778A806E+238]
 
 INFO:apscheduler.executors.default:Running job "crawl_and_insert_data (trigger: interval[0:01:00], next run at: 2025-01-16 11:14:32 KST)" (scheduled at 2025-01-16 11:14:32.339041+09:00)
+<<<<<<< HEAD
 INFO:numexpr.utils:NumExpr defaulting to 4 threads.
 INFO:WDM:====== WebDriver manager ======
 INFO:WDM:Get LATEST chromedriver version for google-chrome
@@ -8232,3 +8379,7 @@ INFO:apscheduler.scheduler:Added job "crawl_and_insert_data" to job store "defau
 INFO:apscheduler.scheduler:Scheduler started
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 569-178-434
+=======
+>>>>>>> 5d76b10881f91ca0642cbb910c314941850318f1
+INFO:numexpr.utils:NumExpr defaulting to 4 threads.
+>>>>>>> e4a3bb73634b33b8c8e529ff3d0b22b9f44556ca

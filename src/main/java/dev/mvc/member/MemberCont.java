@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import dev.mvc.classify.ClassifyProcInter;
 import dev.mvc.classify.ClassifyVOMenu;
+import dev.mvc.genre.GenreProcInter;
+import dev.mvc.genre.GenreVOMenu;
 import dev.mvc.log.LogProcInter;
 import dev.mvc.log.LogVO;
 import dev.mvc.classify.ClassifyVOMenu;
@@ -37,6 +39,10 @@ public class MemberCont {
   @Autowired
   @Qualifier("dev.mvc.log.LogProc")
   private LogProcInter logProc; 
+  
+  @Autowired
+  @Qualifier("dev.mvc.genre.GenreProc") // @Component("dev.mvc.exchange.ExchangeProc")
+  private GenreProcInter genreProc;
   
   @Autowired
   @Qualifier("dev.mvc.classify.ClassifyProc")
@@ -109,10 +115,14 @@ public class MemberCont {
     if (this.memberProc.isMemberAdmin(session)) {
       ArrayList<MemberVO> list = this.memberProc.list();
       model.addAttribute("list", list);
+      
 
-      // 메뉴 추가
       ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
       model.addAttribute("menu", menu);
+      
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
+
 
       return "/member/list"; // /templates/member/list.html
     } else {
@@ -336,6 +346,12 @@ public class MemberCont {
     // Cookie 관련 코드---------------------------------------------------------
     Cookie[] cookies = request.getCookies();
     Cookie cookie = null;
+    
+    ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+    model.addAttribute("menu", menu);
+    
+    ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+    model.addAttribute("menu1", menu1);
 
     String ck_id = "admin"; // id 저장
     String ck_id_save = ""; // id 저장 여부를 체크
@@ -399,6 +415,12 @@ public class MemberCont {
       HashMap<String, Object> map = new HashMap<>();
       map.put("id", id);
       map.put("passwd", passwd);
+      
+      ArrayList<ClassifyVOMenu> menu = this.classifyProc.menu();
+      model.addAttribute("menu", menu);
+      
+      ArrayList<GenreVOMenu> menu1 = this.genreProc.menu(); // 대분류
+      model.addAttribute("menu1", menu1);
 
       int cnt = this.memberProc.login(map);
       System.out.println("-> login_proc cnt: " + cnt);
